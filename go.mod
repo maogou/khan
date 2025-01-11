@@ -6,6 +6,7 @@ require (
 	github.com/gin-contrib/pprof v1.5.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/validator/v10 v10.23.0
+	github.com/go-resty/resty/v2 v2.16.3
 	github.com/pterm/pterm v0.12.80
 	github.com/rs/xid v1.5.0
 	github.com/rs/zerolog v1.33.0
