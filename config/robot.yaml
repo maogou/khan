@@ -5,7 +5,7 @@ timeout: 5
 
 # sdk 配置
 sdk:
-  url: http://frp.irainone.com:14873
+  url: http://127.0.0.1:4600
   timeout: 30
   token: "9ec822b31bd4492a9b311bb1ba854f37"
   appId: "wx_kSHnTp-K2BYDIy1o1tQul"

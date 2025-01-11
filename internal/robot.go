@@ -2,6 +2,7 @@ package internal
 
 import (
 	"os"
+	"smallBot/internal/command/demo"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/version"
 	"smallBot/internal/constant"
@@ -30,6 +31,7 @@ func NewRobotCommand() *cli.App {
 		Commands: []*cli.Command{
 			serve.Start(),
 			version.Info(),
+			demo.Demo(),
 		},
 	}
 
