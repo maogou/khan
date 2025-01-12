@@ -6,4 +6,6 @@ const (
 	longOpen         = "/wxsdk/longv2/open"
 	secAutoAuth      = "/wxsdk/lgoin/secautoauth"
 	createApp        = "/wxsdk/lgoin/createapp"
+	heartbeat        = "/wxsdk/lgoin/heartbeat"
+	logout           = "/wxsdk/lgoin/logout"
 )

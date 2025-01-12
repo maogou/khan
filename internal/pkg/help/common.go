@@ -14,5 +14,9 @@ func GetQidLog(ctx context.Context) zerolog.Logger {
 		return zl
 	}
 
+	if qid, ok := ctx.Value(constant.QID).(string); ok {
+		return log.With().Str(constant.QID, qid).Logger()
+	}
+
 	return log.Logger
 }

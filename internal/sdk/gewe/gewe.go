@@ -30,3 +30,15 @@ func NewGeweSdk(conf *config.Config, client *resty.Client, validate *validator.V
 		validate: validate,
 	}
 }
+
+func (g *Gewe) Config() *config.Config {
+	return g.config
+}
+
+func (g *Gewe) Client() *resty.Client {
+	return g.client
+}
+
+func (g *Gewe) Validate() *validator.Validate {
+	return g.validate
+}
