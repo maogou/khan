@@ -14,7 +14,7 @@ COPY ./*.ini /etc/supervisor.d/
 
 #复制long,pact及配置文件 到运行目录
 COPY ./bin/* /root/gewe/base/
-COPY ./config/* /root/gewe/base/
+COPY ./config/* /root/gewe/base/config/
 
 
 # 添加Supervisor主配置文件
