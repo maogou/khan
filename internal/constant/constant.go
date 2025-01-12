@@ -1,17 +1,13 @@
 package constant
 
 const (
-	LOGO = `
-	        _____            _               _
-         |  __ \          | |             | |
- __   __ | |__) |   ___   | |__     ___   | |_
- \ \ / / |  _  /   / _ \  | '_ \   / _ \  | __|
-  \ V /  | | \ \  | (_) | | |_) | | (_) | | |_
-   \_/   |_|  \_\  \___/  |_.__/   \___/   \__| (v1.0.0)
-	
-	`
-	VERSION = "v1.0.0"
-	QID     = "qid"
-	ZEROLOG = "zerolog"
-	XID     = "X-Request-Id"
+	VERSION     = "v1.0.0"
+	QID         = "qid"
+	ZEROLOG     = "zerolog"
+	XID         = "X-Request-Id"
+	PublicKey   = "tN3+yIKhj+8BEzYVUlcEOMMBg6AxRRmSV38muqpIrxw="
+	GithubRepo  = "github.com/maogou/vRobot@latest"
+	GO111MODULE = "on"
+	GOPROXY     = "https://goproxy.cn/,direct"
+	Windows     = "windows"
 )

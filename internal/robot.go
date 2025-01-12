@@ -3,8 +3,10 @@ package internal
 import (
 	"os"
 	"path/filepath"
+	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
 	"smallBot/internal/command/serve"
+	"smallBot/internal/command/upgrade"
 	"smallBot/internal/command/version"
 	"smallBot/internal/constant"
 	"strconv"
@@ -26,15 +28,16 @@ func init() {
 
 func NewRobotCommand() *cli.App {
 	robot := &cli.App{
-		Name:                  "robot",
-		Usage:                 "超简单的微信机器人",
-		Copyright:             "(c) 2025 kinyou_xy@foxmail.com",
-		Version:               constant.VERSION,
-		CustomAppHelpTemplate: constant.LOGO + cli.AppHelpTemplate,
+		Name:      "bolt",
+		Usage:     "超简单超稳定的机器人",
+		Copyright: "(c) 2025 kinyou_xy@foxmail.com",
+		Version:   constant.VERSION,
 
 		Commands: []*cli.Command{
 			serve.Start(),
 			version.Info(),
+			auth.Verify(),
+			upgrade.Upgrade(),
 			demo.Demo(),
 		},
 	}
