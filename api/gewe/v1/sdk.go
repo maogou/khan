@@ -1,8 +1,9 @@
 package v1
 
 type CommonResponse struct {
-	Ret int    `json:"ret"`
-	Msg string `json:"msg"`
+	Ret    int    `json:"ret"`
+	Msg    string `json:"msg"`
+	MsgErr string `json:"msg_err,omitempty"`
 }
 
 type LoginQrCodeRequest struct {

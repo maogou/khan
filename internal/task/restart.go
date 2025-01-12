@@ -17,7 +17,7 @@ func (m *Monitor) restart() {
 	log.Info().Str("appId", appId).Msg("开始监控重启长连接.....")
 
 	m.crontab.AddFunc(
-		"@every 15s", func() {
+		"@every 120s", func() {
 			ctx := context.WithValue(context.Background(), constant.QID, xid.New().String())
 			log := help.GetQidLog(ctx)
 			loResp, err := m.sdk.LongOpen(
