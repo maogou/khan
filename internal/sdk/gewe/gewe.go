@@ -19,7 +19,7 @@ type Gewe struct {
 
 func NewGeweSdk(conf *config.Config, client *resty.Client, validate *validator.Validate) *Gewe {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
-	client.BaseURL = conf.Sdk.Url
+	client.BaseURL = conf.Sdk.Pact
 
 	return &Gewe{
 		client:   client,

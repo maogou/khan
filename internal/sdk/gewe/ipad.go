@@ -38,7 +38,8 @@ func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 	log := help.GetQidLog(ctx)
 	log.Info().Any("req", req).Msg("调用LongOpen方法")
 
-	resp, err := g.client.R().SetBody(req).SetResult(&v1.LongOpenResponse{}).Post(longOpen)
+	api := g.config.Sdk.Long + longOpen
+	resp, err := g.client.R().SetBody(req).SetResult(&v1.LongOpenResponse{}).Post(api)
 
 	if err != nil {
 		log.Error().Err(err).Msg("调用LongOpen方法失败")

@@ -106,7 +106,10 @@ func do(cCtx *cli.Context) error {
 
 	loResp, err := sdk.LongOpen(
 		ctx, v1.LongOpenRequest{
-			AppId: sdkResp.Data.AppId,
+			AppId:      sdkResp.Data.AppId,
+			CleanCache: true,
+			Host:       "http://127.0.0.1/api/v1/collect",
+			Timeout:    10,
 		},
 	)
 

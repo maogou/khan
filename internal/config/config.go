@@ -20,7 +20,8 @@ type Config struct {
 
 type Sdk struct {
 	TimeOut time.Duration `yaml:"timeout" validate:"required,min=5"`
-	Url     string        `yaml:"url" validate:"required"`
+	Pact    string        `yaml:"pact" validate:"required"`
+	Long    string        `yaml:"long" validate:"required"`
 	Token   string        `yaml:"token"`
 	AppId   string        `yaml:"appid"`
 	UuId    string        `yaml:"uuid"`

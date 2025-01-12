@@ -8,6 +8,7 @@ import (
 
 func InitRouter(engine *gin.Engine, sdk *gewe.Gewe) error {
 	initCommonRoute(engine)
+	initCallbackRoute(engine, sdk)
 	//initPprofRoute(engine)
 
 	return nil

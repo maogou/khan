@@ -17,6 +17,13 @@ type ErrResponse struct {
 	Qid     string         `json:"qid"`
 }
 
+type ErrValidatorResponse struct {
+	Code    int               `json:"code"`
+	Message string            `json:"message"`
+	Data    map[string]string `json:"data,omitempty"`
+	Qid     string            `json:"qid"`
+}
+
 type SuccessResponse struct {
 	Code    int         `json:"code"`
 	Message string      `json:"message"`
@@ -42,10 +49,10 @@ func Fail(c *gin.Context, err error) {
 	)
 }
 
-func ValidatorErr(c *gin.Context, err error, data map[string]any) {
+func ValidatorErr(c *gin.Context, err error, data map[string]string) {
 	code, message := errno.DecodeErr(err)
 	c.JSON(
-		http.StatusOK, ErrResponse{
+		http.StatusOK, ErrValidatorResponse{
 			Code:    code,
 			Message: message,
 			Data:    data,
