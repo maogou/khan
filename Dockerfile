@@ -18,10 +18,23 @@ RUN go build -ldflags="-s -w" -o smallBot smallBot/cmd
 
 FROM alpine
 
-RUN apk update --no-cache && apk add --no-cache ca-certificates
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+RUN apk update --no-cache && apk add --no-cache ca-certificates && \
+    apk add --no-cache redis supervisor curl && \
+    rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+
 COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/Shanghai
 ENV TZ Asia/Shanghai
 
-COPY --from=builder /build/config /app/config
-COPY --from=builder /build/smallBot /app/smallBot
-CMD ["./smallBot","start"]
+WORKDIR /app
+
+COPY --from=builder /build/docker/supervisor/ini/*.ini /etc/supervisor.d/
+COPY --from=builder /build/docker/bin/* /app/
+COPY --from=builder /build/docker/config/app.config /app/app.config
+COPY --from=builder /build/docker/config/robot.yaml /app/config/robot.yaml
+COPY --from=builder /build/smallBot /app/sbot
+COPY --from=builder /build/docker/supervisor/supervisord.conf /etc/supervisord.conf
+
+# 启动Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

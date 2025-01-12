@@ -108,7 +108,7 @@ func do(cCtx *cli.Context) error {
 		ctx, v1.LongOpenRequest{
 			AppId:      sdkResp.Data.AppId,
 			CleanCache: true,
-			Host:       "http://127.0.0.1/api/v1/collect",
+			Host:       "http://127.0.0.1:8073/api/v1/collect",
 			Timeout:    10,
 		},
 	)
@@ -127,7 +127,8 @@ func do(cCtx *cli.Context) error {
 
 	saaResp, err := sdk.SecAutoAuth(
 		ctx, v1.SecAutoAuthRequest{
-			AppId: sdkResp.Data.AppId,
+			AppId:  sdkResp.Data.AppId,
+			SdkVer: "8.0.48",
 		},
 	)
 
