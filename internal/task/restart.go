@@ -23,7 +23,7 @@ func (m *Monitor) restart() {
 			loResp, err := m.sdk.LongOpen(
 				ctx, v1.LongOpenRequest{
 					AppId:      appId,
-					Timeout:    30,
+					Timeout:    60,
 					CleanCache: true,
 					Host:       "http://127.0.0.1:8073/api/v1/collect",
 				},

@@ -46,7 +46,7 @@ func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 		return nil, err
 	}
 
-	log.Info().Any("resp", resp).Str("api", api).Msg("调用LongOpen返回结果")
+	log.Info().Str("api", api).Msg("调用LongOpen返回结果")
 
 	return resp.Result().(*v1.LongOpenResponse), nil
 }
