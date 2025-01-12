@@ -20,6 +20,12 @@ func (c *CallbackHandler) Collect(ctx *gin.Context) {
 		return
 	}
 
+	//中间件种和handler种必须使用ctx的副本
+	cCp := ctx.Copy()
+	go func() {
+		c.chain.HandlerRequest(cCp, req)
+	}()
+
 	log.Info().Any("req", req).Msg("收到的消息")
 
 	response.SuccessMsg(ctx, "success")
