@@ -27,7 +27,7 @@ type ErrValidatorResponse struct {
 type SuccessResponse struct {
 	Code    int         `json:"code"`
 	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
+	Data    interface{} `json:"data,omitempty"`
 	Qid     string      `json:"qid"`
 }
 
