@@ -8,4 +8,6 @@ const (
 	createApp        = "/wxsdk/lgoin/createapp"
 	heartbeat        = "/wxsdk/lgoin/heartbeat"
 	logout           = "/wxsdk/lgoin/logout"
+
+	postText = "/wxsdk/message/sendmsg"
 )

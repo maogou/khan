@@ -1,0 +1,195 @@
+package login
+
+import (
+	"context"
+	"errors"
+	v1 "smallBot/api/gewe/v1"
+	"smallBot/internal/sdk/gewe"
+	"time"
+
+	"github.com/rs/zerolog"
+
+	"github.com/rs/xid"
+
+	tea "github.com/charmbracelet/bubbletea"
+
+	"github.com/pterm/pterm"
+	"github.com/skip2/go-qrcode"
+
+	"github.com/rs/zerolog/log"
+)
+
+type QuickLogin struct {
+	template
+	tableData pterm.TableData
+	url       string
+	sdk       *gewe.Gewe
+	p         *tea.Program
+	selected  int
+	appId     string
+	zLog      zerolog.Logger
+	ctx       context.Context
+	err       error
+}
+
+var _ BootStrap = (*QuickLogin)(nil)
+
+func NewQuickLogin(sdk *gewe.Gewe, p *tea.Program) *QuickLogin {
+	ql := new(QuickLogin)
+	qid := xid.New().String()
+	ql.ctx = context.WithValue(context.Background(), "qid", qid)
+	ql.sdk = sdk
+	ql.p = p
+	ql.tableData = pterm.TableData{{"配置项", "对应值", "备注"}}
+	ql.b = ql
+	ql.zLog = log.With().Str("qid", qid).Logger()
+
+	return ql
+}
+
+func (q *QuickLogin) GetAppId() {
+	ctx := context.WithValue(context.Background(), "qid", xid.New().String())
+	sdkResp, err := q.sdk.CreateApp(
+		ctx, v1.CreateAppRequest{
+			Country:    "中国",
+			DeviceName: "iPad",
+			Model:      "iPad",
+			SdkVer:     "8.0.48",
+		},
+	)
+	if err != nil {
+		q.err = err
+		q.zLog.Error().Err(err).Msg("创建appId,请求CreateApp失败")
+	} else if sdkResp.Ret != 0 {
+		q.zLog.Warn().Str("err_msg", sdkResp.MsgErr).Msg("调用创建appId失败")
+		q.err = errors.New(sdkResp.MsgErr)
+	} else {
+		q.tableData = append(q.tableData, []string{"appId", sdkResp.Data.AppId, "appId是和wx账号绑定的,请保存下来"})
+		q.sdk.SetAppId(sdkResp.Data.AppId)
+	}
+}
+
+func (q *QuickLogin) GetLoginQrCode(appId string) {
+	if len(appId) > 0 {
+		q.appId = appId
+		q.sdk.SetAppId(appId)
+	}
+
+	lqcResp, err := q.sdk.LoginQrCode(q.ctx, v1.LoginQrCodeRequest{AppId: q.appId})
+	if err != nil {
+		q.err = err
+		q.zLog.Error().Err(err).Msg("获取二维码失败")
+	} else if lqcResp.Ret != 0 {
+		q.zLog.Warn().Str("err_msg", lqcResp.MsgErr).Msg("调用获取二维码失败")
+		q.err = errors.New(lqcResp.MsgErr)
+	} else {
+		q.tableData = append(
+			q.tableData,
+			[]string{"uuid", lqcResp.Data.Uuid, "登录随机生成的唯一标识"},
+			[]string{"appId", q.appId, "设备标识id(很重要)"},
+			[]string{"welcome", "欢迎使用khan服务!", "文件传输助手欢迎消息"},
+		)
+
+		q.sdk.SetUuId(lqcResp.Data.Uuid)
+		q.sdk.SetNKey(lqcResp.Data.NKey)
+		q.url = lqcResp.Data.Url
+	}
+}
+
+func (q *QuickLogin) PrintQrCode() {
+	if qr, err := qrcode.New(q.url, qrcode.Medium); err != nil {
+		q.err = err
+		q.zLog.Error().Err(err).Msg("生成二维码失败")
+	} else {
+		art := qr.ToSmallString(false)
+		pterm.Println("请使用微信扫一扫登录")
+		pterm.Println(art)
+	}
+}
+
+func (q *QuickLogin) Confirm() {
+	if m, err := q.p.Run(); err != nil {
+		q.err = err
+		q.zLog.Error().Err(err).Msg("运行确认登录失败")
+	} else {
+		if cm, ok := m.(confirm); ok && cm.selected != "" {
+			for i := 0; i < len(cm.choices); i++ {
+				if cm.choices[i] == cm.selected {
+					q.selected = i + 1
+					break
+				}
+			}
+
+			if q.selected != 1 {
+				q.err = errors.New("你取消了登录")
+			}
+		} else {
+			q.err = errors.New("你退出确认登录")
+		}
+	}
+
+}
+
+func (q *QuickLogin) CheckLogin() {
+	q.zLog.Info().Msg("正在检查登录状态,请稍等...")
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+
+	maxRetry := 11
+	retryCount := 0
+
+	for range ticker.C {
+		q.zLog.Info().Msg("正在检查登录状态,请稍等...")
+		retryCount++
+
+		if retryCount > maxRetry {
+			pterm.Println("登录超时")
+			q.err = errors.New("登录超时")
+			break
+		}
+
+		resp, cErr := q.sdk.CheckLoginQrCode(
+			q.ctx, v1.CheckLoginQrCodeRequest{
+				AppId: q.appId,
+				NKey:  q.sdk.GetNKey(),
+				Uuid:  q.sdk.GetUuId(),
+			},
+		)
+
+		if cErr != nil {
+			q.zLog.Error().Err(cErr).Msg("检查登录状态失败")
+			continue
+		}
+
+		if resp.Ret != 0 {
+			q.zLog.Warn().Str("err_msg", resp.MsgErr).Msg("调用检查登录状态失败")
+			continue
+		}
+
+		q.zLog.Info().Msg("亲爱的 (" + resp.Data.StatusInfo.NickName + ") 恭喜你成功登录!")
+		break
+
+	}
+
+}
+
+func (q *QuickLogin) PrintConfig() {
+	log.Info().Msg("确认登录后,请保存以下服务启动需要的配置如下:")
+
+	q.err = pterm.DefaultTable.WithHasHeader().WithBoxed().WithData(q.tableData).Render()
+}
+
+func (q *QuickLogin) Welcome() {
+	var welcome = v1.PostTextRequest{
+		Content: "欢迎使用Khan服务!",
+		ToWxid:  "filehelper",
+		AppId:   q.appId,
+	}
+
+	_, q.err = q.sdk.PostText(q.ctx, welcome)
+
+}
+
+func (q *QuickLogin) CanNext() bool {
+	return q.err == nil || q.selected == 2
+}

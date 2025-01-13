@@ -5,17 +5,30 @@ import (
 	"path/filepath"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
+	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
 	"smallBot/internal/command/version"
+	"smallBot/internal/config"
 	"smallBot/internal/constant"
+	"smallBot/internal/sdk/gewe"
 	"strconv"
 	"time"
+
+	"github.com/go-playground/validator/v10"
+	"github.com/go-resty/resty/v2"
 
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 
 	"github.com/rs/zerolog"
+)
+
+var (
+	conf     config.Config
+	sdk      *gewe.Gewe
+	client   = resty.New()
+	validate = validator.New()
 )
 
 func init() {
@@ -27,6 +40,9 @@ func init() {
 }
 
 func NewRobotCommand() *cli.App {
+	conf = config.MustLoadConfig("")
+	sdk = gewe.NewGeweSdk(&conf, client, validate)
+
 	robot := &cli.App{
 		Name:      "bolt",
 		Usage:     "超简单超稳定的机器人",
@@ -34,9 +50,10 @@ func NewRobotCommand() *cli.App {
 		Version:   constant.VERSION,
 
 		Commands: []*cli.Command{
-			serve.Start(),
+			serve.Start(conf, sdk),
 			version.Info(),
 			auth.Verify(),
+			login.Login(conf, sdk),
 			upgrade.Upgrade(),
 			demo.Demo(),
 		},

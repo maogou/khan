@@ -97,3 +97,9 @@ type CreateAppResponse struct {
 	CommonResponse
 	Data CreateAppData `json:"data"`
 }
+
+type Welcome struct {
+	AppId   string `json:"appId" validate:"required"`
+	ToWxid  string `json:"toWxid" validate:"required"`
+	Content string `json:"content" validate:"required"`
+}

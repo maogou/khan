@@ -5,8 +5,6 @@ import (
 	"smallBot/internal/sdk/gewe"
 	"smallBot/internal/task"
 
-	"github.com/go-playground/validator/v10"
-	"github.com/go-resty/resty/v2"
 	"github.com/robfig/cron/v3"
 
 	"github.com/rs/zerolog/log"
@@ -14,13 +12,11 @@ import (
 )
 
 var (
-	conf    config.Config
-	sdk     *gewe.Gewe
-	crontab = cron.New()
 	monitor *task.Monitor
+	crontab = cron.New()
 )
 
-func Start() *cli.Command {
+func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 	return &cli.Command{
 		Name:  "start",
 		Usage: "启动机器人服务",
@@ -31,13 +27,13 @@ func Start() *cli.Command {
 				Usage: "项目配置文件",
 			},
 		},
+
 		Before: func(cCtx *cli.Context) error {
-			log.Info().Msg("正在初始化机器人配置,请稍等...")
-			conf = config.MustLoadConfig(cCtx.String("config"))
-			sdk = gewe.NewGeweSdk(&conf, resty.New(), validator.New())
+			log.Info().Msg("初始化长连接监控...")
 			monitor = task.NewMonitor("长连接监控", sdk, crontab)
 			return nil
 		},
+
 		Action: func(cCtx *cli.Context) error {
 			log.Info().Msg("开启定时任务...")
 			monitor.Run()
