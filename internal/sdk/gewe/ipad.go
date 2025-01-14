@@ -8,7 +8,7 @@ import (
 
 func (g *Gewe) LoginQrCode(ctx context.Context, req v1.LoginQrCodeRequest) (*v1.LoginQrCodeResponse, error) {
 	log := help.GetQidLog(ctx)
-	log.Info().Any("req", req).Msg("调用LoginQrCode方法")
+	log.Info().Msg("调用LoginQrCode方法")
 
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.LoginQrCodeResponse{}).Post(loginQrCode)
 
@@ -22,7 +22,7 @@ func (g *Gewe) LoginQrCode(ctx context.Context, req v1.LoginQrCodeRequest) (*v1.
 
 func (g *Gewe) CheckLoginQrCode(ctx context.Context, req v1.CheckLoginQrCodeRequest) (*v1.CheckLoginQrCodeResponse, error) {
 	log := help.GetQidLog(ctx)
-	log.Info().Any("req", req).Msg("调用CheckLoginQrCode方法")
+	log.Info().Msg("调用CheckLoginQrCode方法")
 
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.CheckLoginQrCodeResponse{}).Post(checkLoginQrCode)
 
@@ -36,7 +36,7 @@ func (g *Gewe) CheckLoginQrCode(ctx context.Context, req v1.CheckLoginQrCodeRequ
 
 func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOpenResponse, error) {
 	log := help.GetQidLog(ctx)
-	log.Info().Any("req", req).Msg("调用LongOpen方法")
+	log.Info().Msg("调用LongOpen方法")
 
 	api := g.config.Sdk.Long + longOpen
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.LongOpenResponse{}).Post(api)
@@ -53,7 +53,7 @@ func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 
 func (g *Gewe) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.SecAutoAuthResponse, error) {
 	log := help.GetQidLog(ctx)
-	log.Info().Any("req", req).Msg("调用SecAutoAuth方法")
+	log.Info().Msg("调用SecAutoAuth方法")
 
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.SecAutoAuthResponse{}).Post(secAutoAuth)
 
@@ -67,7 +67,7 @@ func (g *Gewe) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.
 
 func (g *Gewe) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.CreateAppResponse, error) {
 	log := help.GetQidLog(ctx)
-	log.Info().Any("req", req).Msg("调用CreateApp方法")
+	log.Info().Msg("调用CreateApp方法")
 
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.CreateAppResponse{}).Post(createApp)
 
@@ -77,4 +77,18 @@ func (g *Gewe) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.Crea
 	}
 
 	return resp.Result().(*v1.CreateAppResponse), nil
+}
+
+func (g *Gewe) HearBeat(ctx context.Context, req v1.HearBeatRequest) (*v1.HearBeatResponse, error) {
+	log := help.GetQidLog(ctx)
+	log.Info().Msg("调用HearBeat方法")
+
+	resp, err := g.client.R().SetBody(req).SetResult(&v1.HearBeatResponse{}).Post(heartbeat)
+
+	if err != nil {
+		log.Error().Err(err).Msg("调用HearBeat方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*v1.HearBeatResponse), nil
 }

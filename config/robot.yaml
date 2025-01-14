@@ -5,6 +5,7 @@ timeout: 5
 
 # sdk 配置
 sdk:
+  collect: http://127.0.0.1:8073/api/v1/collect
   pact: http://127.0.0.1:4600
   long: http://127.0.0.1:5600
   timeout: 30

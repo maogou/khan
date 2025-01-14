@@ -98,8 +98,22 @@ type CreateAppResponse struct {
 	Data CreateAppData `json:"data"`
 }
 
-type Welcome struct {
-	AppId   string `json:"appId" validate:"required"`
-	ToWxid  string `json:"toWxid" validate:"required"`
-	Content string `json:"content" validate:"required"`
+type HearBeatRequest struct {
+	AppId string `json:"appid" validate:"required"`
+}
+
+type HearBeatResponse struct {
+	CommonResponse
+	Data struct {
+		BaseResponse struct {
+			Ret    int `json:"ret"`
+			ErrMsg struct {
+			} `json:"errMsg"`
+		} `json:"BaseResponse"`
+		NextTime                  int   `json:"NextTime"`
+		Selector                  int64 `json:"Selector"`
+		BlueToothBroadCastContent struct {
+			ILen int `json:"iLen"`
+		} `json:"BlueToothBroadCastContent"`
+	} `json:"data"`
 }

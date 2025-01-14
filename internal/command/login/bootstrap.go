@@ -7,6 +7,9 @@ type BootStrap interface {
 	Confirm()
 	CheckLogin()
 	PrintConfig()
+	HearBeat()
+	AutoAuth()
+	Open()
 	Welcome()
 	CanNext() bool
 }

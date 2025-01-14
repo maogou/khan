@@ -174,9 +174,68 @@ func (q *QuickLogin) CheckLogin() {
 }
 
 func (q *QuickLogin) PrintConfig() {
-	log.Info().Msg("确认登录后,请保存以下服务启动需要的配置如下:")
+	q.zLog.Info().Msg("确认登录后,请保存以下服务启动需要的配置如下:")
 
 	q.err = pterm.DefaultTable.WithHasHeader().WithBoxed().WithData(q.tableData).Render()
+}
+
+func (q *QuickLogin) HearBeat() {
+	q.zLog.Info().Msg("正在发送心跳包,请稍等...")
+	hbResp, err := q.sdk.HearBeat(q.ctx, v1.HearBeatRequest{AppId: q.appId})
+
+	if err != nil {
+		q.zLog.Error().Err(err).Msg("发送心跳包失败")
+		q.err = err
+	} else {
+		if hbResp.Ret != 0 {
+			q.zLog.Warn().Str("err_msg", hbResp.MsgErr).Msg("调用发送心跳包失败")
+			q.err = errors.New(hbResp.MsgErr)
+		} else {
+			q.zLog.Info().Msg("发送心跳包成功")
+		}
+	}
+}
+
+func (q *QuickLogin) AutoAuth() {
+	q.zLog.Info().Msg("正在自动认证,请稍等...")
+	saaResp, err := q.sdk.SecAutoAuth(q.ctx, v1.SecAutoAuthRequest{AppId: q.appId})
+
+	if err != nil {
+		q.zLog.Error().Err(err).Msg("自动认证失败")
+		q.err = err
+	} else {
+		if saaResp.Ret != 0 {
+			q.zLog.Warn().Str("err_msg", saaResp.MsgErr).Msg("调用自动认证失败")
+			q.err = errors.New(saaResp.MsgErr)
+		} else {
+			q.zLog.Info().Msg("自动认证成功")
+		}
+	}
+}
+
+func (q *QuickLogin) Open() {
+	q.zLog.Info().Msg("正在打开长连接,请稍等...")
+
+	loResp, err := q.sdk.LongOpen(
+		q.ctx, v1.LongOpenRequest{
+			AppId:      q.appId,
+			CleanCache: true,
+			Host:       q.sdk.Config().Sdk.Collect,
+			Timeout:    60,
+		},
+	)
+
+	if err != nil {
+		q.zLog.Error().Err(err).Msg("调用开启长连接失败")
+		q.err = err
+	} else {
+		if loResp.Ret != 0 {
+			q.zLog.Warn().Str("err_msg", loResp.MsgErr).Msg("调用开启长连接失败")
+			q.err = errors.New(loResp.MsgErr)
+		} else {
+			q.zLog.Info().Msg("开启长连接成功")
+		}
+	}
 }
 
 func (q *QuickLogin) Welcome() {
