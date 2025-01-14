@@ -23,8 +23,8 @@ var _ Confirm = (*confirm)(nil)
 func NewConfirm() Confirm {
 	return &confirm{
 		choices: []string{
-			"我已在手机上确认登录,稍后将你的手机上会显示Ipad微信已登录",
-			"我已经在手机上取消登录",
+			"① 我已在手机上确认登录,稍后你的手机上将会显示iPad微信已登录",
+			"② 我已经在手机上取消登录",
 		},
 	}
 }
@@ -61,7 +61,7 @@ func (c confirm) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (c confirm) View() string {
-	s := "请在手机上确认登录:\n\n"
+	s := "请选择你要执行的操作:\n\n"
 
 	for i, choice := range c.choices {
 		cursor := " "
