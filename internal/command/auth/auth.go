@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
+	"smallBot/internal/pkg/license/licenseutil"
 
 	"github.com/rs/zerolog/log"
 
@@ -29,6 +30,7 @@ func Verify() *cli.Command {
 			key := cCtx.String("key")
 
 			if res, err := parse(key); err != nil {
+				log.Error().Err(err).Msg("授权许可证验证失败")
 				return err
 			} else {
 				log.Info().Msg("许可证信息:")
@@ -44,7 +46,7 @@ func parse(key string) (*license.License, error) {
 		result    *license.License
 		err       error
 	)
-	if publicKey, err = license.ReadPublicKeyFromStr(constant.PublicKey); err != nil {
+	if publicKey, err = licenseutil.ReadPublicKeyFromStr(constant.PublicKey); err != nil {
 		return nil, err
 	}
 
