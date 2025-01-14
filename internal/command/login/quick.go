@@ -66,6 +66,7 @@ func (q *QuickLogin) GetAppId() {
 	} else {
 		q.tableData = append(q.tableData, []string{"appId", sdkResp.Data.AppId, "appId是和wx账号绑定的,请保存下来"})
 		q.sdk.SetAppId(sdkResp.Data.AppId)
+		q.appId = sdkResp.Data.AppId
 	}
 }
 
