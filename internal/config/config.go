@@ -19,13 +19,15 @@ type Config struct {
 }
 
 type Sdk struct {
-	Collect string        `yaml:"collect" validate:"required"`
-	TimeOut time.Duration `yaml:"timeout" validate:"required,min=5"`
-	Pact    string        `yaml:"pact" validate:"required"`
-	Long    string        `yaml:"long" validate:"required"`
-	Token   string        `yaml:"token"`
-	AppId   string        `yaml:"appid"`
-	UuId    string        `yaml:"uuid"`
+	Collect  string        `yaml:"collect" validate:"required"`
+	Callback string        `yaml:"callback"`
+	TimeOut  time.Duration `yaml:"timeout" validate:"required,min=5"`
+	Pact     string        `yaml:"pact" validate:"required"`
+	Long     string        `yaml:"long" validate:"required"`
+	Token    string        `yaml:"token"`
+	AppId    string        `yaml:"appid"`
+	UuId     string        `yaml:"uuid"`
+	License  string        `yaml:"license" validate:"required"`
 }
 
 func MustLoadConfig(cfgFile string) Config {

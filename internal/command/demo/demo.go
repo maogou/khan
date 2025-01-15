@@ -2,6 +2,7 @@ package demo
 
 import (
 	"encoding/json"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"time"
 
@@ -26,7 +27,7 @@ func do(cCtx *cli.Context) error {
 		Sub: "微信号",
 		Lim: 1,
 		Iat: time.Now().Local(),
-		Exp: time.Now().Local().Add(time.Hour * 24 * 30),
+		Exp: time.Now().Local().Add(time.Hour * 24 * 7),
 	}
 
 	if err := l.KeyGen("./khan"); err != nil {
@@ -43,7 +44,7 @@ func do(cCtx *cli.Context) error {
 
 	log.Info().Msg("创建许可证成功")
 
-	nl, err := l.Verify("./khan.pub", "./khan.lic")
+	nl, err := l.Verify(constant.PublicKey, "./khan.lic")
 
 	if err != nil {
 		log.Error().Err(err).Msg("验证失败")

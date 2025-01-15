@@ -2,11 +2,10 @@ package license
 
 import (
 	"os"
-	"smallBot/internal/pkg/license/licenseutil"
 )
 
 func (l *License) Create(priPath, out string) error {
-	privateKey, err := licenseutil.ReadPrivateKey(priPath)
+	privateKey, err := ReadPrivateKey(priPath)
 
 	if err != nil {
 		return err

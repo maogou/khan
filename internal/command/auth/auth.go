@@ -1,11 +1,9 @@
 package auth
 
 import (
-	"crypto/ed25519"
-	"encoding/base64"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
-	"smallBot/internal/pkg/license/licenseutil"
+	"strconv"
 
 	"github.com/rs/zerolog/log"
 
@@ -20,46 +18,31 @@ func Verify() *cli.Command {
 		Usage: "授权许可证验证",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:     "key",
-				Value:    "",
-				Usage:    "颁发的软件许可证",
-				Required: true,
+				Name:  "path",
+				Value: "./config/khan.lic",
+				Usage: "颁发的软件许可证绝对路径",
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			key := cCtx.String("key")
+			private := cCtx.String("path")
 
-			if res, err := parse(key); err != nil {
+			lic, err := license.Parse(constant.PublicKey, private)
+
+			if err != nil {
 				log.Error().Err(err).Msg("授权许可证验证失败")
 				return err
-			} else {
-				log.Info().Msg("许可证信息:")
-				return printLicense(res)
 			}
+
+			if lic.Expired() {
+				log.Error().Err(err).Msg("授权许可证已过期")
+				return err
+			}
+
+			printLicense(lic)
+
+			return nil
 		},
 	}
-}
-
-func parse(key string) (*license.License, error) {
-	var (
-		publicKey ed25519.PublicKey
-		result    *license.License
-		err       error
-	)
-	if publicKey, err = licenseutil.ReadPublicKeyFromStr(constant.PublicKey); err != nil {
-		return nil, err
-	}
-
-	var bKey = make([]byte, base64.StdEncoding.DecodedLen(len(key)))
-	if _, err = base64.StdEncoding.Decode(bKey, []byte(key)); err != nil {
-		return nil, err
-	}
-
-	if result, err = license.DecodeStr(string(bKey), publicKey); err != nil {
-		return nil, license.ErrInvalidSignature
-	}
-
-	return result, nil
 }
 
 func printLicense(license *license.License) error {
@@ -67,9 +50,10 @@ func printLicense(license *license.License) error {
 		WithBoxed().
 		WithData(
 			pterm.TableData{
-				{"客户标识", license.Cus},
+				{"配置项", "属性值"},
 				{"微信号", license.Sub},
 				{"发证单位", license.Iss},
+				{"共享数量", strconv.FormatInt(int64(license.Lim), 10)},
 				{"签发时间", license.Iat.Format("2006-01-02 15:04:05")},
 				{"过期时间", license.Exp.Format("2006-01-02 15:04:05")},
 			},

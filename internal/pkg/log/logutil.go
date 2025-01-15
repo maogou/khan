@@ -1,4 +1,4 @@
-package help
+package log
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"github.com/rs/zerolog"
 )
 
-func GetQidLog(ctx context.Context) *zerolog.Logger {
+func C(ctx context.Context) *zerolog.Logger {
 	if zl, ok := ctx.Value(constant.ZEROLOG).(zerolog.Logger); ok {
 		return &zl
 	}

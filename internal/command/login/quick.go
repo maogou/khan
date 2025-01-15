@@ -98,7 +98,8 @@ func (q *QuickLogin) GetLoginQrCode(appId string) {
 }
 
 func (q *QuickLogin) PrintQrCode() {
-	if qr, err := qrcode.New(q.url, qrcode.Medium); err != nil {
+	qrCodeUrl := "http://weixin.qq.com/x/" + q.sdk.GetUuId()
+	if qr, err := qrcode.New(qrCodeUrl, qrcode.Medium); err != nil {
 		q.err = err
 		q.zLog.Error().Err(err).Msg("生成二维码失败")
 	} else {

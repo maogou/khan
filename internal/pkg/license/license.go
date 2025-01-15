@@ -28,7 +28,7 @@ type License struct {
 }
 
 func (l *License) Expired() bool {
-	return l.Exp.IsZero() == false && time.Now().After(l.Exp)
+	return l.Exp.IsZero() == false && time.Now().Local().After(l.Exp)
 }
 
 func (l *License) Encode(privateKey ed25519.PrivateKey) ([]byte, error) {

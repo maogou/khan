@@ -1,4 +1,4 @@
-package licenseutil
+package license
 
 import (
 	"crypto/ed25519"

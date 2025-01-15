@@ -14,3 +14,13 @@ func (g *Gewe) PostText(ctx context.Context, req v1.PostTextRequest) (*v1.PostTe
 
 	return resp.Result().(*v1.PostTextResponse), nil
 }
+
+func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
+	_, err := g.client.R().SetBody(req).Post(callback)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

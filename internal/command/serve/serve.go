@@ -2,6 +2,8 @@ package serve
 
 import (
 	"smallBot/internal/config"
+	"smallBot/internal/constant"
+	"smallBot/internal/pkg/license"
 	"smallBot/internal/sdk/gewe"
 	"smallBot/internal/task"
 
@@ -14,6 +16,7 @@ import (
 var (
 	monitor *task.Monitor
 	crontab = cron.New()
+	lic     = &license.License{}
 )
 
 func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
@@ -31,6 +34,19 @@ func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 		Before: func(cCtx *cli.Context) error {
 			log.Info().Msg("初始化长连接监控...")
 			monitor = task.NewMonitor("长连接监控", sdk, crontab)
+			nLic, err := license.Parse(constant.PublicKey, conf.Sdk.License)
+			if err != nil {
+				log.Error().Err(err).Msg("许可证校验失败")
+				return err
+			}
+
+			if nLic.Expired() {
+				log.Error().Msg("许可证已过期")
+				return err
+			}
+
+			lic = nLic
+
 			return nil
 		},
 
@@ -39,7 +55,7 @@ func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 			monitor.Run()
 			log.Info().Msg("开始启动机器人服务...")
 
-			if err := run(conf, sdk); err != nil {
+			if err := run(conf, sdk, lic); err != nil {
 				log.Error().Err(err).Msg("启动机器人服务失败")
 				return err
 			}

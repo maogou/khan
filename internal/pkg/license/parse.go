@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func (l *License) Verify(pub, file string) (*License, error) {
+func Parse(pub, file string) (*License, error) {
 	var (
 		publicKey ed25519.PublicKey
 		err       error
