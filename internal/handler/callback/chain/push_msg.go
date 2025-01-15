@@ -21,7 +21,7 @@ func NewPushMsg(sdk *gewe.Gewe) *PushMsg {
 var _ Chain = (*PushMsg)(nil)
 
 func (c *PushMsg) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
-
+	log.C(ctx).Info().Msg("调用PushMsg->IsCanHandler方法")
 	if len(c.sdk.Config().Sdk.Callback) > 0 {
 		return true
 	}
@@ -33,7 +33,10 @@ func (c *PushMsg) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 	log.C(ctx).Info().Msg("调用PushMsg->HandlerRequest方法")
 
 	if c.IsCanHandler(ctx, param) {
-		c.Process(ctx, param)
+		_ = c.Process(ctx, param)
+		if c.NextHandler != nil {
+			c.NextHandler.HandlerRequest(ctx, param)
+		}
 	}
 
 }

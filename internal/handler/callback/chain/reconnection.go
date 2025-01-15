@@ -20,14 +20,16 @@ func (r *Reconnection) HandlerRequest(ctx context.Context, param v1.CollectReque
 	log.C(ctx).Info().Msg("调用Reconnection->HandlerRequest方法")
 
 	if r.IsCanHandler(ctx, param) {
-		if r.Process(ctx, param) == nil && r.NextHandler != nil {
-			r.NextHandler.HandlerRequest(ctx, param)
+		if err := r.Process(ctx, param); err != nil {
+			log.C(ctx).Error().Err(err).Msg("调用Reconnection->Process方法失败")
 		}
 	}
 
 }
 
 func (r *Reconnection) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
+	log.C(ctx).Info().Msg("调用Reconnection->IsCanHandler方法")
+
 	msgType := param.TypeName
 
 	switch msgType {

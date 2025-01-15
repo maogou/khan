@@ -19,7 +19,7 @@ func initCallbackRoute(route *gin.Engine, sdk *gewe.Gewe, l *license.License) {
 	ignore.SetNext(pushMsg)
 	pushMsg.SetNext(reconnection)
 
-	callbackHandler := callback.NewCallbackHandler(sdk, ignore)
+	callbackHandler := callback.NewCallbackHandler(sdk, verify)
 
 	route.POST("/api/v1/collect", callbackHandler.Collect)
 }
