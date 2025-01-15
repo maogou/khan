@@ -22,7 +22,7 @@ import (
 func run(conf config.Config, sdk *gewe.Gewe, l *license.License) error {
 	gin.SetMode(conf.Mode)
 	route := gin.Default()
-	route.Use(middleware.RequestId())
+	route.Use(middleware.RequestId(), middleware.VerifyLicense(conf))
 
 	addr := ":" + strconv.Itoa(conf.Port)
 
