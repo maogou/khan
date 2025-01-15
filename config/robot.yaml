@@ -14,3 +14,4 @@ sdk:
   appId: "wx_kSHnTp-K2BYDIy1o1tQul"
   uuid: ""
   license: "./config/khan.lic"
+  key: "./config/khan.pub"
