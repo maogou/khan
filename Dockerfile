@@ -13,7 +13,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o smallBot smallBot/cmd
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o sbot smallBot/cmd
 
 
 FROM alpine
