@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
-	"smallBot/internal/command/license"
 	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
@@ -45,18 +44,18 @@ func NewRobotCommand() *cli.App {
 	sdk = gewe.NewGeweSdk(&conf, client, validate)
 
 	robot := &cli.App{
-		Name:      "bolt",
-		Usage:     "超简单超稳定的机器人",
-		Copyright: "(c) 2025 kinyou_xy@foxmail.com",
-		Version:   constant.VERSION,
-
+		Name:        "bolt",
+		Usage:       "超简单超稳定的机器人",
+		Copyright:   "(c) 2025 kinyou_xy@foxmail.com",
+		Version:     constant.VERSION,
+		Description: "本项目仅供学习交流使用，请勿用于商业用途，作者不承担任何法律问题",
 		Commands: []*cli.Command{
 			serve.Start(conf, sdk),
 			version.Info(),
 			auth.Verify(),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			license.Create(),
+			//license.Create(),
 			demo.Demo(),
 		},
 	}
