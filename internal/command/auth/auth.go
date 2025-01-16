@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"strconv"
 
@@ -26,7 +25,7 @@ func Verify() *cli.Command {
 		Action: func(cCtx *cli.Context) error {
 			private := cCtx.String("path")
 
-			lic, err := license.Parse(constant.PublicKey, private)
+			lic, err := license.Parse("./config/khan.pub", private)
 
 			if err != nil {
 				log.Error().Err(err).Msg("授权许可证验证失败")
