@@ -21,7 +21,7 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 		return
 	}
 
-	resp, err := m.sdk.PostText(ctx, v1.PostTextRequest{AppId: req.AppId, Content: req.Content, ToWxid: req.ToWxid})
+	resp, err := m.sdk.PostText(ctx, req)
 
 	if err != nil {
 		log.Error().Err(err).Msg("调用PostText方法发送消息失败")

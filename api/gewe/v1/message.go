@@ -1,10 +1,14 @@
 package v1
 
+type ToWxid struct {
+	Content string `json:"content"`
+	MsgType int    `json:"msg_type"`
+	ToWxid  string `json:"to_wxid"`
+}
+
 type PostTextRequest struct {
-	AppId   string `json:"appId" validate:"required"`
-	ToWxid  string `json:"toWxid" validate:"required"`  //好友/群的ID
-	Ats     string `json:"ats" validate:"omitempty"`    //@的好友，多个英文逗号分隔。群主或管理员@全部的人，则填写'notify@all' 在群内发送消息@某人时，content中需包含@xxx
-	Content string `json:"content" validate:"required"` //文本消息
+	Appid      string   `json:"appid"`
+	ToWxidList []ToWxid `json:"to_wxid_list"`
 }
 
 type PostTextResponse struct {
@@ -23,7 +27,7 @@ type PostTextResponse struct {
 				String string `json:"string"`
 			} `json:"ToUsetName"`
 			MsgId          int   `json:"MsgId"`
-			NewClientMsgid int64 `json:"NewClientMsgid"`
+			NewClientMsgid int   `json:"NewClientMsgid"`
 			Createtime     int   `json:"Createtime"`
 			Servertime     int   `json:"servertime"`
 			Type           int   `json:"Type"`

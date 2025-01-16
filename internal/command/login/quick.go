@@ -86,6 +86,7 @@ func (q *QuickLogin) GetLoginQrCode(appId string) {
 		q.tableData = append(
 			q.tableData,
 			[]string{"uuid", lqcResp.Data.Uuid, "登录随机生成的唯一标识"},
+			[]string{"nkey", lqcResp.Data.NKey, "钥匙串key"},
 			[]string{"appId", q.appId, "设备标识id(很重要)"},
 			[]string{"welcome", "欢迎使用khan服务!", "文件传输助手欢迎消息"},
 		)
@@ -241,9 +242,14 @@ func (q *QuickLogin) Open() {
 
 func (q *QuickLogin) Welcome() {
 	var welcome = v1.PostTextRequest{
-		Content: "欢迎使用Khan服务!",
-		ToWxid:  "filehelper",
-		AppId:   q.appId,
+		Appid: q.appId,
+		ToWxidList: []v1.ToWxid{
+			{
+				Content: "欢迎使用Khan服务!",
+				ToWxid:  "filehelper",
+				MsgType: 1,
+			},
+		},
 	}
 
 	var resp *v1.PostTextResponse
