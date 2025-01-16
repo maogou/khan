@@ -5,9 +5,13 @@ timeout: 5
 
 # sdk 配置
 sdk:
+  collect: http://127.0.0.1:8073/api/v1/collect
+  callback: http://127.0.0.1:8073/api/v1/callback
   pact: http://127.0.0.1:4600
   long: http://127.0.0.1:5600
   timeout: 30
   token: "9ec822b31bd4492a9b311bb1ba854f37"
-  appId: "wx_kSHnTp-K2BYDIy1o1tQul"
+  appId: "wx_5SRrQoTAbvCV9QZTa6XdY"
   uuid: ""
+  license: "./config/khan.lic"
+  key: "./config/khan.pub"
