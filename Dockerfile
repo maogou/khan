@@ -32,7 +32,7 @@ WORKDIR /app
 COPY --from=builder /build/docker/supervisor/ini/*.ini /etc/supervisor.d/
 COPY --from=builder /build/docker/bin/* /app/
 COPY --from=builder /build/docker/config/app.config /app/app.config
-COPY --from=builder /build/docker/config/robot.yaml /app/config/robot.yaml
+COPY --from=builder /build/docker/config/* /app/config/
 COPY --from=builder /build/smallBot /app/sbot
 COPY --from=builder /build/docker/supervisor/supervisord.conf /etc/supervisord.conf
 
