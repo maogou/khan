@@ -5,7 +5,10 @@ type template struct {
 }
 
 func (t *template) Start(appId string) {
-	t.b.GetAppId()
+
+	if len(appId) == 0 {
+		t.b.GetAppId()
+	}
 
 	if t.b.CanNext() {
 		t.b.GetLoginQrCode(appId)

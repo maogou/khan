@@ -64,7 +64,6 @@ func (q *QuickLogin) GetAppId() {
 		q.zLog.Warn().Str("err_msg", sdkResp.MsgErr).Msg("调用创建appId失败")
 		q.err = errors.New(sdkResp.MsgErr)
 	} else {
-		q.tableData = append(q.tableData, []string{"appId", sdkResp.Data.AppId, "appId是和wx账号绑定的,请保存下来"})
 		q.sdk.SetAppId(sdkResp.Data.AppId)
 		q.appId = sdkResp.Data.AppId
 	}
@@ -228,7 +227,7 @@ func (q *QuickLogin) Open() {
 	)
 
 	if err != nil {
-		q.zLog.Error().Err(err).Msg("调用开启长连接失败")
+		q.zLog.Error().Msg("调用开启长连接失败")
 		q.err = err
 	} else {
 		if loResp.Ret != 0 {
@@ -247,7 +246,11 @@ func (q *QuickLogin) Welcome() {
 		AppId:   q.appId,
 	}
 
-	_, q.err = q.sdk.PostText(q.ctx, welcome)
+	var resp *v1.PostTextResponse
+
+	resp, q.err = q.sdk.PostText(q.ctx, welcome)
+
+	q.zLog.Info().Any("welcome", resp).Msg("发送欢迎消息")
 
 }
 

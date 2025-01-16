@@ -13,7 +13,7 @@ func (g *Gewe) LoginQrCode(ctx context.Context, req v1.LoginQrCodeRequest) (*v1.
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.LoginQrCodeResponse{}).Post(loginQrCode)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用LoginQrCode方法失败")
+		log.Error().Msg("调用LoginQrCode方法失败")
 		return nil, err
 	}
 
@@ -27,7 +27,7 @@ func (g *Gewe) CheckLoginQrCode(ctx context.Context, req v1.CheckLoginQrCodeRequ
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.CheckLoginQrCodeResponse{}).Post(checkLoginQrCode)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用CheckLoginQrCode方法失败")
+		log.Error().Msg("调用CheckLoginQrCode方法失败")
 		return nil, err
 	}
 
@@ -42,7 +42,7 @@ func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.LongOpenResponse{}).Post(api)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用LongOpen方法失败")
+		log.Error().Msg("调用LongOpen方法失败")
 		return nil, err
 	}
 
@@ -56,7 +56,7 @@ func (g *Gewe) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.SecAutoAuthResponse{}).Post(secAutoAuth)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用SecAutoAuth方法失败")
+		log.Error().Msg("调用SecAutoAuth方法失败")
 		return nil, err
 	}
 
@@ -70,7 +70,7 @@ func (g *Gewe) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.Crea
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.CreateAppResponse{}).Post(createApp)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用CreateApp方法失败")
+		log.Error().Msg("调用CreateApp方法失败")
 		return nil, err
 	}
 
@@ -84,7 +84,7 @@ func (g *Gewe) HearBeat(ctx context.Context, req v1.HearBeatRequest) (*v1.HearBe
 	resp, err := g.client.R().SetBody(req).SetResult(&v1.HearBeatResponse{}).Post(heartbeat)
 
 	if err != nil {
-		log.Error().Err(err).Msg("调用HearBeat方法失败")
+		log.Error().Msg("调用HearBeat方法失败")
 		return nil, err
 	}
 
