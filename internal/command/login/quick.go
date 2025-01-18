@@ -262,5 +262,5 @@ func (q *QuickLogin) Welcome() {
 }
 
 func (q *QuickLogin) CanNext() bool {
-	return q.err == nil || q.selected == 2
+	return q.err == nil || q.selected == 1
 }
