@@ -1,38 +1,36 @@
 package v1
 
-type ToWxid struct {
-	Content string `json:"content"`
-	MsgType int    `json:"msg_type"`
-	ToWxid  string `json:"to_wxid"`
-}
-
 type PostTextRequest struct {
-	Appid      string   `json:"appid"`
-	ToWxidList []ToWxid `json:"to_wxid_list"`
+	AppId   string `json:"appId"`
+	ToWxid  string `json:"toWxid"`
+	Ats     string `json:"ats"`
+	Content string `json:"content"`
 }
 
 type PostTextResponse struct {
-	Ret  int    `json:"ret"`
-	Msg  string `json:"msg"`
-	Data struct {
-		BaseResponse struct {
-			Ret    int `json:"ret"`
-			ErrMsg struct {
-			} `json:"errMsg"`
-		} `json:"BaseResponse"`
-		Count int `json:"Count"`
-		List  []struct {
-			Ret        int `json:"Ret"`
-			ToUsetName struct {
-				String string `json:"string"`
-			} `json:"ToUsetName"`
-			MsgId          int   `json:"MsgId"`
-			NewClientMsgid int   `json:"NewClientMsgid"`
-			Createtime     int   `json:"Createtime"`
-			Servertime     int   `json:"servertime"`
-			Type           int   `json:"Type"`
-			NewMsgId       int64 `json:"NewMsgId"`
-		} `json:"List"`
-		NoKnow int `json:"NoKnow"`
-	} `json:"data"`
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}
+
+type PostImageRequest struct {
+	AppId  string `json:"appId" validate:"required"`
+	ToWxid string `json:"toWxid" validate:"required"`
+	ImgUrl string `json:"imgUrl" validate:"required"`
+}
+
+type PostImageResponse struct {
+	ToWxid     string      `json:"toWxid"`
+	CreateTime int         `json:"createTime"`
+	MsgId      int         `json:"msgId"`
+	NewMsgId   int64       `json:"newMsgId"`
+	Type       interface{} `json:"type"`
+	AesKey     string      `json:"aesKey"`
+	FileId     string      `json:"fileId"`
+	Length     int         `json:"length"`
+	Width      int         `json:"width"`
+	Height     int         `json:"height"`
+	Md5        string      `json:"md5"`
 }

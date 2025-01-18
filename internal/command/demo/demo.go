@@ -1,7 +1,7 @@
 package demo
 
 import (
-	v1 "smallBot/api/gewe/v1"
+	"smallBot/api/gewe/v1/transform"
 	"smallBot/internal/config"
 	"smallBot/internal/sdk/gewe"
 	"time"
@@ -32,9 +32,9 @@ func do(cCtx *cli.Context) error {
 	sdk := gewe.NewGeweSdk(&conf, client, validate)
 
 	resp, err := sdk.PostText(
-		cCtx.Context, v1.PostTextRequest{
-			Appid: "wx_Ez4I3ZO1gKOG7h0IgfB8D",
-			ToWxidList: []v1.ToWxid{
+		cCtx.Context, transform.PostTextRequest{
+			AppId: "wx_Ez4I3ZO1gKOG7h0IgfB8D",
+			ToWxidList: []transform.ToWxid{
 				{
 					Content: "当前时间为:" + time.Now().Format(time.DateTime),
 					ToWxid:  "xingmaogou",

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	v1 "smallBot/api/gewe/v1"
+	"smallBot/api/gewe/v1/transform"
 	"smallBot/internal/sdk/gewe"
 	"time"
 
@@ -241,9 +242,9 @@ func (q *QuickLogin) Open() {
 }
 
 func (q *QuickLogin) Welcome() {
-	var welcome = v1.PostTextRequest{
-		Appid: q.appId,
-		ToWxidList: []v1.ToWxid{
+	var welcome = transform.PostTextRequest{
+		AppId: q.appId,
+		ToWxidList: []transform.ToWxid{
 			{
 				Content: "欢迎使用Khan服务!",
 				ToWxid:  "filehelper",
@@ -252,7 +253,7 @@ func (q *QuickLogin) Welcome() {
 		},
 	}
 
-	var resp *v1.PostTextResponse
+	var resp *transform.PostTextResponse
 
 	resp, q.err = q.sdk.PostText(q.ctx, welcome)
 
