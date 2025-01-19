@@ -7,6 +7,7 @@ import (
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/sdk/gewe"
 	"smallBot/internal/task"
+	"strings"
 
 	"github.com/robfig/cron/v3"
 
@@ -40,6 +41,8 @@ func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 			}
 
 			pKey := filepath.Base(conf.Sdk.License)
+			pKey = strings.ReplaceAll(pKey, "37", "+")
+			pKey = strings.ReplaceAll(pKey, "73", "/")
 
 			nLic, err := license.Parse(pKey, conf.Sdk.License)
 			if err != nil {

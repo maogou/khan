@@ -6,6 +6,7 @@ import (
 	"smallBot/internal/config"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/response"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
@@ -21,6 +22,9 @@ func VerifyLicense(conf config.Config) gin.HandlerFunc {
 		}
 
 		pKey := filepath.Base(conf.Sdk.License)
+
+		pKey = strings.ReplaceAll(pKey, "37", "+")
+		pKey = strings.ReplaceAll(pKey, "73", "/")
 
 		nLic, err := license.Parse(pKey, conf.Sdk.License)
 		if err != nil {
