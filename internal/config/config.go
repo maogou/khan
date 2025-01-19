@@ -28,7 +28,6 @@ type Sdk struct {
 	AppId    string        `yaml:"appid"`
 	UuId     string        `yaml:"uuid"`
 	License  string        `yaml:"license" validate:"required"`
-	Key      string        `yaml:"Key" validate:"required"`
 }
 
 func MustLoadConfig(cfgFile string) Config {

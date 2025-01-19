@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"os"
+	"path/filepath"
 	"smallBot/internal/config"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/response"
@@ -11,7 +13,16 @@ import (
 
 func VerifyLicense(conf config.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		nLic, err := license.Parse(conf.Sdk.Key, conf.Sdk.License)
+		if _, err := os.Stat(conf.Sdk.License); err != nil {
+			log.Error().Err(err).Msg("许可证不存在")
+			c.Abort()
+			response.SuccessMsg(c, "许可证不存在")
+			return
+		}
+
+		pKey := filepath.Base(conf.Sdk.License)
+
+		nLic, err := license.Parse(pKey, conf.Sdk.License)
 		if err != nil {
 			log.Error().Err(err).Msg("许可证校验失败")
 			c.Abort()

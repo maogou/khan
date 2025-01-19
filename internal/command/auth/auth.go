@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"os"
+	"path/filepath"
 	"smallBot/internal/pkg/license"
 	"strconv"
 
@@ -17,15 +19,22 @@ func Verify() *cli.Command {
 		Usage: "授权许可证验证",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:  "path",
-				Value: "./config/khan.lic",
-				Usage: "颁发的软件许可证绝对路径",
+				Name:     "path",
+				Value:    "",
+				Usage:    "颁发的软件许可证绝对路径",
+				Required: true,
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			private := cCtx.String("path")
+			path := cCtx.String("path")
 
-			lic, err := license.Parse("./config/khan.pub", private)
+			if _, err := os.Stat(path); err != nil {
+				return err
+			}
+
+			pub := filepath.Base(path)
+
+			lic, err := license.Parse(pub, path)
 
 			if err != nil {
 				log.Error().Err(err).Msg("授权许可证验证失败")
@@ -37,7 +46,10 @@ func Verify() *cli.Command {
 				return err
 			}
 
-			printLicense(lic)
+			_ = printLicense(lic)
+			if err != nil {
+				return err
+			}
 
 			return nil
 		},

@@ -1,6 +1,8 @@
 package serve
 
 import (
+	"os"
+	"path/filepath"
 	"smallBot/internal/config"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/sdk/gewe"
@@ -33,7 +35,13 @@ func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 		Before: func(cCtx *cli.Context) error {
 			log.Info().Msg("初始化长连接监控...")
 			monitor = task.NewMonitor("长连接监控", sdk, crontab)
-			nLic, err := license.Parse(conf.Sdk.Key, conf.Sdk.License)
+			if _, err := os.Stat(conf.Sdk.License); err != nil {
+				return err
+			}
+
+			pKey := filepath.Base(conf.Sdk.License)
+
+			nLic, err := license.Parse(pKey, conf.Sdk.License)
 			if err != nil {
 				log.Error().Err(err).Msg("许可证校验失败")
 				return err
