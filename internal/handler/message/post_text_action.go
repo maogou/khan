@@ -17,20 +17,21 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		log.C(ctx).Error().Err(err).Msg("参数验证失败")
-		response.Fail(ctx, err)
+		response.Fail(ctx, errno.ValidateError)
 		return
 	}
 
-	resp, err := m.sdk.PostText(ctx, transform.PostTextRequest{
-		AppId: req.AppId,
-		ToWxidList: []transform.ToWxid{
-			{
-				Content: req.Content,
-				ToWxid:  req.ToWxid,
-				MsgType: 1,
+	resp, err := m.sdk.PostText(
+		ctx, transform.PostTextRequest{
+			AppId: req.AppId,
+			ToWxidList: []transform.ToWxid{
+				{
+					Content: req.Content,
+					ToWxid:  req.ToWxid,
+					MsgType: 1,
+				},
 			},
 		},
-	},
 	)
 
 	if err != nil {
@@ -41,13 +42,15 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 
 	log.C(ctx).Info().Any("req", req).Any("resp", resp).Msg("发送消息成功")
 
-	response.Success(ctx, v1.PostTextResponse{
-		ToWxid:     req.ToWxid,
-		MsgId:      resp.Data.List[0].MsgId,
-		NewMsgId:   resp.Data.List[0].NewMsgId,
-		Type:       resp.Data.List[0].Type,
-		CreateTime: resp.Data.List[0].Createtime,
-	})
+	response.Success(
+		ctx, v1.PostTextResponse{
+			ToWxid:     req.ToWxid,
+			MsgId:      resp.Data.List[0].MsgId,
+			NewMsgId:   resp.Data.List[0].NewMsgId,
+			Type:       resp.Data.List[0].Type,
+			CreateTime: resp.Data.List[0].Createtime,
+		},
+	)
 
 	return
 }

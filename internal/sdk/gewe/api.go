@@ -9,5 +9,7 @@ const (
 	heartbeat        = "/wxsdk/lgoin/heartbeat"
 	logout           = "/wxsdk/lgoin/logout"
 
-	postText = "/wxsdk/message/sendmsg"
+	postText  = "/wxsdk/message/sendmsg"
+	postImage = "/wxsdk/message/sendimg"
+	sendFile  = "/wxsdk/message/sendfile"
 )

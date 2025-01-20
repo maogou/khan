@@ -17,7 +17,7 @@ func (m *MessageHandler) PostImage(ctx *gin.Context) {
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		log.C(ctx).Error().Err(err).Msg("参数验证失败")
-		response.Fail(ctx, err)
+		response.Fail(ctx, errno.ValidateError)
 		return
 	}
 

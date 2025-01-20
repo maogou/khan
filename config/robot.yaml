@@ -11,6 +11,6 @@ sdk:
   long: http://127.0.0.1:5600
   timeout: 30
   token: "9ec822b31bd4492a9b311bb1ba854f37"
-  appId: "wx_5SRrQoTAbvCV9QZTa6XdY"
+  appId: ""
   uuid: ""
   license: "./config/E8jXeKtvEWOeEs9UiCu4Xi4mk9arnl5tGvmB3ZIMzUU="
