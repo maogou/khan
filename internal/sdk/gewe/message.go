@@ -38,6 +38,17 @@ func (g *Gewe) PostFile(ctx context.Context, req transform.PostFileRequest) (*tr
 	return resp.Result().(*transform.PostFileResponse), nil
 }
 
+func (g *Gewe) PostLink(ctx context.Context, req transform.PostLinkRequest) (*transform.PostLinkResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PostLinkResponse{}).Post(sendLink)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postLink方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PostLinkResponse), nil
+}
+
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	_, err := g.client.R().SetBody(req).Post(callback)
 

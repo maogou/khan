@@ -16,9 +16,9 @@ type PostTextResponse struct {
 }
 
 type PostImageRequest struct {
-	AppId  string `json:"appId" validate:"required"`
-	ToWxid string `json:"toWxid" validate:"required"`
-	ImgUrl string `json:"imgUrl" validate:"required"`
+	AppId  string `json:"appId" binding:"required"`
+	ToWxid string `json:"toWxid" binding:"required"`
+	ImgUrl string `json:"imgUrl" binding:"required"`
 }
 
 type PostImageResponse struct {
@@ -43,6 +43,23 @@ type PostFileRequest struct {
 }
 
 type PostFileResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}
+
+type PostLinkRequest struct {
+	AppId    string `json:"appId" binding:"required"`
+	ToWxid   string `json:"toWxid" binding:"required"`
+	Title    string `json:"title" binding:"required"`
+	Desc     string `json:"desc" binding:"required"`
+	LinkUrl  string `json:"linkUrl" binding:"required"`
+	ThumbUrl string `json:"thumbUrl" binding:"required"`
+}
+
+type PostLinkResponse struct {
 	ToWxid     string `json:"toWxid"`
 	CreateTime int    `json:"createTime"`
 	MsgId      int    `json:"msgId"`

@@ -12,4 +12,5 @@ const (
 	postText  = "/wxsdk/message/sendmsg"
 	postImage = "/wxsdk/message/sendimg"
 	sendFile  = "/wxsdk/message/sendfile"
+	sendLink  = "/wxsdk/message/sendlink"
 )
