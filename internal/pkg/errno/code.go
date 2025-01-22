@@ -13,4 +13,5 @@ var (
 	DownloadFileNotExistError = &ErrNo{Code: 10006, Message: "下载文件不存在"}
 	DownloadFileOpenError     = &ErrNo{Code: 10007, Message: "文件打开失败"}
 	DownloadFileStatError     = &ErrNo{Code: 10008, Message: "获取文件信息失败"}
+	PersonalProfileError      = &ErrNo{Code: 10009, Message: "获取个人资料失败"}
 )

@@ -66,3 +66,25 @@ type PostLinkResponse struct {
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
 }
+
+type PersonalProfileRequest struct {
+	AppId   string `json:"appId" binding:"required"`
+	ProxyIp string `json:"proxyIp"`
+}
+
+type PersonalProfileResponse struct {
+	Alias           string `json:"alias"`
+	Wxid            string `json:"wxid"`
+	NickName        string `json:"nickName"`
+	Mobile          string `json:"mobile"`
+	Uin             int    `json:"uin"`
+	Sex             int    `json:"sex"`
+	Province        string `json:"province"`
+	City            string `json:"city"`
+	Signature       string `json:"signature"`
+	Country         string `json:"country"`
+	BigHeadImgUrl   string `json:"bigHeadImgUrl"`
+	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
+	RegCountry      string `json:"regCountry"`
+	SnsBgImg        string `json:"snsBgImg"`
+}

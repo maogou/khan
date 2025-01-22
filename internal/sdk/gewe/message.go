@@ -49,6 +49,17 @@ func (g *Gewe) PostLink(ctx context.Context, req transform.PostLinkRequest) (*tr
 	return resp.Result().(*transform.PostLinkResponse), nil
 }
 
+func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用personalProfile方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PersonalProfileResponse), nil
+}
+
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	_, err := g.client.R().SetBody(req).Post(callback)
 
