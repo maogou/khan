@@ -7,11 +7,15 @@ var (
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}
 
-	SendMsgError              = &ErrNo{Code: 10003, Message: "发送消息失败"}
-	DownloadImgError          = &ErrNo{Code: 10004, Message: "下载图片失败"}
-	DownloadNameEmptyError    = &ErrNo{Code: 10005, Message: "下载文件名不能为空"}
-	DownloadFileNotExistError = &ErrNo{Code: 10006, Message: "下载文件不存在"}
-	DownloadFileOpenError     = &ErrNo{Code: 10007, Message: "文件打开失败"}
-	DownloadFileStatError     = &ErrNo{Code: 10008, Message: "获取文件信息失败"}
-	PersonalProfileError      = &ErrNo{Code: 10009, Message: "获取个人资料失败"}
+	SendMsgError                = &ErrNo{Code: 10003, Message: "发送消息失败"}
+	DownloadImgError            = &ErrNo{Code: 10004, Message: "下载图片失败"}
+	DownloadNameEmptyError      = &ErrNo{Code: 10005, Message: "下载文件名不能为空"}
+	DownloadFileNotExistError   = &ErrNo{Code: 10006, Message: "下载文件不存在"}
+	DownloadFileOpenError       = &ErrNo{Code: 10007, Message: "文件打开失败"}
+	DownloadFileStatError       = &ErrNo{Code: 10008, Message: "获取文件信息失败"}
+	PersonalProfileError        = &ErrNo{Code: 10009, Message: "获取个人资料失败"}
+	PersonalQrcodeError         = &ErrNo{Code: 10010, Message: "获取个人二维码失败"}
+	PersonalSafetyError         = &ErrNo{Code: 10011, Message: "获取个人安全设备失败"}
+	PersonalPrivacySettingError = &ErrNo{Code: 10012, Message: "设置个人隐私设置失败"}
+	PersonalUploadHeadImgError  = &ErrNo{Code: 10013, Message: "上传头像失败"}
 )

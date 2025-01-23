@@ -14,5 +14,9 @@ const (
 	sendFile  = "/wxsdk/message/sendfile"
 	sendLink  = "/wxsdk/message/sendlink"
 
-	personalProfile = "/wxsdk/personal/getprofile"
+	personalProfile         = "/wxsdk/personal/getprofile"
+	personalQrcode          = "/wxsdk/personal/getqrcode"
+	personalSafety          = "/wxsdk/personal/getsafetyinfo"
+	personalPrivacySetting  = "wxsdk/personal/privacysettings"
+	personalUploadHdHeadImg = "/wxsdk/personal/uploadhdheadimg"
 )

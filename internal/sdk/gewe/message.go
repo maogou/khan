@@ -60,6 +60,50 @@ func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfil
 	return resp.Result().(*transform.PersonalProfileResponse), nil
 }
 
+func (g *Gewe) PersonalQrcode(ctx context.Context, req transform.PersonalQrcodeRequest) (*transform.PersonalQrcodResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalQrcodResponse{}).Post(personalQrcode)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用personalQrcode方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PersonalQrcodResponse), nil
+}
+
+func (g *Gewe) PersonalSafety(ctx context.Context, req transform.PersonalSafetyRequest) (*transform.PersonalSafetyResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalSafetyResponse{}).Post(personalSafety)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用personalSafety方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PersonalSafetyResponse), nil
+}
+
+func (g *Gewe) PersonalPrivacySetting(ctx context.Context, req transform.PersonalPrivacySettingRequest) (*transform.PersonalPrivacySettingResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalPrivacySettingResponse{}).Post(personalPrivacySetting)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用personalPrivacySetting方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PersonalPrivacySettingResponse), nil
+}
+
+func (g *Gewe) PersonalUploadHeadImg(ctx context.Context, req transform.PersonalUploadHdHeadImgRequest) (*transform.PersonalUploadHdHeadImgResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalUploadHdHeadImgResponse{}).Post(personalUploadHdHeadImg)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用personalUploadHdHeadImg方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PersonalUploadHdHeadImgResponse), nil
+}
+
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	_, err := g.client.R().SetBody(req).Post(callback)
 
