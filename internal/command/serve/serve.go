@@ -1,6 +1,7 @@
 package serve
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"smallBot/internal/config"
@@ -52,7 +53,7 @@ func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
 
 			if nLic.Expired() {
 				log.Error().Msg("许可证已过期")
-				return err
+				return errors.New("授权许可证已过期")
 			}
 
 			lic = nLic

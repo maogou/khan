@@ -71,6 +71,17 @@ func (g *Gewe) PostVideo(ctx context.Context, req transform.PostVideoRequest) (*
 	return resp.Result().(*transform.PostVideoResponse), nil
 }
 
+func (g *Gewe) PostNameCard(ctx context.Context, req transform.PostNameCardRequest) (*transform.PostNameCardResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PostNameCardResponse{}).Post(sendNameCard)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postNameCard方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PostNameCardResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 

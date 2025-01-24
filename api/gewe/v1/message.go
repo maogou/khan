@@ -158,3 +158,18 @@ type PostVideoResponse struct {
 	FileId     string      `json:"fileId"`
 	Length     int         `json:"length"`
 }
+
+type PostNameCardRequest struct {
+	AppId        string `json:"appId" binding:"required"`
+	ToWxid       string `json:"toWxid" binding:"required"`
+	NickName     string `json:"nickName" binding:"required"`
+	NameCardWxid string `json:"nameCardWxid" binding:"required"`
+}
+
+type PostNameCardResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}

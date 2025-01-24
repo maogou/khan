@@ -24,4 +24,6 @@ var (
 	PostLinkError               = &ErrNo{Code: 10017, Message: "发送链接消息失败"}
 	PostVoiceError              = &ErrNo{Code: 10018, Message: "发送语音消息失败"}
 	PostVideoError              = &ErrNo{Code: 10019, Message: "发送视频消息失败"}
+	PostNameCardError           = &ErrNo{Code: 10020, Message: "发送名片消息失败"}
+	XmlEncodeError              = &ErrNo{Code: 10021, Message: "xml编码失败"}
 )
