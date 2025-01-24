@@ -49,6 +49,28 @@ func (g *Gewe) PostLink(ctx context.Context, req transform.PostLinkRequest) (*tr
 	return resp.Result().(*transform.PostLinkResponse), nil
 }
 
+func (g *Gewe) PostVoice(ctx context.Context, req transform.PostVoiceRequest) (*transform.PostVoiceResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PostVoiceResponse{}).Post(sendVoice)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postVoice方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PostVoiceResponse), nil
+}
+
+func (g *Gewe) PostVideo(ctx context.Context, req transform.PostVideoRequest) (*transform.PostVideoResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PostVideoResponse{}).Post(sendVideo)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postVideo方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PostVideoResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 

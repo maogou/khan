@@ -29,10 +29,15 @@ func (m *MessageHandler) PostImage(ctx *gin.Context) {
 			ToWxid:   req.ToWxid,
 		},
 	)
-
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PostImage方法发送消息失败")
-		response.Fail(ctx, errno.SendMsgError)
+		response.Fail(ctx, errno.PostImageError)
+		return
+	}
+
+	if resp.Ret != 0 {
+		log.C(ctx).Error().Err(err).Msg("调用PostImage方法发送消息失败")
+		response.Fail(ctx, errno.PostImageError)
 		return
 	}
 
@@ -53,6 +58,4 @@ func (m *MessageHandler) PostImage(ctx *gin.Context) {
 			Md5:        resp.Data.BasicData.FileMd5,
 		},
 	)
-
-	return
 }

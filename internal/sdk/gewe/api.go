@@ -13,6 +13,8 @@ const (
 	postImage = "/wxsdk/message/sendimg"
 	sendFile  = "/wxsdk/message/sendfile"
 	sendLink  = "/wxsdk/message/sendlink"
+	sendVoice = "/wxsdk/message/sendvoice"
+	sendVideo = "/wxsdk/message/sendvideo"
 
 	personalProfile         = "/wxsdk/personal/getprofile"
 	personalQrcode          = "/wxsdk/personal/getqrcode"

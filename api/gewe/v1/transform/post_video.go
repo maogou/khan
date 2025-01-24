@@ -1,13 +1,14 @@
 package transform
 
+type PostVideoConfig struct {
+	VideoPlayLength int    `json:"video_play_length"`
+	VideoThumbnail  string `json:"video_thumbnail"`
+}
 type PostVideoRequest struct {
-	Appid  string `json:"appid"`
-	Config struct {
-		VideoPlayLength int    `json:"video_play_length"`
-		VideoThumbnail  string `json:"video_thumbnail"`
-	} `json:"config"`
-	FileLink string `json:"file_link"`
-	ToWxid   string `json:"to_wxid"`
+	Appid    string          `json:"appid"`
+	Config   PostVideoConfig `json:"config"`
+	FileLink string          `json:"file_link"`
+	ToWxid   string          `json:"to_wxid"`
 }
 
 type PostVideoResponse struct {

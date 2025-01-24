@@ -24,7 +24,6 @@ func (m *MessageHandler) PostLink(ctx *gin.Context) {
 	}
 
 	imgByte, err := m.downloadFile(ctx, req.ThumbUrl)
-
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("下载图片失败")
 		response.Fail(ctx, errno.DownloadImgError)
@@ -41,10 +40,15 @@ func (m *MessageHandler) PostLink(ctx *gin.Context) {
 			Url:    req.LinkUrl,
 		},
 	)
-
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PostLink方法发送消息失败")
-		response.Fail(ctx, errno.SendMsgError)
+		response.Fail(ctx, errno.PostLinkError)
+		return
+	}
+
+	if resp.Ret != 0 {
+		log.C(ctx).Error().Any("resp", resp).Msg("调用PostLink方法发送消息失败")
+		response.Fail(ctx, errno.PostLinkError)
 		return
 	}
 
@@ -59,15 +63,12 @@ func (m *MessageHandler) PostLink(ctx *gin.Context) {
 			Type:       resp.Data.Type,
 		},
 	)
-
-	return
 }
 
 func (m *MessageHandler) downloadFile(ctx context.Context, url string) ([]byte, error) {
 	log.C(ctx).Info().Msg("调用MessageHandler->downloadFile方法")
 
 	resp, err := m.sdk.Client().R().Get(url)
-
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("下载文件失败")
 		return nil, errno.DownloadImgError

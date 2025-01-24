@@ -33,14 +33,19 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 			},
 		},
 	)
-
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PostText方法发送消息失败")
-		response.Fail(ctx, errno.SendMsgError)
+		response.Fail(ctx, errno.PostTextError)
 		return
 	}
 
 	log.C(ctx).Info().Any("req", req).Any("resp", resp).Msg("发送消息成功")
+
+	if resp.Ret != 0 {
+		log.C(ctx).Error().Err(err).Msg("调用PostText方法发送消息失败")
+		response.Fail(ctx, errno.PostTextError)
+		return
+	}
 
 	response.Success(
 		ctx, v1.PostTextResponse{
@@ -51,6 +56,4 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 			CreateTime: resp.Data.List[0].Createtime,
 		},
 	)
-
-	return
 }

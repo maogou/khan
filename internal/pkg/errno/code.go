@@ -18,4 +18,10 @@ var (
 	PersonalSafetyError         = &ErrNo{Code: 10011, Message: "获取个人安全设备失败"}
 	PersonalPrivacySettingError = &ErrNo{Code: 10012, Message: "设置个人隐私设置失败"}
 	PersonalUploadHeadImgError  = &ErrNo{Code: 10013, Message: "上传头像失败"}
+	PostTextError               = &ErrNo{Code: 10014, Message: "发送文本消息失败"}
+	PostImageError              = &ErrNo{Code: 10015, Message: "发送图片消息失败"}
+	PostFileError               = &ErrNo{Code: 10016, Message: "发送文件消息失败"}
+	PostLinkError               = &ErrNo{Code: 10017, Message: "发送链接消息失败"}
+	PostVoiceError              = &ErrNo{Code: 10018, Message: "发送语音消息失败"}
+	PostVideoError              = &ErrNo{Code: 10019, Message: "发送视频消息失败"}
 )

@@ -34,16 +34,24 @@ func (m *MessageHandler) PostFile(ctx *gin.Context) {
 
 	if err != nil {
 		log.C(ctx).Error().Msg("发送文件失败")
-		response.Fail(ctx, errno.SendMsgError)
+		response.Fail(ctx, errno.PostFileError)
 		return
 	}
 
-	response.Success(ctx, v1.PostFileResponse{
-		ToWxid:     req.ToWxid,
-		CreateTime: resp.Data.SendMsgStatus.CreateTime,
-		MsgId:      resp.Data.SendMsgStatus.MsgId,
-		NewMsgId:   resp.Data.SendMsgStatus.NewMsgId,
-		Type:       resp.Data.SendMsgStatus.Type,
-	})
+	if resp.Ret != 0 {
+		log.C(ctx).Error().Err(err).Msg("调用PostFile方法发送消息失败")
+		response.Fail(ctx, errno.PostFileError)
+		return
+	}
+
+	response.Success(
+		ctx, v1.PostFileResponse{
+			ToWxid:     req.ToWxid,
+			CreateTime: resp.Data.SendMsgStatus.CreateTime,
+			MsgId:      resp.Data.SendMsgStatus.MsgId,
+			NewMsgId:   resp.Data.SendMsgStatus.NewMsgId,
+			Type:       resp.Data.SendMsgStatus.Type,
+		},
+	)
 
 }

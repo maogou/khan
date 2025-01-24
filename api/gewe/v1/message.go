@@ -124,3 +124,37 @@ type PersonalUploadHeadImgRequest struct {
 	AppId      string `json:"appId" binding:"required"`
 	HeadImgUrl string `json:"headImgUrl" binding:"required"`
 }
+
+type PostVoiceRequest struct {
+	AppId         string `json:"appId" binding:"required"`
+	ToWxid        string `json:"toWxid" binding:"required"`
+	VoiceUrl      string `json:"voiceUrl" binding:"required"`
+	VoiceDuration int    `json:"voiceDuration" binding:"required"`
+}
+
+type PostVoiceResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}
+
+type PostVideoRequest struct {
+	AppId         string `json:"appId" binding:"required"`
+	ToWxid        string `json:"toWxid" binding:"required"`
+	VideoUrl      string `json:"videoUrl" binding:"required"`
+	ThumbUrl      string `json:"thumbUrl" binding:"required"`
+	VideoDuration int    `json:"videoDuration" binding:"required"`
+}
+
+type PostVideoResponse struct {
+	ToWxid     string      `json:"toWxid"`
+	CreateTime interface{} `json:"createTime"`
+	MsgId      int         `json:"msgId"`
+	NewMsgId   int64       `json:"newMsgId"`
+	Type       int         `json:"type"`
+	AesKey     string      `json:"aesKey"`
+	FileId     string      `json:"fileId"`
+	Length     int         `json:"length"`
+}
