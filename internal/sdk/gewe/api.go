@@ -16,6 +16,8 @@ const (
 	sendVoice    = "/wxsdk/message/sendvoice"
 	sendVideo    = "/wxsdk/message/sendvideo"
 	sendNameCard = "/wxsdk/message/sendmsg"
+	sendEmoji    = "/wxsdk/message/sendemoji"
+	sendApplet   = "/wxsdk/message/sendapplet"
 
 	personalProfile         = "/wxsdk/personal/getprofile"
 	personalQrcode          = "/wxsdk/personal/getqrcode"

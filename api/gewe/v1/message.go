@@ -173,3 +173,18 @@ type PostNameCardResponse struct {
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
 }
+
+type PostEmojiRequest struct {
+	AppId     string `json:"appId" binding:"required"`
+	ToWxid    string `json:"toWxid" binding:"required"`
+	EmojiMd5  string `json:"emojiMd5" binding:"required"`
+	EmojiSize int    `json:"emojiSize" binding:"required"`
+}
+
+type PostEmojiResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int64  `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}

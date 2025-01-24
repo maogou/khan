@@ -26,4 +26,5 @@ var (
 	PostVideoError              = &ErrNo{Code: 10019, Message: "发送视频消息失败"}
 	PostNameCardError           = &ErrNo{Code: 10020, Message: "发送名片消息失败"}
 	XmlEncodeError              = &ErrNo{Code: 10021, Message: "xml编码失败"}
+	PostEmojiError              = &ErrNo{Code: 10022, Message: "发送表情消息失败"}
 )

@@ -16,4 +16,5 @@ func initMessageRoute(route *gin.Engine, sdk *gewe.Gewe) {
 	route.POST("/api/v2//message/postLink", messageHandler.PostLink)
 
 	route.POST("/api/v2//message/postNameCard", messageHandler.PostNameCard)
+	route.POST("/api/v2//message/postEmoji", messageHandler.PostEmoji)
 }

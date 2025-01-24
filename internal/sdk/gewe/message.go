@@ -82,6 +82,17 @@ func (g *Gewe) PostNameCard(ctx context.Context, req transform.PostNameCardReque
 	return resp.Result().(*transform.PostNameCardResponse), nil
 }
 
+func (g *Gewe) PostEmoji(ctx context.Context, req transform.PostEmojiRequest) (*transform.PostEmojiResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.PostEmojiResponse{}).Post(sendEmoji)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postEmoji方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.PostEmojiResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 
