@@ -9,5 +9,5 @@ import (
 func initDownloadRouter(route *gin.Engine) {
 	downloadHandler := download.NewDownloadHandler()
 
-	route.GET("/api/v2/download/:filename", downloadHandler.StaticFile)
+	route.GET("/v2/api/download/:filename", downloadHandler.StaticFile)
 }

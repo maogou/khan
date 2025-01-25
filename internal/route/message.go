@@ -10,11 +10,11 @@ import (
 func initMessageRoute(route *gin.Engine, sdk *gewe.Gewe) {
 	messageHandler := message.NewMessageHandler(sdk)
 
-	route.POST("/api/v2/message/postText", messageHandler.PostText)
-	route.POST("/api/v2//message/postImage", messageHandler.PostImage)
-	route.POST("/api/v2//message/postFile", messageHandler.PostFile)
-	route.POST("/api/v2//message/postLink", messageHandler.PostLink)
+	route.POST("/v2/api/message/postText", messageHandler.PostText)
+	route.POST("/v2/api//message/postImage", messageHandler.PostImage)
+	route.POST("/v2/api//message/postFile", messageHandler.PostFile)
+	route.POST("/v2/api//message/postLink", messageHandler.PostLink)
 
-	route.POST("/api/v2//message/postNameCard", messageHandler.PostNameCard)
-	route.POST("/api/v2//message/postEmoji", messageHandler.PostEmoji)
+	route.POST("/v2/api//message/postNameCard", messageHandler.PostNameCard)
+	route.POST("/v2/api//message/postEmoji", messageHandler.PostEmoji)
 }
