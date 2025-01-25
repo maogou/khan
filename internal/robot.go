@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
-	"smallBot/internal/command/license"
 	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
@@ -62,7 +61,7 @@ func NewRobotCommand() *cli.App {
 			auth.Verify(),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			license.Create(),
+			//license.Create(),
 			demo.Demo(),
 		},
 	}
