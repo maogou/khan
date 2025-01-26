@@ -12,6 +12,7 @@ func InitRouter(engine *gin.Engine, sdk *gewe.Gewe, l *license.License) error {
 	initDownloadRouter(engine)
 	initCallbackRoute(engine, sdk, l)
 	initMessageRoute(engine, sdk)
+	initContactRoute(engine, sdk)
 	initPprofRoute(engine)
 
 	return nil
