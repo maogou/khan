@@ -147,6 +147,15 @@ func (g *Gewe) ContactInfo(ctx context.Context, req transform.ContactInfoRequest
 	return resp.Result().(*transform.ContactInfoResponse), nil
 }
 
+func (g *Gewe) ContactDetail(ctx context.Context, req transform.ContactDetailRequest) (*transform.ContactDetailResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactDetailResponse{}).Post(contactDetail)
+	if err != nil {
+		log.C(ctx).Error().Msg("调用contactDetail方法失败")
+		return nil, err
+	}
+	return resp.Result().(*transform.ContactDetailResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 

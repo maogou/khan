@@ -34,4 +34,5 @@ var (
 	ContactAddError    = &ErrNo{Code: 10026, Message: "添加联系人失败"}
 	ContactDelError    = &ErrNo{Code: 10027, Message: "删除联系人失败"}
 	ContactInfoError   = &ErrNo{Code: 10028, Message: "获取联系人信息失败"}
+	ContactDetailError = &ErrNo{Code: 10029, Message: "获取联系人详细信息失败"}
 )
