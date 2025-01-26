@@ -212,5 +212,4 @@ type ContactSearchResponse struct {
 	BigHeadImgUrl   string `json:"bigHeadImgUrl"`
 	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
 	V4              string `json:"v4"`
-	Wxid            string `json:"wxid"`
 }

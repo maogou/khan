@@ -47,8 +47,7 @@ func (c *ContactHandler) Search(ctx *gin.Context) {
 			Signature:       resp.Data.Signature,
 			BigHeadImgUrl:   resp.Data.BigHeadImgUrl,
 			SmallHeadImgUrl: resp.Data.SmallHeadImgUrl,
-			V4:              "",
-			Wxid:            resp.Data.Pyinitial.String,
+			V4:              resp.Data.AntispamTicket,
 		},
 	)
 }
