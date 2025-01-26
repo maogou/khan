@@ -156,6 +156,17 @@ func (g *Gewe) ContactDetail(ctx context.Context, req transform.ContactDetailReq
 	return resp.Result().(*transform.ContactDetailResponse), nil
 }
 
+func (g *Gewe) ContactSetOnlyChat(ctx context.Context, req transform.ContactSetOnlyChatRequest) (*transform.ContactSetOnlyChatResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactSetOnlyChatResponse{}).Post(contactSetOnlyChat)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用contactSetOnlyChat方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.ContactSetOnlyChatResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 

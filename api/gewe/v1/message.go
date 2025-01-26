@@ -283,3 +283,9 @@ type ContactDetailItem struct {
 	City            interface{} `json:"city"`
 	PhoneNumList    interface{} `json:"phoneNumList"`
 }
+
+type ContactSetOnlyChatRequest struct {
+	AppId    string `json:"appId" binding:"required"`
+	Wxid     string `json:"wxid" binding:"required"`
+	OnlyChat bool   `json:"onlyChat"`
+}
