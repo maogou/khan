@@ -188,3 +188,13 @@ type PostEmojiResponse struct {
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
 }
+
+type ContactListRequest struct {
+	AppId string `json:"appId" binding:"required"`
+}
+
+type ContactListResponse struct {
+	Friends   []string `json:"friends"`
+	Chatrooms []string `json:"chatrooms"`
+	Ghs       []string `json:"ghs"`
+}

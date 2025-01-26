@@ -19,6 +19,8 @@ const (
 	sendEmoji    = "/wxsdk/message/sendemoji"
 	sendApplet   = "/wxsdk/message/sendapplet"
 
+	contactList = "/wxsdk/contacts/listings"
+
 	personalProfile         = "/wxsdk/personal/getprofile"
 	personalQrcode          = "/wxsdk/personal/getqrcode"
 	personalSafety          = "/wxsdk/personal/getsafetyinfo"
