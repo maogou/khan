@@ -23,7 +23,7 @@ func (c *ContactHandler) OnlyChat(ctx *gin.Context) {
 
 	resp, err := c.sdk.ContactSetOnlyChat(
 		ctx, transform.ContactSetOnlyChatRequest{
-			Appid: c.sdk.GetAppId(),
+			Appid: req.AppId,
 			Config: transform.ContactSetOnlyChatConfig{
 				Status: lo.Ternary(req.OnlyChat, 1, 2),
 				ToWxid: req.Wxid,
