@@ -157,6 +157,7 @@ func (g *Gewe) ContactDetail(ctx context.Context, req transform.ContactDetailReq
 }
 
 func (g *Gewe) ContactSetOnlyChat(ctx context.Context, req transform.ContactSetOnlyChatRequest) (*transform.ContactSetOnlyChatResponse, error) {
+	log.C(ctx).Info().Any("req", req).Str("url", contactSetOnlyChat).Msg("请求产生为")
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactSetOnlyChatResponse{}).Post(contactSetOnlyChat)
 
 	if err != nil {
