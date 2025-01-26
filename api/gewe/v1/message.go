@@ -213,3 +213,12 @@ type ContactSearchResponse struct {
 	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
 	V4              string `json:"v4"`
 }
+
+type ContactAddRequest struct {
+	AppId   string `json:"appId" binding:"required"`
+	Scene   int    `json:"scene" binding:"required"`
+	Content string `json:"content" binding:"required"`
+	V4      string `json:"v4" binding:"required"`
+	V3      string `json:"v3" binding:"required"`
+	Option  int    `json:"option" binding:"required"`
+}
