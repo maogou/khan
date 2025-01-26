@@ -227,3 +227,31 @@ type ContactDelRequest struct {
 	AppId string `json:"appId" binding:"required"`
 	Wxid  string `json:"wxid" binding:"required"`
 }
+
+type ContactInfoRequest struct {
+	AppId string   `json:"appId" binding:"required"`
+	Wxids []string `json:"wxids" binding:"required,max=100"`
+}
+
+type ContactInfoItem struct {
+	UserName        string `json:"userName"`
+	NickName        string `json:"nickName"`
+	PyInitial       string `json:"pyInitial"`
+	QuanPin         string `json:"quanPin"`
+	Sex             int    `json:"sex"`
+	Remark          string `json:"remark"`
+	RemarkPyInitial string `json:"remarkPyInitial"`
+	RemarkQuanPin   string `json:"remarkQuanPin"`
+	Signature       string `json:"signature"`
+	Alias           string `json:"alias"`
+	SnsBgImg        string `json:"snsBgImg"`
+	Country         string `json:"country"`
+	BigHeadImgUrl   string `json:"bigHeadImgUrl"`
+	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
+	Description     string `json:"description"`
+	CardImgUrl      string `json:"cardImgUrl"`
+	LabelList       string `json:"labelList"`
+	Province        string `json:"province"`
+	City            string `json:"city"`
+	PhoneNumList    string `json:"phoneNumList"`
+}

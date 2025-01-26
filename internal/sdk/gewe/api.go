@@ -23,6 +23,7 @@ const (
 	contactSearch = "/wxsdk/contacts/search"
 	contactAdd    = "/wxsdk/contacts/verifyuser"
 	contactDel    = "/wxsdk/contacts/delete"
+	contactInfo   = "/wxsdk/contacts/batchgetbriefinfo"
 
 	personalProfile         = "/wxsdk/personal/getprofile"
 	personalQrcode          = "/wxsdk/personal/getqrcode"
