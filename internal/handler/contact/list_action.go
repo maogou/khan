@@ -86,9 +86,9 @@ func (c *ContactHandler) List(ctx *gin.Context) {
 
 				for _, friend := range contact.Data.ContactUsernameList {
 					if len(friend) > 0 && strings.HasPrefix(friend, "gh_") {
-						result.Ghs = append(result.Friends, friend)
+						result.Ghs = append(result.Ghs, friend)
 					} else if len(friend) > 0 && strings.HasPrefix(friend, "wxid_") {
-						result.Friends = append(result.Chatrooms, friend)
+						result.Friends = append(result.Friends, friend)
 					} else if len(friend) > 0 {
 						result.Chatrooms = append(result.Chatrooms, friend)
 					}
