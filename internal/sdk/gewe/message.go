@@ -93,7 +93,7 @@ func (g *Gewe) PostEmoji(ctx context.Context, req transform.PostEmojiRequest) (*
 	return resp.Result().(*transform.PostEmojiResponse), nil
 }
 
-func (g Gewe) ContactList(ctx context.Context, req transform.ContactListRequest) (*transform.ContactListResponse, error) {
+func (g *Gewe) ContactList(ctx context.Context, req transform.ContactListRequest) (*transform.ContactListResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactListResponse{}).Post(contactList)
 	if err != nil {
 		log.C(ctx).Error().Msg("调用contactList方法失败")
@@ -101,6 +101,17 @@ func (g Gewe) ContactList(ctx context.Context, req transform.ContactListRequest)
 	}
 
 	return resp.Result().(*transform.ContactListResponse), nil
+}
+
+func (g *Gewe) ContactSearch(ctx context.Context, req transform.ContactSearchRequest) (*transform.ContactSearchResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactSearchResponse{}).Post(contactSearch)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用contactSearch方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.ContactSearchResponse), nil
 }
 
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {

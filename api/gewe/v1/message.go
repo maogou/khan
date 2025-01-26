@@ -198,3 +198,19 @@ type ContactListResponse struct {
 	Chatrooms []string `json:"chatrooms"`
 	Ghs       []string `json:"ghs"`
 }
+
+type ContactSearchRequest struct {
+	AppId        string `json:"appId" binding:"required"`
+	ContactsInfo string `json:"contactsInfo" binding:"required"`
+}
+
+type ContactSearchResponse struct {
+	V3              string `json:"v3"`
+	NickName        string `json:"nickName"`
+	Sex             int    `json:"sex"`
+	Signature       string `json:"signature"`
+	BigHeadImgUrl   string `json:"bigHeadImgUrl"`
+	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
+	V4              string `json:"v4"`
+	Wxid            string `json:"wxid"`
+}
