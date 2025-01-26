@@ -222,3 +222,8 @@ type ContactAddRequest struct {
 	V3      string `json:"v3" binding:"required"`
 	Option  int    `json:"option" binding:"required"`
 }
+
+type ContactDelRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	Wxid  string `json:"wxid" binding:"required"`
+}

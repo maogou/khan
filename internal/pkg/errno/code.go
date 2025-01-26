@@ -32,4 +32,5 @@ var (
 	RequestCanceled    = &ErrNo{Code: 10024, Message: "请求被取消"}
 	ContactSearchError = &ErrNo{Code: 10025, Message: "搜索联系人失败"}
 	ContactAddError    = &ErrNo{Code: 10026, Message: "添加联系人失败"}
+	ContactDelError    = &ErrNo{Code: 10027, Message: "删除联系人失败"}
 )

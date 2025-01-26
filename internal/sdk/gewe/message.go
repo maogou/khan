@@ -125,6 +125,18 @@ func (g *Gewe) ContactAdd(ctx context.Context, req transform.ContactAddRequest) 
 	return resp.Result().(*transform.ContactAddResponse), nil
 }
 
+func (g *Gewe) ContactDel(ctx context.Context, req transform.ContactDelRequest) (*transform.ContactDelResponse, error) {
+
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.ContactDelResponse{}).Post(contactDel)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用contactDel方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.ContactDelResponse), nil
+}
+
 func (g *Gewe) PersonalProfile(ctx context.Context, req transform.PersonalProfileRequest) (*transform.PersonalProfileResponse, error) {
 	resp, err := g.client.R().SetBody(req).SetResult(&transform.PersonalProfileResponse{}).Post(personalProfile)
 
