@@ -289,3 +289,9 @@ type ContactSetOnlyChatRequest struct {
 	Wxid     string `json:"wxid" binding:"required"`
 	OnlyChat bool   `json:"onlyChat"`
 }
+
+type ContactSetRemarkResquest struct {
+	AppId  string `json:"appId" binding:"required"`
+	Wxid   string `json:"wxid" binding:"required"`
+	Remark string `json:"remark" binding:"required"`
+}

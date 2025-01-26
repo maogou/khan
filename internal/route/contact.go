@@ -16,4 +16,5 @@ func initContactRoute(engine *gin.Engine, sdk *gewe.Gewe) {
 	engine.POST("/v2/api/contacts/getBriefInfo", contactHandler.Info)
 	engine.POST("/v2/api/contacts/getDetailInfo", contactHandler.Detail)
 	engine.POST("/v2/api/contacts/setFriendPermissions", contactHandler.OnlyChat)
+	engine.POST("/v2/api/contacts/setFriendRemark", contactHandler.Remark)
 }

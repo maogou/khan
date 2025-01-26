@@ -26,6 +26,7 @@ const (
 	contactInfo        = "/wxsdk/contacts/batchgetbriefinfo"
 	contactDetail      = "/wxsdk/contacts/detail"
 	contactSetOnlyChat = "/wxsdk/other/multifunctional"
+	contactSetRemark   = "/wxsdk/contacts/setremark"
 
 	personalProfile         = "/wxsdk/personal/getprofile"
 	personalQrcode          = "/wxsdk/personal/getqrcode"

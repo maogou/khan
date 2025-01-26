@@ -36,4 +36,5 @@ var (
 	ContactInfoError        = &ErrNo{Code: 10028, Message: "获取联系人信息失败"}
 	ContactDetailError      = &ErrNo{Code: 10029, Message: "获取联系人详细信息失败"}
 	ContactSetOnlyChatError = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
+	ContactSetRemarkError   = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
 )
