@@ -234,6 +234,50 @@ func (g *Gewe) PersonalUploadHeadImg(ctx context.Context, req transform.Personal
 	return resp.Result().(*transform.PersonalUploadHdHeadImgResponse), nil
 }
 
+func (g *Gewe) LabelAdd(ctx context.Context, req transform.LabelAddRequest) (*transform.LabelAddResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.LabelAddResponse{}).Post(labelAdd)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用labelAdd方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.LabelAddResponse), nil
+}
+
+func (g *Gewe) LabelDelete(ctx context.Context, req transform.LabelDeleteRequest) (*transform.LabelDeleteResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.LabelDeleteResponse{}).Post(labelDelete)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用labelDelete方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.LabelDeleteResponse), nil
+}
+
+func (g *Gewe) LabelList(ctx context.Context, req transform.LabelListRequest) (*transform.LabelListResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.LabelListResponse{}).Post(labelList)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用labelList方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.LabelListResponse), nil
+}
+
+func (g *Gewe) LabelModify(ctx context.Context, req transform.LabelModifyRequest) (*transform.LabelModifyResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.LabelModifyResponse{}).Post(labelModify)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用labelModify方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.LabelModifyResponse), nil
+}
+
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	_, err := g.client.R().SetBody(req).Post(callback)
 

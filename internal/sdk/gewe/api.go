@@ -35,4 +35,9 @@ const (
 	personalSafety          = "/wxsdk/personal/getsafetyinfo"
 	personalPrivacySetting  = "wxsdk/personal/privacysettings"
 	personalUploadHdHeadImg = "/wxsdk/personal/uploadhdheadimg"
+
+	labelAdd    = "/wxsdk/label/add"
+	labelDelete = "/wxsdk/label/delete"
+	labelList   = "/wxsdk/label/list"
+	labelModify = "/wxsdk/label/modifylist"
 )

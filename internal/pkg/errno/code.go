@@ -37,4 +37,9 @@ var (
 	ContactDetailError      = &ErrNo{Code: 10029, Message: "获取联系人详细信息失败"}
 	ContactSetOnlyChatError = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
 	ContactSetRemarkError   = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
+
+	LabelAddError    = &ErrNo{Code: 10032, Message: "添加标签失败"}
+	LabelDeleteError = &ErrNo{Code: 10033, Message: "删除标签失败"}
+	LabelListError   = &ErrNo{Code: 10034, Message: "获取标签列表失败"}
+	LabelModifyError = &ErrNo{Code: 10035, Message: "修改标签失败"}
 )
