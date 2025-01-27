@@ -279,9 +279,16 @@ func (g *Gewe) LabelModify(ctx context.Context, req transform.LabelModifyRequest
 }
 
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
-	_, err := g.client.R().SetBody(req).Post(callback)
+	cData := transform.CallbackRequest{
+		AppId:    req.AppId,
+		Data:     req.Data,
+		TypeName: req.TypeName,
+	}
+
+	_, err := g.client.R().SetBody(cData).Post(callback)
 
 	if err != nil {
+		log.C(ctx).Error().Msg("回调信息PushMsg方法推送失败")
 		return err
 	}
 
