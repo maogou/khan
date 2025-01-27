@@ -1,16 +1,17 @@
 package message
 
 import (
-	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/gewe/v1"
 	"smallBot/api/gewe/v1/transform"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
-func (m MessageHandler) PostEmoji(ctx *gin.Context) {
+func (m *MessageHandler) PostEmoji(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用MessageHandler->PostEmoji方法")
 
 	var req v1.PostEmojiRequest

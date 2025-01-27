@@ -1,10 +1,10 @@
 package v1
 
 type PostTextRequest struct {
-	AppId   string `json:"appId"`
-	ToWxid  string `json:"toWxid"`
+	AppId   string `json:"appId" binding:"required"`
+	ToWxid  string `json:"toWxid" binding:"required"`
 	Ats     string `json:"ats"`
-	Content string `json:"content"`
+	Content string `json:"content" binding:"required"`
 }
 
 type PostTextResponse struct {
@@ -36,10 +36,10 @@ type PostImageResponse struct {
 }
 
 type PostFileRequest struct {
-	AppId    string `json:"appId"  validate:"required"`
-	ToWxid   string `json:"toWxid" validate:"required"`
-	FileName string `json:"fileName" validate:"required"`
-	FileUrl  string `json:"fileUrl" validate:"required"`
+	AppId    string `json:"appId"  binding:"required"`
+	ToWxid   string `json:"toWxid" binding:"required"`
+	FileName string `json:"fileName" binding:"required"`
+	FileUrl  string `json:"fileUrl" binding:"required"`
 }
 
 type PostFileResponse struct {

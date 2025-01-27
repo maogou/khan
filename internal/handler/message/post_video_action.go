@@ -1,16 +1,17 @@
 package message
 
 import (
-	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/gewe/v1"
 	"smallBot/api/gewe/v1/transform"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
-func (m MessageHandler) PostVideo(ctx *gin.Context) {
+func (m *MessageHandler) PostVideo(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用MessageHandler->PostVideo方法")
 
 	var req v1.PostVideoRequest
