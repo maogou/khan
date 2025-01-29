@@ -278,6 +278,92 @@ func (g *Gewe) LabelModify(ctx context.Context, req transform.LabelModifyRequest
 	return resp.Result().(*transform.LabelModifyResponse), nil
 }
 
+func (g *Gewe) GroupMember(ctx context.Context, req transform.GroupMemberRequest) (*transform.GroupMemberResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupMemberResponse{}).Post(groupMember)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupMember方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupMemberResponse), nil
+}
+
+func (g *Gewe) GroupDetail(ctx context.Context, req transform.GroupDetailRequest) (*transform.GroupDetailResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupDetailResponse{}).Post(groupDetail)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupDetail方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupDetailResponse), nil
+}
+
+func (g *Gewe) GroupAnnouncement(ctx context.Context, req transform.GroupAnnouncementRequest) (*transform.GroupAnnouncementResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupAnnouncementResponse{}).Post(groupAnnouncement)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupAnnouncement方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupAnnouncementResponse), nil
+}
+
+func (g *Gewe) GroupSetAnnouncement(ctx context.Context, req transform.GroupSetAnnouncementRequest) (*transform.GroupSetAnnouncementResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupSetAnnouncementResponse{}).Post(groupSetAnnouncement)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupSetAnnouncement方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupSetAnnouncementResponse), nil
+}
+
+func (g *Gewe) GroupModifyName(ctx context.Context, req transform.GroupModifyNameRequest) (*transform.GroupModifyNameResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupModifyNameResponse{}).Post(groupModifyName)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupModifyName方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupModifyNameResponse), nil
+}
+
+func (g *Gewe) GroupModifyRemark(ctx context.Context, req transform.GroupModifyRemarkRequest) (*transform.GroupModifyRemarkResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupModifyRemarkResponse{}).Post(groupModifyRemark)
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupModifyRemark方法失败")
+		return nil, err
+	}
+	return resp.Result().(*transform.GroupModifyRemarkResponse), nil
+}
+
+func (g *Gewe) GroupModifyMyNickName(ctx context.Context, req transform.GroupModifyRemarkRequest) (*transform.GroupModifyNickNameResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupModifyNickNameResponse{}).Post(groupModifyMyNickName)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupModifyMyNickName方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupModifyNickNameResponse), nil
+}
+
+func (g *Gewe) GroupTopPing(ctx context.Context, req transform.GroupTopPingRequest) (*transform.GroupTopPingResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupTopPingResponse{}).Post(groupTopPing)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupTopPing方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupTopPingResponse), nil
+}
+
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	cData := transform.CallbackRequest{
 		AppId:    req.AppId,

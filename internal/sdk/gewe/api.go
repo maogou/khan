@@ -40,4 +40,13 @@ const (
 	labelDelete = "/wxsdk/label/delete"
 	labelList   = "/wxsdk/label/list"
 	labelModify = "/wxsdk/label/modifylist"
+
+	groupMember           = "/wxsdk/group/member"
+	groupDetail           = "/wxsdk/group/detail"
+	groupAnnouncement     = "/wxsdk/group/infodetail"
+	groupSetAnnouncement  = "/wxsdk/group/setannouncement"
+	groupModifyName       = "/wxsdk/group/setname"
+	groupModifyRemark     = "/wxsdk/group/setremark"
+	groupModifyMyNickName = "/wxsdk/group/setmynickname"
+	groupTopPing          = "/wxsdk/group/topping"
 )
