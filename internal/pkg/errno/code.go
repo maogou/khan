@@ -42,4 +42,7 @@ var (
 	LabelDeleteError = &ErrNo{Code: 10033, Message: "删除标签失败"}
 	LabelListError   = &ErrNo{Code: 10034, Message: "获取标签列表失败"}
 	LabelModifyError = &ErrNo{Code: 10035, Message: "修改标签失败"}
+
+	LoginQrCodeError      = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
+	CheckLoginQrCodeError = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
 )

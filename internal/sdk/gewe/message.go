@@ -364,6 +364,27 @@ func (g *Gewe) GroupTopPing(ctx context.Context, req transform.GroupTopPingReque
 	return resp.Result().(*transform.GroupTopPingResponse), nil
 }
 
+func (g *Gewe) GroupSaveToContactList(ctx context.Context, req transform.GroupSaveContactToListRequest) (*transform.GroupSaveContactToListResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupSaveContactToListResponse{}).Post(groupContactSaveList)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupSaveToContactList方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupSaveContactToListResponse), nil
+}
+
+func (g *Gewe) GroupSetMsgSilence(ctx context.Context, req transform.GroupSetSilenceRequest) (*transform.GroupSetSilenceResponse, error) {
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GroupSetSilenceResponse{}).Post(groupSetSilence)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用GroupSetMsgSilence方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.GroupSetSilenceResponse), nil
+}
 func (g *Gewe) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	cData := transform.CallbackRequest{
 		AppId:    req.AppId,

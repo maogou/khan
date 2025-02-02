@@ -49,4 +49,6 @@ const (
 	groupModifyRemark     = "/wxsdk/group/setremark"
 	groupModifyMyNickName = "/wxsdk/group/setmynickname"
 	groupTopPing          = "/wxsdk/group/topping"
+	groupContactSaveList  = "/wxsdk/group/movecontractlist"
+	groupSetSilence       = "/wxsdk/group/setdisturb"
 )

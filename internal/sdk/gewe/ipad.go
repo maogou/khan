@@ -3,35 +3,36 @@ package gewe
 import (
 	"context"
 	v1 "smallBot/api/gewe/v1"
+	"smallBot/api/gewe/v1/transform"
 	"smallBot/internal/pkg/help"
 )
 
-func (g *Gewe) LoginQrCode(ctx context.Context, req v1.LoginQrCodeRequest) (*v1.LoginQrCodeResponse, error) {
+func (g *Gewe) LoginQrCode(ctx context.Context, req transform.GetLoginQrCodeRequest) (*transform.GetLoginQrCodeResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用LoginQrCode方法")
 
-	resp, err := g.client.R().SetBody(req).SetResult(&v1.LoginQrCodeResponse{}).Post(loginQrCode)
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.GetLoginQrCodeResponse{}).Post(loginQrCode)
 
 	if err != nil {
 		log.Error().Msg("调用LoginQrCode方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*v1.LoginQrCodeResponse), nil
+	return resp.Result().(*transform.GetLoginQrCodeResponse), nil
 }
 
-func (g *Gewe) CheckLoginQrCode(ctx context.Context, req v1.CheckLoginQrCodeRequest) (*v1.CheckLoginQrCodeResponse, error) {
+func (g *Gewe) CheckLoginQrCode(ctx context.Context, req transform.CheckLoginRequest) (*transform.CheckLoginResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用CheckLoginQrCode方法")
 
-	resp, err := g.client.R().SetBody(req).SetResult(&v1.CheckLoginQrCodeResponse{}).Post(checkLoginQrCode)
+	resp, err := g.client.R().SetBody(req).SetResult(&transform.CheckLoginResponse{}).Post(checkLoginQrCode)
 
 	if err != nil {
 		log.Error().Msg("调用CheckLoginQrCode方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*v1.CheckLoginQrCodeResponse), nil
+	return resp.Result().(*transform.CheckLoginResponse), nil
 }
 
 func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOpenResponse, error) {

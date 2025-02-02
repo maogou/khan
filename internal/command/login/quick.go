@@ -76,24 +76,24 @@ func (q *QuickLogin) GetLoginQrCode(appId string) {
 		q.sdk.SetAppId(appId)
 	}
 
-	lqcResp, err := q.sdk.LoginQrCode(q.ctx, v1.LoginQrCodeRequest{AppId: q.appId})
+	lqcResp, err := q.sdk.LoginQrCode(q.ctx, transform.GetLoginQrCodeRequest{AppId: q.appId})
 	if err != nil {
 		q.err = err
 		q.zLog.Error().Err(err).Msg("获取二维码失败")
 	} else if lqcResp.Ret != 0 {
-		q.zLog.Warn().Str("err_msg", lqcResp.MsgErr).Msg("调用获取二维码失败")
-		q.err = errors.New(lqcResp.MsgErr)
+		q.zLog.Warn().Str("err_msg", lqcResp.Msg).Msg("调用获取二维码失败")
+		q.err = errors.New(lqcResp.Msg)
 	} else {
 		q.tableData = append(
 			q.tableData,
 			[]string{"uuid", lqcResp.Data.Uuid, "登录随机生成的唯一标识"},
-			[]string{"nkey", lqcResp.Data.NKey, "钥匙串key"},
+			[]string{"nkey", lqcResp.Data.Nkey, "钥匙串key"},
 			[]string{"appId", q.appId, "设备标识id(很重要)"},
 			[]string{"welcome", "欢迎使用khan服务!", "文件传输助手欢迎消息"},
 		)
 
 		q.sdk.SetUuId(lqcResp.Data.Uuid)
-		q.sdk.SetNKey(lqcResp.Data.NKey)
+		q.sdk.SetNKey(lqcResp.Data.Nkey)
 		q.url = lqcResp.Data.Url
 	}
 }
@@ -152,9 +152,9 @@ func (q *QuickLogin) CheckLogin() {
 		}
 
 		resp, cErr := q.sdk.CheckLoginQrCode(
-			q.ctx, v1.CheckLoginQrCodeRequest{
-				AppId: q.appId,
-				NKey:  q.sdk.GetNKey(),
+			q.ctx, transform.CheckLoginRequest{
+				Appid: q.appId,
+				Nkey:  q.sdk.GetNKey(),
 				Uuid:  q.sdk.GetUuId(),
 			},
 		)
@@ -165,7 +165,7 @@ func (q *QuickLogin) CheckLogin() {
 		}
 
 		if resp.Ret != 0 {
-			q.zLog.Warn().Str("err_msg", resp.MsgErr).Msg("调用检查登录状态失败")
+			q.zLog.Warn().Str("err_msg", resp.Msg).Msg("调用检查登录状态失败")
 			continue
 		}
 
