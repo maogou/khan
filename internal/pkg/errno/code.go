@@ -45,4 +45,5 @@ var (
 
 	LoginQrCodeError      = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
 	CheckLoginQrCodeError = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
+	SetCallbackError      = &ErrNo{Code: 10038, Message: "请检查回调地址,此回调地址容器内无法访问"}
 )

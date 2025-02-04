@@ -13,4 +13,5 @@ func initLoginHandler(engine *gin.Engine, sdk *gewe.Gewe) {
 
 	engine.POST("/v2/api/login/getLoginQrCode", loginHandler.LoginQrCode)
 	engine.POST("/v2/api/login/checkLogin", loginHandler.CheckLogin)
+	engine.POST("/v2/api/login/setCallback", loginHandler.SetCallback)
 }
