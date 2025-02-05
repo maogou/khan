@@ -1,14 +1,14 @@
 package message
 
 import (
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 )
 
 type MessageHandler struct {
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewMessageHandler(sdk *gewe.Gewe) *MessageHandler {
+func NewMessageHandler(sdk *khan.Khan) *MessageHandler {
 	return &MessageHandler{
 		sdk: sdk,
 	}

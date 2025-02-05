@@ -1,9 +1,9 @@
 package demo
 
 import (
-	"smallBot/api/gewe/v1/transform"
+	"smallBot/api/khan/v1/transform"
 	"smallBot/internal/config"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -29,7 +29,7 @@ func do(cCtx *cli.Context) error {
 	conf := config.MustLoadConfig("")
 	client := resty.New()
 	validate := validator.New()
-	sdk := gewe.NewGeweSdk(&conf, client, validate)
+	sdk := khan.NewKhanSdk(&conf, client, validate)
 
 	resp, err := sdk.PostText(
 		cCtx.Context, transform.PostTextRequest{

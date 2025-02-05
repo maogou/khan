@@ -2,12 +2,12 @@ package router
 
 import (
 	"smallBot/internal/handler/label"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
 
-func initLabelRoute(engine *gin.Engine, sdk *gewe.Gewe) {
+func initLabelRoute(engine *gin.Engine, sdk *khan.Khan) {
 
 	labelHandler := label.NewLabelHandler(sdk)
 

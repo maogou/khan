@@ -3,17 +3,17 @@ package chain
 import (
 	"context"
 	"errors"
-	v1 "smallBot/api/gewe/v1"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/spf13/cast"
 )
 
 type Reconnection struct {
 	BaseHandler
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
 func (r *Reconnection) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
@@ -114,7 +114,7 @@ func (r *Reconnection) Process(ctx context.Context, param v1.CollectRequest) err
 
 }
 
-func NewReconnection(sdk *gewe.Gewe) *Reconnection {
+func NewReconnection(sdk *khan.Khan) *Reconnection {
 	return &Reconnection{
 		sdk: sdk,
 	}

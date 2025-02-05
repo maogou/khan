@@ -2,12 +2,12 @@ package router
 
 import (
 	"smallBot/internal/pkg/license"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
 
-func InitRouter(engine *gin.Engine, sdk *gewe.Gewe, l *license.License) error {
+func InitRouter(engine *gin.Engine, sdk *khan.Khan, l *license.License) error {
 	initCommonRoute(engine)
 	initLoginHandler(engine, sdk)
 	initDownloadRouter(engine)

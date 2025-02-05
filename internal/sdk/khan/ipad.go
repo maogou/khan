@@ -1,13 +1,13 @@
-package gewe
+package khan
 
 import (
 	"context"
-	v1 "smallBot/api/gewe/v1"
-	"smallBot/api/gewe/v1/transform"
+	v1 "smallBot/api/khan/v1"
+	"smallBot/api/khan/v1/transform"
 	"smallBot/internal/pkg/help"
 )
 
-func (g *Gewe) LoginQrCode(ctx context.Context, req transform.GetLoginQrCodeRequest) (*transform.GetLoginQrCodeResponse, error) {
+func (g *Khan) LoginQrCode(ctx context.Context, req transform.GetLoginQrCodeRequest) (*transform.GetLoginQrCodeResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用LoginQrCode方法")
 
@@ -21,7 +21,7 @@ func (g *Gewe) LoginQrCode(ctx context.Context, req transform.GetLoginQrCodeRequ
 	return resp.Result().(*transform.GetLoginQrCodeResponse), nil
 }
 
-func (g *Gewe) CheckLoginQrCode(ctx context.Context, req transform.CheckLoginRequest) (*transform.CheckLoginResponse, error) {
+func (g *Khan) CheckLoginQrCode(ctx context.Context, req transform.CheckLoginRequest) (*transform.CheckLoginResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用CheckLoginQrCode方法")
 
@@ -35,7 +35,7 @@ func (g *Gewe) CheckLoginQrCode(ctx context.Context, req transform.CheckLoginReq
 	return resp.Result().(*transform.CheckLoginResponse), nil
 }
 
-func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOpenResponse, error) {
+func (g *Khan) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOpenResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用LongOpen方法")
 
@@ -50,7 +50,7 @@ func (g *Gewe) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 	return resp.Result().(*v1.LongOpenResponse), nil
 }
 
-func (g *Gewe) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.SecAutoAuthResponse, error) {
+func (g *Khan) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.SecAutoAuthResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用SecAutoAuth方法")
 
@@ -64,7 +64,7 @@ func (g *Gewe) SecAutoAuth(ctx context.Context, req v1.SecAutoAuthRequest) (*v1.
 	return resp.Result().(*v1.SecAutoAuthResponse), nil
 }
 
-func (g *Gewe) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.CreateAppResponse, error) {
+func (g *Khan) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.CreateAppResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用CreateApp方法")
 
@@ -78,7 +78,7 @@ func (g *Gewe) CreateApp(ctx context.Context, req v1.CreateAppRequest) (*v1.Crea
 	return resp.Result().(*v1.CreateAppResponse), nil
 }
 
-func (g *Gewe) HearBeat(ctx context.Context, req v1.HearBeatRequest) (*v1.HearBeatResponse, error) {
+func (g *Khan) HearBeat(ctx context.Context, req v1.HearBeatRequest) (*v1.HearBeatResponse, error) {
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用HearBeat方法")
 

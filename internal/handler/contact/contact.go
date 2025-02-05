@@ -1,12 +1,12 @@
 package contact
 
-import "smallBot/internal/sdk/gewe"
+import "smallBot/internal/sdk/khan"
 
 type ContactHandler struct {
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewContactHandler(sdk *gewe.Gewe) *ContactHandler {
+func NewContactHandler(sdk *khan.Khan) *ContactHandler {
 	return &ContactHandler{
 		sdk: sdk,
 	}

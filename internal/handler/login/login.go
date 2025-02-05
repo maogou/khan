@@ -1,12 +1,12 @@
 package login
 
-import "smallBot/internal/sdk/gewe"
+import "smallBot/internal/sdk/khan"
 
 type LoginHandler struct {
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewLoginHandler(sdk *gewe.Gewe) *LoginHandler {
+func NewLoginHandler(sdk *khan.Khan) *LoginHandler {
 	return &LoginHandler{
 		sdk: sdk,
 	}

@@ -2,12 +2,12 @@ package router
 
 import (
 	"smallBot/internal/handler/personal"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
 
-func initPersonal(engine *gin.Engine, sdk *gewe.Gewe) {
+func initPersonal(engine *gin.Engine, sdk *khan.Khan) {
 	personalHandler := personal.NewPersonalHandler(sdk)
 
 	engine.POST("/v2/api/personal/getQrCode", personalHandler.Qrcode)

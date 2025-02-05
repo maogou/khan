@@ -2,17 +2,17 @@ package chain
 
 import (
 	"context"
-	v1 "smallBot/api/gewe/v1"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 )
 
 type Ignore struct {
 	BaseHandler
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewIgnore(sdk *gewe.Gewe) *Ignore {
+func NewIgnore(sdk *khan.Khan) *Ignore {
 	return &Ignore{
 		sdk: sdk,
 	}

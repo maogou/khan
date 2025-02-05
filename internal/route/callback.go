@@ -4,12 +4,12 @@ import (
 	"smallBot/internal/handler/callback"
 	"smallBot/internal/handler/callback/chain"
 	"smallBot/internal/pkg/license"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
 
-func initCallbackRoute(route *gin.Engine, sdk *gewe.Gewe, l *license.License) {
+func initCallbackRoute(route *gin.Engine, sdk *khan.Khan, l *license.License) {
 	verify := chain.NewVerify(l)
 	ignore := chain.NewIgnore(sdk)
 	pushMsg := chain.NewPushMsg(sdk)

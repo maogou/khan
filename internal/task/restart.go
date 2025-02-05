@@ -2,7 +2,7 @@ package task
 
 import (
 	"context"
-	v1 "smallBot/api/gewe/v1"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/help"
 

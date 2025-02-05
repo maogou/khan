@@ -12,7 +12,7 @@ import (
 	"smallBot/internal/command/version"
 	"smallBot/internal/config"
 	"smallBot/internal/constant"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 	"strconv"
 	"time"
 
@@ -27,7 +27,7 @@ import (
 
 var (
 	conf        config.Config
-	sdk         *gewe.Gewe
+	sdk         *khan.Khan
 	client      = resty.New()
 	validate    = validator.New()
 	description = `免责说明:
@@ -48,7 +48,7 @@ func init() {
 
 func NewRobotCommand() *cli.App {
 	conf = config.MustLoadConfig("")
-	sdk = gewe.NewGeweSdk(&conf, client, validate)
+	sdk = khan.NewKhanSdk(&conf, client, validate)
 
 	robot := &cli.App{
 		Name:        "bolt",

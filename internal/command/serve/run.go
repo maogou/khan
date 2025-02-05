@@ -10,7 +10,7 @@ import (
 	"smallBot/internal/middleware"
 	"smallBot/internal/pkg/license"
 	router "smallBot/internal/route"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 	"strconv"
 	"time"
 
@@ -19,7 +19,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func run(conf config.Config, sdk *gewe.Gewe, l *license.License) error {
+func run(conf config.Config, sdk *khan.Khan, l *license.License) error {
 	gin.SetMode(conf.Mode)
 	route := gin.Default()
 	route.Use(middleware.RequestId(), middleware.VerifyLicense(conf))

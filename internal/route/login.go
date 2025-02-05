@@ -2,12 +2,12 @@ package router
 
 import (
 	"smallBot/internal/handler/login"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
 
-func initLoginHandler(engine *gin.Engine, sdk *gewe.Gewe) {
+func initLoginHandler(engine *gin.Engine, sdk *khan.Khan) {
 
 	loginHandler := login.NewLoginHandler(sdk)
 

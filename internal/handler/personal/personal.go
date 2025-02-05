@@ -1,12 +1,12 @@
 package personal
 
-import "smallBot/internal/sdk/gewe"
+import "smallBot/internal/sdk/khan"
 
 type PersonalHandler struct {
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewPersonalHandler(sdk *gewe.Gewe) *PersonalHandler {
+func NewPersonalHandler(sdk *khan.Khan) *PersonalHandler {
 	return &PersonalHandler{
 		sdk: sdk,
 	}

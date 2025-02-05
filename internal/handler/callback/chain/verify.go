@@ -2,7 +2,7 @@ package chain
 
 import (
 	"context"
-	v1 "smallBot/api/gewe/v1"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/log"
 )

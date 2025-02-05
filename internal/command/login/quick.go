@@ -3,9 +3,9 @@ package login
 import (
 	"context"
 	"errors"
-	v1 "smallBot/api/gewe/v1"
-	"smallBot/api/gewe/v1/transform"
-	"smallBot/internal/sdk/gewe"
+	v1 "smallBot/api/khan/v1"
+	"smallBot/api/khan/v1/transform"
+	"smallBot/internal/sdk/khan"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -24,7 +24,7 @@ type QuickLogin struct {
 	template
 	tableData pterm.TableData
 	url       string
-	sdk       *gewe.Gewe
+	sdk       *khan.Khan
 	p         *tea.Program
 	selected  int
 	appId     string
@@ -35,7 +35,7 @@ type QuickLogin struct {
 
 var _ BootStrap = (*QuickLogin)(nil)
 
-func NewQuickLogin(sdk *gewe.Gewe, p *tea.Program) *QuickLogin {
+func NewQuickLogin(sdk *khan.Khan, p *tea.Program) *QuickLogin {
 	ql := new(QuickLogin)
 	qid := xid.New().String()
 	ql.ctx = context.WithValue(context.Background(), "qid", qid)

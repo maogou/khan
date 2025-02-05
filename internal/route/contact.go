@@ -3,10 +3,10 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"smallBot/internal/handler/contact"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 )
 
-func initContactRoute(engine *gin.Engine, sdk *gewe.Gewe) {
+func initContactRoute(engine *gin.Engine, sdk *khan.Khan) {
 	contactHandler := contact.NewContactHandler(sdk)
 
 	engine.POST("/v2/api/contacts/fetchContactsList", contactHandler.List)

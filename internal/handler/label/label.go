@@ -1,12 +1,12 @@
 package label
 
-import "smallBot/internal/sdk/gewe"
+import "smallBot/internal/sdk/khan"
 
 type LabelHandler struct {
-	sdk *gewe.Gewe
+	sdk *khan.Khan
 }
 
-func NewLabelHandler(sdk *gewe.Gewe) *LabelHandler {
+func NewLabelHandler(sdk *khan.Khan) *LabelHandler {
 	return &LabelHandler{
 		sdk: sdk,
 	}

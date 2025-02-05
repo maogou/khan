@@ -2,7 +2,7 @@ package login
 
 import (
 	"smallBot/internal/config"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/samber/lo"
@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func Login(conf config.Config, sdk *gewe.Gewe) *cli.Command {
+func Login(conf config.Config, sdk *khan.Khan) *cli.Command {
 	return &cli.Command{
 		Name:  "login",
 		Usage: "快捷登录(危险:不是首次登录,请务必传递appId参数)",

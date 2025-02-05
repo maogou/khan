@@ -2,15 +2,15 @@ package callback
 
 import (
 	"smallBot/internal/handler/callback/chain"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 )
 
 type CallbackHandler struct {
-	sdk   *gewe.Gewe
+	sdk   *khan.Khan
 	chain chain.Chain
 }
 
-func NewCallbackHandler(sdk *gewe.Gewe, chain chain.Chain) *CallbackHandler {
+func NewCallbackHandler(sdk *khan.Khan, chain chain.Chain) *CallbackHandler {
 	return &CallbackHandler{
 		sdk:   sdk,
 		chain: chain,

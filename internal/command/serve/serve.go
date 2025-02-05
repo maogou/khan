@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"smallBot/internal/config"
 	"smallBot/internal/pkg/license"
-	"smallBot/internal/sdk/gewe"
+	"smallBot/internal/sdk/khan"
 	"smallBot/internal/task"
 	"strings"
 
@@ -22,7 +22,7 @@ var (
 	lic     = &license.License{}
 )
 
-func Start(conf config.Config, sdk *gewe.Gewe) *cli.Command {
+func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
 	return &cli.Command{
 		Name:  "start",
 		Usage: "启动机器人服务",

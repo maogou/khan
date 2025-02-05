@@ -1,4 +1,4 @@
-package gewe
+package khan
 
 const (
 	loginQrCode      = "/wxsdk/lgoin/getloginqrcode"
