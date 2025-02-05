@@ -17,4 +17,6 @@ func initMessageRoute(route *gin.Engine, sdk *khan.Khan) {
 	route.POST("/v2/api//message/postVoice", messageHandler.PostVoice)
 	route.POST("/v2/api//message/postNameCard", messageHandler.PostNameCard)
 	route.POST("/v2/api//message/postEmoji", messageHandler.PostEmoji)
+	route.POST("/v2/api//message/postVideo", messageHandler.PostVideo)
+	route.POST("/v2/api//message/downloadImg", messageHandler.DownloadImg)
 }

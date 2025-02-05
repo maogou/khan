@@ -18,6 +18,7 @@ const (
 	sendNameCard = "/wxsdk/message/sendmsg"
 	sendEmoji    = "/wxsdk/message/sendemoji"
 	sendApplet   = "/wxsdk/message/sendapplet"
+	downloadImg  = "/wxsdk/other/resourcedownload"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"

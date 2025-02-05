@@ -234,6 +234,17 @@ func (k *Khan) PersonalUploadHeadImg(ctx context.Context, req transform.Personal
 	return resp.Result().(*transform.PersonalUploadHdHeadImgResponse), nil
 }
 
+func (k *Khan) DownloadImg(ctx context.Context, req transform.DownloadImgRequest) (*transform.DownloadImgResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&transform.DownloadImgResponse{}).Post(downloadImg)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用downloadImg方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.DownloadImgResponse), nil
+}
+
 func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
 	cData := transform.CallbackRequest{
 		AppId:    req.AppId,
