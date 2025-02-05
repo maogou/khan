@@ -1,17 +1,16 @@
 package transform
 
 /*
-*
-如果group_id 是以@chatroom结尾则 true=> 0 false=>1
-否则 true=>1 false=>0
-*/
-type GroupSetSilenceRequest struct {
+* 如果group_id以@chatroom结尾 则设置置顶为 2050  不置顶为 2
+* 如果group_id不是以@chatroom结尾 则设置置顶为 34823    不置顶为 32775
+ */
+type ChatroomTopPingRequest struct {
 	Appid   string `json:"appid"`
 	GroupId string `json:"group_id"`
-	Value   int    `json:"value"`
+	Value   int    `json:"value"` //2050
 }
 
-type GroupSetSilenceResponse struct {
+type ChatroomTopPingResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {

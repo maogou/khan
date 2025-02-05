@@ -1,11 +1,11 @@
 package transform
 
-type GroupDetailRequest struct {
+type ChatroomDetailRequest struct {
 	Appid       string   `json:"appid"`
 	GroupIdList []string `json:"group_id_list"`
 }
 
-type GroupDetailResponse struct {
+type ChatroomDetailResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {
@@ -20,10 +20,13 @@ type GroupDetailResponse struct {
 				String string `json:"string"`
 			} `json:"UserName"`
 			NickName struct {
+				String string `json:"string"`
 			} `json:"NickName"`
 			Pyinitial struct {
+				String string `json:"string"`
 			} `json:"Pyinitial"`
 			QuanPin struct {
+				String string `json:"string"`
 			} `json:"QuanPin"`
 			Sex    int `json:"Sex"`
 			ImgBuf struct {
@@ -33,10 +36,13 @@ type GroupDetailResponse struct {
 			BitVal  int   `json:"BitVal"`
 			ImgFlag int   `json:"ImgFlag"`
 			Remark  struct {
+				String string `json:"string"`
 			} `json:"Remark"`
 			RemarkPyinitial struct {
+				String string `json:"string"`
 			} `json:"RemarkPyinitial"`
 			RemarkQuanPin struct {
+				String string `json:"string"`
 			} `json:"RemarkQuanPin"`
 			ContactType   int `json:"ContactType"`
 			RoomInfoCount int `json:"RoomInfoCount"`

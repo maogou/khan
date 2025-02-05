@@ -1,11 +1,11 @@
 package transform
 
-type GroupAnnouncementRequest struct {
+type ChatroomAnnouncementRequest struct {
 	Appid   string `json:"appid"`
 	GroupId string `json:"group_id"`
 }
 
-type GroupAnnouncementResponse struct {
+type ChatroomAnnouncementResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {

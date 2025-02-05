@@ -1,12 +1,17 @@
 package transform
 
-type GroupModifyRemarkRequest struct {
+/*
+*
+如果group_id 是以@chatroom结尾则 true=> 0 false=>1
+否则 true=>1 false=>0
+*/
+type ChatroomSetSilenceRequest struct {
 	Appid   string `json:"appid"`
 	GroupId string `json:"group_id"`
-	Name    string `json:"name"`
+	Value   int    `json:"value"`
 }
 
-type GroupModifyRemarkResponse struct {
+type ChatroomSetSilenceResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {

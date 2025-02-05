@@ -1,12 +1,12 @@
 package transform
 
-type GroupModifyNameRequest struct {
+type ChatroomModifyRemarkRequest struct {
 	Appid   string `json:"appid"`
 	GroupId string `json:"group_id"`
 	Name    string `json:"name"`
 }
 
-type GroupModifyNameResponse struct {
+type ChatroomModifyRemarkResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {

@@ -46,4 +46,12 @@ var (
 	LoginQrCodeError      = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
 	CheckLoginQrCodeError = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
 	SetCallbackError      = &ErrNo{Code: 10038, Message: "请检查回调地址,此回调地址容器内无法访问"}
+
+	ChatroomCreateError           = &ErrNo{Code: 10039, Message: "创建群聊失败"}
+	ChatroomModifyNameError       = &ErrNo{Code: 10040, Message: "修改群聊名称失败"}
+	ChatroomModifyRemarkError     = &ErrNo{Code: 10041, Message: "修改群聊备注失败"}
+	ChatroomModifyMyselfNameError = &ErrNo{Code: 10042, Message: "修改群聊名称失败"}
+	ChatroomSetAnnouncementError  = &ErrNo{Code: 10043, Message: "修改群聊公告失败"}
+	ChatroomGetAnnouncementError  = &ErrNo{Code: 10044, Message: "获取群聊公告失败"}
+	ChatroomDetailError           = &ErrNo{Code: 10045, Message: "获取群聊详情失败"}
 )
