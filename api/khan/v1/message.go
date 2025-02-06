@@ -191,7 +191,7 @@ type PostEmojiResponse struct {
 
 type DownloadImgRequest struct {
 	AppId string `json:"appId" binding:"required"`
-	Type  int    `json:"type" binding:"required,in=1,2,3"`
+	Type  int    `json:"type" binding:"required,oneof=1 2 3"`
 	Xml   string `json:"xml" binding:"required"`
 }
 

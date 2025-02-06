@@ -2,12 +2,18 @@ package message
 
 import (
 	"encoding/xml"
+	"github.com/rs/xid"
+	"github.com/samber/lo"
+	"os"
+	"path/filepath"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"strings"
+	"time"
 
 	"github.com/spf13/cast"
 
@@ -60,9 +66,9 @@ func (m *MessageHandler) DownloadImg(ctx *gin.Context) {
 		return
 	}
 
-	xs := strings.ReplaceAll(req.Xml, `\`, "")
+	xs := strings.ReplaceAll(req.Xml, "\n", "")
 	xs = strings.ReplaceAll(xs, "\t", "")
-	xs = strings.ReplaceAll(xs, "\n", "")
+	xs = strings.ReplaceAll(xs, `\`, "")
 
 	if err := xml.Unmarshal([]byte(xs), &xmlImg); err != nil {
 		log.C(ctx).Error().Err(err).Msg("xml反序列化失败")
@@ -70,12 +76,28 @@ func (m *MessageHandler) DownloadImg(ctx *gin.Context) {
 		return
 	}
 
+	cdnThumbAesKey := xmlImg.Img.CdnThumbAesKey
+	xmlAesKey := xmlImg.Img.AesKey
+	cdnThumbUrl := xmlImg.Img.CdnThumbUrl
+	cdnMidImgUrl := xmlImg.Img.CdnMidImgUrl
+	aesKey := lo.Ternary(len(xmlAesKey) == 0, cdnThumbAesKey, xmlAesKey)
+	fileId := lo.Ternary(len(cdnThumbUrl) == 0, cdnMidImgUrl, cdnThumbUrl)
+
+	execPath, err := os.Executable()
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("获取程序路径失败")
+		response.Fail(ctx, errno.ExecPathError)
+		return
+	}
+
+	log.C(ctx).Info().Msg("执行路径：" + filepath.Dir(execPath))
+
 	resp, err := m.sdk.DownloadImg(
 		ctx, transform.DownloadImgRequest{
-			AesKey:    xmlImg.Img.AesKey,
+			AesKey:    aesKey,
 			Appid:     req.AppId,
 			FileType:  req.Type,
-			FileUrl:   xmlImg.Img.CdnMidImgUrl,
+			FileUrl:   fileId,
 			Totalsize: cast.ToInt(xmlImg.Img.Length),
 		},
 	)
@@ -92,5 +114,20 @@ func (m *MessageHandler) DownloadImg(ctx *gin.Context) {
 		return
 	}
 
-	response.SuccessMsg(ctx, resp.Data.FileData)
+	filename := xid.New().String() + ".png"
+	path := filepath.Dir(execPath) + "/public/download/" + time.Now().Local().Format("20060102") + "/" + req.AppId + "/" + filename
+
+	log.C(ctx).Info().Str("path", path).Msg("图片保存的目录")
+
+	if err = help.DownloadBase64File(resp.Data.FileData, path); err != nil {
+		log.C(ctx).Error().Err(err).Msg("下载图片失败")
+		response.Fail(ctx, errno.DownloadImgError)
+		return
+	}
+
+	response.Success(
+		ctx, v1.DownloadImgResponse{
+			FileUrl: path,
+		},
+	)
 }

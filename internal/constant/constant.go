@@ -1,7 +1,7 @@
 package constant
 
 const (
-	VERSION     = "v1.0.0"
+	VERSION     = "v1.0.5"
 	QID         = "qid"
 	ZEROLOG     = "zerolog"
 	XID         = "X-Request-Id"

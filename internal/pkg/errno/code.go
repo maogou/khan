@@ -55,4 +55,5 @@ var (
 	ChatroomGetAnnouncementError  = &ErrNo{Code: 10044, Message: "获取群聊公告失败"}
 	ChatroomDetailError           = &ErrNo{Code: 10045, Message: "获取群聊详情失败"}
 	XmlDecodeError                = &ErrNo{Code: 10046, Message: "xml解码失败"}
+	ExecPathError                 = &ErrNo{Code: 10047, Message: "获取执行路径失败"}
 )
