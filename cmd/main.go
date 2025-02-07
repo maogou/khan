@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	robot := internal.NewRobotCommand()
+	robot := internal.NewKhanCommand()
 
 	if err := robot.Run(os.Args); err != nil {
 		panic(err)

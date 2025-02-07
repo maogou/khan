@@ -45,7 +45,7 @@ func init() {
 	log.Logger = log.With().Caller().Logger().Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "2006-01-02 15:04:05.000"})
 }
 
-func NewRobotCommand() *cli.App {
+func NewKhanCommand() *cli.App {
 	conf = config.MustLoadConfig("")
 	sdk = khan.NewKhanSdk(&conf, client, validate)
 
