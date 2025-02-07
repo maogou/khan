@@ -72,6 +72,22 @@ type SnsDetailResponse struct {
 	WithUserList  []SnsWithUserListItem `json:"withUserList"`
 }
 
+type SnsForwardRequest struct {
+	AppId        string   `json:"appId" binding:"required"`
+	AllowWxIds   []string `json:"allowWxIds"`
+	AtWxIds      []string `json:"atWxIds"`
+	DisableWxIds []string `json:"disableWxIds"`
+	SnsXml       string   `json:"snsXml" binding:"required"`
+	Privacy      bool     `json:"privacy"`
+}
+
+type SnsForwardResponse struct {
+	Id         string `json:"id"`
+	UserName   string `json:"userName"`
+	NickName   string `json:"nickName"`
+	CreateTime int64  `json:"createTime"`
+}
+
 type SnsFriendPageRequest struct {
 	AppId        string `json:"appId" binding:"required"`
 	MaxId        int    `json:"maxId"`
