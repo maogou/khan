@@ -18,6 +18,7 @@ func InitRouter(engine *gin.Engine, sdk *khan.Khan, l *license.License) error {
 	initContactRoute(engine, sdk)
 	initLabelRoute(engine, sdk)
 	initSnsRoute(engine, sdk)
+	initFavorRoute(engine, sdk)
 	initPprofRoute(engine)
 
 	return nil
