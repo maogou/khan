@@ -27,3 +27,14 @@ func (k *Khan) SnsFriendPage(ctx context.Context, req transform.SnsFriendPageReq
 
 	return resp.Result().(*transform.SnsFriendPageResponse), nil
 }
+
+func (k *Khan) SnsDetail(ctx context.Context, req transform.SnsDetailRequest) (*transform.SnsDetailResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&transform.SnsDetailResponse{}).Post(snsDetail)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsDetail方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.SnsDetailResponse), nil
+}
