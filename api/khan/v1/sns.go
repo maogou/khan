@@ -17,3 +17,11 @@ type SnsUploadImgItem struct {
 type SnsUploadImgResponse struct {
 	Data []SnsUploadImgItem `json:"data"`
 }
+
+type SnsFriendPageRequest struct {
+	AppId        string `json:"appId" binding:"required"`
+	MaxId        int    `json:"maxId"`
+	Decrypt      bool   `json:"decrypt"`
+	Wxid         string `json:"wxid" binding:"required"`
+	FirstPageMd5 string `json:"firstPageMd5"`
+}

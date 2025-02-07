@@ -16,3 +16,14 @@ func (k *Khan) SnsUploadImg(ctx context.Context, req transform.SnsUploadImgReque
 
 	return resp.Result().(*transform.SnsUploadImgResponse), nil
 }
+
+func (k *Khan) SnsFriendPage(ctx context.Context, req transform.SnsFriendPageRequest) (*transform.SnsFriendPageResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&transform.SnsFriendPageResponse{}).Post(snsFriendPage)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsFriendPage方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.SnsFriendPageResponse), nil
+}

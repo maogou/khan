@@ -55,7 +55,8 @@ const (
 	chatroomSetSilence       = "/wxsdk/group/setdisturb"
 	chatroomQrcode           = "/wxsdk/group/getqrcode"
 
-	snsUploadImg = "/wxsdk/sns/uploadimage"
+	snsUploadImg  = "/wxsdk/sns/uploadimage"
+	snsFriendPage = "/wxsdk/sns/userpage"
 
 	favorSync   = "/wxsdk/favor/sync"
 	favorDetail = "/wxsdk/favor/getcontent"
