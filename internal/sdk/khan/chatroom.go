@@ -125,3 +125,14 @@ func (k *Khan) ChatroomSetMsgSilence(ctx context.Context, req transform.Chatroom
 
 	return resp.Result().(*transform.ChatroomSetSilenceResponse), nil
 }
+
+func (k *Khan) ChatroomQrcode(ctx context.Context, req transform.ChatroomQrcodeRequest) (*transform.ChatroomQrcodeResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomQrcodeResponse{}).Post(chatroomQrcode)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomQrcode方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*transform.ChatroomQrcodeResponse), nil
+}

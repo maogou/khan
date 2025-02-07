@@ -16,4 +16,8 @@ func initChatroomHandler(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v2/api/group/setChatroomAnnouncement", chatroomHandler.SetAnnouncement)
 	engine.POST("/v2/api/group/getChatroomAnnouncement", chatroomHandler.GetAnnouncement)
 	engine.POST("/v2/api/group/getChatroomInfo", chatroomHandler.Detail)
+	engine.POST("/v2/api/group/getChatroomMemberList", chatroomHandler.Member)
+	engine.POST("/v2/api/group/pinChat", chatroomHandler.TopPing)
+	engine.POST("/v2/api/group/setMsgSilence", chatroomHandler.SetSilence)
+	engine.POST("/v2/api/group/getChatroomQrCode", chatroomHandler.QrCode)
 }

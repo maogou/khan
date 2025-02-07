@@ -75,3 +75,36 @@ type ChatroomDetailResponse struct {
 	SmallHeadImgUrl string               `json:"smallHeadImgUrl"`
 	MemberList      []ChatroomMemberItem `json:"memberList"`
 }
+
+type ChatroomMemberRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+}
+
+type ChatroomMemberResponse struct {
+	MemberList    []ChatroomMemberItem `json:"memberList"`
+	ChatroomOwner string               `json:"chatroomOwner"`
+	AdminWxid     []string             `json:"adminWxid"`
+}
+
+type ChatroomTopPingRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	Top        bool   `json:"top"`
+}
+
+type ChatroomSetSilenceRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	Silence    bool   `json:"silence"`
+}
+
+type ChatroomQrcodeRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+}
+
+type ChatroomQrcodeResponse struct {
+	QrBase64 string `json:"qrBase64"`
+	QrTips   string `json:"qrTips"`
+}

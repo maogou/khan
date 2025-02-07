@@ -53,6 +53,7 @@ const (
 	chatroomTopPing          = "/wxsdk/group/topping"
 	chatroomContactSaveList  = "/wxsdk/group/movecontractlist"
 	chatroomSetSilence       = "/wxsdk/group/setdisturb"
+	chatroomQrcode           = "/wxsdk/group/getqrcode"
 
 	snsUploadImg = "/wxsdk/sns/uploadimage"
 

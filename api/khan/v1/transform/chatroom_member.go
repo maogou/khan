@@ -25,6 +25,7 @@ type ChatroomMemberResponse struct {
 				SmallHeadImgUrl    string `json:"SmallHeadImgUrl"`
 				ChatroomMemberFlag int    `json:"ChatroomMemberFlag"`
 				InviterUserName    string `json:"InviterUserName,omitempty"`
+				DisplayName        string `json:"DisplayName,omitempty"`
 			} `json:"ChatRoomMember"`
 			InfoMask int `json:"InfoMask"`
 		} `json:"NewChatroomData"`
@@ -33,6 +34,9 @@ type ChatroomMemberResponse struct {
 		AllMemberUserNameList []struct {
 			String string `json:"string"`
 		} `json:"allMemberUserNameList"`
-		AdminCount int `json:"adminCount"`
+		AdminCount        int `json:"adminCount"`
+		AdminUserNameList []struct {
+			String string `json:"string"`
+		} `json:"adminUserNameList"`
 	} `json:"data"`
 }

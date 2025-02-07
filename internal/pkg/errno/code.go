@@ -60,4 +60,9 @@ var (
 	FavorSyncError   = &ErrNo{Code: 10048, Message: "同步收藏失败"}
 	FavorDetailError = &ErrNo{Code: 10049, Message: "获取收藏详情失败"}
 	FavorDeleteError = &ErrNo{Code: 10050, Message: "删除收藏失败"}
+
+	ChatroomMemberError     = &ErrNo{Code: 10051, Message: "获取群聊成员失败"}
+	ChatroomTopPingError    = &ErrNo{Code: 10052, Message: "置顶群聊失败"}
+	ChatroomSetSilenceError = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
+	ChatroomQrcodeError     = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
 )
