@@ -57,6 +57,7 @@ const (
 
 	snsUploadImg  = "/wxsdk/sns/uploadimage"
 	snsFriendPage = "/wxsdk/sns/userpage"
+	snsMyselfPage = "/wxsdk/sns/timeline"
 	snsDetail     = "/wxsdk/sns/queryiddetail"
 
 	favorSync   = "/wxsdk/favor/sync"

@@ -2,7 +2,7 @@ package login
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/login"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -22,7 +22,7 @@ func (l *LoginHandler) LoginQrCode(ctx *gin.Context) {
 	}
 
 	resp, err := l.sdk.LoginQrCode(
-		ctx, transform.GetLoginQrCodeRequest{
+		ctx, login.GetLoginQrCodeRequest{
 			AppId: req.AppId,
 		},
 	)

@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/download"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
@@ -93,7 +93,7 @@ func (m *MessageHandler) DownloadImg(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("执行路径：" + filepath.Dir(execPath))
 
 	resp, err := m.sdk.DownloadImg(
-		ctx, transform.DownloadImgRequest{
+		ctx, download.DownloadImgRequest{
 			AesKey:    aesKey,
 			Appid:     req.AppId,
 			FileType:  req.Type,

@@ -1,4 +1,4 @@
-package transform
+package message
 
 type CallbackRequest struct {
 	AppId    string `json:"Appid" validate:"required"`

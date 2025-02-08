@@ -12,4 +12,5 @@ func initSnsRoute(engine *gin.Engine, sdk *khan.Khan) {
 
 	engine.POST("/v2/api/sns/uploadSnsImage", snsHandler.UploadImg)
 	engine.POST("/v2/api/sns/snsDetails", snsHandler.Detail)
+	engine.POST("/v2/api/v2/api/sns/snsList", snsHandler.MyselfPage)
 }

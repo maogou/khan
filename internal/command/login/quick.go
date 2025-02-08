@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/login"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/sdk/khan"
 	"time"
@@ -77,7 +77,7 @@ func (q *QuickLogin) GetLoginQrCode(appId string) {
 		q.sdk.SetAppId(appId)
 	}
 
-	lqcResp, err := q.sdk.LoginQrCode(q.ctx, transform.GetLoginQrCodeRequest{AppId: q.appId})
+	lqcResp, err := q.sdk.LoginQrCode(q.ctx, login.GetLoginQrCodeRequest{AppId: q.appId})
 	if err != nil {
 		q.err = err
 		q.zLog.Error().Err(err).Msg("获取二维码失败")
@@ -153,7 +153,7 @@ func (q *QuickLogin) CheckLogin() {
 		}
 
 		resp, cErr := q.sdk.CheckLoginQrCode(
-			q.ctx, transform.CheckLoginRequest{
+			q.ctx, login.CheckLoginRequest{
 				Appid: q.appId,
 				Nkey:  q.sdk.GetNKey(),
 				Uuid:  q.sdk.GetUuId(),

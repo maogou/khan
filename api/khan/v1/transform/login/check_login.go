@@ -1,4 +1,4 @@
-package transform
+package login
 
 type CheckLoginRequest struct {
 	Appid string `json:"appid"`

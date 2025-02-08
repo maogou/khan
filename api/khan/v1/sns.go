@@ -102,3 +102,25 @@ type SnsMyselfPageRequest struct {
 	Decrypt      bool   `json:"decrypt"`
 	FirstPageMd5 string `json:"firstPageMd5"`
 }
+
+type SnsPageItem struct {
+	Id            string                `json:"id"`
+	UserName      string                `json:"userName"`
+	NickName      string                `json:"nickName"`
+	CreateTime    int64                 `json:"createTime"`
+	SnsXml        string                `json:"snsXml"`
+	LikeCount     int                   `json:"likeCount"`
+	LikeList      []SnsLikeListItem     `json:"likeList"`
+	CommentCount  int                   `json:"commentCount"`
+	CommentList   []SnsCommentListItem  `json:"commentList"`
+	WithUserCount int                   `json:"withUserCount"`
+	WithUserList  []SnsWithUserListItem `json:"withUserList"`
+}
+
+type SnsMyselfPageResponse struct {
+	FirstPageMd5 string        `json:"firstPageMd5"`
+	MaxId        string        `json:"maxId"`
+	SnsCount     int           `json:"snsCount"`
+	RequestTime  int           `json:"requestTime"`
+	SnsList      []SnsPageItem `json:"snsList"`
+}

@@ -1,4 +1,4 @@
-package transform
+package download
 
 type DownloadImgRequest struct {
 	AesKey    string `json:"aes_key"`

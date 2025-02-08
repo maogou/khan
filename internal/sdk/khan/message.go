@@ -3,8 +3,8 @@ package khan
 import (
 	"context"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
 	"smallBot/api/khan/v1/transform/contact"
+	"smallBot/api/khan/v1/transform/download"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/api/khan/v1/transform/personal"
 	"smallBot/internal/pkg/log"
@@ -237,19 +237,19 @@ func (k *Khan) PersonalUploadHeadImg(ctx context.Context, req personal.PersonalU
 	return resp.Result().(*personal.PersonalUploadHdHeadImgResponse), nil
 }
 
-func (k *Khan) DownloadImg(ctx context.Context, req transform.DownloadImgRequest) (*transform.DownloadImgResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.DownloadImgResponse{}).Post(downloadImg)
+func (k *Khan) DownloadImg(ctx context.Context, req download.DownloadImgRequest) (*download.DownloadImgResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadImgResponse{}).Post(downloadImg)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用downloadImg方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.DownloadImgResponse), nil
+	return resp.Result().(*download.DownloadImgResponse), nil
 }
 
 func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
-	cData := transform.CallbackRequest{
+	cData := message.CallbackRequest{
 		AppId:    req.AppId,
 		Data:     req.Data,
 		TypeName: req.TypeName,

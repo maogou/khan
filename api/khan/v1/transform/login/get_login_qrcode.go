@@ -1,4 +1,4 @@
-package transform
+package login
 
 type GetLoginQrCodeRequest struct {
 	AppId string `json:"appid"`

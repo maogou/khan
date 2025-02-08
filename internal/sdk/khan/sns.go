@@ -17,6 +17,17 @@ func (k *Khan) SnsUploadImg(ctx context.Context, req sns.SnsUploadImgRequest) (*
 	return resp.Result().(*sns.SnsUploadImgResponse), nil
 }
 
+func (k *Khan) SnsMyselfPage(ctx context.Context, req sns.SnsMyselfPageRequest) (*sns.SnsMyselfPageResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsMyselfPageResponse{}).Post(snsMyselfPage)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用SnsMyselfPage方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsMyselfPageResponse), nil
+}
+
 func (k *Khan) SnsFriendPage(ctx context.Context, req sns.SnsFriendPageRequest) (*sns.SnsFriendPageResponse, error) {
 	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsFriendPageResponse{}).Post(snsFriendPage)
 
