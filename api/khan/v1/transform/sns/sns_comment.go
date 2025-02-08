@@ -1,14 +1,14 @@
 package sns
 
-type SnsFriendPageRequest struct {
-	AppId        string `json:"appId"`
-	MaxId        int    `json:"max_id"`
-	Decrypt      bool   `json:"decrypt"`
-	ToWxid       string `json:"to_wxid"`
-	Fristpagemd5 string `json:"fristpagemd5"`
+type SnsCommentRequest struct {
+	AppId   string `json:"appid"`
+	Id      string `json:"id"`
+	Type    int    `json:"type"`
+	ToWxid  string `json:"to_wxid"`
+	Content string `json:"content"`
 }
 
-type SnsFriendPageResponse struct {
+type SnsCommentResponse struct {
 	Ret  int    `json:"ret"`
 	Msg  string `json:"msg"`
 	Data struct {
@@ -17,13 +17,11 @@ type SnsFriendPageResponse struct {
 			ErrMsg struct {
 			} `json:"errMsg"`
 		} `json:"BaseResponse"`
-		FirstPageMd5 string `json:"FirstPageMd5"`
-		ObjectCount  int    `json:"ObjectCount"`
-		ObjectList   []struct {
-			Id         string `json:"Id"`
-			Username   string `json:"Username"`
-			Nickname   string `json:"Nickname"`
-			CreateTime int64  `json:"CreateTime"`
+		SnsObject struct {
+			Id         float64 `json:"Id"`
+			Username   string  `json:"Username"`
+			Nickname   string  `json:"Nickname"`
+			CreateTime int     `json:"CreateTime"`
 			ObjectDesc struct {
 				ILen   int    `json:"iLen"`
 				Buffer string `json:"buffer"`
@@ -36,7 +34,7 @@ type SnsFriendPageResponse struct {
 				Nickname        string `json:"Nickname"`
 				Source          int    `json:"Source"`
 				Type            int    `json:"Type"`
-				CreateTime      int64  `json:"CreateTime"`
+				CreateTime      int    `json:"CreateTime"`
 				CommentId       int    `json:"CommentId"`
 				ReplyCommentId  int    `json:"ReplyCommentId"`
 				IsNotRichText   int    `json:"IsNotRichText"`
@@ -47,6 +45,8 @@ type SnsFriendPageResponse struct {
 			} `json:"LikeUserList"`
 			CommentCount         int `json:"CommentCount"`
 			CommentUserListCount int `json:"CommentUserListCount"`
+			WithUserCount        int `json:"WithUserCount"`
+			WithUserListCount    int `json:"WithUserListCount"`
 			CommentUserList      []struct {
 				Username        string `json:"Username"`
 				Nickname        string `json:"Nickname"`
@@ -62,9 +62,7 @@ type SnsFriendPageResponse struct {
 				DeleteFlag      int    `json:"DeleteFlag"`
 				CommentFlag     int    `json:"CommentFlag"`
 			} `json:"CommentUserList"`
-			WithUserCount     int `json:"WithUserCount"`
-			WithUserListCount int `json:"WithUserListCount"`
-			WithUserList      []struct {
+			WithUserList []struct {
 				Username        string `json:"Username"`
 				Source          int    `json:"Source"`
 				Type            int    `json:"Type"`
@@ -104,19 +102,6 @@ type SnsFriendPageResponse struct {
 				ShowType int `json:"ShowType"`
 				RScore   int `json:"RScore"`
 			} `json:"WeAppInfo"`
-		} `json:"ObjectList"`
-		NewRequestTime        int `json:"NewRequestTime"`
-		ObjectCountForSameMd5 int `json:"ObjectCountForSameMd5"`
-		ControlFlag           int `json:"ControlFlag"`
-		ServerConfig          struct {
-			PostMentionLimit      int `json:"PostMentionLimit"`
-			CopyAndPasteWordLimit int `json:"CopyAndPasteWordLimit"`
-		} `json:"ServerConfig"`
-		AdvertiseCount int `json:"AdvertiseCount"`
-		Session        struct {
-			ILen   int    `json:"iLen"`
-			Buffer string `json:"buffer"`
-		} `json:"Session"`
-		RecCount int `json:"RecCount"`
+		} `json:"snsObject"`
 	} `json:"data"`
 }

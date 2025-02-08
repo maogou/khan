@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -13,15 +14,17 @@ import (
 
 func (d *DownloadHandler) StaticFile(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用DownloadHandler->StaticFile方法")
-	fileName := ctx.Param("filename")
 
-	if len(fileName) == 0 {
-		log.C(ctx).Error().Msg("文件名不能为空")
-		response.Fail(ctx, errno.DownloadNameEmptyError)
+	var req v1.DownloadFileRequest
+
+	if err := ctx.ShouldBindQuery(&req); err != nil {
+		log.C(ctx).Error().Err(err).Msg("DownloadHandler->StaticFile方法参数绑定失败")
+		response.Fail(ctx, errno.ValidateError)
 		return
 	}
 
-	filePath := filepath.Join("public", "download", fileName)
+	fileName := filepath.Base(req.File)
+	filePath := filepath.Join("public", "download", req.File)
 
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
 		log.C(ctx).Error().Err(err).Msg("文件不存在")

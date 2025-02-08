@@ -49,3 +49,36 @@ func (k *Khan) SnsDetail(ctx context.Context, req sns.SnsDetailRequest) (*sns.Sn
 
 	return resp.Result().(*sns.SnsDetailResponse), nil
 }
+
+func (k *Khan) SnsLike(ctx context.Context, req sns.SnsLikeRequest) (*sns.SnsLikeResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsLikeResponse{}).Post(snsLike)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsLike方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsLikeResponse), nil
+}
+
+func (k *Khan) SnsCancelLike(ctx context.Context, req sns.SnsCancelLikeRequest) (*sns.SnsCancelLikeResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsCancelLikeResponse{}).Post(snsCancelLike)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsCancelLike方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsCancelLikeResponse), nil
+}
+
+func (k *Khan) SnsComment(ctx context.Context, req sns.SnsCommentRequest) (*sns.SnsCommentResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsCommentResponse{}).Post(snsComment)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsComment方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsCommentResponse), nil
+}

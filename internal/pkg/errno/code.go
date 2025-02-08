@@ -68,4 +68,8 @@ var (
 
 	SnsDetailError     = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
 	SnsMyselfPageError = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
+	SnsFriendPageError = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}
+	SnsLikeError       = &ErrNo{Code: 10058, Message: "点赞朋友圈失败"}
+	SnsCancelLikeError = &ErrNo{Code: 10059, Message: "取消点赞朋友圈失败"}
+	SnsCommentError    = &ErrNo{Code: 10060, Message: "评论朋友圈失败"}
 )

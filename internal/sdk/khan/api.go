@@ -59,6 +59,9 @@ const (
 	snsFriendPage = "/wxsdk/sns/userpage"
 	snsMyselfPage = "/wxsdk/sns/timeline"
 	snsDetail     = "/wxsdk/sns/queryiddetail"
+	snsLike       = "/wxsdk/sns/comment"
+	snsComment    = "/wxsdk/sns/comment"
+	snsCancelLike = "/wxsdk/sns/funcop"
 
 	favorSync   = "/wxsdk/favor/sync"
 	favorDetail = "/wxsdk/favor/getcontent"

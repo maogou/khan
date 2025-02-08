@@ -88,21 +88,6 @@ type SnsForwardResponse struct {
 	CreateTime int64  `json:"createTime"`
 }
 
-type SnsFriendPageRequest struct {
-	AppId        string `json:"appId" binding:"required"`
-	MaxId        int    `json:"maxId"`
-	Decrypt      bool   `json:"decrypt"`
-	Wxid         string `json:"wxid" binding:"required"`
-	FirstPageMd5 string `json:"firstPageMd5"`
-}
-
-type SnsMyselfPageRequest struct {
-	AppId        string `json:"appId" binding:"required"`
-	MaxId        int    `json:"maxId"`
-	Decrypt      bool   `json:"decrypt"`
-	FirstPageMd5 string `json:"firstPageMd5"`
-}
-
 type SnsPageItem struct {
 	Id            string                `json:"id"`
 	UserName      string                `json:"userName"`
@@ -117,10 +102,51 @@ type SnsPageItem struct {
 	WithUserList  []SnsWithUserListItem `json:"withUserList"`
 }
 
+type SnsFriendPageRequest struct {
+	AppId        string `json:"appId" binding:"required"`
+	MaxId        int    `json:"maxId"`
+	Decrypt      bool   `json:"decrypt"`
+	Wxid         string `json:"wxid" binding:"required"`
+	FirstPageMd5 string `json:"firstPageMd5"`
+}
+
+type SnsFriendPageResponse struct {
+	FirstPageMd5 string        `json:"firstPageMd5"`
+	MaxId        string        `json:"maxId"`
+	SnsCount     int           `json:"snsCount"`
+	RequestTime  int           `json:"requestTime"`
+	SnsList      []SnsPageItem `json:"snsList"`
+}
+
+type SnsMyselfPageRequest struct {
+	AppId        string `json:"appId" binding:"required"`
+	MaxId        int    `json:"maxId"`
+	Decrypt      bool   `json:"decrypt"`
+	FirstPageMd5 string `json:"firstPageMd5"`
+}
+
 type SnsMyselfPageResponse struct {
 	FirstPageMd5 string        `json:"firstPageMd5"`
 	MaxId        string        `json:"maxId"`
 	SnsCount     int           `json:"snsCount"`
 	RequestTime  int           `json:"requestTime"`
 	SnsList      []SnsPageItem `json:"snsList"`
+}
+
+type SnsLikeRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	SnsId string `json:"snsId" binding:"required"`
+	Wxid  string `json:"wxid" binding:"required"`
+}
+
+type SnsCancelLikeRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	SnsId string `json:"snsId" binding:"required"`
+}
+
+type SnsCommentRequest struct {
+	AppId   string `json:"appId"`
+	SnsId   string `json:"snsId"`
+	Wxid    string `json:"wxid"`
+	Content string `json:"content"`
 }
