@@ -2,7 +2,7 @@ package sns
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -28,9 +28,9 @@ func (s *SnsHandler) UploadImg(ctx *gin.Context) {
 
 	for index, imgUrl := range req.ImgUrls {
 		resp, err := s.sdk.SnsUploadImg(
-			ctx, transform.SnsUploadImgRequest{
+			ctx, sns.SnsUploadImgRequest{
 				Appid: req.AppId,
-				Config: transform.SnsUploadImgConfig{
+				Config: sns.SnsUploadImgConfig{
 					Thumbnail: true,
 				},
 				FileLink: imgUrl,

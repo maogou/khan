@@ -3,7 +3,7 @@ package favor
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/label"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -26,7 +26,7 @@ func (f *FavorHandler) Sync(ctx *gin.Context) {
 	}
 
 	resp, err := f.sdk.Sync(
-		ctx, transform.FavorSyncRequest{
+		ctx, label.FavorSyncRequest{
 			AppId:   req.AppId,
 			SyncKey: req.SyncKey,
 		},

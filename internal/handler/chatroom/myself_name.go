@@ -3,7 +3,7 @@ package chatroom
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/chatroom"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -21,7 +21,7 @@ func (c *ChatRoomHandler) ModifyMyselfName(ctx *gin.Context) {
 	}
 
 	resp, err := c.sdk.ChatroomModifyMyNickName(
-		ctx, transform.ChatroomModifyNickNameRequest{
+		ctx, chatroom.ChatroomModifyNickNameRequest{
 			Appid:    req.AppId,
 			GroupId:  req.ChatroomId,
 			NickName: req.ChatroomName,

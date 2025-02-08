@@ -2,7 +2,7 @@ package message
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -22,9 +22,9 @@ func (m *MessageHandler) PostImage(ctx *gin.Context) {
 	}
 
 	resp, err := m.sdk.PostImage(
-		ctx, transform.PostImage{
+		ctx, message.PostImage{
 			AppId:    req.AppId,
-			Config:   transform.PostImageConfig{Thumbnail: true},
+			Config:   message.PostImageConfig{Thumbnail: true},
 			FileLink: req.ImgUrl,
 			ToWxid:   req.ToWxid,
 		},

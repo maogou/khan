@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/singleflight"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -37,12 +37,12 @@ func (c *ContactHandler) List(ctx *gin.Context) {
 			var (
 				currentChatRoomContactSeq int = 0
 				currentWxcontactSeq       int = 0
-				allResults                []*transform.ContactListResponse
+				allResults                []*contact.ContactListResponse
 			)
 
 			for {
 				resp, err := c.sdk.ContactList(
-					ctx, transform.ContactListRequest{
+					ctx, contact.ContactListRequest{
 						Appid:                     req.AppId,
 						CurrentChatRoomContactSeq: currentChatRoomContactSeq,
 						CurrentWxcontactSeq:       currentWxcontactSeq,
@@ -79,7 +79,7 @@ func (c *ContactHandler) List(ctx *gin.Context) {
 			response.Fail(ctx, errno.ContactListError)
 			return
 		}
-		contactList := res.Val.([]*transform.ContactListResponse)
+		contactList := res.Val.([]*contact.ContactListResponse)
 
 		for _, contact := range contactList {
 			if len(contact.Data.ContactUsernameList) > 0 {

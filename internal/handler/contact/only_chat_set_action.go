@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -22,9 +22,9 @@ func (c *ContactHandler) OnlyChat(ctx *gin.Context) {
 	}
 
 	resp, err := c.sdk.ContactSetOnlyChat(
-		ctx, transform.ContactSetOnlyChatRequest{
+		ctx, contact.ContactSetOnlyChatRequest{
 			Appid: req.AppId,
-			Config: transform.ContactSetOnlyChatConfig{
+			Config: contact.ContactSetOnlyChatConfig{
 				Status: lo.Ternary(req.OnlyChat, 1, 2),
 				ToWxid: req.Wxid,
 			},

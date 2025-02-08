@@ -2,7 +2,7 @@ package sns
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -29,7 +29,7 @@ func (s *SnsHandler) Detail(ctx *gin.Context) {
 	}
 
 	resp, err := s.sdk.SnsDetail(
-		ctx, transform.SnsDetailRequest{
+		ctx, sns.SnsDetailRequest{
 			AppId:   req.AppId,
 			Decrypt: true,
 			Id:      req.SnsId,

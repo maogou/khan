@@ -2,7 +2,7 @@ package label
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/label"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -22,7 +22,7 @@ func (l *LabelHandler) Add(ctx *gin.Context) {
 	}
 
 	resp, err := l.sdk.LabelAdd(
-		ctx, transform.LabelAddRequest{
+		ctx, label.LabelAddRequest{
 			Appid: req.AppId,
 			Name:  req.LabelName,
 		},

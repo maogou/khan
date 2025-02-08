@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/chatroom"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -33,7 +33,7 @@ func (c *ChatRoomHandler) SetSilence(ctx *gin.Context) {
 	)
 
 	resp, err := c.sdk.ChatroomSetMsgSilence(
-		ctx, transform.ChatroomSetSilenceRequest{
+		ctx, chatroom.ChatroomSetSilenceRequest{
 			Appid:   req.AppId,
 			GroupId: req.ChatroomId,
 			Value:   value,

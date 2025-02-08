@@ -2,7 +2,7 @@ package message
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -22,9 +22,9 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 	}
 
 	resp, err := m.sdk.PostText(
-		ctx, transform.PostTextRequest{
+		ctx, message.PostTextRequest{
 			AppId: req.AppId,
-			ToWxidList: []transform.ToWxid{
+			ToWxidList: []message.ToWxid{
 				{
 					Content: req.Content,
 					ToWxid:  req.ToWxid,

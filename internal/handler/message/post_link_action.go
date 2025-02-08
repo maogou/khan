@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -31,7 +31,7 @@ func (m *MessageHandler) PostLink(ctx *gin.Context) {
 	}
 
 	resp, err := m.sdk.PostLink(
-		ctx, transform.PostLinkRequest{
+		ctx, message.PostLinkRequest{
 			Appid:  req.AppId,
 			Base64: base64.StdEncoding.EncodeToString(imgByte),
 			Des:    req.Desc,

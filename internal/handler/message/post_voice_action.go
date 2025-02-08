@@ -3,7 +3,7 @@ package message
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -21,7 +21,7 @@ func (m *MessageHandler) PostVoice(ctx *gin.Context) {
 	}
 
 	resp, err := m.sdk.PostVoice(
-		ctx, transform.PostVoiceRequest{
+		ctx, message.PostVoiceRequest{
 			Appid:    req.AppId,
 			ToWxid:   req.ToWxid,
 			FileLink: req.VoiceUrl,

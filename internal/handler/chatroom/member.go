@@ -3,7 +3,7 @@ package chatroom
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/chatroom"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -27,7 +27,7 @@ func (c *ChatRoomHandler) Member(ctx *gin.Context) {
 	}
 
 	resp, err := c.sdk.ChatroomMember(
-		ctx, transform.ChatroomMemberRequest{
+		ctx, chatroom.ChatroomMemberRequest{
 			Appid:   req.AppId,
 			GroupId: req.ChatroomId,
 		},

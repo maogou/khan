@@ -3,7 +3,7 @@ package contact
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -24,7 +24,7 @@ func (c *ContactHandler) Info(ctx *gin.Context) {
 	}
 
 	resp, err := c.sdk.ContactInfo(
-		ctx, transform.ContactInfoRequest{
+		ctx, contact.ContactInfoRequest{
 			Appid:      req.AppId,
 			ToWxidList: req.Wxids,
 		},

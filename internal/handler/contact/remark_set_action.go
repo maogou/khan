@@ -3,7 +3,7 @@ package contact
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -21,7 +21,7 @@ func (c *ContactHandler) Remark(ctx *gin.Context) {
 	}
 
 	resp, err := c.sdk.ContactSetRemark(
-		ctx, transform.ContactSetRemarkRequest{
+		ctx, contact.ContactSetRemarkRequest{
 			Appid:  req.AppId,
 			Remark: req.Remark,
 			ToWxid: req.Wxid,

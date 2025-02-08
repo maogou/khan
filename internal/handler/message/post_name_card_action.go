@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -15,7 +15,7 @@ func (m *MessageHandler) PostNameCard(ctx *gin.Context) {
 
 	var (
 		req  v1.PostNameCardRequest
-		cXml transform.NameCardMsgXml
+		cXml message.NameCardMsgXml
 	)
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -41,9 +41,9 @@ func (m *MessageHandler) PostNameCard(ctx *gin.Context) {
 	}
 
 	resp, err := m.sdk.PostNameCard(
-		ctx, transform.PostNameCardRequest{
+		ctx, message.PostNameCardRequest{
 			Appid: req.AppId,
-			ToWxidList: []transform.PostNameCardConfig{
+			ToWxidList: []message.PostNameCardConfig{
 				{
 					Content: string(xmlByte),
 					ToWxid:  req.NameCardWxid,

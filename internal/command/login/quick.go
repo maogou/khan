@@ -5,6 +5,7 @@ import (
 	"errors"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/sdk/khan"
 	"time"
 
@@ -242,9 +243,9 @@ func (q *QuickLogin) Open() {
 }
 
 func (q *QuickLogin) Welcome() {
-	var welcome = transform.PostTextRequest{
+	var welcome = message.PostTextRequest{
 		AppId: q.appId,
-		ToWxidList: []transform.ToWxid{
+		ToWxidList: []message.ToWxid{
 			{
 				Content: "欢迎使用Khan服务!",
 				ToWxid:  "filehelper",
@@ -253,7 +254,7 @@ func (q *QuickLogin) Welcome() {
 		},
 	}
 
-	var resp *transform.PostTextResponse
+	var resp *message.PostTextResponse
 
 	resp, q.err = q.sdk.PostText(q.ctx, welcome)
 

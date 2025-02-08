@@ -3,7 +3,7 @@ package favor
 import (
 	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/label"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -21,7 +21,7 @@ func (f *FavorHandler) Delete(ctx *gin.Context) {
 	}
 
 	resp, err := f.sdk.Delete(
-		ctx, transform.FavorDeleteRequest{
+		ctx, label.FavorDeleteRequest{
 			AppId: req.AppId,
 			FavId: req.FavId,
 		},

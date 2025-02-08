@@ -2,7 +2,7 @@ package personal
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/personal"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -23,7 +23,7 @@ func (p *PersonalHandler) UploadHdImg(ctx *gin.Context) {
 	}
 
 	resp, err := p.sdk.PersonalUploadHeadImg(
-		ctx, transform.PersonalUploadHdHeadImgRequest{
+		ctx, personal.PersonalUploadHdHeadImgRequest{
 			Appid:    req.AppId,
 			FileLink: req.HeadImgUrl,
 		},

@@ -2,137 +2,137 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/chatroom"
 	"smallBot/internal/pkg/log"
 )
 
-func (k *Khan) ChatroomCreate(ctx context.Context, req transform.ChatroomCreateRequest) (*transform.ChatroomCreateResponse, error) {
+func (k *Khan) ChatroomCreate(ctx context.Context, req chatroom.ChatroomCreateRequest) (*chatroom.ChatroomCreateResponse, error) {
 
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomCreateResponse{}).Post(chatroomCreate)
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomCreateResponse{}).Post(chatroomCreate)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomCreate方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomCreateResponse), nil
+	return resp.Result().(*chatroom.ChatroomCreateResponse), nil
 }
 
-func (k *Khan) ChatroomMember(ctx context.Context, req transform.ChatroomMemberRequest) (*transform.ChatroomMemberResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomMemberResponse{}).Post(chatroomMember)
+func (k *Khan) ChatroomMember(ctx context.Context, req chatroom.ChatroomMemberRequest) (*chatroom.ChatroomMemberResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomMemberResponse{}).Post(chatroomMember)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomMember方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomMemberResponse), nil
+	return resp.Result().(*chatroom.ChatroomMemberResponse), nil
 }
 
-func (k *Khan) ChatroomDetail(ctx context.Context, req transform.ChatroomDetailRequest) (*transform.ChatroomDetailResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomDetailResponse{}).Post(chatroomDetail)
+func (k *Khan) ChatroomDetail(ctx context.Context, req chatroom.ChatroomDetailRequest) (*chatroom.ChatroomDetailResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomDetailResponse{}).Post(chatroomDetail)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomDetail方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomDetailResponse), nil
+	return resp.Result().(*chatroom.ChatroomDetailResponse), nil
 }
 
-func (k *Khan) ChatroomAnnouncement(ctx context.Context, req transform.ChatroomAnnouncementRequest) (*transform.ChatroomAnnouncementResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomAnnouncementResponse{}).Post(chatroomAnnouncement)
+func (k *Khan) ChatroomAnnouncement(ctx context.Context, req chatroom.ChatroomAnnouncementRequest) (*chatroom.ChatroomAnnouncementResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomAnnouncementResponse{}).Post(chatroomAnnouncement)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomAnnouncement方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomAnnouncementResponse), nil
+	return resp.Result().(*chatroom.ChatroomAnnouncementResponse), nil
 }
 
-func (k *Khan) ChatroomSetAnnouncement(ctx context.Context, req transform.ChatroomSetAnnouncementRequest) (*transform.ChatroomSetAnnouncementResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomSetAnnouncementResponse{}).Post(chatroomSetAnnouncement)
+func (k *Khan) ChatroomSetAnnouncement(ctx context.Context, req chatroom.ChatroomSetAnnouncementRequest) (*chatroom.ChatroomSetAnnouncementResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomSetAnnouncementResponse{}).Post(chatroomSetAnnouncement)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomSetAnnouncement方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomSetAnnouncementResponse), nil
+	return resp.Result().(*chatroom.ChatroomSetAnnouncementResponse), nil
 }
 
-func (k *Khan) ChatroomModifyName(ctx context.Context, req transform.ChatroomModifyNameRequest) (*transform.ChatroomModifyNameResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomModifyNameResponse{}).Post(chatroomModifyName)
+func (k *Khan) ChatroomModifyName(ctx context.Context, req chatroom.ChatroomModifyNameRequest) (*chatroom.ChatroomModifyNameResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomModifyNameResponse{}).Post(chatroomModifyName)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomModifyName方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomModifyNameResponse), nil
+	return resp.Result().(*chatroom.ChatroomModifyNameResponse), nil
 }
 
-func (k *Khan) ChatroomModifyRemark(ctx context.Context, req transform.ChatroomModifyRemarkRequest) (*transform.ChatroomModifyRemarkResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomModifyRemarkResponse{}).Post(chatroomModifyRemark)
+func (k *Khan) ChatroomModifyRemark(ctx context.Context, req chatroom.ChatroomModifyRemarkRequest) (*chatroom.ChatroomModifyRemarkResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomModifyRemarkResponse{}).Post(chatroomModifyRemark)
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomModifyRemark方法失败")
 		return nil, err
 	}
-	return resp.Result().(*transform.ChatroomModifyRemarkResponse), nil
+	return resp.Result().(*chatroom.ChatroomModifyRemarkResponse), nil
 }
 
-func (k *Khan) ChatroomModifyMyNickName(ctx context.Context, req transform.ChatroomModifyNickNameRequest) (*transform.ChatroomModifyNickNameResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomModifyNickNameResponse{}).Post(chatroomModifyMyNickName)
+func (k *Khan) ChatroomModifyMyNickName(ctx context.Context, req chatroom.ChatroomModifyNickNameRequest) (*chatroom.ChatroomModifyNickNameResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomModifyNickNameResponse{}).Post(chatroomModifyMyNickName)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomModifyMyNickName方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomModifyNickNameResponse), nil
+	return resp.Result().(*chatroom.ChatroomModifyNickNameResponse), nil
 }
 
-func (k *Khan) ChatroomTopPing(ctx context.Context, req transform.ChatroomTopPingRequest) (*transform.ChatroomTopPingResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomTopPingResponse{}).Post(chatroomTopPing)
+func (k *Khan) ChatroomTopPing(ctx context.Context, req chatroom.ChatroomTopPingRequest) (*chatroom.ChatroomTopPingResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomTopPingResponse{}).Post(chatroomTopPing)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomTopPing方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomTopPingResponse), nil
+	return resp.Result().(*chatroom.ChatroomTopPingResponse), nil
 }
 
-func (k *Khan) ChatroomSaveToContactList(ctx context.Context, req transform.ChatroomSaveContactToListRequest) (*transform.ChatroomSaveContactToListResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomSaveContactToListResponse{}).Post(chatroomContactSaveList)
+func (k *Khan) ChatroomSaveToContactList(ctx context.Context, req chatroom.ChatroomSaveContactToListRequest) (*chatroom.ChatroomSaveContactToListResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomSaveContactToListResponse{}).Post(chatroomContactSaveList)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomSaveToContactList方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomSaveContactToListResponse), nil
+	return resp.Result().(*chatroom.ChatroomSaveContactToListResponse), nil
 }
 
-func (k *Khan) ChatroomSetMsgSilence(ctx context.Context, req transform.ChatroomSetSilenceRequest) (*transform.ChatroomSetSilenceResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomSetSilenceResponse{}).Post(chatroomSetSilence)
+func (k *Khan) ChatroomSetMsgSilence(ctx context.Context, req chatroom.ChatroomSetSilenceRequest) (*chatroom.ChatroomSetSilenceResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomSetSilenceResponse{}).Post(chatroomSetSilence)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomSetMsgSilence方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomSetSilenceResponse), nil
+	return resp.Result().(*chatroom.ChatroomSetSilenceResponse), nil
 }
 
-func (k *Khan) ChatroomQrcode(ctx context.Context, req transform.ChatroomQrcodeRequest) (*transform.ChatroomQrcodeResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&transform.ChatroomQrcodeResponse{}).Post(chatroomQrcode)
+func (k *Khan) ChatroomQrcode(ctx context.Context, req chatroom.ChatroomQrcodeRequest) (*chatroom.ChatroomQrcodeResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomQrcodeResponse{}).Post(chatroomQrcode)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用ChatroomQrcode方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*transform.ChatroomQrcodeResponse), nil
+	return resp.Result().(*chatroom.ChatroomQrcodeResponse), nil
 }

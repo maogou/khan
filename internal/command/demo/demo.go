@@ -1,7 +1,7 @@
 package demo
 
 import (
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/config"
 	"smallBot/internal/sdk/khan"
 	"time"
@@ -32,9 +32,9 @@ func do(cCtx *cli.Context) error {
 	sdk := khan.NewKhanSdk(&conf, client, validate)
 
 	resp, err := sdk.PostText(
-		cCtx.Context, transform.PostTextRequest{
+		cCtx.Context, message.PostTextRequest{
 			AppId: "wx_Ez4I3ZO1gKOG7h0IgfB8D",
-			ToWxidList: []transform.ToWxid{
+			ToWxidList: []message.ToWxid{
 				{
 					Content: "当前时间为:" + time.Now().Format(time.DateTime),
 					ToWxid:  "xingmaogou",

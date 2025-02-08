@@ -2,7 +2,7 @@ package personal
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform"
+	"smallBot/api/khan/v1/transform/personal"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -24,7 +24,7 @@ func (p *PersonalHandler) PrivacySetting(ctx *gin.Context) {
 	}
 
 	resp, err := p.sdk.PersonalPrivacySetting(
-		ctx, transform.PersonalPrivacySettingRequest{
+		ctx, personal.PersonalPrivacySettingRequest{
 			Appid: req.AppId,
 			Id:    req.Option,
 			Value: lo.Ternary(req.Open, 1, 0),
