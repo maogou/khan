@@ -4,6 +4,7 @@ var (
 	Ok                  = &ErrNo{Code: 0, Message: "OK"}
 	PageNotFoundError   = &ErrNo{Code: 404, Message: "访问的页面不存在"}
 	MethodNotAllowError = &ErrNo{Code: 405, Message: "访问的路由请求方式错误"}
+	GetFileBase64Error  = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}
 
@@ -66,10 +67,12 @@ var (
 	ChatroomSetSilenceError = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
 	ChatroomQrcodeError     = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
 
-	SnsDetailError     = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
-	SnsMyselfPageError = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
-	SnsFriendPageError = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}
-	SnsLikeError       = &ErrNo{Code: 10058, Message: "点赞朋友圈失败"}
-	SnsCancelLikeError = &ErrNo{Code: 10059, Message: "取消点赞朋友圈失败"}
-	SnsCommentError    = &ErrNo{Code: 10060, Message: "评论朋友圈失败"}
+	SnsDetailError          = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
+	SnsMyselfPageError      = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
+	SnsFriendPageError      = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}
+	SnsLikeError            = &ErrNo{Code: 10058, Message: "点赞朋友圈失败"}
+	SnsCancelLikeError      = &ErrNo{Code: 10059, Message: "取消点赞朋友圈失败"}
+	SnsCommentError         = &ErrNo{Code: 10060, Message: "评论朋友圈失败"}
+	SnsDeleteCommentError   = &ErrNo{Code: 10061, Message: "删除朋友圈评论失败"}
+	SnsSetPrivacyScopeError = &ErrNo{Code: 10062, Message: "设置朋友圈可见范围失败"}
 )

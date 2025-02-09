@@ -145,8 +145,20 @@ type SnsCancelLikeRequest struct {
 }
 
 type SnsCommentRequest struct {
-	AppId   string `json:"appId"`
-	SnsId   string `json:"snsId"`
-	Wxid    string `json:"wxid"`
-	Content string `json:"content"`
+	AppId     string `json:"appId" binding:"required"`
+	SnsId     string `json:"snsId" binding:"required"`
+	Wxid      string `json:"wxid" binding:"required"`
+	Content   string `json:"content" binding:"required"`
+	CommentId int    `json:"commentId"`
+}
+
+type SnsDelCommentRequest struct {
+	AppId     string `json:"appId" binding:"required"`
+	SnsId     string `json:"snsId" binding:"required"`
+	CommentId int    `json:"commentId" binding:"required"`
+}
+
+type SnsSetPrivacyScopeRequest struct {
+	AppId  string `json:"appId" binding:"required"`
+	Option int    `json:"option" binding:"required,oneof=1 2 3 4"`
 }

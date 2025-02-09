@@ -1,11 +1,12 @@
 package sns
 
 type SnsCommentRequest struct {
-	AppId   string `json:"appid"`
-	Id      string `json:"id"`
-	Type    int    `json:"type"`
-	ToWxid  string `json:"to_wxid"`
-	Content string `json:"content"`
+	AppId          string `json:"appid"`
+	Id             string `json:"id"`
+	Type           int    `json:"type"`
+	ToWxid         string `json:"to_wxid"`
+	Content        string `json:"content"`
+	ReplyCommnetId int    `json:"reply_commnet_id"`
 }
 
 type SnsCommentResponse struct {

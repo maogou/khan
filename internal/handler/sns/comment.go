@@ -23,11 +23,12 @@ func (s *SnsHandler) Comment(ctx *gin.Context) {
 
 	resp, err := s.sdk.SnsComment(
 		ctx, sns.SnsCommentRequest{
-			AppId:   req.AppId,
-			Content: req.Content,
-			Id:      req.SnsId,
-			ToWxid:  req.Wxid,
-			Type:    2,
+			AppId:          req.AppId,
+			Content:        req.Content,
+			Id:             req.SnsId,
+			ToWxid:         req.Wxid,
+			Type:           2,
+			ReplyCommnetId: req.CommentId,
 		},
 	)
 

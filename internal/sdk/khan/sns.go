@@ -82,3 +82,25 @@ func (k *Khan) SnsComment(ctx context.Context, req sns.SnsCommentRequest) (*sns.
 
 	return resp.Result().(*sns.SnsCommentResponse), nil
 }
+
+func (k *Khan) SnsDeleteComment(ctx context.Context, req sns.SnsDeleteCommentRequest) (*sns.SnsDeleteCommentResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsDeleteCommentResponse{}).Post(snsDeleteComment)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsDeleteComment方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsDeleteCommentResponse), nil
+}
+
+func (k *Khan) SnsSetPrivacyScope(ctx context.Context, req sns.SnsSetPrivacyScopeRequest) (*sns.SnsSetPrivacyScopeResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSetPrivacyScopeResponse{}).Post(snsSetPrivacyScope)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSetPrivacyScope方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSetPrivacyScopeResponse), nil
+}

@@ -23,3 +23,11 @@ func DownloadBase64File(base64Str, path string) error {
 
 	return nil
 }
+
+func GetFileBase64(filePath string) (string, error) {
+	bytes, err := os.ReadFile(filePath)
+	if err != nil {
+		return "", err
+	}
+	return base64.StdEncoding.EncodeToString(bytes), nil
+}

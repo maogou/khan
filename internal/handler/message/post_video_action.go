@@ -4,6 +4,7 @@ import (
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"time"
@@ -22,13 +23,21 @@ func (m *MessageHandler) PostVideo(ctx *gin.Context) {
 		return
 	}
 
+	base64, err := help.GetFileBase64(req.ThumbUrl)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("参数验证失败")
+		response.Fail(ctx, errno.GetFileBase64Error)
+		return
+	}
+
 	resp, err := m.sdk.PostVideo(
 		ctx, message.PostVideoRequest{
 			Appid:  req.AppId,
 			ToWxid: req.ToWxid,
 			Config: message.PostVideoConfig{
 				VideoPlayLength: req.VideoDuration,
-				VideoThumbnail:  req.ThumbUrl,
+				VideoThumbnail:  base64,
 			},
 			FileLink: req.VideoUrl,
 		},
