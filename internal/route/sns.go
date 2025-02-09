@@ -19,4 +19,9 @@ func initSnsRoute(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v2/api/sns/commentSns", snsHandler.Comment)
 	engine.POST("/v2/api/sns/deleteCommentSns", snsHandler.DeleteComment)
 	engine.POST("/v2/api/sns/snsVisibleScope", snsHandler.SetPrivacyScope)
+	engine.POST("/v2/api/sns/strangerVisibilityEnabled", snsHandler.StrangerVisibility)
+	engine.POST("/v2/api/sns/snsSetPrivacy", snsHandler.SetPrivacy)
+	engine.POST("/v2/api/sns/delSns", snsHandler.Delete)
+	engine.POST("/v2/api/sns/uploadSnsVideo", snsHandler.UploadVideo)
+	engine.POST("/v2/api/sns/sendTextSns", snsHandler.SendText)
 }

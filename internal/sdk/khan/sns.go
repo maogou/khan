@@ -104,3 +104,57 @@ func (k *Khan) SnsSetPrivacyScope(ctx context.Context, req sns.SnsSetPrivacyScop
 
 	return resp.Result().(*sns.SnsSetPrivacyScopeResponse), nil
 }
+
+func (k *Khan) SnsStrangerVisibilityEnabled(ctx context.Context, req sns.SnsStrangerVisibilityEnabledRequest) (*sns.SnsStrangerVisibilityEnabledResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsStrangerVisibilityEnabledResponse{}).Post(snsStrangerVisibilityEnabled)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsStrangerVisibilityEnabled方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsStrangerVisibilityEnabledResponse), nil
+}
+
+func (k *Khan) SnsSetPrivacy(ctx context.Context, req sns.SnsSetPrivacyRequest) (*sns.SnsSetPrivacyReponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSetPrivacyReponse{}).Post(snsSetPrivacy)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSetPrivacy方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSetPrivacyReponse), nil
+}
+
+func (k *Khan) SnsDelete(ctx context.Context, req sns.SnsDeleteRequest) (*sns.SnsDeleteResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsDeleteResponse{}).Post(snsDelete)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsDelete方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsDeleteResponse), nil
+}
+
+func (k *Khan) SnsUploadVideo(ctx context.Context, req sns.SnsUploadVideoRequest) (*sns.SnsUploadVideoResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsUploadVideoResponse{}).Post(snsUploadVideo)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsUploadVideo方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsUploadVideoResponse), nil
+}
+
+func (k *Khan) SnsSendText(ctx context.Context, req sns.SnsSendTextRequest) (*sns.SnsSendTextResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendTextResponse{}).Post(snsSendText)
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSendText方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSendTextResponse), nil
+}

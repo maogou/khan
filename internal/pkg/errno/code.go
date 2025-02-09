@@ -67,12 +67,17 @@ var (
 	ChatroomSetSilenceError = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
 	ChatroomQrcodeError     = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
 
-	SnsDetailError          = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
-	SnsMyselfPageError      = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
-	SnsFriendPageError      = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}
-	SnsLikeError            = &ErrNo{Code: 10058, Message: "点赞朋友圈失败"}
-	SnsCancelLikeError      = &ErrNo{Code: 10059, Message: "取消点赞朋友圈失败"}
-	SnsCommentError         = &ErrNo{Code: 10060, Message: "评论朋友圈失败"}
-	SnsDeleteCommentError   = &ErrNo{Code: 10061, Message: "删除朋友圈评论失败"}
-	SnsSetPrivacyScopeError = &ErrNo{Code: 10062, Message: "设置朋友圈可见范围失败"}
+	SnsDetailError                    = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
+	SnsMyselfPageError                = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
+	SnsFriendPageError                = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}
+	SnsLikeError                      = &ErrNo{Code: 10058, Message: "点赞朋友圈失败"}
+	SnsCancelLikeError                = &ErrNo{Code: 10059, Message: "取消点赞朋友圈失败"}
+	SnsCommentError                   = &ErrNo{Code: 10060, Message: "评论朋友圈失败"}
+	SnsDeleteCommentError             = &ErrNo{Code: 10061, Message: "删除朋友圈评论失败"}
+	SnsSetPrivacyScopeError           = &ErrNo{Code: 10062, Message: "设置朋友圈可见范围失败"}
+	SnsStrangerVisibilityEnabledError = &ErrNo{Code: 10063, Message: "设置陌生人可见失败"}
+	SnsSetPrivacyError                = &ErrNo{Code: 10064, Message: "设置某条朋友圈权限失败"}
+	SnsDeleteError                    = &ErrNo{Code: 10065, Message: "删除朋友圈失败"}
+	SnsUploadVideoError               = &ErrNo{Code: 10066, Message: "上传视频失败"}
+	SnsSendTextError                  = &ErrNo{Code: 10067, Message: "发送朋友圈文本失败"}
 )

@@ -162,3 +162,48 @@ type SnsSetPrivacyScopeRequest struct {
 	AppId  string `json:"appId" binding:"required"`
 	Option int    `json:"option" binding:"required,oneof=1 2 3 4"`
 }
+
+type SnsStrangerVisibilityEnabledRequest struct {
+	AppId   string `json:"appId" binding:"required"`
+	Enabled bool   `json:"enabled"`
+}
+
+type SnsSetPrivacyRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	SnsId string `json:"snsId" binding:"required"`
+	Open  bool   `json:"open"`
+}
+
+type SnsDeleteRequest struct {
+	AppId string `json:"appId"  binding:"required"`
+	SnsId string `json:"snsId" binding:"required"`
+}
+
+type SnsUploadVideoRequest struct {
+	AppId    string `json:"appId" binding:"required"`
+	ThumbUrl string `json:"thumbUrl" binding:"required"`
+	VideoUrl string `json:"videoUrl" binding:"required"`
+}
+
+type SnsUploadVideoResponse struct {
+	FileUrl  string `json:"fileUrl"`
+	ThumbUrl string `json:"thumbUrl"`
+	FileMd5  string `json:"fileMd5"`
+	Length   int    `json:"length"`
+}
+
+type SnsSendTextRequest struct {
+	AppId        string   `json:"appId"`
+	AllowWxIds   []string `json:"allowWxIds"`
+	AtWxIds      []string `json:"atWxIds"`
+	DisableWxIds []string `json:"disableWxIds"`
+	Content      string   `json:"content"`
+	Privacy      bool     `json:"privacy"`
+}
+
+type SnsSendTextResponse struct {
+	Id         int64  `json:"id"`
+	UserName   string `json:"userName"`
+	NickName   string `json:"nickName"`
+	CreateTime int64  `json:"createTime"`
+}
