@@ -23,7 +23,7 @@ func (m *MessageHandler) PostVideo(ctx *gin.Context) {
 		return
 	}
 
-	base64, err := help.GetFileBase64(req.ThumbUrl)
+	base64, err := help.GetFileBase64(m.sdk.Client(), req.ThumbUrl)
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("参数验证失败")

@@ -4,6 +4,8 @@ import (
 	"encoding/base64"
 	"os"
 	"path/filepath"
+
+	"github.com/go-resty/resty/v2"
 )
 
 func DownloadBase64File(base64Str, path string) error {
@@ -24,10 +26,11 @@ func DownloadBase64File(base64Str, path string) error {
 	return nil
 }
 
-func GetFileBase64(filePath string) (string, error) {
-	bytes, err := os.ReadFile(filePath)
+func GetFileBase64(client *resty.Client, fileUrl string) (string, error) {
+	resp, err := client.R().Get(fileUrl)
 	if err != nil {
 		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(bytes), nil
+
+	return base64.StdEncoding.EncodeToString(resp.Body()), nil
 }
