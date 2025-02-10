@@ -21,10 +21,10 @@ type SnsSendTextResponse struct {
 			} `json:"errMsg"`
 		} `json:"BaseResponse"`
 		SnsObject struct {
-			Id         int64  `json:"Id"`
-			Username   string `json:"Username"`
-			Nickname   string `json:"Nickname"`
-			CreateTime int64  `json:"CreateTime"`
+			Id         float64 `json:"Id"`
+			Username   string  `json:"Username"`
+			Nickname   string  `json:"Nickname"`
+			CreateTime int64   `json:"CreateTime"`
 			ObjectDesc struct {
 				ILen   int    `json:"iLen"`
 				Buffer string `json:"buffer"`
