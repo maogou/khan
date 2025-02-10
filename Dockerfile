@@ -13,7 +13,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o smallBot smallBot/cmd
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o khan smallBot/cmd
 
 
 FROM alpine
@@ -33,7 +33,7 @@ COPY --from=builder /build/docker/supervisor/ini/*.ini /etc/supervisor.d/
 COPY --from=builder /build/docker/bin/* /app/
 COPY --from=builder /build/docker/config/app.config /app/app.config
 COPY --from=builder /build/docker/config/* /app/config/
-COPY --from=builder /build/smallBot /app/sbot
+COPY --from=builder /build/khan /app/khan
 COPY --from=builder /build/docker/supervisor/supervisord.conf /etc/supervisord.conf
 
 # 启动Supervisor

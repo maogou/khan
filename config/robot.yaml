@@ -13,8 +13,8 @@ redis:
 sdk:
   collect: http://127.0.0.1:8073/api/v1/collect
   callback: http://127.0.0.1:8073/api/v1/callback
-  pact: http://127.0.0.1:4600
-  long: http://127.0.0.1:5600
+  gog7a6v8g: http://127.0.0.1:8075
+  gog7a6v90: http://127.0.0.1:8076
   timeout: 30
   token: "9ec822b31bd4492a9b311bb1ba854f37"
   appId: ""

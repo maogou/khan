@@ -39,7 +39,7 @@ func (k *Khan) LongOpen(ctx context.Context, req v1.LongOpenRequest) (*v1.LongOp
 	log := help.GetQidLog(ctx)
 	log.Info().Msg("调用LongOpen方法")
 
-	api := k.config.Sdk.Long + longOpen
+	api := k.config.Sdk.Gog7a6v90 + longOpen
 	resp, err := k.client.R().SetBody(req).SetResult(&v1.LongOpenResponse{}).Post(api)
 
 	if err != nil {

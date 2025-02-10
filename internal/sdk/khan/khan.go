@@ -2,9 +2,10 @@ package khan
 
 import (
 	"embed"
-	"github.com/redis/go-redis/v9"
 	"smallBot/internal/config"
 	"time"
+
+	"github.com/redis/go-redis/v9"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/go-resty/resty/v2"
@@ -24,7 +25,7 @@ type Khan struct {
 
 func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate, rdb *redis.Client, tpl embed.FS) *Khan {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
-	client.BaseURL = conf.Sdk.Pact
+	client.BaseURL = conf.Sdk.Gog7a6v8g
 
 	return &Khan{
 		client:   client,
