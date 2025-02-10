@@ -1,10 +1,12 @@
 package sns
 
 import (
-	"encoding/xml"
+	"bytes"
+	"html/template"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
-	"smallBot/api/khan/v1/transform/sns/template"
+	"smallBot/api/khan/v1/transform/sns/tpl"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -18,8 +20,9 @@ func (s *SnsHandler) SendText(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用SnsHandler->SendText方法")
 
 	var (
-		req         v1.SnsSendTextRequest
-		xmlTemplate template.TimelineObject
+		req          v1.SnsSendTextRequest
+		textTimeline tpl.TextTimelineObject
+		buf          bytes.Buffer
 	)
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -28,15 +31,13 @@ func (s *SnsHandler) SendText(ctx *gin.Context) {
 		return
 	}
 
-	xmlTemplate.ContentDesc = template.CDATA{
-		Content: req.Content,
-	}
+	textTimeline.Content = req.Content
 
-	xmlByte, err := xml.Marshal(xmlTemplate)
+	t := template.Must(template.New("text_timeline").Parse(constant.SnsText))
 
-	if err != nil {
-		log.C(ctx).Error().Err(err).Msg("xml序列化失败")
-		response.Fail(ctx, errno.XmlEncodeError)
+	if err := t.Execute(&buf, textTimeline); err != nil {
+		log.C(ctx).Error().Err(err).Msg("模板解析失败")
+		response.Fail(ctx, errno.TemplateParseError)
 		return
 	}
 
@@ -49,7 +50,7 @@ func (s *SnsHandler) SendText(ctx *gin.Context) {
 			DisableUser:  lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
 			DisableTagId: make([]string, 0),
 			Private:      req.Privacy,
-			XmlTxt:       string(xmlByte),
+			XmlTxt:       buf.String(),
 		},
 	)
 

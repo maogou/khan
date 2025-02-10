@@ -1,8 +1,9 @@
 package demo
 
 import (
-	"github.com/rs/zerolog/log"
 	"smallBot/internal/sdk/khan"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/urfave/cli/v2"
 )
@@ -21,13 +22,5 @@ func Demo(sdk *khan.Khan) *cli.Command {
 func do(cCtx *cli.Context, sdk *khan.Khan) error {
 	log.Info().Msg("i am demo!")
 
-	_, err := sdk.Tpl().ReadFile("tpl/text.tpl")
-
-	if err != nil {
-		log.Error().Err(err).Msg("读取模板失败")
-		return err
-	}
-
-	log.Info().Msg("读取模板成功")
 	return nil
 }
