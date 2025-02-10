@@ -207,3 +207,29 @@ type SnsSendTextResponse struct {
 	NickName   string  `json:"nickName"`
 	CreateTime int64   `json:"createTime"`
 }
+
+type SnsSendImageItem struct {
+	FileUrl  string `json:"fileUrl" binding:"required"`
+	ThumbUrl string `json:"thumbUrl" binding:"required"`
+	FileMd5  string `json:"fileMd5" binding:"required"`
+	Length   int    `json:"length"`
+	Width    int    `json:"width" binding:"required"`
+	Height   int    `json:"height" binding:"required"`
+}
+
+type SnsSendImageRequst struct {
+	AppId        string             `json:"appId" binding:"required"`
+	AllowWxIds   []string           `json:"allowWxIds"`
+	AtWxIds      []string           `json:"atWxIds"`
+	DisableWxIds []string           `json:"disableWxIds"`
+	Content      string             `json:"content"`
+	ImgInfos     []SnsSendImageItem `json:"imgInfos" binding:"required"`
+	Privacy      bool               `json:"privacy"`
+}
+
+type SnsSendImageResponse struct {
+	Id         float64 `json:"id"`
+	UserName   string  `json:"userName"`
+	NickName   string  `json:"nickName"`
+	CreateTime int64   `json:"createTime"`
+}

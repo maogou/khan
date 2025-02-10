@@ -51,7 +51,7 @@ const SnsImage = `
     <id>0</id>
     <username></username>
     <createTime>1603345160</createTime>
-    <contentDesc><![CDATA[${content}]]></contentDesc>
+    <contentDesc><![CDATA[{{.Content}}]]></contentDesc>
     <contentDescShowType>0</contentDescShowType>
     <contentDescScene>3</contentDescScene>
     <private>0</private>
@@ -79,8 +79,9 @@ const SnsImage = `
         <title></title>
         <description></description>
         <contentUrl></contentUrl>
-        <mediaList><#list imgInfos as img>
-                <media>
+        <mediaList>
+            {{range .ImgInfos}}
+            <media>
                 <id>0</id>
                 <type>2</type>
                 <title></title>
@@ -88,8 +89,11 @@ const SnsImage = `
                 <userData></userData>
                 <subType>0</subType>
                 <videoSize width="500" height="889"/>
-                <url type="1" <#if img.fileMd5?? > md5="${img.fileMd5}"</#if>><![CDATA[${img.fileUrl}]]></url>
-                <thumb type="1"><![CDATA[${img.thumbUrl}]]></thumb></media></#list></mediaList>
+                <url type="1" {{if .FileMd5}} md5="{{.FileMd5}}"{{end}}><![CDATA[{{.FileUrl}}]]></url>
+                <thumb type="1"><![CDATA[{{.ThumbUrl}}]]></thumb>
+            </media>
+            {{end}}
+        </mediaList>
     </ContentObject>
     <actionInfo>
         <appMsg>
@@ -115,7 +119,7 @@ const SnsUrl = `
     <id>0</id>
     <username><![CDATA[]]></username>
     <createTime>1604548459</createTime>
-    <contentDesc><![CDATA[${contentDesc}]]></contentDesc>
+    <contentDesc><![CDATA[{{.Content}}]]></contentDesc>
     <contentDescShowType>0</contentDescShowType>
     <contentDescScene>4</contentDescScene>
     <private>0</private>
@@ -135,9 +139,9 @@ const SnsUrl = `
     <statExtStr></statExtStr>
     <ContentObject>
         <contentStyle>3</contentStyle>
-        <title><![CDATA[${title}]]></title>
-        <description><![CDATA[${description}]]></description>
-        <contentUrl><![CDATA[${contentUrl}]]></contentUrl>
+        <title><![CDATA[{{.Title}}]]></title>
+        <description><![CDATA[{{.Description}}]]></description>
+        <contentUrl><![CDATA[{{.ContentUrl}}]]></contentUrl>
         <mediaList>
             <media>
                 <id>0</id>
@@ -147,10 +151,10 @@ const SnsUrl = `
                 <private>0</private>
                 <userData></userData>
                 <subType>0</subType>
-                <videoSize width=\"0\" height=\"0\"></videoSize>
-                <url type=\"0\" md5=\"\" videomd5=\"\"><![CDATA[${thumbUrl}]]></url>
-                <lowBandUrl type=\"0\"><![CDATA[${thumbUrl}]]></lowBandUrl>
-                <thumb type=\"1\"><![CDATA[${thumbUrl}]]></thumb>
+                <videoSize width="0" height="0"></videoSize>
+                <url type="0" md5="" videomd5=""><![CDATA[{{.ThumbUrl}}]]></url>
+                <lowBandUrl type="0"><![CDATA[{{.ThumbUrl}}]]></lowBandUrl>
+                <thumb type="1"><![CDATA[{{.ThumbUrl}}]]></thumb>
             </media>
         </mediaList>
         <mmreadershare>
@@ -175,7 +179,7 @@ const SnsUrl = `
             <messageAction></messageAction>
         </appMsg>
     </actionInfo>
-    <location poiClassifyId=\"\" poiName=\"\" poiAddress=\"\" poiClassifyType=\"0\" city=\"\"></location>
+    <location poiClassifyId="" poiName="" poiAddress="" poiClassifyType="0" city=""></location>
     <publicUserName></publicUserName>
     <streamvideo>
         <streamvideourl></streamvideourl>
@@ -190,7 +194,7 @@ const SnsVideo = `
     <id>0</id>
     <username><![CDATA[]]></username>
     <createTime>1603346167</createTime>
-    <contentDesc><![CDATA[${content}]]></contentDesc>
+    <contentDesc><![CDATA[{{.Content}}]]></contentDesc>
     <contentDescShowType>0</contentDescShowType>
     <contentDescScene>0</contentDescScene>
     <private>0</private>
@@ -213,26 +217,28 @@ const SnsVideo = `
         <title></title>
         <description>Sight</description>
         <mediaList>
+            {{range .VideoInfos}}
             <media>
                 <id>0</id>
                 <type>6</type>
                 <title></title>
-                <description><![CDATA[${content}]]></description>
+                <description><![CDATA[{{.Content}}]]></description>
                 <private>0</private>
                 <userData></userData>
                 <subType>0</subType>
-                <videoSize width=\"720\" height=\"1280\"/>
-                    <url type=\"1\">
-                        <![CDATA[${videoInfo.fileUrl}]]>
-                    </url>
-                    <thumb type=\"1\"><![CDATA[${videoInfo.thumbUrl}]]></thumb>
-                    <size width=\"720.000000\" height=\"1280.000000\" totalSize=\"1649264\"/>
-                        <videoDuration>
-                            <#if videoInfo.videoDuration?? >
-                                <![CDATA[${videoInfo.videoDuration}]]>
-                            </#if>
-                        </videoDuration>
+                <videoSize width="720" height="1280"/>
+                <url type="1">
+                    <![CDATA[{{.FileUrl}}]]>
+                </url>
+                <thumb type="1"><![CDATA[{{.ThumbUrl}}]]></thumb>
+                <size width="720.000000" height="1280.000000" totalSize="1649264"/>
+                <videoDuration>
+                    {{if .VideoDuration}}
+                    <![CDATA[{{.VideoDuration}}]]>
+                    {{end}}
+                </videoDuration>
             </media>
+            {{end}}
         </mediaList>
     </ContentObject>
 </TimelineObject>

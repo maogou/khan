@@ -5,7 +5,6 @@ import (
 	"html/template"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
-	"smallBot/api/khan/v1/transform/sns/tpl"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
@@ -21,7 +20,7 @@ func (s *SnsHandler) SendText(ctx *gin.Context) {
 
 	var (
 		req          v1.SnsSendTextRequest
-		textTimeline tpl.TextTimelineObject
+		textTimeline sns.TextTimelineObject
 		buf          bytes.Buffer
 	)
 

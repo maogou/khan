@@ -158,3 +158,14 @@ func (k *Khan) SnsSendText(ctx context.Context, req sns.SnsSendTextRequest) (*sn
 
 	return resp.Result().(*sns.SnsSendTextResponse), nil
 }
+
+func (k *Khan) SnsSendImage(ctx context.Context, req sns.SnsSendImageRequest) (*sns.SnsSendImageResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendImageResponse{}).Post(snsSendImage)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSendImage方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSendImageResponse), nil
+}
