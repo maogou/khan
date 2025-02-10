@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"smallBot/internal/pkg/license"
 	"strconv"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 
@@ -32,9 +33,11 @@ func Verify() *cli.Command {
 				return err
 			}
 
-			pub := filepath.Base(path)
+			pKey := filepath.Base(path)
+			pKey = strings.ReplaceAll(pKey, "37", "+")
+			pKey = strings.ReplaceAll(pKey, "73", "/")
 
-			lic, err := license.Parse(pub, path)
+			lic, err := license.Parse(pKey, path)
 
 			if err != nil {
 				log.Error().Err(err).Msg("授权许可证验证失败")
