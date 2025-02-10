@@ -2,7 +2,6 @@ package internal
 
 import (
 	"os"
-	"path/filepath"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
 	"smallBot/internal/command/login"
@@ -40,7 +39,7 @@ var (
 func init() {
 	zerolog.TimeFieldFormat = time.RFC3339Nano
 	zerolog.CallerMarshalFunc = func(pc uintptr, file string, line int) string {
-		return filepath.Base(file) + ":" + strconv.Itoa(line)
+		return file + ":" + strconv.Itoa(line)
 	}
 	log.Logger = log.With().Caller().Logger().Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "2006-01-02 15:04:05.000"})
 }
