@@ -1,54 +1,33 @@
 package demo
 
 import (
-	"smallBot/api/khan/v1/transform/message"
-	"smallBot/internal/config"
-	"smallBot/internal/sdk/khan"
-	"time"
-
 	"github.com/rs/zerolog/log"
-
-	"github.com/go-playground/validator/v10"
-	"github.com/go-resty/resty/v2"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/urfave/cli/v2"
 )
 
-func Demo() *cli.Command {
+func Demo(sdk *khan.Khan) *cli.Command {
 	return &cli.Command{
 		Name:  "demo",
 		Usage: "测试khan的接口",
 
 		Action: func(cCtx *cli.Context) error {
-			return do(cCtx)
+			return do(cCtx, sdk)
 		},
 	}
 }
 
-func do(cCtx *cli.Context) error {
-	conf := config.MustLoadConfig("")
-	client := resty.New()
-	validate := validator.New()
-	sdk := khan.NewKhanSdk(&conf, client, validate)
+func do(cCtx *cli.Context, sdk *khan.Khan) error {
+	log.Info().Msg("i am demo!")
 
-	resp, err := sdk.PostText(
-		cCtx.Context, message.PostTextRequest{
-			AppId: "wx_Ez4I3ZO1gKOG7h0IgfB8D",
-			ToWxidList: []message.ToWxid{
-				{
-					Content: "当前时间为:" + time.Now().Format(time.DateTime),
-					ToWxid:  "xingmaogou",
-					MsgType: 1,
-				},
-			},
-		},
-	)
+	_, err := sdk.Tpl().ReadFile("tpl/text.tpl")
 
 	if err != nil {
-		log.Info().Any("err", err).Msg("err")
+		log.Error().Err(err).Msg("读取模板失败")
 		return err
 	}
 
-	log.Info().Any("resp", resp).Msg("resp")
+	log.Info().Msg("读取模板成功")
 	return nil
 }

@@ -1,0 +1,43 @@
+<TimelineObject>
+    <id></id>
+    <username></username>
+    <createTime></createTime>
+    <contentDesc><![CDATA[${content}]]></contentDesc>
+    <contentDescShowType>0</contentDescShowType>
+    <contentDescScene>3</contentDescScene>
+    <private>0</private>
+    <sightFolded>0</sightFolded>
+    <showFlag>0</showFlag>
+    <appInfo>
+        <id></id>
+        <version></version>
+        <appName></appName>
+        <installUrl></installUrl>
+        <fromUrl></fromUrl>
+        <isForceUpdate>0</isForceUpdate>
+        <isHidden>0</isHidden>
+    </appInfo>
+    <sourceUserName></sourceUserName>
+    <sourceNickName></sourceNickName>
+    <statisticsData></statisticsData>
+    <statExtStr></statExtStr>
+    <ContentObject>
+        <contentStyle>2</contentStyle>
+        <title></title>
+        <description></description>
+        <mediaList></mediaList>
+        <contentUrl></contentUrl>
+    </ContentObject>
+    <actionInfo>
+        <appMsg>
+            <messageAction></messageAction>
+        </appMsg>
+    </actionInfo>
+    <location poiClassifyId=\"\" poiName=\"\" poiAddress=\"\" poiClassifyType=\"0\" city=\"\"></location>
+    <publicUserName></publicUserName>
+    <streamvideo>
+        <streamvideourl></streamvideourl>
+        <streamvideothumburl></streamvideothumburl>
+        <streamvideoweburl></streamvideoweburl>
+    </streamvideo>
+</TimelineObject>

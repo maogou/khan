@@ -1,0 +1,72 @@
+<TimelineObject>
+    <id>0</id>
+    <username><![CDATA[]]></username>
+    <createTime>1604548459</createTime>
+    <contentDesc><![CDATA[${contentDesc}]]></contentDesc>
+    <contentDescShowType>0</contentDescShowType>
+    <contentDescScene>4</contentDescScene>
+    <private>0</private>
+    <sightFolded>0</sightFolded>
+    <showFlag>0</showFlag>
+    <appInfo>
+        <id></id>
+        <version></version>
+        <appName></appName>
+        <installUrl></installUrl>
+        <fromUrl></fromUrl>
+        <isForceUpdate>0</isForceUpdate>
+    </appInfo>
+    <sourceUserName></sourceUserName>
+    <sourceNickName></sourceNickName>
+    <statisticsData></statisticsData>
+    <statExtStr></statExtStr>
+    <ContentObject>
+        <contentStyle>3</contentStyle>
+        <title><![CDATA[${title}]]></title>
+        <description><![CDATA[${description}]]></description>
+        <contentUrl><![CDATA[${contentUrl}]]></contentUrl>
+        <mediaList>
+            <media>
+                <id>0</id>
+                <type>2</type>
+                <title></title>
+                <description></description>
+                <private>0</private>
+                <userData></userData>
+                <subType>0</subType>
+                <videoSize width=\"0\" height=\"0\"></videoSize>
+                <url type=\"0\" md5=\"\" videomd5=\"\"><![CDATA[${thumbUrl}]]></url>
+                <lowBandUrl type=\"0\"><![CDATA[${thumbUrl}]]></lowBandUrl>
+                <thumb type=\"1\"><![CDATA[${thumbUrl}]]></thumb>
+            </media>
+        </mediaList>
+        <mmreadershare>
+            <itemshowtype>0</itemshowtype>
+            <nativepage>0</nativepage>
+            <digest>
+                <![CDATA[]]>
+            </digest>
+            <cover>
+                <![CDATA[]]>
+            </cover>
+            <pubtime>0</pubtime>
+            <duration>0</duration>
+            <width>0</width>
+            <height>0</height>
+            <vid></vid>
+            <funcflag>0</funcflag>
+        </mmreadershare>
+    </ContentObject>
+    <actionInfo>
+        <appMsg>
+            <messageAction></messageAction>
+        </appMsg>
+    </actionInfo>
+    <location poiClassifyId=\"\" poiName=\"\" poiAddress=\"\" poiClassifyType=\"0\" city=\"\"></location>
+    <publicUserName></publicUserName>
+    <streamvideo>
+        <streamvideourl></streamvideourl>
+        <streamvideothumburl></streamvideothumburl>
+        <streamvideoweburl></streamvideoweburl>
+    </streamvideo>
+</TimelineObject>

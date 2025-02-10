@@ -1,6 +1,7 @@
 package khan
 
 import (
+	"embed"
 	"smallBot/internal/config"
 	"time"
 
@@ -16,9 +17,10 @@ type Khan struct {
 	uuid     string
 	nKey     string
 	validate *validator.Validate
+	tpl      embed.FS
 }
 
-func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate) *Khan {
+func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate, tpl embed.FS) *Khan {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
 	client.BaseURL = conf.Sdk.Pact
 
@@ -29,6 +31,7 @@ func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.V
 		appId:    conf.Sdk.AppId,
 		uuid:     conf.Sdk.UuId,
 		validate: validate,
+		tpl:      tpl,
 	}
 }
 
@@ -79,4 +82,8 @@ func (k *Khan) Client() *resty.Client {
 
 func (k *Khan) Validate() *validator.Validate {
 	return k.validate
+}
+
+func (k *Khan) Tpl() embed.FS {
+	return k.tpl
 }

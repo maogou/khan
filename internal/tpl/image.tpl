@@ -1,0 +1,61 @@
+<TimelineObject>
+    <id>0</id>
+    <username></username>
+    <createTime>1603345160</createTime>
+    <contentDesc><![CDATA[${content}]]></contentDesc>
+    <contentDescShowType>0</contentDescShowType>
+    <contentDescScene>3</contentDescScene>
+    <private>0</private>
+    <sightFolded>0</sightFolded>
+    <showFlag>0</showFlag>
+    <contentattr><![CDATA[0]]></contentattr>
+    <sourceUserName></sourceUserName>
+    <sourceNickName></sourceNickName>
+    <statisticsData></statisticsData>
+    <weappInfo>
+        <appUserName></appUserName>
+        <pagePath></pagePath>
+        <version><![CDATA[0]]></version>
+        <isHidden>0</isHidden>
+        <debugMode><![CDATA[0]]></debugMode>
+        <shareActionId></shareActionId>
+        <isGame><![CDATA[0]]></isGame>
+        <messageExtraData></messageExtraData>
+        <subType><![CDATA[0]]></subType>
+        <preloadResources></preloadResources>
+    </weappInfo>
+    <ContentObject>
+        <contentStyle><![CDATA[1]]></contentStyle>
+        <contentSubStyle><![CDATA[0]]></contentSubStyle>
+        <title></title>
+        <description></description>
+        <contentUrl></contentUrl>
+        <mediaList><#list imgInfos as img>
+                <media>
+                <id>0</id>
+                <type>2</type>
+                <title></title>
+                <private>0</private>
+                <userData></userData>
+                <subType>0</subType>
+                <videoSize width="500" height="889"/>
+                <url type="1" <#if img.fileMd5?? > md5="${img.fileMd5}"</#if>><![CDATA[${img.fileUrl}]]></url>
+                <thumb type="1"><![CDATA[${img.thumbUrl}]]></thumb></media></#list></mediaList>
+    </ContentObject>
+    <actionInfo>
+        <appMsg>
+            <mediaTagName></mediaTagName>
+            <messageExt></messageExt>
+            <messageAction></messageAction>
+        </appMsg>
+    </actionInfo>
+    <appInfo>
+        <id></id>
+    </appInfo>
+    <publicUserName></publicUserName>
+    <streamvideo>
+        <streamvideourl></streamvideourl>
+        <streamvideothumburl></streamvideothumburl>
+        <streamvideoweburl></streamvideoweburl>
+    </streamvideo>
+</TimelineObject>
