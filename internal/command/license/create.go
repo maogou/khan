@@ -51,7 +51,6 @@ func Create() *cli.Command {
 
 func do(cCtx *cli.Context) error {
 	out := cCtx.String("appid")
-	days := cCtx.Int("day")
 
 	l := license.License{
 		Iss: "khan",
@@ -59,7 +58,7 @@ func do(cCtx *cli.Context) error {
 		Sub: out,
 		Lim: 1,
 		Iat: time.Now().Local(),
-		Exp: time.Now().Local().Add(time.Hour * 24 * time.Duration(days)),
+		Exp: time.Now().Local().Add(time.Hour * 24 * 30),
 	}
 
 	filePath, err := filepath.Abs(licensePath)
