@@ -4,6 +4,8 @@ var (
 	Ok                  = &ErrNo{Code: 0, Message: "OK"}
 	PageNotFoundError   = &ErrNo{Code: 404, Message: "访问的页面不存在"}
 	MethodNotAllowError = &ErrNo{Code: 405, Message: "访问的路由请求方式错误"}
+	RedisGetDataError   = &ErrNo{Code: 405, Message: "redis获取数据失败"}
+	RedisNoDataError    = &ErrNo{Code: 406, Message: "redis获取数据为空"}
 	GetFileBase64Error  = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}

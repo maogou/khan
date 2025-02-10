@@ -16,10 +16,11 @@ const (
 )
 
 type Config struct {
-	Mode    string `yaml:"mode" validate:"required,oneof=debug test release"`
-	Port    int    `yaml:"port" validate:"required"`
-	TimeOut int    `yaml:"timeout" validate:"required,min=2"`
-	Sdk     *Sdk   `yaml:"sdk" validate:"required"`
+	Mode    string     `yaml:"mode" validate:"required,oneof=debug test release"`
+	Port    int        `yaml:"port" validate:"required"`
+	TimeOut int        `yaml:"timeout" validate:"required,min=2"`
+	Sdk     *Sdk       `yaml:"sdk" validate:"required"`
+	Redis   *RdbConfig `yaml:"redis" validate:"required"`
 }
 
 type Sdk struct {
@@ -32,6 +33,12 @@ type Sdk struct {
 	AppId    string        `yaml:"appid"`
 	UuId     string        `yaml:"uuid"`
 	License  string        `yaml:"license" validate:"required"`
+}
+
+type RdbConfig struct {
+	Addr     string `yaml:"addr" validate:"required"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db" validate:"max=15"`
 }
 
 func MustLoadConfig(cfgFile string) Config {

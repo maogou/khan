@@ -3,6 +3,12 @@ mode: debug
 port: 8073
 timeout: 5
 
+#redis配置
+redis:
+  addr: 127.0.0.1:6379
+  password: ""
+  db: 0
+
 # sdk 配置
 sdk:
   collect: http://127.0.0.1:8073/api/v1/collect
@@ -13,4 +19,4 @@ sdk:
   token: "9ec822b31bd4492a9b311bb1ba854f37"
   appId: ""
   uuid: ""
-  license: "./config/vMbki5wjTSUkG9CNeV0uYdZjQChCDvdSCKKW6VbPMEE="
+  license: "./config/cgUUWmqPBgviMCZK8KQ0baqRw2sv8kWlqGEiaEM73g3s="

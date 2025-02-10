@@ -5,12 +5,14 @@ import (
 	"os"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
+	"smallBot/internal/command/license"
 	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
 	"smallBot/internal/command/version"
 	"smallBot/internal/config"
 	"smallBot/internal/constant"
+	"smallBot/internal/pkg/db"
 	"smallBot/internal/sdk/khan"
 	"strconv"
 	"time"
@@ -49,7 +51,8 @@ func init() {
 
 func NewKhanCommand() *cli.App {
 	conf = config.MustLoadConfig("")
-	sdk = khan.NewKhanSdk(&conf, client, validate, tpl)
+	rdb := db.MustInitRedis(&conf)
+	sdk = khan.NewKhanSdk(&conf, client, validate, rdb, tpl)
 
 	robot := &cli.App{
 		Name:        "khan",
@@ -63,7 +66,7 @@ func NewKhanCommand() *cli.App {
 			auth.Verify(),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			//license.Create(),
+			license.Create(),
 			demo.Demo(sdk),
 		},
 	}
