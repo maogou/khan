@@ -82,10 +82,10 @@ type SnsForwardRequest struct {
 }
 
 type SnsForwardResponse struct {
-	Id         string `json:"id"`
-	UserName   string `json:"userName"`
-	NickName   string `json:"nickName"`
-	CreateTime int64  `json:"createTime"`
+	Id         float64 `json:"id"`
+	UserName   string  `json:"userName"`
+	NickName   string  `json:"nickName"`
+	CreateTime int64   `json:"createTime"`
 }
 
 type SnsPageItem struct {
