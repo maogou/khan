@@ -11,8 +11,8 @@ import (
 func Upgrade() *cli.Command {
 	cmd := &cli.Command{
 		Name:        "upgrade",
-		Usage:       "升级bolt到最新版本",
-		Description: "使用示例: bolt upgrade",
+		Usage:       "升级khan到最新版本",
+		Description: "使用示例: khan upgrade",
 
 		Action: func(cCtx *cli.Context) error {
 			return execute()

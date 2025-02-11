@@ -14,6 +14,7 @@ import (
 	"smallBot/internal/pkg/db"
 	"smallBot/internal/sdk/khan"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-playground/validator/v10"
@@ -41,6 +42,9 @@ var (
 func init() {
 	zerolog.TimeFieldFormat = time.RFC3339Nano
 	zerolog.CallerMarshalFunc = func(pc uintptr, file string, line int) string {
+		if _, after, found := strings.Cut(file, "build"); found {
+			return strings.TrimLeft(after, "../") + ":" + strconv.Itoa(line)
+		}
 		return file + ":" + strconv.Itoa(line)
 	}
 	log.Logger = log.With().Caller().Logger().Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "2006-01-02 15:04:05.000"})
