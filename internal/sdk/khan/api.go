@@ -69,6 +69,7 @@ const (
 	snsStrangerVisibilityEnabled = "/wxsdk/sns/privacyset"
 	snsUploadVideo               = "/wxsdk/sns/uploadvideo"
 	snsSendText                  = "/wxsdk/sns/tweet"
+	snsSendUrl                   = "/wxsdk/sns/tweet"
 	snsSendImage                 = "/wxsdk/sns/tweetimg"
 
 	favorSync   = "/wxsdk/favor/sync"

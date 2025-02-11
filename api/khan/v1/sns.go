@@ -233,3 +233,23 @@ type SnsSendImageResponse struct {
 	NickName   string  `json:"nickName"`
 	CreateTime int64   `json:"createTime"`
 }
+
+type SnsSendUrlRequest struct {
+	AppId        string   `json:"appId" binding:"required"`
+	AllowWxIds   []string `json:"allowWxIds"`
+	AtWxIds      []string `json:"atWxIds"`
+	DisableWxIds []string `json:"disableWxIds"`
+	Content      string   `json:"content"`
+	Description  string   `json:"description" binding:"required"`
+	Title        string   `json:"title" binding:"required"`
+	LinkUrl      string   `json:"linkUrl" binding:"required"`
+	ThumbUrl     string   `json:"thumbUrl" binding:"required"`
+	Privacy      bool     `json:"privacy"`
+}
+
+type SnsSendUrlResponse struct {
+	Id         float64 `json:"id"`
+	UserName   string  `json:"userName"`
+	NickName   string  `json:"nickName"`
+	CreateTime int64   `json:"createTime"`
+}
