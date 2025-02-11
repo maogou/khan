@@ -24,4 +24,5 @@ func initSnsRoute(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v2/api/sns/delSns", snsHandler.Delete)
 	engine.POST("/v2/api/sns/uploadSnsVideo", snsHandler.UploadVideo)
 	engine.POST("/v2/api/sns/sendTextSns", snsHandler.SendText)
+	engine.POST("/v2/api/sns/sendImageSns", snsHandler.SendImage)
 }

@@ -83,4 +83,5 @@ var (
 	SnsDeleteError                    = &ErrNo{Code: 10065, Message: "删除朋友圈失败"}
 	SnsUploadVideoError               = &ErrNo{Code: 10066, Message: "上传视频失败"}
 	SnsSendTextError                  = &ErrNo{Code: 10067, Message: "发送朋友圈文本失败"}
+	SnsSendImageError                 = &ErrNo{Code: 10068, Message: "发送朋友圈图片失败"}
 )

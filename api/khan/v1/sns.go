@@ -217,7 +217,7 @@ type SnsSendImageItem struct {
 	Height   int    `json:"height" binding:"required"`
 }
 
-type SnsSendImageRequst struct {
+type SnsSendImageRequest struct {
 	AppId        string             `json:"appId" binding:"required"`
 	AllowWxIds   []string           `json:"allowWxIds"`
 	AtWxIds      []string           `json:"atWxIds"`
