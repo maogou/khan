@@ -1,5 +1,7 @@
 package v1
 
+import "encoding/xml"
+
 type SnsUploadImgRequest struct {
 	AppId   string   `json:"appId" binding:"required"`
 	ImgUrls []string `json:"imgUrls" binding:"required,max=9"`
@@ -252,4 +254,108 @@ type SnsSendUrlResponse struct {
 	UserName   string  `json:"userName"`
 	NickName   string  `json:"nickName"`
 	CreateTime int64   `json:"createTime"`
+}
+
+type TimelineObject struct {
+	XMLName             xml.Name      `xml:"TimelineObject"`
+	Id                  string        `xml:"id"`
+	Username            string        `xml:"username"`
+	CreateTime          string        `xml:"createTime"`
+	ContentDesc         string        `xml:"contentDesc"`
+	ContentDescShowType string        `xml:"contentDescShowType"`
+	ContentDescScene    string        `xml:"contentDescScene"`
+	Private             string        `xml:"private"`
+	SightFolded         string        `xml:"sightFolded"`
+	ShowFlag            string        `xml:"showFlag"`
+	AppInfo             AppInfo       `xml:"appInfo"`
+	SourceUserName      string        `xml:"sourceUserName"`
+	SourceNickName      string        `xml:"sourceNickName"`
+	StatisticsData      string        `xml:"statisticsData"`
+	StatExtStr          string        `xml:"statExtStr"`
+	ContentObject       ContentObject `xml:"ContentObject"`
+	ActionInfo          ActionInfo    `xml:"actionInfo"`
+	Location            Location      `xml:"location"`
+	PublicUserName      string        `xml:"publicUserName"`
+	Streamvideo         Streamvideo   `xml:"streamvideo"`
+}
+
+type AppInfo struct {
+	Id            string `xml:"id"`
+	Version       string `xml:"version"`
+	AppName       string `xml:"appName"`
+	InstallUrl    string `xml:"installUrl"`
+	FromUrl       string `xml:"fromUrl"`
+	IsForceUpdate string `xml:"isForceUpdate"`
+	IsHidden      string `xml:"isHidden"`
+}
+
+type ContentObject struct {
+	ContentStyle int       `xml:"contentStyle"`
+	Title        string    `xml:"title"`
+	Description  string    `xml:"description"`
+	MediaList    MediaList `xml:"mediaList"`
+	ContentUrl   string    `xml:"contentUrl"`
+}
+
+type MediaList struct {
+	Media []Media `xml:"media"`
+}
+
+type Media struct {
+	Id          string    `xml:"id"`
+	Type        string    `xml:"type"`
+	Title       string    `xml:"title"`
+	Description string    `xml:"description"`
+	Private     string    `xml:"private"`
+	UserData    string    `xml:"userData"`
+	SubType     string    `xml:"subType"`
+	VideoSize   VideoSize `xml:"videoSize"`
+	Url         Url       `xml:"url"`
+	Thumb       Thumb     `xml:"thumb"`
+	Size        Size      `xml:"size"`
+}
+
+type VideoSize struct {
+	Width  string `xml:"width,attr"`
+	Height string `xml:"height,attr"`
+}
+
+type Url struct {
+	Type     string `xml:"type,attr"`
+	Md5      string `xml:"md5,attr"`
+	Videomd5 string `xml:"videomd5,attr"`
+	Text     string `xml:",chardata"`
+}
+
+type Thumb struct {
+	Type string `xml:"type,attr"`
+	Text string `xml:",chardata"`
+}
+
+type Size struct {
+	Width     string `xml:"width,attr"`
+	Height    string `xml:"height,attr"`
+	TotalSize string `xml:"totalSize,attr"`
+}
+
+type ActionInfo struct {
+	AppMsg AppMsg `xml:"appMsg"`
+}
+
+type AppMsg struct {
+	MessageAction string `xml:"messageAction"`
+}
+
+type Location struct {
+	PoiClassifyId   string `xml:"poiClassifyId,attr"`
+	PoiName         string `xml:"poiName,attr"`
+	PoiAddress      string `xml:"poiAddress,attr"`
+	PoiClassifyType string `xml:"poiClassifyType,attr"`
+	City            string `xml:"city,attr"`
+}
+
+type Streamvideo struct {
+	Streamvideourl      string `xml:"streamvideourl"`
+	Streamvideothumburl string `xml:"streamvideothumburl"`
+	Streamvideoweburl   string `xml:"streamvideoweburl"`
 }

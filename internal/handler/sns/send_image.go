@@ -2,6 +2,7 @@ package sns
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/pkg/errno"
@@ -44,9 +45,9 @@ func (s *SnsHandler) SendImage(ctx *gin.Context) {
 			AppId:        req.AppId,
 			Content:      req.Content,
 			Media:        transformImage,
-			AtUser:       req.AtWxIds,
-			AllowUser:    req.AllowWxIds,
-			DisableUser:  req.DisableWxIds,
+			AtUser:       lo.Ternary(len(req.AtWxIds) > 0, req.AtWxIds, make([]string, 0)),
+			AllowUser:    lo.Ternary(len(req.AllowWxIds) > 0, req.AllowWxIds, make([]string, 0)),
+			DisableUser:  lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
 			AllowTagId:   make([]string, 0),
 			DisableTagId: make([]string, 0),
 			Private:      req.Privacy,
