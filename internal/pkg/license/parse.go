@@ -9,6 +9,7 @@ func Parse(pub, file string) (*License, error) {
 	var (
 		publicKey ed25519.PublicKey
 		err       error
+		pl        *License
 	)
 	if _, err = os.Stat(pub); err != nil {
 		publicKey, err = ReadPublicKeyFromStr(pub)
@@ -20,7 +21,12 @@ func Parse(pub, file string) (*License, error) {
 		return nil, err
 	}
 
-	pl, err := DecodeFile(file, publicKey)
+	if _, err = os.Stat(file); err != nil {
+		pl, err = DecodeStr(file, publicKey)
+	} else {
+		pl, err = DecodeFile(file, publicKey)
+	}
+
 	if err != nil {
 		return nil, err
 	}

@@ -1,10 +1,13 @@
 package auth
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/config"
 	"smallBot/internal/constant"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/license"
 	"strconv"
 	"strings"
@@ -34,6 +37,7 @@ func Verify(conf config.Config) *cli.Command {
 			}
 
 			pKey := filepath.Base(path)
+
 			pKey = strings.ReplaceAll(pKey, constant.License37, "+")
 			pKey = strings.ReplaceAll(pKey, constant.License73, "/")
 			pKey = strings.ReplaceAll(pKey, constant.License919, "=")
@@ -61,6 +65,29 @@ func Verify(conf config.Config) *cli.Command {
 }
 
 func printLicense(license *license.License) error {
+
+	var (
+		p v1.Permission
+	)
+	if err := json.Unmarshal(license.Dat, &p); err != nil {
+		log.Error().Err(err).Msg("json解析授权许可证失败")
+		return err
+	}
+
+	names := help.TransferPermissionToName(p.Permission)
+
+	nb, err := json.Marshal(names)
+	if err != nil {
+		log.Error().Err(err).Msg("json解析授权许可证(permission-名称)失败")
+		return err
+	}
+
+	wb, err := json.Marshal(p.Wid)
+	if err != nil {
+		log.Error().Err(err).Msg("json解析授权许可证(wid)失败")
+		return err
+	}
+
 	return pterm.DefaultTable.WithHasHeader().
 		WithBoxed().
 		WithData(
@@ -71,6 +98,8 @@ func printLicense(license *license.License) error {
 				{"共享数量", strconv.FormatInt(int64(license.Lim), 10)},
 				{"签发时间", license.Iat.Format("2006-01-02 15:04:05")},
 				{"过期时间", license.Exp.Format("2006-01-02 15:04:05")},
+				{"可用权限", string(nb)},
+				{"共享微信", string(wb)},
 			},
 		).Render()
 }

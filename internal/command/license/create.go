@@ -3,14 +3,16 @@ package license
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/samber/lo"
 	"os"
 	"path/filepath"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/license"
 	"strings"
 	"time"
+
+	"github.com/samber/lo"
 
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
@@ -18,15 +20,17 @@ import (
 
 const licensePath = "licenses"
 
+var p v1.Permission
+
 func Create() *cli.Command {
 	return &cli.Command{
 		Name:  "create",
 		Usage: "生成许可证",
 		Flags: []cli.Flag{
-			&cli.StringFlag{
+			&cli.StringSliceFlag{
 				Name:     "appid",
-				Value:    "",
-				Usage:    "应用的appid",
+				Value:    cli.NewStringSlice(),
+				Usage:    "应用的appid --appid=id1 --appid=id2",
 				Required: true,
 			},
 			&cli.StringFlag{
@@ -35,14 +39,14 @@ func Create() *cli.Command {
 				Usage:    "登陆的账号",
 				Required: true,
 			},
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:  "day",
-				Value: "7",
+				Value: 7,
 				Usage: "许可证的可用天数",
 			},
-			&cli.StringFlag{
+			&cli.IntFlag{
 				Name:  "limit",
-				Value: "1",
+				Value: 1,
 				Usage: "许可证的共享人数",
 			},
 			&cli.BoolFlag{
@@ -58,20 +62,26 @@ func Create() *cli.Command {
 }
 
 func do(cCtx *cli.Context) error {
-	out := cCtx.String("appid")
+	appIds := cCtx.StringSlice("appid")
+
+	firstAppId := appIds[0]
 	current := time.Now().Local()
 	vip := cCtx.Bool("vip")
 
 	permission := lo.Ternary(vip, help.AccessVipPermission(), help.AccessPermission())
 
-	pb, _ := help.TransferPermissionToByte(permission)
+	p.Permission = permission
+	p.Wid = appIds
+
+	pb, _ := json.Marshal(&p)
 
 	days := lo.Ternary(cCtx.Int("day") > 0, cCtx.Int("day"), 7)
+	limit := lo.Ternary(cCtx.Int("limit") > 0, cCtx.Int("limit"), 1)
 	l := license.License{
 		Iss: "khan",
 		Cus: cCtx.String("account"),
-		Sub: out,
-		Lim: 1,
+		Sub: firstAppId,
+		Lim: limit,
 		Iat: current,
 		Exp: current.AddDate(0, 0, days),
 		Dat: json.RawMessage(pb),
@@ -83,31 +93,32 @@ func do(cCtx *cli.Context) error {
 		return err
 	}
 
-	if err = l.KeyGen(filePath, out); err != nil {
+	if err = l.KeyGen(filePath, firstAppId); err != nil {
 		log.Error().Err(err).Msg("生成失败")
 		return err
 	}
 
 	log.Info().Msg("生成秘钥成功")
 
-	pKByte, err := os.ReadFile(filePath + "/" + out + ".pub")
+	pKByte, err := os.ReadFile(filePath + "/" + firstAppId + ".pub")
 	if err != nil {
 		log.Error().Err(err).Msg("获取公钥失败")
 		return err
 	}
 
-	pKey := strings.ReplaceAll(string(pKByte), "+", constant.License37)
+	pKey := string(pKByte)
+	pKey = strings.ReplaceAll(pKey, "+", constant.License37)
 	pKey = strings.ReplaceAll(pKey, "/", constant.License73)
 	pKey = strings.ReplaceAll(pKey, "=", constant.License919)
 
-	if err = l.Create(filePath+"/"+out+".pri", filePath+"/"+pKey); err != nil {
+	if err = l.Create(filePath+"/"+firstAppId+".pri", filePath+"/"+pKey); err != nil {
 		log.Error().Err(err).Msg("创建许可证失败")
 		return err
 	}
 
 	log.Info().Msg("创建许可证成功")
 
-	nl, err := l.Verify(filePath+"/"+out+".pub", filePath+"/"+pKey)
+	nl, err := l.Verify(filePath+"/"+firstAppId+".pub", filePath+"/"+pKey)
 
 	if err != nil {
 		log.Error().Err(err).Msg("验证失败")

@@ -44,9 +44,11 @@ func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
 
 			pKey := filepath.Base(conf.Sdk.License)
 			oPKey := pKey
-			pKey = strings.ReplaceAll(pKey, "37", "+")
-			pKey = strings.ReplaceAll(pKey, "73", "/")
-			pKey = strings.ReplaceAll(pKey, "919", "=")
+			pKey = strings.NewReplacer(
+				constant.License37, "+",
+				constant.License73, "/",
+				constant.License919, "=",
+			).Replace(pKey)
 
 			nLic, err := license.Parse(pKey, conf.Sdk.License)
 			if err != nil {
