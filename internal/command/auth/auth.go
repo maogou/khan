@@ -3,6 +3,8 @@ package auth
 import (
 	"os"
 	"path/filepath"
+	"smallBot/internal/config"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"strconv"
 	"strings"
@@ -14,28 +16,27 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func Verify() *cli.Command {
+func Verify(conf config.Config) *cli.Command {
 	return &cli.Command{
 		Name:  "verify",
 		Usage: "授权许可证验证",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:     "path",
-				Value:    "",
-				Usage:    "颁发的软件许可证绝对路径",
-				Required: true,
+				Name:  "path",
+				Value: conf.Sdk.License,
+				Usage: "颁发的软件许可证绝对路径",
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
 			path := cCtx.String("path")
-
-			if _, err := os.Stat(path); err != nil {
+			if _, err := os.Stat(path); len(path) > 0 && err != nil {
 				return err
 			}
 
 			pKey := filepath.Base(path)
-			pKey = strings.ReplaceAll(pKey, "37", "+")
-			pKey = strings.ReplaceAll(pKey, "73", "/")
+			pKey = strings.ReplaceAll(pKey, constant.License37, "+")
+			pKey = strings.ReplaceAll(pKey, constant.License73, "/")
+			pKey = strings.ReplaceAll(pKey, constant.License919, "=")
 
 			lic, err := license.Parse(pKey, path)
 

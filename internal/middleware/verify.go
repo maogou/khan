@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"smallBot/internal/config"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/response"
 	"strings"
@@ -23,12 +24,13 @@ func VerifyLicense(conf config.Config) gin.HandlerFunc {
 
 		pKey := filepath.Base(conf.Sdk.License)
 
-		pKey = strings.ReplaceAll(pKey, "37", "+")
-		pKey = strings.ReplaceAll(pKey, "73", "/")
+		pKey = strings.ReplaceAll(pKey, constant.License37, "+")
+		pKey = strings.ReplaceAll(pKey, constant.License73, "/")
+		pKey = strings.ReplaceAll(pKey, constant.License919, "=")
 
 		nLic, err := license.Parse(pKey, conf.Sdk.License)
 		if err != nil {
-			log.Error().Err(err).Msg("许可证校验失败")
+			log.Error().Msg("许可证校验失败")
 			c.Abort()
 			response.SuccessMsg(c, "许可证校验失败")
 			return
@@ -40,6 +42,8 @@ func VerifyLicense(conf config.Config) gin.HandlerFunc {
 			response.SuccessMsg(c, "许可证已过期")
 			return
 		}
+
+		c.Set(constant.License, nLic)
 
 		c.Next()
 	}

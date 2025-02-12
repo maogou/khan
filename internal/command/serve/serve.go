@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"smallBot/internal/config"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/sdk/khan"
 	"smallBot/internal/task"
@@ -42,12 +43,14 @@ func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
 			}
 
 			pKey := filepath.Base(conf.Sdk.License)
+			oPKey := pKey
 			pKey = strings.ReplaceAll(pKey, "37", "+")
 			pKey = strings.ReplaceAll(pKey, "73", "/")
+			pKey = strings.ReplaceAll(pKey, "919", "=")
 
 			nLic, err := license.Parse(pKey, conf.Sdk.License)
 			if err != nil {
-				log.Error().Err(err).Msg("许可证校验失败")
+				log.Error().Msg("许可证校验失败")
 				return err
 			}
 
@@ -57,6 +60,18 @@ func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
 			}
 
 			lic = nLic
+
+			kl, _ := os.ReadFile(conf.Sdk.License)
+
+			if err = sdk.Rdb().Set(cCtx.Context, constant.License, string(kl), 0).Err(); err != nil {
+				log.Error().Msg("redis设置授权许可证失败")
+				return err
+			}
+
+			if err = sdk.Rdb().Set(cCtx.Context, constant.LicenseKey, oPKey, 0).Err(); err != nil {
+				log.Error().Msg("redis设置授权许可证key失败")
+				return err
+			}
 
 			return nil
 		},

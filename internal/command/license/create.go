@@ -3,8 +3,11 @@ package license
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/samber/lo"
 	"os"
 	"path/filepath"
+	"smallBot/internal/constant"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/license"
 	"strings"
 	"time"
@@ -42,6 +45,11 @@ func Create() *cli.Command {
 				Value: "1",
 				Usage: "许可证的共享人数",
 			},
+			&cli.BoolFlag{
+				Name:  "vip",
+				Value: false,
+				Usage: "vip用户享受高级功能",
+			},
 		},
 		Action: func(cCtx *cli.Context) error {
 			return do(cCtx)
@@ -51,14 +59,22 @@ func Create() *cli.Command {
 
 func do(cCtx *cli.Context) error {
 	out := cCtx.String("appid")
+	current := time.Now().Local()
+	vip := cCtx.Bool("vip")
 
+	permission := lo.Ternary(vip, help.AccessVipPermission(), help.AccessPermission())
+
+	pb, _ := help.TransferPermissionToByte(permission)
+
+	days := lo.Ternary(cCtx.Int("day") > 0, cCtx.Int("day"), 7)
 	l := license.License{
 		Iss: "khan",
 		Cus: cCtx.String("account"),
 		Sub: out,
 		Lim: 1,
-		Iat: time.Now().Local(),
-		Exp: time.Now().Local().Add(time.Hour * 24 * 30),
+		Iat: current,
+		Exp: current.AddDate(0, 0, days),
+		Dat: json.RawMessage(pb),
 	}
 
 	filePath, err := filepath.Abs(licensePath)
@@ -80,8 +96,9 @@ func do(cCtx *cli.Context) error {
 		return err
 	}
 
-	pKey := strings.ReplaceAll(string(pKByte), "+", "37")
-	pKey = strings.ReplaceAll(pKey, "/", "73")
+	pKey := strings.ReplaceAll(string(pKByte), "+", constant.License37)
+	pKey = strings.ReplaceAll(pKey, "/", constant.License73)
+	pKey = strings.ReplaceAll(pKey, "=", constant.License919)
 
 	if err = l.Create(filePath+"/"+out+".pri", filePath+"/"+pKey); err != nil {
 		log.Error().Err(err).Msg("创建许可证失败")

@@ -5,7 +5,6 @@ const (
 	QID         = "qid"
 	ZEROLOG     = "zerolog"
 	XID         = "X-Request-Id"
-	PublicKey   = "DEPGPS8dGpmdVJsVzMe8Jrt6joMn85dHDz14NgmjM0E="
 	GithubRepo  = "github.com/maogou/vRobot@latest"
 	GO111MODULE = "on"
 	GOPROXY     = "https://goproxy.cn/,direct"
@@ -21,4 +20,10 @@ const (
 	TypeNameMsgModContacts = "ModContacts"
 	TypeNameMsgFinderMsg   = "FinderMsg"
 	TypeNameMsgOffline     = "Offline"
+
+	License    = "khan_license"
+	LicenseKey = "khan_license_key"
+	License37  = "37"
+	License73  = "73"
+	License919 = "919"
 )
