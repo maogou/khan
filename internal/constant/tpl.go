@@ -217,7 +217,6 @@ const SnsVideo = `
         <title></title>
         <description>Sight</description>
         <mediaList>
-            {{range .VideoInfos}}
             <media>
                 <id>0</id>
                 <type>6</type>
@@ -228,17 +227,16 @@ const SnsVideo = `
                 <subType>0</subType>
                 <videoSize width="720" height="1280"/>
                 <url type="1">
-                    <![CDATA[{{.FileUrl}}]]>
+                    <![CDATA[{{.Video.FileUrl}}]]>
                 </url>
-                <thumb type="1"><![CDATA[{{.ThumbUrl}}]]></thumb>
-                <size width="720.000000" height="1280.000000" totalSize="1649264"/>
+                <thumb type="1"><![CDATA[{{.Video.ThumbUrl}}]]></thumb>
+                <size width="720" height="1280" totalSize="1649264"/>
                 <videoDuration>
-                    {{if .VideoDuration}}
-                    <![CDATA[{{.VideoDuration}}]]>
+                    {{if .Video.VideoDuration}}
+                        <![CDATA[{{.Video.VideoDuration}}]]>
                     {{end}}
                 </videoDuration>
             </media>
-            {{end}}
         </mediaList>
     </ContentObject>
 </TimelineObject>

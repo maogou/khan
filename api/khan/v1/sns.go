@@ -256,6 +256,30 @@ type SnsSendUrlResponse struct {
 	CreateTime int64   `json:"createTime"`
 }
 
+type SnsSendVideoItem struct {
+	FileUrl  string `json:"fileUrl"  binding:"required"`
+	ThumbUrl string `json:"thumbUrl"  binding:"required"`
+	FileMd5  string `json:"fileMd5"  binding:"required"`
+	Length   int    `json:"length"  binding:"required"`
+}
+
+type SnsSendVideoRequest struct {
+	AppId        string           `json:"appId" binding:"required"`
+	AllowWxIds   []string         `json:"allowWxIds"`
+	AtWxIds      []string         `json:"atWxIds"`
+	DisableWxIds []string         `json:"disableWxIds"`
+	Content      string           `json:"content"`
+	VideoInfo    SnsSendVideoItem `json:"videoInfo" binding:"required"`
+	Privacy      bool             `json:"privacy"`
+}
+
+type SnsSendVideoResponse struct {
+	Id         float64 `json:"id"`
+	UserName   string  `json:"userName"`
+	NickName   string  `json:"nickName"`
+	CreateTime int64   `json:"createTime"`
+}
+
 type TimelineObject struct {
 	XMLName             xml.Name      `xml:"TimelineObject"`
 	Id                  string        `xml:"id"`

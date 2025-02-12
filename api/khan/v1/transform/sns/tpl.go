@@ -32,5 +32,5 @@ type SnsVideoTimelineItem struct {
 
 type SnsVideoTimelineObject struct {
 	Content string
-	Items   []SnsVideoTimelineItem
+	Video   SnsVideoTimelineItem
 }

@@ -180,3 +180,14 @@ func (k *Khan) SnsSendUrl(ctx context.Context, req sns.SnsSendUrlRequest) (*sns.
 
 	return resp.Result().(*sns.SnsSendUrlResponse), nil
 }
+
+func (k *Khan) SnsSendVideo(ctx context.Context, req sns.SnsSendVideoRequest) (*sns.SnsSendVideoResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendVideoResponse{}).Post(snsSendVideo)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSendVideo方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSendVideoResponse), nil
+}
