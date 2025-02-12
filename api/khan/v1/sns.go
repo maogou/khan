@@ -280,6 +280,13 @@ type SnsSendVideoResponse struct {
 	CreateTime int64   `json:"createTime"`
 }
 
+type SnsSendExcludeImageResponse struct {
+	Id         float64 `json:"id"`
+	UserName   string  `json:"userName"`
+	NickName   string  `json:"nickName"`
+	CreateTime int64   `json:"createTime"`
+}
+
 type TimelineObject struct {
 	XMLName             xml.Name      `xml:"TimelineObject"`
 	Id                  string        `xml:"id"`

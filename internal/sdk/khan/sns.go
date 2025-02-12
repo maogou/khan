@@ -191,3 +191,14 @@ func (k *Khan) SnsSendVideo(ctx context.Context, req sns.SnsSendVideoRequest) (*
 
 	return resp.Result().(*sns.SnsSendVideoResponse), nil
 }
+
+func (k *Khan) SnsSendExcludeImage(ctx context.Context, req sns.SnsSendExcludeImageRequest) (*sns.SnsSendExcludeImageResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendExcludeImageResponse{}).Post(snsSendExcludeImage)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用snsSendExcludeImage方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*sns.SnsSendExcludeImageResponse), nil
+}

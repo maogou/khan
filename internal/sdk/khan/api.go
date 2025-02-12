@@ -70,6 +70,7 @@ const (
 	snsUploadVideo               = "/wxsdk/sns/uploadvideo"
 	snsSendText                  = "/wxsdk/sns/tweet"
 	snsSendUrl                   = "/wxsdk/sns/tweet"
+	snsSendExcludeImage          = "/wxsdk/sns/tweet"
 	snsSendVideo                 = "/wxsdk/sns/tweet"
 	snsSendImage                 = "/wxsdk/sns/tweetimg"
 

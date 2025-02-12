@@ -87,4 +87,6 @@ var (
 	SnsSendImageError                 = &ErrNo{Code: 10068, Message: "发送朋友圈图片失败"}
 	SnsSendUrlError                   = &ErrNo{Code: 10069, Message: "发送朋友圈链接失败"}
 	SnsSendVideoError                 = &ErrNo{Code: 10070, Message: "发送朋友圈视频失败"}
+	SnsSendExcludeImageError          = &ErrNo{Code: 10071, Message: "转发非图片朋友圈失败"}
+	SnsForwardError                   = &ErrNo{Code: 10072, Message: "转发朋友圈失败"}
 )
