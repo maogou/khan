@@ -20,6 +20,7 @@ var excludePaths = []string{
 	"/",
 	"/api/v1/collect",
 	"/v2/api/download",
+	"/api/v1/callback",
 }
 
 func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
