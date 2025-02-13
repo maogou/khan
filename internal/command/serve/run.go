@@ -22,7 +22,7 @@ import (
 func run(conf config.Config, sdk *khan.Khan, l *license.License) error {
 	gin.SetMode(conf.Mode)
 	route := gin.Default()
-	route.Use(middleware.RequestId(), middleware.VerifyLicense(sdk.Rdb()))
+	route.Use(middleware.RequestId(), middleware.VerifyLicense(sdk.Rdb(), conf))
 
 	addr := ":" + strconv.Itoa(conf.Port)
 

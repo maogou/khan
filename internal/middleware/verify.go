@@ -6,6 +6,7 @@ import (
 	"io"
 	"slices"
 	v1 "smallBot/api/khan/v1"
+	"smallBot/internal/config"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/log"
@@ -23,7 +24,7 @@ var excludePaths = []string{
 	"/api/v1/callback",
 }
 
-func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
+func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		var (
@@ -82,7 +83,7 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 		paths := strings.Split(url, "/")
 
 		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
-		if len(paths) > 3 {
+		if len(paths) > 3 && !strings.Contains(url, conf.Sdk.Callback) {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
 				log.C(ctx).Info().Str("paths[3]", paths[3]).Any("permission", p).Msg("无此接口的访问权限")
 				ctx.Abort()
@@ -91,7 +92,7 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 			}
 		}
 
-		if slices.Contains(excludePaths, url) {
+		if slices.Contains(excludePaths, url) || !strings.Contains(url, conf.Sdk.Callback) {
 			ctx.Next()
 			return
 		}
