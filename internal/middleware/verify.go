@@ -83,7 +83,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 		paths := strings.Split(url, "/")
 
 		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
-		if len(paths) > 3 && !strings.Contains(url, conf.Sdk.Callback) {
+		if len(paths) > 3 && !strings.Contains(conf.Sdk.Callback, url) {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
 				log.C(ctx).Info().Str("paths[3]", paths[3]).Any("permission", p).Msg("无此接口的访问权限")
 				ctx.Abort()
@@ -92,7 +92,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			}
 		}
 
-		if slices.Contains(excludePaths, url) || !strings.Contains(url, conf.Sdk.Callback) {
+		if slices.Contains(excludePaths, url) || !strings.Contains(conf.Sdk.Callback, url) {
 			ctx.Next()
 			return
 		}
