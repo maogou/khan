@@ -66,9 +66,11 @@ func (m *MessageHandler) DownloadImg(ctx *gin.Context) {
 		return
 	}
 
-	xs := strings.ReplaceAll(req.Xml, "\n", "")
-	xs = strings.ReplaceAll(xs, "\t", "")
-	xs = strings.ReplaceAll(xs, `\`, "")
+	xs := strings.NewReplacer(
+		"\n", "",
+		"\t", "",
+		`\`, "",
+	).Replace(req.Xml)
 
 	if err := xml.Unmarshal([]byte(xs), &xmlImg); err != nil {
 		log.C(ctx).Error().Err(err).Msg("xml反序列化失败")

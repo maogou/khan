@@ -38,9 +38,11 @@ func Verify(conf config.Config) *cli.Command {
 
 			pKey := filepath.Base(path)
 
-			pKey = strings.ReplaceAll(pKey, constant.License37, "+")
-			pKey = strings.ReplaceAll(pKey, constant.License73, "/")
-			pKey = strings.ReplaceAll(pKey, constant.License919, "=")
+			pKey = strings.NewReplacer(
+				constant.License37, "+",
+				constant.License73, "/",
+				constant.License919, "=",
+			).Replace(pKey)
 
 			lic, err := license.Parse(pKey, path)
 

@@ -107,9 +107,12 @@ func do(cCtx *cli.Context) error {
 	}
 
 	pKey := string(pKByte)
-	pKey = strings.ReplaceAll(pKey, "+", constant.License37)
-	pKey = strings.ReplaceAll(pKey, "/", constant.License73)
-	pKey = strings.ReplaceAll(pKey, "=", constant.License919)
+
+	pKey = strings.NewReplacer(
+		"+", constant.License37,
+		"/", constant.License73,
+		"=", constant.License919,
+	).Replace(pKey)
 
 	if err = l.Create(filePath+"/"+firstAppId+".pri", filePath+"/"+pKey); err != nil {
 		log.Error().Err(err).Msg("创建许可证失败")
