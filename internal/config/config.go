@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	DefaultConfigPath = "config/robot.yaml"
+	DefaultConfigPath = "config/khan.yaml"
 )
 
 type Config struct {

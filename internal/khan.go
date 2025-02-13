@@ -4,7 +4,6 @@ import (
 	"os"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
-	"smallBot/internal/command/license"
 	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
@@ -67,7 +66,7 @@ func NewKhanCommand() *cli.App {
 			auth.Verify(conf),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			license.Create(),
+			//license.Create(),
 			demo.Demo(sdk),
 		},
 	}
