@@ -2,23 +2,24 @@ package callback
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/help"
+	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )
 
 func (c *CallbackHandler) Collect(ctx *gin.Context) {
-	log := help.GetQidLog(ctx)
-	log.Info().Msg("调用Collect方法")
-
+	log.C(ctx).Info().Msg("开始调用CallbackHandler-Collect")
 	var req v1.CollectRequest
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
-		log.Error().Err(err).Msg("参数验证失败")
-		response.Fail(ctx, err)
+		log.C(ctx).Error().Err(err).Msg("CallbackHandler-Collect参数绑定失败")
+		response.Fail(ctx, errno.ValidateError)
 		return
 	}
+
+	log.C(ctx).Info().Any("req", req).Msg("解收到原始的回调数据")
 
 	//中间件种和handler种必须使用ctx的副本
 	cCp := ctx.Copy()
@@ -26,9 +27,5 @@ func (c *CallbackHandler) Collect(ctx *gin.Context) {
 		c.chain.HandlerRequest(cCp, req)
 	}()
 
-	log.Info().Any("req", req).Msg("收到的消息")
-
 	response.SuccessMsg(ctx, "success")
-
-	return
 }
