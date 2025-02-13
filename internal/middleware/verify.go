@@ -1,29 +1,35 @@
 package middleware
 
 import (
+	"bytes"
 	"encoding/json"
+	"io"
+	"slices"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
+	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/redis/go-redis/v9"
-	"github.com/rs/zerolog/log"
 )
 
-type PostRequest struct {
-	AppID string `json:"appid"`
-	AppId string `json:"appId"`
+var excludePaths = []string{
+	"/",
+	"/api/v1/collect",
+	"/v2/api/download",
 }
 
 func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		var (
-			p    v1.Permission
-			pKey string
+			p         v1.Permission
+			pKey      string
+			bodyBytes []byte
+			yw        v1.LicenseYourselfWidRequest
 		)
 
 		keys := []string{constant.License, constant.LicenseKey}
@@ -31,7 +37,7 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 
 		lb, ok := vals[0].(string)
 		if !ok || len(lb) == 0 {
-			log.Ctx(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
+			log.C(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
 				"client_ip", ctx.ClientIP(),
 			).Msg("Redis 获取授权许可证为空")
 			response.SuccessMsg(ctx, "Redis 获取授权许可证为空")
@@ -41,7 +47,7 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 
 		pKey, ok = vals[1].(string)
 		if !ok || len(pKey) == 0 {
-			log.Ctx(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
+			log.C(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
 				"client_ip", ctx.ClientIP(),
 			).Msg("Redis 获取授权许可证key为空")
 			response.SuccessMsg(ctx, "Redis 获取授权许可证key为空")
@@ -58,14 +64,14 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 		lic, err := license.Parse(pKey, lb)
 
 		if err = json.Unmarshal(lic.Dat, &p); err != nil {
-			log.Error().Err(err).Msg("json解析授权许可证失败")
+			log.C(ctx).Error().Err(err).Msg("json解析授权许可证失败")
 			ctx.Abort()
 			response.SuccessMsg(ctx, "json解析授权许可证失败")
 			return
 		}
 
 		if lic.Expired() {
-			log.Error().Msg("许可证已过期")
+			log.C(ctx).Error().Msg("许可证已过期")
 			ctx.Abort()
 			response.SuccessMsg(ctx, "许可证已过期")
 			return
@@ -74,28 +80,50 @@ func VerifyLicense(rdb *redis.Client) gin.HandlerFunc {
 		url := ctx.Request.URL.Path
 		paths := strings.Split(url, "/")
 
+		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
 		if len(paths) > 3 {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
-				log.Ctx(ctx).Info().Str("url", url).Any("permission", p).Msg("无此接口的访问权限")
+				log.C(ctx).Info().Str("paths[3]", paths[3]).Any("permission", p).Msg("无此接口的访问权限")
 				ctx.Abort()
-				response.SuccessMsg(ctx, "无此接口的访问权限,请联系软件作者(wechat: wxksky2022)")
+				response.SuccessMsg(ctx, "无此接口的访问权限,请联系软件作者!")
 				return
 			}
+		}
 
-			//获取post json请求中的appid
-			var req PostRequest
-			if err := ctx.ShouldBindJSON(&req); err != nil {
-				log.Ctx(ctx).Error().Err(err).Msg("解析 JSON 请求体失败")
-				ctx.Abort()
-				response.SuccessMsg(ctx, "解析 JSON 请求体失败")
-				return
+		if slices.Contains(excludePaths, url) {
+			ctx.Next()
+			return
+		}
+		if ctx.Request.Body != nil {
+			if ctx.Request.Body != nil {
+				bodyBytes, err = io.ReadAll(ctx.Request.Body)
+				if err != nil {
+					log.C(ctx).Error().Err(err).Msg("读取请求体失败")
+					response.SuccessMsg(ctx, "读取请求体失败")
+					ctx.Abort()
+					return
+				}
 			}
+		}
 
-			appid := req.AppId
-			log.Ctx(ctx).Info().Str("appid=========>", appid).Msg("ssssss")
+		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 
+		if err = ctx.ShouldBindJSON(&yw); err != nil {
+			log.C(ctx).Error().Err(err).Msg("解析json中的yourself_wxid请求体失败")
+			ctx.Abort()
+			response.SuccessMsg(ctx, "解析json中的yourself_wxid请求体失败，请求参数重必须有yourself_wxid参数")
+			return
+		}
+		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+		if !slices.Contains(p.Wid, yw.YourselfWXid) {
+			log.C(ctx).Warn().Msg("请求的yourself_wxid未授权，无法使用khan服务")
+			ctx.Abort()
+			response.SuccessMsg(ctx, "请求的yourself_wxid未授权，无法使用khan服务")
+			return
 		}
 
 		ctx.Next()
+
 	}
 }
