@@ -77,4 +77,7 @@ const (
 	favorSync   = "/wxsdk/favor/sync"
 	favorDetail = "/wxsdk/favor/getcontent"
 	favorDelete = "/wxsdk/favor/delete"
+
+	redPacket    = "/wxsdk/tenpay/openhb"
+	collectMoney = "/wxsdk/tenpay/collectmoney"
 )
