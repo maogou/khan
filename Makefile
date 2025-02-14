@@ -14,7 +14,7 @@ HOST_PORT ?= 8074
 CONTAINER_PORT ?= 8073
 LOG_FILE ?= /var/log/supervisor/supervisord.log
 
-.PHONY: all build docker-build docker-run clean help env
+.PHONY: all build docker-build docker-run clean help env demo
 
 all: docker-build
 	@echo "镜像构建成功，开始运行容器..."
@@ -96,6 +96,9 @@ env:
 	@echo "CONTAINER_PORT: $(CONTAINER_PORT)"
 	@echo "LOG_FILE: $(LOG_FILE)"
 
+demo:
+	@echo "demo测试..."
+	go run cmd/main.go demo
 
 help:
 	@echo "可执行的命令:"
@@ -111,3 +114,4 @@ help:
 	@echo "  coverage     - 生成覆盖率报告"
 	@echo "  install-deps - 安装开发依赖"
 	@echo "  env          - 查看环境变量"
+	@echo "  demo         - demo测试"
