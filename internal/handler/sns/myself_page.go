@@ -1,12 +1,13 @@
 package sns
 
 import (
-	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (s *SnsHandler) MyselfPage(ctx *gin.Context) {

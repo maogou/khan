@@ -2,8 +2,6 @@ package sns
 
 import (
 	"bytes"
-	"github.com/gin-gonic/gin"
-	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/constant"
@@ -11,6 +9,9 @@ import (
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"text/template"
+
+	"github.com/gin-gonic/gin"
+	"github.com/samber/lo"
 )
 
 func (s *SnsHandler) SendUrl(ctx *gin.Context) {

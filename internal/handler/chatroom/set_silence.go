@@ -1,14 +1,15 @@
 package chatroom
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/chatroom"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/samber/lo"
 )
 
 func (c *ChatRoomHandler) SetSilence(ctx *gin.Context) {

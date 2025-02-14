@@ -2,14 +2,15 @@ package contact
 
 import (
 	"errors"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/sync/singleflight"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"golang.org/x/sync/singleflight"
 )
 
 func (c *ContactHandler) List(ctx *gin.Context) {

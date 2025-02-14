@@ -1,9 +1,10 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"smallBot/internal/handler/chatroom"
 	"smallBot/internal/sdk/khan"
+
+	"github.com/gin-gonic/gin"
 )
 
 func initChatroomHandler(engine *gin.Engine, sdk *khan.Khan) {

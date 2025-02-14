@@ -2,8 +2,6 @@ package message
 
 import (
 	"encoding/xml"
-	"github.com/rs/xid"
-	"github.com/samber/lo"
 	"os"
 	"path/filepath"
 	v1 "smallBot/api/khan/v1"
@@ -14,6 +12,9 @@ import (
 	"smallBot/internal/pkg/response"
 	"strings"
 	"time"
+
+	"github.com/rs/xid"
+	"github.com/samber/lo"
 
 	"github.com/spf13/cast"
 

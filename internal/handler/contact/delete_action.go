@@ -1,12 +1,13 @@
 package contact
 
 import (
-	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/contact"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (c *ContactHandler) Delete(ctx *gin.Context) {

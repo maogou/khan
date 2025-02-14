@@ -2,8 +2,6 @@ package sns
 
 import (
 	"bytes"
-	"github.com/gin-gonic/gin"
-	"github.com/samber/lo"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/sns"
 	"smallBot/internal/constant"
@@ -12,6 +10,9 @@ import (
 	"smallBot/internal/pkg/response"
 	"strconv"
 	"text/template"
+
+	"github.com/gin-gonic/gin"
+	"github.com/samber/lo"
 )
 
 func (s *SnsHandler) SendVideo(ctx *gin.Context) {

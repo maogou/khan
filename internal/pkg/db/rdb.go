@@ -2,9 +2,10 @@ package db
 
 import (
 	"context"
+	"smallBot/internal/config"
+
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
-	"smallBot/internal/config"
 )
 
 func MustInitRedis(conf *config.Config) *redis.Client {

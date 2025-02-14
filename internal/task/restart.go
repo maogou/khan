@@ -2,10 +2,11 @@ package task
 
 import (
 	"context"
-	"github.com/rs/xid"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
+
+	"github.com/rs/xid"
 )
 
 func (m *Monitor) restart() {

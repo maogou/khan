@@ -1,9 +1,10 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"smallBot/internal/handler/transfer"
 	"smallBot/internal/sdk/khan"
+
+	"github.com/gin-gonic/gin"
 )
 
 func initTransferRoute(engine *gin.Engine, skd *khan.Khan) {

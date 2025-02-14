@@ -1,9 +1,10 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"smallBot/internal/handler/favor"
 	"smallBot/internal/sdk/khan"
+
+	"github.com/gin-gonic/gin"
 )
 
 func initFavorRoute(engine *gin.Engine, sdk *khan.Khan) {

@@ -2,12 +2,13 @@ package message
 
 import (
 	"encoding/xml"
-	"github.com/gin-gonic/gin"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (m *MessageHandler) PostNameCard(ctx *gin.Context) {

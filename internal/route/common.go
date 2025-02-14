@@ -1,11 +1,12 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/response"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // initCommonRoute 初始化404 & 405对应的路由
