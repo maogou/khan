@@ -256,6 +256,8 @@ func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback, wxi
 		Wxid:     wxid,
 	}
 
+	log.C(ctx).Info().Any("push_data", cData).Msg("推送的消息")
+
 	_, err := k.client.R().SetBody(cData).Post(callback)
 
 	if err != nil {
