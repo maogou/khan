@@ -51,7 +51,7 @@ func Create(sdk *khan.Khan) *cli.Command {
 			},
 			&cli.StringFlag{
 				Name:     "account",
-				Value:    "",
+				Value:    constant.AppName,
 				Usage:    "授权的账号",
 				Required: true,
 			},

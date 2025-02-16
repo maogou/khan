@@ -24,7 +24,7 @@ type Config struct {
 }
 
 type Sdk struct {
-	Collect   string        `yaml:"collect" validate:"required"`
+	Collect   string        `yaml:"collect"`
 	Callback  string        `yaml:"callback"`
 	TimeOut   time.Duration `yaml:"timeout" validate:"required,min=5"`
 	Gog7a6v8g string        `yaml:"gog7a6v8g" validate:"required"`

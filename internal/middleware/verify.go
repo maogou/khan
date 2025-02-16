@@ -8,6 +8,7 @@ import (
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/config"
 	"smallBot/internal/constant"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -31,7 +32,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			p         v1.Permission
 			pKey      string
 			bodyBytes []byte
-			yw        v1.LicenseYourselfWidRequest
+			//yw        v1.LicenseYourselfWidRequest
 		)
 
 		keys := []string{constant.License, constant.LicenseKey}
@@ -79,8 +80,18 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
+		if len(p.AppId) == 1 && p.AppId[0] == constant.KhanFree {
+			ctx.Next()
+			return
+		}
+
 		url := ctx.Request.URL.Path
 		paths := strings.Split(url, "/")
+
+		if slices.Contains(excludePaths, url) || !strings.Contains(conf.Sdk.Callback, url) {
+			ctx.Next()
+			return
+		}
 
 		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
 		if len(paths) > 3 && !strings.Contains(conf.Sdk.Callback, url) {
@@ -92,10 +103,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			}
 		}
 
-		if slices.Contains(excludePaths, url) || !strings.Contains(conf.Sdk.Callback, url) {
-			ctx.Next()
-			return
-		}
 		if ctx.Request.Body != nil {
 			if ctx.Request.Body != nil {
 				bodyBytes, err = io.ReadAll(ctx.Request.Body)
@@ -108,20 +115,30 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			}
 		}
 
-		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
-
-		if err = ctx.ShouldBindJSON(&yw); err != nil {
-			log.C(ctx).Error().Err(err).Msg("解析json中的yourself_wxid请求体失败")
+		token := ctx.GetHeader(constant.KhanToken)
+		if len(token) == 0 {
+			log.C(ctx).Error().Msg("请求头中未携带token")
 			ctx.Abort()
-			response.SuccessMsg(ctx, "解析json中的yourself_wxid请求体失败，请求参数重必须有yourself_wxid参数")
+			response.SuccessMsg(ctx, "请求头中未携带token")
 			return
 		}
+
+		decrypted, err := help.AesDecrypt(token, []byte(constant.AesWXidKey))
+		if err != nil {
+			log.C(ctx).Error().Err(err).Msg("token 解密失败")
+			ctx.Abort()
+			response.SuccessMsg(ctx, "token 解密失败")
+			return
+		}
+
+		appid := strings.TrimLeft(decrypted, constant.AppName)
+
 		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 
-		if !slices.Contains(p.AppId, yw.YourselfWXid) {
-			log.C(ctx).Warn().Msg("请求的yourself_wxid未授权，无法使用khan服务")
+		if !slices.Contains(p.AppId, appid) {
+			log.C(ctx).Warn().Msg("请求的携带的token对应的wxid未授权，无法使用khan服务")
 			ctx.Abort()
-			response.SuccessMsg(ctx, "请求的yourself_wxid未授权，无法使用khan服务")
+			response.SuccessMsg(ctx, "请求的携带的token对应的wxid未授权，无法使用khan服务")
 			return
 		}
 

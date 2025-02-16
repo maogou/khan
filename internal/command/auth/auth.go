@@ -95,13 +95,14 @@ func printLicense(license *license.License) error {
 		WithData(
 			pterm.TableData{
 				{"配置项", "属性值"},
-				{"微信号", license.Sub},
+				{"客户标识", license.Cus},
 				{"发证单位", license.Iss},
+				{"用户类型", license.Typ},
 				{"共享数量", strconv.FormatInt(int64(license.Lim), 10)},
 				{"签发时间", license.Iat.Format("2006-01-02 15:04:05")},
 				{"过期时间", license.Exp.Format("2006-01-02 15:04:05")},
 				{"可用权限", string(nb)},
-				{"共享微信", string(wb)},
+				{"共享appid", string(wb)},
 			},
 		).Render()
 }
