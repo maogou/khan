@@ -7,6 +7,6 @@ type CollectRequest struct {
 }
 
 type SetCallbackRequest struct {
-	AppId       string `json:"appid" validate:"required"`
+	Token       string `json:"token" validate:"required"`
 	CallbackUrl string `json:"callbackUrl" validate:"required"`
 }

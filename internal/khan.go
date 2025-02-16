@@ -67,7 +67,7 @@ func NewKhanCommand() *cli.App {
 			auth.Verify(conf),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			license.Create(),
+			license.Create(sdk),
 			demo.Demo(sdk),
 		},
 	}

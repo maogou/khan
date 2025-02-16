@@ -84,7 +84,7 @@ func printLicense(license *license.License) error {
 		return err
 	}
 
-	wb, err := json.Marshal(p.Wid)
+	wb, err := json.Marshal(p.AppId)
 	if err != nil {
 		log.Error().Err(err).Msg("json解析授权许可证(wid)失败")
 		return err

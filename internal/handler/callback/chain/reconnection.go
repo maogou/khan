@@ -56,36 +56,43 @@ func (r *Reconnection) Process(ctx context.Context, param v1.CollectRequest) err
 
 	hbResp, err := r.sdk.HearBeat(
 		ctx, v1.HearBeatRequest{
-			AppId: r.sdk.GetAppId(),
+			AppId: param.AppId,
 		},
 	)
 
 	if err != nil {
-		log.C(ctx).Error().Err(err).Msg("调用心跳包失败")
+		log.C(ctx).Error().Err(err).Msg("调用💓接口失败")
 		return err
 	}
 
 	if hbResp.Ret != 0 {
-		log.C(ctx).Warn().Str("err_msg", hbResp.MsgErr).Msg("调用心跳包失败")
+		log.C(ctx).Warn().Str("err_msg", hbResp.MsgErr).Msg("(hbResp.Ret != 0) ==>调用💓接口失败")
 		return errors.New(hbResp.MsgErr)
 	}
 
-	log.C(ctx).Info().Msg("调用心跳包成功")
+	if hbResp.Data.BaseResponse.Ret != 0 {
+		log.C(ctx).Warn().Any(
+			"err_msg", hbResp.Data.BaseResponse.ErrMsg,
+		).Msg("(hbResp.Data.BaseResponse.Ret !=0) ==>调用💓接口失败")
+		return errors.New("💓接口异常")
+	}
+
+	log.C(ctx).Info().Msg("调用💓接口成功")
 
 	saaResp, err := r.sdk.SecAutoAuth(
 		ctx, v1.SecAutoAuthRequest{
-			AppId:  r.sdk.GetAppId(),
+			AppId:  param.AppId,
 			SdkVer: "8.0.48",
 		},
 	)
 
 	if err != nil {
-		log.C(ctx).Error().Err(err).Msg("调用SecAutoAuth方法失败")
+		log.C(ctx).Error().Err(err).Msg("调用SecAutoAuth接口失败")
 		return err
 	}
 
 	if saaResp.Ret != 0 {
-		log.C(ctx).Warn().Str("err_msg", saaResp.MsgErr).Msg("调用SecAutoAuth方法失败")
+		log.C(ctx).Warn().Str("err_msg", saaResp.MsgErr).Msg("调用SecAutoAuth接口失败")
 		return errors.New(saaResp.MsgErr)
 	}
 
@@ -93,7 +100,7 @@ func (r *Reconnection) Process(ctx context.Context, param v1.CollectRequest) err
 
 	loResp, err := r.sdk.LongOpen(
 		ctx, v1.LongOpenRequest{
-			AppId:      r.sdk.GetAppId(),
+			AppId:      param.AppId,
 			CleanCache: false,
 			Host:       r.sdk.Config().Sdk.Collect,
 			Timeout:    r.sdk.Config().TimeOut,

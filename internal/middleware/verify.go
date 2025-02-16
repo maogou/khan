@@ -118,7 +118,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 		}
 		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 
-		if !slices.Contains(p.Wid, yw.YourselfWXid) {
+		if !slices.Contains(p.AppId, yw.YourselfWXid) {
 			log.C(ctx).Warn().Msg("请求的yourself_wxid未授权，无法使用khan服务")
 			ctx.Abort()
 			response.SuccessMsg(ctx, "请求的yourself_wxid未授权，无法使用khan服务")

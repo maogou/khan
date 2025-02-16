@@ -28,11 +28,10 @@ func (l *LoginHandler) SetCallback(ctx *gin.Context) {
 		return
 	}
 
-	log.C(ctx).Info().Str("old_callback_url", l.sdk.Config().Sdk.Callback).Msg("原来的callback_url")
-
-	l.sdk.Config().Sdk.Callback = req.CallbackUrl
-
-	log.C(ctx).Info().Str("new_callback_url", l.sdk.Config().Sdk.Callback).Msg("设置后的callback_url")
+	if err = l.sdk.Rdb().Set(ctx, req.Token, req.CallbackUrl, 0).Err(); err != nil {
+		log.C(ctx).Error().Err(err).Msg("设置回调保存redis失败")
+		response.Fail(ctx, errno.SetTokenCallbackError)
+	}
 
 	response.SuccessMsg(ctx, "设置成功")
 }
