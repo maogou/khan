@@ -36,3 +36,8 @@ type CheckLoginResponse struct {
 	Status      int                 `json:"status"`
 	LoginInfo   CheckLoginLoginInfo `json:"loginInfo"`
 }
+
+type LoginCreateApp struct {
+	AppId string `json:"app_id"`
+	Tip   string `json:"tip"`
+}

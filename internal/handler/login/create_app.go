@@ -34,11 +34,11 @@ func (l *LoginHandler) CreateApp(ctx *gin.Context) {
 		return
 	}
 
-	response.Success(ctx,
-		v1.CreateAppData{
-			Id:    caResp.Data.Id,
+	response.Success(
+		ctx,
+		v1.LoginCreateApp{
 			AppId: caResp.Data.AppId,
-			Desc:  caResp.Data.Desc,
+			Tip:   "appid是唯一标识,请妥善保管,请勿外泄!",
 		},
 	)
 
