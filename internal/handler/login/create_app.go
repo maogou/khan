@@ -1,0 +1,45 @@
+package login
+
+import (
+	v1 "smallBot/api/khan/v1"
+	"smallBot/internal/constant"
+	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/log"
+	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
+)
+
+func (l *LoginHandler) CreateApp(ctx *gin.Context) {
+	log.C(ctx).Info().Msg("调用LoginHandler->CreateApp方法")
+
+	caResp, err := l.sdk.CreateApp(
+		ctx, v1.CreateAppRequest{
+			Country:    constant.Country,
+			DeviceName: constant.DeviceName,
+			Model:      constant.Model,
+			SdkVer:     constant.ProtoVersion,
+		},
+	)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("创建appId,请求CreateApp失败")
+		response.Fail(ctx, errno.CreateAppErr)
+		return
+	}
+
+	if caResp.Ret != 0 {
+		log.C(ctx).Warn().Str("err_msg", caResp.MsgErr).Msg("调用创建appId失败")
+		response.Fail(ctx, errno.CreateAppErr)
+		return
+	}
+
+	response.Success(ctx,
+		v1.CreateAppData{
+			Id:    caResp.Data.Id,
+			AppId: caResp.Data.AppId,
+			Desc:  caResp.Data.Desc,
+		},
+	)
+
+}

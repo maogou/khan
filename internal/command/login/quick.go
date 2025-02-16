@@ -6,6 +6,7 @@ import (
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/login"
 	"smallBot/api/khan/v1/transform/message"
+	"smallBot/internal/constant"
 	"smallBot/internal/sdk/khan"
 	"time"
 
@@ -53,10 +54,10 @@ func (q *QuickLogin) GetAppId() {
 	ctx := context.WithValue(context.Background(), "qid", xid.New().String())
 	sdkResp, err := q.sdk.CreateApp(
 		ctx, v1.CreateAppRequest{
-			Country:    "中国",
-			DeviceName: "iPad",
-			Model:      "iPad",
-			SdkVer:     "8.0.48",
+			Country:    constant.Country,
+			DeviceName: constant.DeviceName,
+			Model:      constant.Model,
+			SdkVer:     constant.ProtoVersion,
 		},
 	)
 	if err != nil {

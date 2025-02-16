@@ -11,6 +11,7 @@ func initLoginHandler(engine *gin.Engine, sdk *khan.Khan) {
 
 	loginHandler := login.NewLoginHandler(sdk)
 
+	engine.POST("/v1/api/login/createApp", loginHandler.CreateApp)
 	engine.POST("/v1/api/login/setCallback", loginHandler.SetCallback)
 
 	engine.POST("/v2/api/login/getLoginQrCode", loginHandler.LoginQrCode)

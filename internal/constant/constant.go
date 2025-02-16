@@ -33,4 +33,9 @@ const (
 
 	KhanFree  = "khan_free"
 	KhanToken = "Khan-Token"
+
+	Country      = "中国"
+	DeviceName   = "ipad"
+	Model        = "ipad"
+	ProtoVersion = "8.0.48"
 )

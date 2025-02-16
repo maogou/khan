@@ -22,6 +22,7 @@ var excludePaths = []string{
 	"/v2/api/download",
 	"/api/v1/callback",
 	"/v1/api/personal/license",
+	"/v1/api/login/createApp",
 }
 
 func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
@@ -31,6 +32,14 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			p    v1.Permission
 			pKey string
 		)
+
+		url := ctx.Request.URL.Path
+		paths := strings.Split(url, "/")
+
+		if slices.Contains(excludePaths, url) || strings.Contains(conf.Sdk.Callback, url) {
+			ctx.Next()
+			return
+		}
 
 		keys := []string{constant.License, constant.LicenseKey}
 		vals, err := rdb.MGet(ctx, keys...).Result()
@@ -70,14 +79,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
-		url := ctx.Request.URL.Path
-		paths := strings.Split(url, "/")
-
-		if slices.Contains(excludePaths, url) || strings.Contains(conf.Sdk.Callback, url) {
-			ctx.Next()
-			return
-		}
-
 		if lic.Expired() {
 			log.C(ctx).Error().Msg("许可证已过期")
 			ctx.Abort()
@@ -104,6 +105,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 		if len(token) == 0 {
 			log.C(ctx).Error().Msg("请求头中未携带token")
 			ctx.Abort()
+
 			response.SuccessMsg(ctx, "请求头中未携带token")
 			return
 		}
