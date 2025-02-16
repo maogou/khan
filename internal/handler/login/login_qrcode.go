@@ -3,6 +3,7 @@ package login
 import (
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/login"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -36,6 +37,14 @@ func (l *LoginHandler) LoginQrCode(ctx *gin.Context) {
 	if resp.Ret != 0 {
 		log.C(ctx).Error().Err(err).Msg("ret != 0 ->调用LoginQrCode方法失败")
 		response.Fail(ctx, errno.LoginQrCodeError)
+		return
+	}
+
+	cKey := constant.WXQrCodeCache + req.AppId
+
+	if err = l.sdk.Rdb().Set(ctx, cKey, resp.Data.Uuid, constant.WXQrCodeExpire).Err(); err != nil {
+		log.C(ctx).Error().Err(err).Msg("设置wx的qrcode失败")
+		response.Fail(ctx, errno.SetWxLoginQrCodeCacheError)
 		return
 	}
 

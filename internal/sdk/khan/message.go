@@ -248,11 +248,12 @@ func (k *Khan) DownloadImg(ctx context.Context, req download.DownloadImgRequest)
 	return resp.Result().(*download.DownloadImgResponse), nil
 }
 
-func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback string) error {
+func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback, wxid string) error {
 	cData := message.CallbackRequest{
 		AppId:    req.AppId,
 		Data:     req.Data,
 		TypeName: req.TypeName,
+		Wxid:     wxid,
 	}
 
 	_, err := k.client.R().SetBody(cData).Post(callback)

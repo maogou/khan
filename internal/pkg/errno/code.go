@@ -50,11 +50,14 @@ var (
 	LabelListError   = &ErrNo{Code: 10034, Message: "获取标签列表失败"}
 	LabelModifyError = &ErrNo{Code: 10035, Message: "修改标签失败"}
 
-	LoginQrCodeError      = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
-	CheckLoginQrCodeError = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
-	SetCallbackError      = &ErrNo{Code: 10038, Message: "请检查回调地址,此回调地址容器内无法访问"}
-	SetTokenCallbackError = &ErrNo{Code: 10039, Message: "设置token对应的回调地址失败"}
-
+	LoginQrCodeError              = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
+	CheckLoginQrCodeError         = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
+	SetCallbackError              = &ErrNo{Code: 10038, Message: "请检查回调地址,此回调地址容器内无法访问"}
+	SetTokenCallbackError         = &ErrNo{Code: 10039, Message: "设置token对应的回调地址失败"}
+	SetWxLoginCacheError          = &ErrNo{Code: 10040, Message: "设置wx登录缓存失败"}
+	SetWxLoginQrCodeCacheError    = &ErrNo{Code: 10041, Message: "设置wx登录二维码缓存失败"}
+	GetWxLoginQrCodeCacheError    = &ErrNo{Code: 10042, Message: "获取wx登录二维码缓存失败"}
+	ExpireWxLoginQrCodeCacheError = &ErrNo{Code: 10043, Message: "登录二维码缓存已过期,请重新获取登录二维码"}
 	ChatroomCreateError           = &ErrNo{Code: 10039, Message: "创建群聊失败"}
 	ChatroomModifyNameError       = &ErrNo{Code: 10040, Message: "修改群聊名称失败"}
 	ChatroomModifyRemarkError     = &ErrNo{Code: 10041, Message: "修改群聊备注失败"}
