@@ -90,6 +90,13 @@ func printLicense(license *license.License) error {
 		return err
 	}
 
+	token, err := json.Marshal(p.Token)
+
+	if err != nil {
+		log.Error().Err(err).Msg("json解析授权许可证(token)失败")
+		return err
+	}
+
 	return pterm.DefaultTable.WithHasHeader().
 		WithBoxed().
 		WithData(
@@ -103,6 +110,7 @@ func printLicense(license *license.License) error {
 				{"过期时间", license.Exp.Format("2006-01-02 15:04:05")},
 				{"可用权限", string(nb)},
 				{"共享appid", string(wb)},
+				{"token", string(token)},
 			},
 		).Render()
 }

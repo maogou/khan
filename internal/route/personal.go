@@ -15,4 +15,5 @@ func initPersonal(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v2/api/personal/getSafetyInfo", personalHandler.Safety)
 	engine.POST("/v2/api/personal/privacySettings", personalHandler.PrivacySetting)
 	engine.POST("/v2/api/personal/updateHeadImg", personalHandler.UploadHdImg)
+	engine.GET("/v1/api/personal/license", personalHandler.License)
 }

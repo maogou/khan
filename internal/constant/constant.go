@@ -32,5 +32,5 @@ const (
 	AesRedisKey = "e23c03daed4736f9c3da32daff4cd00f"
 
 	KhanFree  = "khan_free"
-	KhanToken = "khan_token"
+	KhanToken = "Khan-Token"
 )

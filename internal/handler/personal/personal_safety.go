@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (p PersonalHandler) Safety(ctx *gin.Context) {
+func (p *PersonalHandler) Safety(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用PersonalHandler->Safety方法")
 
 	var req v1.PersonalSafetyRequest

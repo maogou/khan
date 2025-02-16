@@ -1,9 +1,7 @@
 package middleware
 
 import (
-	"bytes"
 	"encoding/json"
-	"io"
 	"slices"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/config"
@@ -23,16 +21,15 @@ var excludePaths = []string{
 	"/api/v1/collect",
 	"/v2/api/download",
 	"/api/v1/callback",
+	"/v1/api/personal/license",
 }
 
 func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		var (
-			p         v1.Permission
-			pKey      string
-			bodyBytes []byte
-			//yw        v1.LicenseYourselfWidRequest
+			p    v1.Permission
+			pKey string
 		)
 
 		keys := []string{constant.License, constant.LicenseKey}
@@ -73,6 +70,14 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
+		url := ctx.Request.URL.Path
+		paths := strings.Split(url, "/")
+
+		if slices.Contains(excludePaths, url) || strings.Contains(conf.Sdk.Callback, url) {
+			ctx.Next()
+			return
+		}
+
 		if lic.Expired() {
 			log.C(ctx).Error().Msg("许可证已过期")
 			ctx.Abort()
@@ -85,14 +90,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
-		url := ctx.Request.URL.Path
-		paths := strings.Split(url, "/")
-
-		if slices.Contains(excludePaths, url) || !strings.Contains(conf.Sdk.Callback, url) {
-			ctx.Next()
-			return
-		}
-
 		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
 		if len(paths) > 3 && !strings.Contains(conf.Sdk.Callback, url) {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
@@ -100,18 +97,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 				ctx.Abort()
 				response.SuccessMsg(ctx, "无此接口的访问权限,请联系软件作者!")
 				return
-			}
-		}
-
-		if ctx.Request.Body != nil {
-			if ctx.Request.Body != nil {
-				bodyBytes, err = io.ReadAll(ctx.Request.Body)
-				if err != nil {
-					log.C(ctx).Error().Err(err).Msg("读取请求体失败")
-					response.SuccessMsg(ctx, "读取请求体失败")
-					ctx.Abort()
-					return
-				}
 			}
 		}
 
@@ -132,8 +117,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 		}
 
 		appid := strings.TrimLeft(decrypted, constant.AppName)
-
-		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 
 		if !slices.Contains(p.AppId, appid) {
 			log.C(ctx).Warn().Msg("请求的携带的token对应的wxid未授权，无法使用khan服务")
