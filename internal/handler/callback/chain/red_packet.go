@@ -48,7 +48,7 @@ func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) b
 	)
 
 	if err := json.Unmarshal(param.Data, &cxc); err != nil {
-		log.C(ctx).Warn().Err(err).Msg("json解析49类型的消息失败,是系统消息推送")
+		log.C(ctx).Warn().Msg("json解析49类型的消息失败,是系统消息推送")
 		return false
 	}
 
