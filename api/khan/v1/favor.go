@@ -2,7 +2,7 @@ package v1
 
 type FavorSyncRequest struct {
 	AppId   string `json:"appId" binding:"required"`
-	SyncKey string `json:"syncKey" binding:"required"`
+	SyncKey string `json:"syncKey"`
 }
 
 type FavorSyncItem struct {
