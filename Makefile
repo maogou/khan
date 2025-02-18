@@ -10,7 +10,7 @@ GO_ROOT := $(shell go env GOROOT)
 DOWNLOAD_PATH := $(shell realpath ../download)
 HOST_DOWNLOAD ?= $(shell [ -d $(DOWNLOAD_PATH) ] || mkdir -p $(DOWNLOAD_PATH); echo $(DOWNLOAD_PATH))
 CONTAINER_DOWNLOAD := /app/public/download
-HOST_PORT ?= 8074
+HOST_PORT ?= 8073
 CONTAINER_PORT ?= 8073
 LOG_FILE ?= /var/log/supervisor/supervisord.log
 
@@ -52,6 +52,8 @@ docker-run:
 	docker run -d \
 		--name ${APP_NAME}_${VERSION} \
 		-p ${HOST_PORT}:${CONTAINER_PORT} \
+		-p 8075:8075 \
+		-p 8076:8076 \
 		-v ${DOWNLOAD_PATH}:${CONTAINER_DOWNLOAD} \
 		${DOCKER_IMAGE}:${VERSION}
 
