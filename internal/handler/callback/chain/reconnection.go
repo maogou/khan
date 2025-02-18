@@ -25,6 +25,10 @@ func (r *Reconnection) HandlerRequest(ctx context.Context, param v1.CollectReque
 		}
 	}
 
+	if r.NextHandler != nil {
+		r.NextHandler.HandlerRequest(ctx, param)
+	}
+
 }
 
 func (r *Reconnection) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {

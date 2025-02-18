@@ -10,6 +10,7 @@ var (
 	ConvertError        = &ErrNo{Code: 409, Message: "类型转换错误"}
 	DecryptTokenFail    = &ErrNo{Code: 410, Message: "token解析失败"}
 	CreateAppErr        = &ErrNo{Code: 411, Message: "创建应用失败"}
+	CallbackMsgTypeErr  = &ErrNo{Code: 412, Message: "回调消息类型解析错误"}
 	GetFileBase64Error  = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}

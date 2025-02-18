@@ -14,10 +14,12 @@ func initCallbackRoute(route *gin.Engine, sdk *khan.Khan, l *license.License) {
 	ignore := chain.NewIgnore(sdk)
 	pushMsg := chain.NewPushMsg(sdk)
 	reconnection := chain.NewReconnection(sdk)
+	redPacket := chain.NewRedPacket(sdk)
 
 	verify.SetNext(ignore)
 	ignore.SetNext(pushMsg)
 	pushMsg.SetNext(reconnection)
+	reconnection.SetNext(redPacket)
 
 	callbackHandler := callback.NewCallbackHandler(sdk, verify)
 

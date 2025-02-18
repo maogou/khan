@@ -12,3 +12,7 @@ type SetCallbackRequest struct {
 	Token       string `json:"token" validate:"required"`
 	CallbackUrl string `json:"callbackUrl" validate:"required"`
 }
+
+type CallbackMessageType struct {
+	MsgType int `json:"MsgType"`
+}

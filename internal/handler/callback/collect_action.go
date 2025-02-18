@@ -19,7 +19,7 @@ func (c *CallbackHandler) Collect(ctx *gin.Context) {
 		return
 	}
 
-	log.C(ctx).Info().Any("req", req).Msg("解收到原始的回调数据")
+	log.C(ctx).Info().Any("req", req).Msg("接收到原始的回调数据")
 
 	//中间件种和handler种必须使用ctx的副本
 	cCp := ctx.Copy()

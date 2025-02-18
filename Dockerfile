@@ -5,7 +5,8 @@ LABEL stage=gobuilder
 ENV CGO_ENABLED 0
 ENV GOPROXY https://goproxy.cn,direct
 
-RUN apk update --no-cache && apk add --no-cache tzdata
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update --no-cache && apk add --no-cache tzdata
 
 WORKDIR /build
 
@@ -18,9 +19,8 @@ RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o khan smallBot/cmd
 
 FROM alpine
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
-RUN apk update --no-cache && apk add --no-cache ca-certificates && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update --no-cache && apk add --no-cache ca-certificates && \
     apk add --no-cache redis supervisor curl && \
     rm -rf /var/cache/apk/* /tmp/* /usr/share/man
 
