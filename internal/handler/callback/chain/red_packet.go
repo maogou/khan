@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"encoding/xml"
+	"math/rand"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/trade"
 	"smallBot/internal/pkg/log"
@@ -98,7 +99,9 @@ func (r *RedPacket) Process(ctx context.Context, param v1.CollectRequest) error 
 		return err
 	}
 
-	random := time.Duration(50 + int64(time.Now().UnixNano()%100))
+	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
+	random := time.Duration(500 + rng.Intn(501))
+
 	time.AfterFunc(
 		random*time.Millisecond, func() {
 			resp, err := r.sdk.OpenRedPacket(
