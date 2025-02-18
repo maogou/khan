@@ -98,8 +98,9 @@ func (r *RedPacket) Process(ctx context.Context, param v1.CollectRequest) error 
 		return err
 	}
 
+	random := time.Duration(50 + int64(time.Now().UnixNano()%100))
 	time.AfterFunc(
-		50*time.Millisecond, func() {
+		random*time.Millisecond, func() {
 			resp, err := r.sdk.OpenRedPacket(
 				ctx, trade.RedPacketRequest{
 					AppId:   param.AppId,
