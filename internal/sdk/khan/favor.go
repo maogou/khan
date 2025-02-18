@@ -2,39 +2,39 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/label"
+	"smallBot/api/khan/v1/transform/favor"
 	"smallBot/internal/pkg/log"
 )
 
-func (k *Khan) Sync(ctx context.Context, req label.FavorSyncRequest) (*label.FavorSyncResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetBody(&label.FavorSyncResponse{}).Post(favorSync)
+func (k *Khan) Sync(ctx context.Context, req favor.FavorSyncRequest) (*favor.FavorSyncResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetBody(&favor.FavorSyncResponse{}).Post(favorSync)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用favorSync方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*label.FavorSyncResponse), nil
+	return resp.Result().(*favor.FavorSyncResponse), nil
 }
 
-func (k *Khan) Detail(ctx context.Context, req label.FavorDetailRequest) (*label.FavorDetailResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&label.FavorDetailResponse{}).Post(favorDetail)
+func (k *Khan) Detail(ctx context.Context, req favor.FavorDetailRequest) (*favor.FavorDetailResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&favor.FavorDetailResponse{}).Post(favorDetail)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用favorDetail方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*label.FavorDetailResponse), nil
+	return resp.Result().(*favor.FavorDetailResponse), nil
 }
 
-func (k *Khan) Delete(ctx context.Context, req label.FavorDeleteRequest) (*label.FavorDeleteResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&label.FavorDeleteResponse{}).Post(favorDelete)
+func (k *Khan) Delete(ctx context.Context, req favor.FavorDeleteRequest) (*favor.FavorDeleteResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&favor.FavorDeleteResponse{}).Post(favorDelete)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用favorDelete方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*label.FavorDeleteResponse), nil
+	return resp.Result().(*favor.FavorDeleteResponse), nil
 }

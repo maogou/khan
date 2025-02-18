@@ -2,7 +2,7 @@ package favor
 
 import (
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/label"
+	"smallBot/api/khan/v1/transform/favor"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -27,7 +27,7 @@ func (f *FavorHandler) Sync(ctx *gin.Context) {
 	}
 
 	resp, err := f.sdk.Sync(
-		ctx, label.FavorSyncRequest{
+		ctx, favor.FavorSyncRequest{
 			AppId:   req.AppId,
 			SyncKey: req.SyncKey,
 		},

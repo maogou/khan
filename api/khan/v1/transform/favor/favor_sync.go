@@ -1,4 +1,4 @@
-package label
+package favor
 
 type FavorSyncRequest struct {
 	AppId   string `json:"appid"`

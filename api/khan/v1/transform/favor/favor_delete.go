@@ -1,4 +1,4 @@
-package label
+package favor
 
 type FavorDeleteRequest struct {
 	AppId string `json:"appid"`
