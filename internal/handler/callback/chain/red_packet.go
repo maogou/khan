@@ -46,12 +46,12 @@ func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) b
 		cxc v1.CallbackXmlContent
 	)
 
-	if param.MsgType != 49 {
+	if err := json.Unmarshal(param.Data, &cxc); err != nil {
+		log.C(ctx).Error().Err(err).Msg("json解析49类型的消息失败")
 		return false
 	}
 
-	if err := json.Unmarshal(param.Data, &cxc); err != nil {
-		log.C(ctx).Error().Err(err).Msg("json解析49类型的消息失败")
+	if cxc.MsgType != 49 {
 		return false
 	}
 
