@@ -39,7 +39,8 @@ const (
 	Model        = "iPad"
 	ProtoVersion = "8.0.48"
 
-	WXQrCodeExpire = 5 * 60
-	WXLoginCache   = "wx_login_cache_"
-	WXQrCodeCache  = "wx_qr_code_"
+	WXQrCodeExpire  = 5 * 60
+	WXLoginCache    = "wx_login_cache_"
+	WXQrCodeCache   = "wx_qr_code_"
+	WXCallbackCache = "wx_callback_"
 )

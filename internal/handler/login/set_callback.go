@@ -2,6 +2,7 @@ package login
 
 import (
 	v1 "smallBot/api/khan/v1"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
@@ -28,7 +29,9 @@ func (l *LoginHandler) SetCallback(ctx *gin.Context) {
 		return
 	}
 
-	if err = l.sdk.Rdb().Set(ctx, req.Token, req.CallbackUrl, 0).Err(); err != nil {
+	cKey := constant.WXCallbackCache + req.AppId
+
+	if err = l.sdk.Rdb().Set(ctx, cKey, req.CallbackUrl, 0).Err(); err != nil {
 		log.C(ctx).Error().Err(err).Msg("设置回调保存redis失败")
 		response.Fail(ctx, errno.SetTokenCallbackError)
 	}
