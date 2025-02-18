@@ -7,6 +7,7 @@ import (
 	"smallBot/api/khan/v1/transform/login"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/constant"
+	"smallBot/internal/pkg/errno"
 	"smallBot/internal/sdk/khan"
 	"time"
 
@@ -27,6 +28,7 @@ type QuickLogin struct {
 	tableData pterm.TableData
 	url       string
 	sdk       *khan.Khan
+	wxid      string
 	p         *tea.Program
 	selected  int
 	appId     string
@@ -97,6 +99,15 @@ func (q *QuickLogin) GetLoginQrCode(appId string) {
 		q.sdk.SetUuId(lqcResp.Data.Uuid)
 		q.sdk.SetNKey(lqcResp.Data.Nkey)
 		q.url = lqcResp.Data.Url
+
+		cKey := constant.WXQrCodeCache + q.appId
+
+		if err = q.sdk.Rdb().Set(
+			q.ctx, cKey, lqcResp.Data.Uuid, constant.WXQrCodeExpire,
+		).Err(); err != nil {
+			q.zLog.Error().Err(err).Msg("设置wx的qrcode失败")
+			q.err = errno.SetWxLoginQrCodeCacheError
+		}
 	}
 }
 
@@ -170,8 +181,14 @@ func (q *QuickLogin) CheckLogin() {
 			q.zLog.Warn().Str("err_msg", resp.Msg).Msg("调用检查登录状态失败")
 			continue
 		}
-
-		q.zLog.Info().Msg("亲爱的 (" + resp.Data.StatusInfo.NickName + ") 恭喜你成功登录!")
+		q.wxid = resp.Data.LoginInfo.AcctSectResp.UserName
+		lcKey := constant.WXLoginCache + q.appId
+		if err := q.sdk.Rdb().Set(q.ctx, lcKey, q.wxid, 0).Err(); err != nil {
+			q.zLog.Error().Err(err).Msg("设置wx登录缓存失败")
+			q.err = errno.SetWxLoginCacheError
+		} else {
+			q.zLog.Info().Msg("亲爱的 (" + resp.Data.StatusInfo.NickName + ") 恭喜你成功登录!")
+		}
 		break
 
 	}
@@ -225,7 +242,7 @@ func (q *QuickLogin) Open() {
 		q.ctx, v1.LongOpenRequest{
 			AppId:      q.appId,
 			CleanCache: true,
-			Host:       q.sdk.Config().Sdk.Collect,
+			Host:       "http://127.0.0.1:8073/api/v1/collect",
 			Timeout:    60,
 		},
 	)
