@@ -86,11 +86,6 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
-		if len(p.AppId) == 1 && p.AppId[0] == constant.KhanFree {
-			ctx.Next()
-			return
-		}
-
 		log.C(ctx).Info().Any("paths", paths).Any("permission", p).Msg("paths and permission")
 		if len(paths) > 3 && !strings.Contains(conf.Sdk.Callback, url) {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
@@ -115,6 +110,11 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			log.C(ctx).Error().Err(err).Msg("token 解密失败")
 			ctx.Abort()
 			response.SuccessMsg(ctx, "token 解密失败")
+			return
+		}
+
+		if len(p.AppId) == 1 && p.AppId[0] == constant.KhanFree {
+			ctx.Next()
 			return
 		}
 

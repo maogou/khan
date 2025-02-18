@@ -7,7 +7,7 @@ import (
 )
 
 func (k *Khan) Sync(ctx context.Context, req favor.FavorSyncRequest) (*favor.FavorSyncResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetBody(&favor.FavorSyncResponse{}).Post(favorSync)
+	resp, err := k.client.R().SetBody(req).SetResult(&favor.FavorSyncResponse{}).Post(favorSync)
 
 	if err != nil {
 		log.C(ctx).Error().Msg("调用favorSync方法失败")
