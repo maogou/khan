@@ -1,6 +1,9 @@
 package v1
 
-import "encoding/xml"
+import (
+	"encoding/json"
+	"encoding/xml"
+)
 
 type SnsUploadImgRequest struct {
 	AppId   string   `json:"appId" binding:"required"`
@@ -61,7 +64,7 @@ type SnsWithUserListItem struct {
 }
 
 type SnsDetailResponse struct {
-	Id            int64                 `json:"id"`
+	Id            json.Number           `json:"id"`
 	UserName      string                `json:"userName"`
 	NickName      string                `json:"nickName"`
 	CreateTime    int64                 `json:"createTime"`
@@ -91,7 +94,7 @@ type SnsForwardResponse struct {
 }
 
 type SnsPageItem struct {
-	Id            string                `json:"id"`
+	Id            json.Number           `json:"id"`
 	UserName      string                `json:"userName"`
 	NickName      string                `json:"nickName"`
 	CreateTime    int64                 `json:"createTime"`
@@ -114,9 +117,9 @@ type SnsFriendPageRequest struct {
 
 type SnsFriendPageResponse struct {
 	FirstPageMd5 string        `json:"firstPageMd5"`
-	MaxId        string        `json:"maxId"`
+	MaxId        json.Number   `json:"maxId"`
 	SnsCount     int           `json:"snsCount"`
-	RequestTime  int           `json:"requestTime"`
+	RequestTime  int64         `json:"requestTime"`
 	SnsList      []SnsPageItem `json:"snsList"`
 }
 
@@ -129,7 +132,7 @@ type SnsMyselfPageRequest struct {
 
 type SnsMyselfPageResponse struct {
 	FirstPageMd5 string        `json:"firstPageMd5"`
-	MaxId        string        `json:"maxId"`
+	MaxId        json.Number   `json:"maxId"`
 	SnsCount     int           `json:"snsCount"`
 	RequestTime  int           `json:"requestTime"`
 	SnsList      []SnsPageItem `json:"snsList"`

@@ -1,5 +1,7 @@
 package sns
 
+import "encoding/json"
+
 type SnsFriendPageRequest struct {
 	AppId        string `json:"appId"`
 	MaxId        int    `json:"max_id"`
@@ -20,10 +22,10 @@ type SnsFriendPageResponse struct {
 		FirstPageMd5 string `json:"FirstPageMd5"`
 		ObjectCount  int    `json:"ObjectCount"`
 		ObjectList   []struct {
-			Id         string `json:"Id"`
-			Username   string `json:"Username"`
-			Nickname   string `json:"Nickname"`
-			CreateTime int64  `json:"CreateTime"`
+			Id         json.Number `json:"Id"`
+			Username   string      `json:"Username"`
+			Nickname   string      `json:"Nickname"`
+			CreateTime int64       `json:"CreateTime"`
 			ObjectDesc struct {
 				ILen   int    `json:"iLen"`
 				Buffer string `json:"buffer"`
@@ -105,10 +107,10 @@ type SnsFriendPageResponse struct {
 				RScore   int `json:"RScore"`
 			} `json:"WeAppInfo"`
 		} `json:"ObjectList"`
-		NewRequestTime        int `json:"NewRequestTime"`
-		ObjectCountForSameMd5 int `json:"ObjectCountForSameMd5"`
-		ControlFlag           int `json:"ControlFlag"`
-		ServerConfig          struct {
+		NewRequestTime        []int64 `json:"NewRequestTime"`
+		ObjectCountForSameMd5 []int   `json:"ObjectCountForSameMd5"`
+		ControlFlag           int     `json:"ControlFlag"`
+		ServerConfig          []struct {
 			PostMentionLimit      int `json:"PostMentionLimit"`
 			CopyAndPasteWordLimit int `json:"CopyAndPasteWordLimit"`
 		} `json:"ServerConfig"`

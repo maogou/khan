@@ -55,7 +55,9 @@ func (s *SnsHandler) FriendPage(ctx *gin.Context) {
 		result.FirstPageMd5 = firstPageMd5
 	}
 
-	result.RequestTime = resp.Data.NewRequestTime
+	if len(resp.Data.NewRequestTime) > 0 {
+		result.RequestTime = resp.Data.NewRequestTime[0]
+	}
 	result.SnsCount = objectCount
 
 	if len(resp.Data.ObjectList) > 0 {

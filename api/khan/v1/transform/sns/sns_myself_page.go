@@ -1,5 +1,7 @@
 package sns
 
+import "encoding/json"
+
 type SnsMyselfPageRequest struct {
 	AppId        string `json:"appid"`
 	MaxId        int    `json:"max_id"`
@@ -19,10 +21,10 @@ type SnsMyselfPageResponse struct {
 		FirstPageMd5 string `json:"FirstPageMd5"`
 		ObjectCount  int    `json:"ObjectCount"`
 		ObjectList   []struct {
-			Id         string `json:"Id"`
-			Username   string `json:"Username"`
-			Nickname   string `json:"Nickname"`
-			CreateTime int64  `json:"CreateTime"`
+			Id         json.Number `json:"Id"`
+			Username   string      `json:"Username"`
+			Nickname   string      `json:"Nickname"`
+			CreateTime int64       `json:"CreateTime"`
 			ObjectDesc struct {
 				ILen   int    `json:"iLen"`
 				Buffer string `json:"buffer"`

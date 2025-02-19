@@ -1,5 +1,7 @@
 package sns
 
+import "encoding/json"
+
 type SnsDetailRequest struct {
 	AppId   string `json:"appid"`
 	Decrypt bool   `json:"decrypt"`
@@ -16,10 +18,10 @@ type SnsDetailResponse struct {
 			} `json:"errMsg"`
 		} `json:"baseResponse"`
 		Object struct {
-			Id         int64  `json:"Id"`
-			Username   string `json:"Username"`
-			Nickname   string `json:"Nickname"`
-			CreateTime int64  `json:"CreateTime"`
+			Id         json.Number `json:"Id"`
+			Username   string      `json:"Username"`
+			Nickname   string      `json:"Nickname"`
+			CreateTime int64       `json:"CreateTime"`
 			ObjectDesc struct {
 				ILen   int    `json:"iLen"`
 				Buffer string `json:"buffer"`
