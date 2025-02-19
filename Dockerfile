@@ -21,8 +21,8 @@ FROM alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     apk update --no-cache && apk add --no-cache ca-certificates && \
-    apk add --no-cache redis supervisor curl && \
-    rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+    apk add --no-cache redis supervisor curl logrotate && \
+    rm -rf /var/cache/apk/* /tmp/* /usr/share/man /etc/logrotate.d/*
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/Shanghai
 ENV TZ Asia/Shanghai
@@ -35,6 +35,7 @@ COPY --from=builder /build/docker/config/app.config /app/app.config
 COPY --from=builder /build/docker/config/* /app/config/
 COPY --from=builder /build/khan /app/khan
 COPY --from=builder /build/docker/supervisor/supervisord.conf /etc/supervisord.conf
+COPY --from=builder /build/docker/logrotate/logrotate.conf /etc/logrotate.d/
 
 # 启动Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
