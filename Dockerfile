@@ -35,7 +35,7 @@ COPY --from=builder /build/docker/config/app.config /app/app.config
 COPY --from=builder /build/docker/config/* /app/config/
 COPY --from=builder /build/khan /app/khan
 COPY --from=builder /build/docker/supervisor/supervisord.conf /etc/supervisord.conf
-COPY --from=builder /build/docker/logrotate/logrotate.conf /etc/logrotate.d/
+COPY --from=builder /build/docker/config/khan.conf /etc/logrotate.d/
 
 # 启动Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
