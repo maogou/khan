@@ -1,9 +1,11 @@
 package serve
 
 import (
+	"encoding/json"
 	"errors"
 	"os"
 	"path/filepath"
+	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/config"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
@@ -21,6 +23,8 @@ var (
 	monitor *task.Monitor
 	crontab = cron.New()
 	lic     = &license.License{}
+	p       v1.Permission
+	appIds  = make([]string, 0)
 )
 
 func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
@@ -75,12 +79,19 @@ func Start(conf config.Config, sdk *khan.Khan) *cli.Command {
 				return err
 			}
 
+			if err = json.Unmarshal(lic.Dat, &p); err != nil {
+				log.Error().Err(err).Msg("json解析授权许可证失败")
+				return err
+			}
+
+			appIds = p.AppId
+
 			return nil
 		},
 
 		Action: func(cCtx *cli.Context) error {
 			log.Info().Msg("开启定时任务...")
-			monitor.Run()
+			monitor.Run(appIds)
 			log.Info().Msg("开始启动机器人服务...")
 
 			if err := run(conf, sdk, lic); err != nil {

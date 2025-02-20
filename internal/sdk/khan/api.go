@@ -80,4 +80,6 @@ const (
 
 	redPacket    = "/wxsdk/tenpay/openhb"
 	collectMoney = "/wxsdk/tenpay/collectmoney"
+
+	batchHeartBeat = "/api/toolbox/batchheartbeat"
 )

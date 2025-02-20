@@ -1,7 +1,7 @@
 package task
 
-func (m *Monitor) Run() {
-	m.restart()
+func (m *Monitor) Run(appIds []string) {
+	m.restart(appIds)
 
 	m.crontab.Start()
 }
