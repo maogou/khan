@@ -39,10 +39,11 @@ const (
 	Model        = "iPad"
 	ProtoVersion = "8.0.48"
 
-	WXQrCodeExpire  = 5 * 60
-	WXLoginCache    = "wx_login_cache_"
-	WXQrCodeCache   = "wx_qr_code_"
-	WXCallbackCache = "wx_callback_"
-	WXLongCache     = "long_connect_cache_"
-	WXLongOK        = "longOk"
+	WXQrCodeExpire       = 5 * 60
+	WXLoginCache         = "wx_login_cache_"
+	WXQrCodeCache        = "wx_qr_code_"
+	WXCallbackCache      = "wx_callback_"
+	WXLongCache          = "long_connect_cache_"
+	WXLongOK             = "longOk"
+	WXLongAlreadyConnect = "已开启长链,无需再度开启"
 )

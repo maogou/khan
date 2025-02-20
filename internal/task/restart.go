@@ -68,8 +68,13 @@ func (m *Monitor) reconnection(ctx context.Context, appid, collectUrl string) bo
 		return false
 	}
 	log.C(ctx).Info().Any("loResp", loResp).Msg("调用长连接返回结果")
+
 	if loResp.Ret != 0 {
 		log.C(ctx).Info().Int("ret", loResp.Ret).Msg("loResp.Ret !=0")
+		if loResp.MsgErr == constant.WXLongAlreadyConnect {
+			log.C(ctx).Info().Int("ret", loResp.Ret).Msg(loResp.MsgErr)
+			return true
+		}
 		return false
 	}
 
