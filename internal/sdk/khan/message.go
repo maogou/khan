@@ -7,6 +7,7 @@ import (
 	"smallBot/api/khan/v1/transform/download"
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/api/khan/v1/transform/personal"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
 )
 
@@ -257,6 +258,16 @@ func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback, wxi
 	}
 
 	log.C(ctx).Info().Any("push_data", cData).Msg("推送的消息")
+
+	cKey := constant.WXCallbackCache + req.AppId
+
+	if customCallback, err := k.rdb.Get(ctx, cKey).Result(); err != nil {
+		log.C(ctx).Error().Err(err).Msg("获取自定义回调地址失败")
+	} else if customCallback != "" {
+		callback = customCallback
+	}
+
+	log.C(ctx).Info().Str("callback", callback).Msg("回调地址")
 
 	_, err := k.client.R().SetBody(cData).Post(callback)
 
