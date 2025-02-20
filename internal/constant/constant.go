@@ -43,4 +43,5 @@ const (
 	WXLoginCache    = "wx_login_cache_"
 	WXQrCodeCache   = "wx_qr_code_"
 	WXCallbackCache = "wx_callback_"
+	WXOffline       = "微信已离线"
 )

@@ -13,18 +13,20 @@ type TranferBatchHeartBeatResponse struct {
 	Data struct {
 		List []struct {
 			Appid       string `json:"appid"`
-			ServiceInfo struct {
-				BaseResponse struct {
-					Ret    int `json:"ret"`
-					ErrMsg struct {
-					} `json:"errMsg"`
-				} `json:"BaseResponse"`
-				NextTime                  int   `json:"NextTime"`
-				Selector                  int64 `json:"Selector"`
-				BlueToothBroadCastContent struct {
-					ILen int `json:"iLen"`
-				} `json:"BlueToothBroadCastContent"`
-			} `json:"service_info"`
+			ServiceInfo any    `json:"service_info"`
 		} `json:"list"`
 	} `json:"data"`
+}
+
+type ServiceInfo struct {
+	BaseResponse struct {
+		Ret    int `json:"ret"`
+		ErrMsg struct {
+		} `json:"errMsg"`
+	} `json:"BaseResponse"`
+	NextTime                  int   `json:"NextTime"`
+	Selector                  int64 `json:"Selector"`
+	BlueToothBroadCastContent struct {
+		ILen int `json:"iLen"`
+	} `json:"BlueToothBroadCastContent"`
 }
