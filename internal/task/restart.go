@@ -7,6 +7,7 @@ import (
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
 	"strconv"
+	"time"
 
 	"github.com/rs/xid"
 )
@@ -83,7 +84,9 @@ func (m *Monitor) reconnection(ctx context.Context, appid, collectUrl string) bo
 }
 
 func (m *Monitor) setLongConnectTime(ctx context.Context, appid string) error {
-	return m.sdk.Rdb().SetEx(ctx, constant.WXLongCache+appid, constant.WXLongOK, constant.WXQrCodeExpire*3).Err()
+	return m.sdk.Rdb().SetEx(
+		ctx, constant.WXLongCache+appid, constant.WXLongOK, constant.WXQrCodeExpire*3*time.Second,
+	).Err()
 }
 
 func (m *Monitor) getLongConnectTime(ctx context.Context, appid string) (string, error) {
