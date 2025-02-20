@@ -9,6 +9,7 @@ import (
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
 	"smallBot/internal/sdk/khan"
+	"strconv"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -238,11 +239,13 @@ func (q *QuickLogin) AutoAuth() {
 func (q *QuickLogin) Open() {
 	q.zLog.Info().Msg("正在打开长连接,请稍等...")
 
+	port := strconv.Itoa(q.sdk.Config().Port)
+
 	loResp, err := q.sdk.LongOpen(
 		q.ctx, v1.LongOpenRequest{
 			AppId:      q.appId,
 			CleanCache: true,
-			Host:       "http://127.0.0.1:8073/api/v1/collect",
+			Host:       "http://127.0.0.1:" + port + "/api/v1/collect",
 			Timeout:    60,
 		},
 	)
