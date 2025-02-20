@@ -69,7 +69,7 @@ func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, ti
 				Width:     strconv.Itoa(cast.ToInt(media.Size.Width)),
 				TotalSize: media.Size.TotalSize,
 				Id:        media.Id,
-				Type:      media.Type,
+				Type:      "1",
 				Url:       media.Url.Text,
 				Height:    strconv.Itoa(cast.ToInt(media.Size.Height)),
 				Md5:       media.Url.Md5,
