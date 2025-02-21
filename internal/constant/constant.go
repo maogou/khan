@@ -10,6 +10,7 @@ const (
 	GO111MODULE = "on"
 	GOPROXY     = "https://goproxy.cn/,direct"
 	Windows     = "windows"
+	DebugPpro   = "debug/pprof"
 
 	TypeNameSystemMessages = "SystemMessages"
 	TypeNameSystemSuccess  = "Long_Serve_START_SUCCESS"
