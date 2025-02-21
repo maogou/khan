@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"encoding/json"
+	"fmt"
 	"slices"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/config"
@@ -38,10 +39,14 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 
 		if slices.Contains(excludePaths, url) || strings.Contains(
 			conf.Sdk.Callback, url,
-		) || strings.Contains(constant.DebugPpro, strings.Trim(url, "/")) {
+		) || strings.Contains(strings.Trim(url, "/"), constant.DebugPpro) {
 			ctx.Next()
 			return
 		}
+
+		fmt.Println(strings.Contains(constant.DebugPpro, strings.Trim(url, "/")))
+		fmt.Println(strings.ContainsAny(constant.DebugPpro, strings.Trim(url, "/")))
+		fmt.Println(strings.Trim(url, "/"))
 
 		keys := []string{constant.License, constant.LicenseKey}
 		vals, err := rdb.MGet(ctx, keys...).Result()
