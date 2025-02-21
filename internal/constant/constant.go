@@ -47,4 +47,9 @@ const (
 	WXLongCache          = "long_connect_cache_"
 	WXLongOK             = "longOk"
 	WXLongAlreadyConnect = "已开启长链,无需再度开启"
+
+	WXMsgTypePayment    = "2000"
+	WXPaymentCacheKey   = "wx_2000_"
+	WXMsgTypeRedPacket  = "2001"
+	WXRedPacketCacheKey = "wx_20001_"
 )

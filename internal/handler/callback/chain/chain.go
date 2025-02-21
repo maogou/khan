@@ -19,3 +19,9 @@ type BaseHandler struct {
 func (h *BaseHandler) SetNext(handler Chain) {
 	h.NextHandler = handler
 }
+
+func (h *BaseHandler) ExecuteNext(ctx context.Context, param v1.CollectRequest) {
+	if h.NextHandler != nil {
+		h.NextHandler.HandlerRequest(ctx, param)
+	}
+}

@@ -24,9 +24,7 @@ func (i *Ignore) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 	log.C(ctx).Info().Msg("调用Ignore->HandlerRequest方法")
 
 	if i.IsCanHandler(ctx, param) {
-		if i.NextHandler != nil {
-			i.NextHandler.HandlerRequest(ctx, param)
-		}
+		i.ExecuteNext(ctx, param)
 	}
 }
 

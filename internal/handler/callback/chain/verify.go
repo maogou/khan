@@ -17,9 +17,7 @@ func (v *Verify) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 	log.C(ctx).Info().Msg("调用Verify->HandlerRequest方法")
 
 	if v.IsCanHandler(ctx, param) {
-		if v.NextHandler != nil {
-			v.NextHandler.HandlerRequest(ctx, param)
-		}
+		v.ExecuteNext(ctx, param)
 	}
 }
 

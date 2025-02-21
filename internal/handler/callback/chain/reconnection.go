@@ -25,9 +25,7 @@ func (r *Reconnection) HandlerRequest(ctx context.Context, param v1.CollectReque
 		}
 	}
 
-	if r.NextHandler != nil {
-		r.NextHandler.HandlerRequest(ctx, param)
-	}
+	r.ExecuteNext(ctx, param)
 
 }
 

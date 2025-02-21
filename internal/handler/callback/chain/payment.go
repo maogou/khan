@@ -15,33 +15,26 @@ import (
 	"time"
 )
 
-type RedPacket struct {
+type Payment struct {
 	BaseHandler
 	sdk *khan.Khan
 }
 
-func NewRedPacket(sdk *khan.Khan) *RedPacket {
-	return &RedPacket{
-		sdk: sdk,
-	}
-}
+func (p *Payment) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
+	log.C(ctx).Info().Msg("调用Payment->HandlerRequest方法")
 
-var _ Chain = (*RedPacket)(nil)
-
-func (r *RedPacket) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
-	log.C(ctx).Info().Msg("调用RedPacket->HandlerRequest方法")
-
-	if r.IsCanHandler(ctx, param) {
-		if err := r.Process(ctx, param); err != nil {
-			log.C(ctx).Error().Err(err).Msg("调用RedPacket->Process方法失败")
+	if p.IsCanHandler(ctx, param) {
+		if err := p.Process(ctx, param); err != nil {
+			log.C(ctx).Error().Err(err).Msg("调用Payment->Process方法失败")
 		}
 	}
 
-	r.ExecuteNext(ctx, param)
+	p.ExecuteNext(ctx, param)
 }
 
-func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
-	log.C(ctx).Info().Msg("调用RedPacket->IsCanHandler方法")
+func (p *Payment) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
+	log.C(ctx).Info().Msg("调用Payment->IsCanHandler方法")
+
 	var (
 		rp  v1.WeChatMessageType49
 		cxc v1.CallbackXmlContent
@@ -69,7 +62,7 @@ func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) b
 	}
 
 	cKey := constant.WXPaymentCacheKey + param.AppId
-	exist, err := r.sdk.Rdb().Get(ctx, cKey).Result()
+	exist, err := p.sdk.Rdb().Get(ctx, cKey).Result()
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("获取自动收款失败")
 		return false
@@ -82,15 +75,16 @@ func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) b
 		return false
 	}
 
-	if rp.AppMessage.Type == constant.WXMsgTypeRedPacket {
+	if rp.AppMessage.Type == constant.WXMsgTypePayment {
 		return true
 	}
 
 	return false
 }
 
-func (r *RedPacket) Process(ctx context.Context, param v1.CollectRequest) error {
-	log.C(ctx).Info().Msg("调用RedPacket->Process方法")
+func (p *Payment) Process(ctx context.Context, param v1.CollectRequest) error {
+	log.C(ctx).Info().Msg("调用Payment->Process方法")
+
 	var (
 		rp  v1.WeChatMessageType49
 		cxc v1.CallbackXmlContent
@@ -118,21 +112,29 @@ func (r *RedPacket) Process(ctx context.Context, param v1.CollectRequest) error 
 
 	time.AfterFunc(
 		random*time.Millisecond, func() {
-			resp, err := r.sdk.OpenRedPacket(
-				ctx, trade.RedPacketRequest{
-					AppId:   param.AppId,
-					GroupId: rp.FromUser,
-					Xml:     xc,
+			resp, err := p.sdk.CollectMoney(
+				ctx, trade.CollectMoneyRequest{
+					AppId: param.AppId,
+					ToWid: rp.FromUser,
+					Xml:   xc,
 				},
 			)
 
 			if err != nil {
-				log.C(ctx).Error().Err(err).Msg("调用openRedPacket方法失败")
+				log.C(ctx).Error().Err(err).Msg("调用CollectMoney方法失败")
 			} else {
-				log.C(ctx).Info().Msgf("调用openRedPacket方法成功,返回值:%+v", resp)
+				log.C(ctx).Info().Msgf("调用CollectMoney方法成功,返回值:%+v", resp)
 			}
 		},
 	)
 
 	return nil
 }
+
+func NewPayment(sdk *khan.Khan) *Payment {
+	return &Payment{
+		sdk: sdk,
+	}
+}
+
+var _ Chain = (*Payment)(nil)

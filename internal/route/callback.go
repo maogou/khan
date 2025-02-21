@@ -15,11 +15,13 @@ func initCallbackRoute(route *gin.Engine, sdk *khan.Khan, l *license.License) {
 	pushMsg := chain.NewPushMsg(sdk)
 	reconnection := chain.NewReconnection(sdk)
 	redPacket := chain.NewRedPacket(sdk)
+	payment := chain.NewPayment(sdk)
 
 	verify.SetNext(ignore)
 	ignore.SetNext(pushMsg)
 	pushMsg.SetNext(reconnection)
 	reconnection.SetNext(redPacket)
+	redPacket.SetNext(payment)
 
 	callbackHandler := callback.NewCallbackHandler(sdk, verify)
 

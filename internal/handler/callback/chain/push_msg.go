@@ -35,10 +35,9 @@ func (c *PushMsg) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 
 	if c.IsCanHandler(ctx, param) {
 		_ = c.Process(ctx, param)
-		if c.NextHandler != nil {
-			c.NextHandler.HandlerRequest(ctx, param)
-		}
 	}
+
+	c.ExecuteNext(ctx, param)
 
 }
 
