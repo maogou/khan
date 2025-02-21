@@ -38,7 +38,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 
 		if slices.Contains(excludePaths, url) || strings.Contains(
 			conf.Sdk.Callback, url,
-		) || strings.Contains(constant.DebugPpro, url) {
+		) || strings.Contains(constant.DebugPpro, strings.Trim(url, "/")) {
 			ctx.Next()
 			return
 		}
