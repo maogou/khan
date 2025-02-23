@@ -71,7 +71,7 @@ func (r *RedPacket) IsCanHandler(ctx context.Context, param v1.CollectRequest) b
 	cKey := constant.WXPaymentCacheKey + param.AppId
 	exist, err := r.sdk.Rdb().Get(ctx, cKey).Result()
 	if err != nil {
-		log.C(ctx).Error().Err(err).Msg("获取自动收款失败")
+		log.C(ctx).Error().Err(err).Msg("获取自动抢红包配置失败")
 		return false
 	}
 
