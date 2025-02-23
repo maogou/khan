@@ -40,8 +40,6 @@ func (t *TransferHandler) Backup(ctx *gin.Context) {
 			continue
 		}
 
-		log.C(ctx).Info().Str("key", key).Str("value", value).Msg("获取redis数据成功")
-
 		result.Data = append(
 			result.Data, v1.TransferBackupItem{
 				Key:   key,
