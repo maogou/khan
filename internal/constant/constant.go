@@ -52,4 +52,9 @@ const (
 	WXPaymentCacheKey   = "wx_2000_"
 	WXMsgTypeRedPacket  = "2001"
 	WXRedPacketCacheKey = "wx_20001_"
+
+	SnsFun          = "sns"
+	RedPacketFun    = "redPacket"
+	TransferFun     = "transfer"
+	CollectMoneyFun = "collectMoney"
 )

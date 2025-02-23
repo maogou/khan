@@ -1,8 +1,9 @@
 package demo
 
 import (
-	"github.com/rs/zerolog/log"
 	"smallBot/internal/sdk/khan"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/urfave/cli/v2"
 )

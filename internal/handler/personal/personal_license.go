@@ -36,7 +36,7 @@ func (p *PersonalHandler) License(ctx *gin.Context) {
 		return
 	}
 
-	appid := decrypted[len(constant.AppName):len(decrypted)]
+	appid := decrypted[len(constant.AppName):]
 
 	keys := []string{constant.License, constant.LicenseKey}
 	vals, err := p.sdk.Rdb().MGet(ctx, keys...).Result()
@@ -68,6 +68,12 @@ func (p *PersonalHandler) License(ctx *gin.Context) {
 	).Replace(pKey)
 
 	lic, err := license.Parse(pKey, lb)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("license解析失败")
+		response.SuccessMsg(ctx, "license解析失败")
+		return
+	}
 
 	if err = json.Unmarshal(lic.Dat, &permission); err != nil {
 		log.C(ctx).Error().Err(err).Msg("json解析授权许可证失败")

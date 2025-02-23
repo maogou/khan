@@ -2,10 +2,11 @@ package task
 
 import (
 	"context"
-	"github.com/rs/xid"
 	"os/exec"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
+
+	"github.com/rs/xid"
 )
 
 func (m *Monitor) logrotate() {

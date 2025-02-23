@@ -20,3 +20,10 @@ type CallbackXmlContent struct {
 	MsgType int        `json:"MsgType"`
 	Content XmlContent `json:"Content"`
 }
+
+type FavItem struct {
+	XMLName xml.Name `xml:"favitem"`
+	Source  struct {
+		SourceID string `xml:"sourceid,attr"`
+	} `xml:"source"`
+}
