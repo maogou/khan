@@ -35,6 +35,8 @@ func NewForwardChain(sdk *khan.Khan) *Processing {
 			chain.NewSnsDetailHandler(sdk),
 			chain.NewPareSnsHandler(sdk),
 			chain.NewSendHandler(sdk),
+			chain.NewDeleteFavHandler(sdk),
+			chain.NewNotifyHandler(sdk),
 		},
 	}
 }

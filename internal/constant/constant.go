@@ -57,4 +57,6 @@ const (
 	RedPacketFun    = "redPacket"
 	TransferFun     = "transfer"
 	CollectMoneyFun = "collectMoney"
+
+	FavIds = "fav_id_"
 )

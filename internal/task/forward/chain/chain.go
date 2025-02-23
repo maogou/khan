@@ -17,7 +17,7 @@ type PipelineData struct {
 	FavID        int
 	SnsID        string
 	ContentStyle int
-	SyncResult   *favor.FavorSyncResponse
+	IsForwardOk  bool
 	FavDetail    *favor.FavorDetailResponse
 	SnsDetail    *sns.SnsDetailResponse
 	Req          v1.SnsForwardRequest

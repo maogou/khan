@@ -3,8 +3,10 @@ package chain
 import (
 	"context"
 	"errors"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/sdk/khan"
+	"strconv"
 )
 
 type FavIdHandler struct {
@@ -22,20 +24,29 @@ var _ Handler = (*FavIdHandler)(nil)
 
 func (f *FavIdHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	log.C(ctx).Info().Str("appid", pld.AppID).Msg("开始执行获取收藏夹ID.....")
-	if len(pld.SyncResult.Data.List) == 0 {
-		log.C(ctx).Warn().Msg("收藏夹为空")
-		return errors.New("收藏夹为空")
+
+	if lLen, err := f.sdk.Rdb().LLen(ctx, constant.FavIds+pld.AppID).Result(); err != nil {
+		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Msg("调用rdb.LLen方法失败")
+		return err
+	} else if lLen == 0 {
+		log.C(ctx).Info().Str("appid", pld.AppID).Msg("队列中没有需要转发的朋友圈")
+		return errors.New("队列中没有需要转发的朋友圈")
 	}
 
-	for _, fav := range pld.SyncResult.Data.List {
-		if fav.Flag == 1 && fav.FavId > 0 {
-			continue
-		}
+	favId, err := f.sdk.Rdb().LPop(ctx, constant.FavIds+pld.AppID).Result()
 
-		pld.FavID = fav.FavId
-
-		break
+	if err != nil {
+		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Msg("调用rdb.LPop方法失败")
+		return err
 	}
+
+	favInt, err := strconv.Atoi(favId)
+	if err != nil {
+		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Msg("调用strconv.Atoi方法失败")
+		return err
+	}
+
+	pld.FavID = favInt
 
 	if pld.FavID == 0 {
 		log.C(ctx).Warn().Str("appid", pld.AppID).Msg("收藏夹中没有需要转发的朋友圈")

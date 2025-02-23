@@ -41,7 +41,10 @@ func (p *ParseSnsHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	req = v1.SnsForwardRequest{
 		AppId:   pld.AppID,
 		Privacy: false,
-		SnsXml:  pld.SnsDetail.Data.Object.ObjectDesc.Buffer,
+		DisableWxIds: []string{
+			pld.SnsDetail.Data.Object.Username,
+		},
+		SnsXml: pld.SnsDetail.Data.Object.ObjectDesc.Buffer,
 	}
 
 	pld.Req = req
