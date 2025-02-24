@@ -15,14 +15,15 @@ func (m *Monitor) forward(appIds []string) {
 		"@every 30s", func() {
 
 			var wg conc.WaitGroup
-			ctx := context.WithValue(context.Background(), constant.QID, xid.New().String())
 			chain := processing.NewForwardChain(m.sdk)
 
-			log.C(ctx).Info().Msg("开始监控转发消息.....")
+			log.C(context.Background()).Info().Msg("开始监控转发消息.....")
 
 			for _, appId := range appIds {
 				wg.Go(
 					func() {
+						ctx := context.WithValue(context.Background(), constant.QID, xid.New().String())
+
 						if err := chain.Execute(ctx, appId); err != nil {
 							log.C(ctx).Error().Err(err).Str("appId", appId).Msg("处理流程失败")
 							return
