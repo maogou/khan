@@ -14,7 +14,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o khan smallBot/cmd
+RUN CGO_ENABLED=0 go build -a -ldflags="-s -w" -o khan smallBot/cmd
 
 
 FROM alpine
