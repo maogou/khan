@@ -97,5 +97,7 @@ var (
 	SnsSendExcludeImageError          = &ErrNo{Code: 10071, Message: "转发非图片朋友圈失败"}
 	SnsForwardError                   = &ErrNo{Code: 10072, Message: "转发朋友圈失败"}
 
-	HearBeatError = &ErrNo{Code: 10073, Message: "心跳失败"}
+	HearBeatError    = &ErrNo{Code: 10073, Message: "心跳失败"}
+	SecAutoAuthError = &ErrNo{Code: 10074, Message: "自动授权失败"}
+	LongOpenError    = &ErrNo{Code: 10075, Message: "长连接打开失败"}
 )

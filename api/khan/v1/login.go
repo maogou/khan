@@ -49,3 +49,7 @@ type LogoutRequest struct {
 type CheckOnlineRequest struct {
 	AppId string `json:"appId" binding:"required"`
 }
+
+type AppIdRequest struct {
+	AppId string `json:"appId" binding:"required"`
+}
