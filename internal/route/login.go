@@ -15,5 +15,6 @@ func initLoginHandler(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v1/api/login/getLoginQrCode", loginHandler.LoginQrCode)
 	engine.POST("/v1/api/login/checkLogin", loginHandler.CheckLogin)
 	engine.POST("/v1/api/login/setCallback", loginHandler.SetCallback)
+	engine.POST("/v1/api/login/checkOnline", loginHandler.CheckOnline)
 
 }

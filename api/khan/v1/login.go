@@ -41,3 +41,11 @@ type LoginCreateApp struct {
 	AppId string `json:"app_id"`
 	Tip   string `json:"tip"`
 }
+
+type LogoutRequest struct {
+	AppId string `json:"appId" binding:"required"`
+}
+
+type CheckOnlineRequest struct {
+	AppId string `json:"appId" binding:"required"`
+}
