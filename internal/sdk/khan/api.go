@@ -20,6 +20,7 @@ const (
 	sendApplet   = "/wxsdk/message/sendapplet"
 	downloadImg  = "/wxsdk/other/resourcedownload"
 	revokeMsg    = "/wxsdk/message/revoke"
+	forwardUrl   = "/wxsdk/message/sendapp"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"

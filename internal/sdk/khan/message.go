@@ -300,3 +300,14 @@ func (k *Khan) ForwardMiniApp(ctx context.Context, req message.ForwardMiniAppReq
 
 	return resp.Result().(*message.ForwardMiniAppResponse), nil
 }
+
+func (k *Khan) ForwardUrl(ctx context.Context, req message.ForwardUrlRequest) (*message.ForwardUrlResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.ForwardUrlResponse{}).Post(forwardUrl)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用forwardUrl方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.ForwardUrlResponse), nil
+}
