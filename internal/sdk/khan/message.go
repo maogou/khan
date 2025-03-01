@@ -322,3 +322,14 @@ func (k *Khan) ForwardVideo(ctx context.Context, req message.ForwardVideoRequest
 
 	return resp.Result().(*message.ForwardVideoResponse), nil
 }
+
+func (k *Khan) ForwardImage(ctx context.Context, req message.ForwardImageRequest) (*message.ForwardImageResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.ForwardImageResponse{}).Post(forwardImage)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用forwardImage方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.ForwardImageResponse), nil
+}

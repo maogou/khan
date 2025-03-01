@@ -22,6 +22,7 @@ const (
 	revokeMsg    = "/wxsdk/message/revoke"
 	forwardUrl   = "/wxsdk/message/sendapp"
 	forwardVideo = "/wxsdk/message/sendcdnvideo"
+	forwardImage = "/wxsdk/message/sendcdnimg"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"

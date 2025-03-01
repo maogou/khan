@@ -188,7 +188,20 @@ type ForwardVideoResponse struct {
 	CreateTime int64  `json:"createTime"`
 	MsgId      int    `json:"msgId"`
 	NewMsgId   int64  `json:"newMsgId"`
-	Type       int    `json:"type"`
 	AesKey     string `json:"aesKey"`
-	Length     int    `json:"length"`
+}
+
+type ForwardImageRequest struct {
+	AppId  string `json:"appId" binding:"required"`
+	ToWxid string `json:"toWxid" binding:"required"`
+	Xml    string `json:"xml" binding:"required"`
+}
+
+type ForwardImageResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	AesKey     string `json:"aesKey"`
+	FileId     string `json:"fileId"`
 }
