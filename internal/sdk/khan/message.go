@@ -278,3 +278,25 @@ func (k *Khan) PushMsg(ctx context.Context, req v1.CollectRequest, callback, wxi
 
 	return nil
 }
+
+func (k *Khan) RevokeMsg(ctx context.Context, req message.RevokeMsgRequest) (*message.RevokeMsgResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.RevokeMsgResponse{}).Post(revokeMsg)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用revokeMsg方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.RevokeMsgResponse), nil
+}
+
+func (k *Khan) ForwardMiniApp(ctx context.Context, req message.ForwardMiniAppRequest) (*message.ForwardMiniAppResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.ForwardMiniAppResponse{}).Post(sendApplet)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用forwardMiniApp方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.ForwardMiniAppResponse), nil
+}

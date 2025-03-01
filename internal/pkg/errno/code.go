@@ -14,6 +14,7 @@ var (
 	GetFileBase64Error  = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}
+	ForwardMiniAppError = &ErrNo{Code: 10002, Message: "转发小程序失败"}
 
 	SendMsgError                = &ErrNo{Code: 10003, Message: "发送消息失败"}
 	DownloadImgError            = &ErrNo{Code: 10004, Message: "下载图片失败"}
@@ -35,6 +36,7 @@ var (
 	PostNameCardError           = &ErrNo{Code: 10020, Message: "发送名片消息失败"}
 	XmlEncodeError              = &ErrNo{Code: 10021, Message: "xml编码失败"}
 	PostEmojiError              = &ErrNo{Code: 10022, Message: "发送表情消息失败"}
+	RevokeMsgError              = &ErrNo{Code: 10021, Message: "撤回消息失败"}
 
 	ContactListError        = &ErrNo{Code: 10023, Message: "获取联系人列表失败"}
 	RequestCanceled         = &ErrNo{Code: 10024, Message: "请求被取消"}

@@ -140,3 +140,25 @@ type DownloadImgRequest struct {
 type DownloadImgResponse struct {
 	FileUrl string `json:"fileUrl"`
 }
+
+type RevokeMsgRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ToWxid     string `json:"toWxid" binding:"required"`
+	NewMsgId   int64  `json:"newMsgId" binding:"required"`
+	CreateTime int64  `json:"createTime" binding:"required"`
+}
+
+type ForwardMiniAppRequest struct {
+	AppId       string `json:"appId" binding:"required"`
+	ToWxid      string `json:"toWxid" binding:"required"`
+	Xml         string `json:"xml" binding:"required"`
+	CoverImgUrl string `json:"coverImgUrl" binding:"required"`
+}
+
+type ForwardMiniAppResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}

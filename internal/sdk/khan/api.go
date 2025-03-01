@@ -19,6 +19,7 @@ const (
 	sendEmoji    = "/wxsdk/message/sendemoji"
 	sendApplet   = "/wxsdk/message/sendapplet"
 	downloadImg  = "/wxsdk/other/resourcedownload"
+	revokeMsg    = "/wxsdk/message/revoke"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"
