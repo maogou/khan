@@ -21,6 +21,7 @@ const (
 	downloadImg  = "/wxsdk/other/resourcedownload"
 	revokeMsg    = "/wxsdk/message/revoke"
 	forwardUrl   = "/wxsdk/message/sendapp"
+	forwardVideo = "/wxsdk/message/sendcdnvideo"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"
