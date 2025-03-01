@@ -24,6 +24,7 @@ const (
 	forwardVideo = "/wxsdk/message/sendcdnvideo"
 	forwardImage = "/wxsdk/message/sendcdnimg"
 	forwardFile  = "/wxsdk/message/sendcdnfile"
+	postAppMsg   = "/wxsdk/message/sendapp"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"

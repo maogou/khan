@@ -355,3 +355,14 @@ func (k *Khan) SendMiniApp(ctx context.Context, req message.SendMiniAppRequest) 
 
 	return resp.Result().(*message.SendMiniAppResponse), nil
 }
+
+func (k *Khan) PostAppMsg(ctx context.Context, req message.PostAppMsgRequest) (*message.PostAppMsgResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.PostAppMsgResponse{}).Post(postAppMsg)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用postAppMsg方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.PostAppMsgResponse), nil
+}

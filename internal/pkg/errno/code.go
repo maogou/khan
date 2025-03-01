@@ -15,6 +15,7 @@ var (
 	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
 	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}
 	ForwardMiniAppError = &ErrNo{Code: 10002, Message: "转发小程序失败"}
+	SendAppMsgError     = &ErrNo{Code: 10003, Message: "发送appMsg失败"}
 
 	SendMsgError                = &ErrNo{Code: 10003, Message: "发送消息失败"}
 	DownloadImgError            = &ErrNo{Code: 10004, Message: "下载图片失败"}

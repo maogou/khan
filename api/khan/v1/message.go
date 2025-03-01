@@ -238,3 +238,17 @@ type SendMiniAppResponse struct {
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
 }
+
+type PostAppMsgRequest struct {
+	AppId  string `json:"appId" binding:"required"`
+	ToWxid string `json:"toWxid" binding:"required"`
+	Appmsg string `json:"appmsg" binding:"required"`
+}
+
+type PostAppMsgResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}
