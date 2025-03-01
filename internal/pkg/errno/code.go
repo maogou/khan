@@ -40,6 +40,7 @@ var (
 	ForwardUrlError             = &ErrNo{Code: 10022, Message: "转发url失败"}
 	ForwardVideoError           = &ErrNo{Code: 10022, Message: "转发视频失败"}
 	ForwardFileError            = &ErrNo{Code: 10022, Message: "转发文件失败"}
+	SendMiniAppError            = &ErrNo{Code: 10022, Message: "发送小程序失败"}
 
 	ContactListError        = &ErrNo{Code: 10023, Message: "获取联系人列表失败"}
 	RequestCanceled         = &ErrNo{Code: 10024, Message: "请求被取消"}

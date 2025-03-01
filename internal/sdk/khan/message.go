@@ -344,3 +344,14 @@ func (k *Khan) ForwardFile(ctx context.Context, req message.ForwardFileRequest) 
 
 	return resp.Result().(*message.ForwardFileResponse), nil
 }
+
+func (k *Khan) SendMiniApp(ctx context.Context, req message.SendMiniAppRequest) (*message.SendMiniAppResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.SendMiniAppResponse{}).Post(sendApplet)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用sendMiniApp方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.SendMiniAppResponse), nil
+}

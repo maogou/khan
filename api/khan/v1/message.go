@@ -219,3 +219,22 @@ type ForwardFileResponse struct {
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
 }
+
+type SendMiniAppRequest struct {
+	AppId       string `json:"appId" binding:"required"`
+	ToWxid      string `json:"toWxid" binding:"required"`
+	MiniAppId   string `json:"miniAppId" binding:"required"`
+	UserName    string `json:"userName" binding:"required"`
+	Title       string `json:"title" binding:"required"`
+	CoverImgUrl string `json:"coverImgUrl" binding:"required"`
+	PagePath    string `json:"pagePath" binding:"required"`
+	DisplayName string `json:"displayName" binding:"required"`
+}
+
+type SendMiniAppResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}

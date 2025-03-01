@@ -241,3 +241,44 @@ const SnsVideo = `
     </ContentObject>
 </TimelineObject>
 `
+
+const SendApplet = `
+<appmsg appid="" sdkver="0">
+    <title>{{.Title}}</title>
+    <des>{{.Title}}</des>
+    <type>33</type>
+    <url>https://mp.weixin.qq.com/mp/waerrpage?appid={{.AppId}}&amp;type=upgrade&amp;upgradetype=3#wechat_redirect</url>
+    <appattach>
+        <cdnthumburl>
+            3057020100044b304902010002048399cc8402032f58510204922a83b7020463d9b375042465613136623764312d396633652d343638352d626465332d6336643962343961643561320204011400030201000405004c54a100
+        </cdnthumburl>
+        <cdnthumbmd5>fc5bc8694248295ef09e9fbea18596e1</cdnthumbmd5>
+        <cdnthumblength>49758</cdnthumblength>
+        <cdnthumbwidth>720</cdnthumbwidth>
+        <cdnthumbheight>576</cdnthumbheight>
+        <cdnthumbaeskey>d48853fcee2638a34fd6b91c048c47ff</cdnthumbaeskey>
+        <aeskey>d48853fcee2638a34fd6b91c048c47ff</aeskey>
+        <encryver>0</encryver>
+        <filekey>wxid_6qzt22_452_1675211637</filekey>
+    </appattach>
+    <sourceusername>{{.UserName}}</sourceusername>
+    <sourcedisplayname>{{.DisplayName}}</sourcedisplayname>
+    <md5>fc5bc8694248295ef09e9fbea18596e1</md5>
+    <recorditem><![CDATA[(null)]]></recorditem>
+    <uploadpercent>98</uploadpercent>
+    <weappinfo>
+        <username><![CDATA[{{.UserName}}]]></username>
+        <appid><![CDATA[{{.AppId}}]]></appid>
+        <type>2</type>
+        <version>13</version>
+        <weappiconurl></weappiconurl>
+        <pagepath><![CDATA[{{.PagePath}}]]></pagepath>
+        <shareId><![CDATA[0_wxb4e9537053626aae_704fc54cfed53ed6c8e85a2cf504a0f5_1675211636_0]]></shareId>
+        <appservicetype>0</appservicetype>
+        <brandofficialflag>0</brandofficialflag>
+        <showRelievedBuyFlag>0</showRelievedBuyFlag>
+        <subType>0</subType>
+        <isprivatemessage>0</isprivatemessage>
+    </weappinfo>
+</appmsg>
+`
