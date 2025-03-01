@@ -205,3 +205,17 @@ type ForwardImageResponse struct {
 	AesKey     string `json:"aesKey"`
 	FileId     string `json:"fileId"`
 }
+
+type ForwardFileRequest struct {
+	AppId  string `json:"appId" binding:"required"`
+	ToWxid string `json:"toWxid" binding:"required"`
+	Xml    string `json:"xml" binding:"required"`
+}
+
+type ForwardFileResponse struct {
+	ToWxid     string `json:"toWxid"`
+	CreateTime int    `json:"createTime"`
+	MsgId      int    `json:"msgId"`
+	NewMsgId   int64  `json:"newMsgId"`
+	Type       int    `json:"type"`
+}

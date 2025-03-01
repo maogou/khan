@@ -24,4 +24,5 @@ func initMessageRoute(route *gin.Engine, sdk *khan.Khan) {
 	route.POST("/v1/api/message/forwardUrl", messageHandler.ForwardUrl)
 	route.POST("/v1/api/message/forwardVideo", messageHandler.ForwardVideo)
 	route.POST("/v1/api/message/forwardImage", messageHandler.ForwardImage)
+	route.POST("/v1/api/message/forwardFile", messageHandler.ForwardFile)
 }

@@ -333,3 +333,14 @@ func (k *Khan) ForwardImage(ctx context.Context, req message.ForwardImageRequest
 
 	return resp.Result().(*message.ForwardImageResponse), nil
 }
+
+func (k *Khan) ForwardFile(ctx context.Context, req message.ForwardFileRequest) (*message.ForwardFileResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&message.ForwardFileResponse{}).Post(forwardFile)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用forwardFile方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*message.ForwardFileResponse), nil
+}

@@ -23,6 +23,7 @@ const (
 	forwardUrl   = "/wxsdk/message/sendapp"
 	forwardVideo = "/wxsdk/message/sendcdnvideo"
 	forwardImage = "/wxsdk/message/sendcdnimg"
+	forwardFile  = "/wxsdk/message/sendcdnfile"
 
 	contactList         = "/wxsdk/contacts/listings"
 	contactSearch       = "/wxsdk/contacts/search"
