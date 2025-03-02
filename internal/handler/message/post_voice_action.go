@@ -26,7 +26,7 @@ func (m *MessageHandler) PostVoice(ctx *gin.Context) {
 			Appid:    req.AppId,
 			ToWxid:   req.ToWxid,
 			FileLink: req.VoiceUrl,
-			Second:   req.VoiceDuration,
+			Second:   req.VoiceDuration / 1000,
 		},
 	)
 

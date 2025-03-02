@@ -1,6 +1,7 @@
 package contact
 
 import (
+	"encoding/json"
 	"errors"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/contact"
@@ -8,6 +9,7 @@ import (
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/singleflight"
@@ -95,6 +97,22 @@ func (c *ContactHandler) List(ctx *gin.Context) {
 					}
 				}
 			}
+		}
+
+		cKey := "contact_cache_" + req.AppId
+
+		cByte, err := json.Marshal(result)
+
+		if err != nil {
+			log.C(ctx).Error().Err(err).Msg("json序列化失败")
+			response.Fail(ctx, errno.JsonEncodeError)
+			return
+		}
+
+		if err = c.sdk.Rdb().Set(ctx, cKey, string(cByte), 10*time.Minute).Err(); err != nil {
+			log.C(ctx).Error().Err(err).Msg("设置联系人缓存失败")
+			response.Fail(ctx, errno.SetContactCacheError)
+			return
 		}
 
 		response.Success(ctx, result)

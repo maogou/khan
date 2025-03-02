@@ -44,20 +44,21 @@ var (
 	SendMiniAppError            = &ErrNo{Code: 10022, Message: "发送小程序失败"}
 	LogoutError                 = &ErrNo{Code: 10022, Message: "退出登录失败"}
 
-	ContactListError        = &ErrNo{Code: 10023, Message: "获取联系人列表失败"}
-	RequestCanceled         = &ErrNo{Code: 10024, Message: "请求被取消"}
-	ContactSearchError      = &ErrNo{Code: 10025, Message: "搜索联系人失败"}
-	ContactAddError         = &ErrNo{Code: 10026, Message: "添加联系人失败"}
-	ContactDelError         = &ErrNo{Code: 10027, Message: "删除联系人失败"}
-	ContactInfoError        = &ErrNo{Code: 10028, Message: "获取联系人信息失败"}
-	ContactDetailError      = &ErrNo{Code: 10029, Message: "获取联系人详细信息失败"}
-	ContactSetOnlyChatError = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
-	ContactSetRemarkError   = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
-
-	LabelAddError    = &ErrNo{Code: 10032, Message: "添加标签失败"}
-	LabelDeleteError = &ErrNo{Code: 10033, Message: "删除标签失败"}
-	LabelListError   = &ErrNo{Code: 10034, Message: "获取标签列表失败"}
-	LabelModifyError = &ErrNo{Code: 10035, Message: "修改标签失败"}
+	ContactListError         = &ErrNo{Code: 10023, Message: "获取联系人列表失败"}
+	RequestCanceled          = &ErrNo{Code: 10024, Message: "请求被取消"}
+	ContactSearchError       = &ErrNo{Code: 10025, Message: "搜索联系人失败"}
+	ContactAddError          = &ErrNo{Code: 10026, Message: "添加联系人失败"}
+	ContactDelError          = &ErrNo{Code: 10027, Message: "删除联系人失败"}
+	ContactInfoError         = &ErrNo{Code: 10028, Message: "获取联系人信息失败"}
+	ContactDetailError       = &ErrNo{Code: 10029, Message: "获取联系人详细信息失败"}
+	ContactSetOnlyChatError  = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
+	ContactSetRemarkError    = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
+	GetContactListCacheError = &ErrNo{Code: 10031, Message: "获取联系人缓存失败"}
+	SetContactCacheError     = &ErrNo{Code: 10032, Message: "设置联系人缓存失败"}
+	LabelAddError            = &ErrNo{Code: 10032, Message: "添加标签失败"}
+	LabelDeleteError         = &ErrNo{Code: 10033, Message: "删除标签失败"}
+	LabelListError           = &ErrNo{Code: 10034, Message: "获取标签列表失败"}
+	LabelModifyError         = &ErrNo{Code: 10035, Message: "修改标签失败"}
 
 	LoginQrCodeError              = &ErrNo{Code: 10036, Message: "获取登录二维码失败"}
 	CheckLoginQrCodeError         = &ErrNo{Code: 10037, Message: "检查登录二维码失败"}
@@ -108,4 +109,6 @@ var (
 	HearBeatError    = &ErrNo{Code: 10073, Message: "心跳失败"}
 	SecAutoAuthError = &ErrNo{Code: 10074, Message: "自动授权失败"}
 	LongOpenError    = &ErrNo{Code: 10075, Message: "长连接打开失败"}
+	JsonEncodeError  = &ErrNo{Code: 10076, Message: "json编码失败"}
+	JsonDecodeError  = &ErrNo{Code: 10077, Message: "json解码失败"}
 )
