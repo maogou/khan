@@ -20,7 +20,7 @@ import (
 var excludePaths = []string{
 	"/",
 	"/api/v1/collect",
-	"/v2/api/download",
+	"/v1/api/download",
 	"/api/v1/callback",
 	"/v1/api/personal/license",
 	"/v1/api/login/createApp",

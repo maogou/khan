@@ -49,7 +49,7 @@ func (m *MessageHandler) PostImage(ctx *gin.Context) {
 			CreateTime: resp.Data.SendMsgStatus.CreateTime,
 			MsgId:      resp.Data.SendMsgStatus.Msgid,
 			NewMsgId:   resp.Data.SendMsgStatus.Newmsgid,
-			Type:       resp.Data.SendMsgStatus.MsgSource,
+			Type:       6,
 			AesKey:     resp.Data.SendMsgStatus.Aeskey,
 			FileId:     resp.Data.SendMsgStatus.Fileid,
 			Height:     resp.Data.BasicData.Height,
