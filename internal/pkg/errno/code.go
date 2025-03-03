@@ -54,6 +54,8 @@ var (
 	ContactSetOnlyChatError  = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
 	ContactSetRemarkError    = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
 	GetContactListCacheError = &ErrNo{Code: 10031, Message: "获取联系人缓存失败"}
+	ContactUploadMobileError = &ErrNo{Code: 10032, Message: "上传手机号失败"}
+	ContactGetMobileError    = &ErrNo{Code: 10032, Message: "获取手机号失败"}
 	SetContactCacheError     = &ErrNo{Code: 10032, Message: "设置联系人缓存失败"}
 	LabelAddError            = &ErrNo{Code: 10032, Message: "添加标签失败"}
 	LabelDeleteError         = &ErrNo{Code: 10033, Message: "删除标签失败"}

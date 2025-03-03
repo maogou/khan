@@ -84,8 +84,7 @@ const (
 	favorDetail = "/wxsdk/favor/getcontent"
 	favorDelete = "/wxsdk/favor/delete"
 
-	redPacket    = "/wxsdk/tenpay/openhb"
-	collectMoney = "/wxsdk/tenpay/collectmoney"
-
+	redPacket      = "/wxsdk/tenpay/openhb"
+	collectMoney   = "/wxsdk/tenpay/collectmoney"
 	batchHeartBeat = "/api/toolbox/batchheartbeat"
 )
