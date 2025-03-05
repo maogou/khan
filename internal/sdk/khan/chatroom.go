@@ -136,3 +136,47 @@ func (k *Khan) ChatroomQrcode(ctx context.Context, req chatroom.ChatroomQrcodeRe
 
 	return resp.Result().(*chatroom.ChatroomQrcodeResponse), nil
 }
+
+func (k *Khan) ChatroomDeleteMember(ctx context.Context, req chatroom.ChatroomDeleteMebmerRequest) (*chatroom.ChatroomDeleteMebmerResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomDeleteMebmerResponse{}).Post(chatroomDeleteMember)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomDeleteMember方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomDeleteMebmerResponse), nil
+}
+
+func (k *Khan) ChatroomInvite(ctx context.Context, req chatroom.ChatroomInviteRequest) (*chatroom.ChatroomInviteResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomInviteResponse{}).Post(chatroomInvite)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomInvite方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomInviteResponse), nil
+}
+
+func (k *Khan) ChatroomAdminOperate(ctx context.Context, req chatroom.ChatroomAdminOperateRequest) (*chatroom.ChatroomAdminOperateResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomAdminOperateResponse{}).Post(chatroomAdminOperate)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomAdminOperate方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomAdminOperateResponse), nil
+}
+
+func (k *Khan) AccessApplyCheckApprove(ctx context.Context, req chatroom.ChatroomConfirInviteRequest) (*chatroom.ChatroomConfirInviteResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomConfirInviteResponse{}).Post(chatroomConfirmInvite)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用AccessApplyCheckApprove方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomConfirInviteResponse), nil
+}

@@ -13,7 +13,7 @@ import (
 func (c *ChatRoomHandler) ModifyMyselfName(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用ChatRoomHandler->ModifyMyselfName方法")
 
-	var req v1.ChatroomModifyNameRequest
+	var req v1.ChatroomModifyMyselfNameRequest
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		log.C(ctx).Error().Err(err).Msg("ChatRoomHandler->ModifyMyselfName方法参数绑定失败")
@@ -25,7 +25,7 @@ func (c *ChatRoomHandler) ModifyMyselfName(ctx *gin.Context) {
 		ctx, chatroom.ChatroomModifyNickNameRequest{
 			Appid:    req.AppId,
 			GroupId:  req.ChatroomId,
-			NickName: req.ChatroomName,
+			NickName: req.NickName,
 		},
 	)
 
@@ -41,5 +41,5 @@ func (c *ChatRoomHandler) ModifyMyselfName(ctx *gin.Context) {
 		return
 	}
 
-	response.SuccessMsg(ctx, "修改群聊名称成功")
+	response.SuccessMsg(ctx, "修改自己在群聊昵称成功")
 }

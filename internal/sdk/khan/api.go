@@ -60,6 +60,10 @@ const (
 	chatroomContactSaveList  = "/wxsdk/group/movecontractlist"
 	chatroomSetSilence       = "/wxsdk/group/setdisturb"
 	chatroomQrcode           = "/wxsdk/group/getqrcode"
+	chatroomDeleteMember     = "/wxsdk/group/delmember"
+	chatroomInvite           = "/wxsdk/group/invite"
+	chatroomAdminOperate     = "/wxsdk/group/admin"
+	chatroomConfirmInvite    = "/wxsdk/group/approveaddchatroommember"
 
 	snsUploadImg                 = "/wxsdk/sns/uploadimage"
 	snsFriendPage                = "/wxsdk/sns/userpage"
