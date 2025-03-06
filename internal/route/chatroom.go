@@ -26,4 +26,6 @@ func initChatroomHandler(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v1/api/group/adminOperate", chatroomHandler.AdminOperate)
 	engine.POST("/v1/api/group/roomAccessApplyCheckApprove", chatroomHandler.ConfirmInvite)
 	engine.POST("/v1/api/group/joinRoomUsingQRCode", chatroomHandler.ScanQrcodeEnter)
+	engine.POST("/v1/api/group/saveContractList", chatroomHandler.MoveContractList)
+	engine.POST("/v1/api/group/addGroupMemberAsFriend", chatroomHandler.AddGroupMemberAsFriend)
 }

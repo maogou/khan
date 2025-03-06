@@ -145,3 +145,20 @@ type ChatroomScanQrcodeResponse struct {
 	ChatroomName string `json:"chatroomName"`
 	ChatroomId   string `json:"chatroomId"`
 }
+
+type ChatroomMoveContractListRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	OperType   int    `json:"operType" binding:"required,oneof=2 3"`
+}
+
+type ChatroomAddGroupMemberAsFriendRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	Content    string `json:"content" binding:"required"`
+	MemberWxid string `json:"memberWxid" binding:"required"`
+}
+
+type ChatroomAddGroupMemberAsFriendResponse struct {
+	V3 string `json:"v3"`
+}

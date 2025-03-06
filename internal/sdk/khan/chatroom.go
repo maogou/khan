@@ -191,3 +191,25 @@ func (k *Khan) ScanQrcodeEnter(ctx context.Context, req chatroom.ChatroomScanQrc
 
 	return resp.Result().(*chatroom.ChatroomScanQrcodeEnterResponse), nil
 }
+
+func (k *Khan) ChatroomMoveContract(ctx context.Context, req chatroom.ChatroomMoveContractRequest) (*chatroom.ChatroomMoveContractResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomMoveContractResponse{}).Post(chatroomMoveContract)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomMoveContract方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomMoveContractResponse), nil
+}
+
+func (k *Khan) ChatroomAddMemberAsFriend(ctx context.Context, req chatroom.ChatroomAddMemberAsFriendRequest) (*chatroom.ChatroomAddMemberAsFriendResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomAddMemberAsFriendResponse{}).Post(chatroomAddMemberAsFriend)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ChatroomAddMemberAsFriend方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomAddMemberAsFriendResponse), nil
+}
