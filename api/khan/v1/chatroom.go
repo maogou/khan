@@ -135,3 +135,13 @@ type ChatroomConfimInviteRequest struct {
 	NewMsgId   int64  `json:"newMsgId" binding:"required"`
 	MsgContent string `json:"msgContent" binding:"required"`
 }
+
+type ChatroomScanQrcodeRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	QrUrl string `json:"qrUrl" binding:"required"`
+}
+
+type ChatroomScanQrcodeResponse struct {
+	ChatroomName string `json:"chatroomName"`
+	ChatroomId   string `json:"chatroomId"`
+}

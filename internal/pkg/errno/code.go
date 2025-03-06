@@ -92,6 +92,7 @@ var (
 	ChatroomSetSilenceError           = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
 	ChatroomQrcodeError               = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
 	ChatroomInviteMemberError         = &ErrNo{Code: 10055, Message: "邀请群聊成员失败"}
+	ChatroomScanQrcodeEnterError      = &ErrNo{Code: 10056, Message: "扫码进入群聊失败"}
 	SnsDetailError                    = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
 	SnsMyselfPageError                = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
 	SnsFriendPageError                = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}

@@ -64,6 +64,7 @@ const (
 	chatroomInvite           = "/wxsdk/group/invite"
 	chatroomAdminOperate     = "/wxsdk/group/admin"
 	chatroomConfirmInvite    = "/wxsdk/group/approveaddchatroommember"
+	scanQrcodeEnter          = "/wxsdk/other/geta8k"
 
 	snsUploadImg                 = "/wxsdk/sns/uploadimage"
 	snsFriendPage                = "/wxsdk/sns/userpage"

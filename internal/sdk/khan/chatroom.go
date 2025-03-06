@@ -180,3 +180,14 @@ func (k *Khan) AccessApplyCheckApprove(ctx context.Context, req chatroom.Chatroo
 
 	return resp.Result().(*chatroom.ChatroomConfirInviteResponse), nil
 }
+
+func (k *Khan) ScanQrcodeEnter(ctx context.Context, req chatroom.ChatroomScanQrcodeEnterRequest) (*chatroom.ChatroomScanQrcodeEnterResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&chatroom.ChatroomScanQrcodeEnterResponse{}).Post(scanQrcodeEnter)
+
+	if err != nil {
+		log.C(ctx).Error().Msg("调用ScanQrcodeEnter方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*chatroom.ChatroomScanQrcodeEnterResponse), nil
+}
