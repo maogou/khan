@@ -4,6 +4,7 @@ import (
 	"os"
 	"smallBot/internal/command/auth"
 	"smallBot/internal/command/demo"
+	"smallBot/internal/command/license"
 	"smallBot/internal/command/login"
 	"smallBot/internal/command/serve"
 	"smallBot/internal/command/upgrade"
@@ -57,7 +58,7 @@ func NewKhanCommand() *cli.App {
 	robot := &cli.App{
 		Name:        "khan",
 		Usage:       "khan-超简单超稳定的机器人",
-		Copyright:   "(c) 2025 kinyou_xy@foxmail.com",
+		Copyright:   "(c) 2025 khanwchat632@gmail.com",
 		Version:     constant.VERSION,
 		Description: description,
 		Commands: []*cli.Command{
@@ -66,7 +67,7 @@ func NewKhanCommand() *cli.App {
 			auth.Verify(conf),
 			login.Login(conf, sdk),
 			upgrade.Upgrade(),
-			//license.Create(sdk),
+			license.Create(sdk),
 			demo.Demo(sdk),
 		},
 	}
