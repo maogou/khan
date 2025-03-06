@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (c ContactHandler) Add(ctx *gin.Context) {
+func (c *ContactHandler) Add(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用ContactHandler->Add方法")
 
 	var req v1.ContactAddRequest

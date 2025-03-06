@@ -19,4 +19,6 @@ func initContactRoute(engine *gin.Engine, sdk *khan.Khan) {
 	engine.POST("/v1/api/contacts/getDetailInfo", contactHandler.Detail)
 	engine.POST("/v1/api/contacts/setFriendPermissions", contactHandler.OnlyChat)
 	engine.POST("/v1/api/contacts/setFriendRemark", contactHandler.Remark)
+	engine.POST("v1/api/contacts/uploadPhoneAddressList", contactHandler.ContactUploadMobile)
+	engine.POST("v1/api/contacts/getPhoneAddressList", contactHandler.ContactGetMobile)
 }

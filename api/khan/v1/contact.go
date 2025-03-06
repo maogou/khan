@@ -106,3 +106,27 @@ type ContactSetRemarkResquest struct {
 	Wxid   string `json:"wxid" binding:"required"`
 	Remark string `json:"remark" binding:"required"`
 }
+
+type ContactUploadMobileRequest struct {
+	AppId  string   `json:"appId" binding:"required"`
+	Phones []string `json:"phones" binding:"required"`
+	OpType int      `json:"opType" binding:"required,oneof=1 2"`
+}
+
+type ContactGetMobileRequest struct {
+	AppId  string   `json:"appId" binding:"required"`
+	Phones []string `json:"phones"`
+}
+type ContactGetMobileItem struct {
+	UserName        string `json:"userName"`
+	NickName        string `json:"nickName"`
+	Sex             int    `json:"sex"`
+	PhoneMd5        string `json:"phoneMd5"`
+	Signature       string `json:"signature"`
+	Country         string `json:"country"`
+	BigHeadImgUrl   string `json:"bigHeadImgUrl"`
+	SmallHeadImgUrl string `json:"smallHeadImgUrl"`
+	Province        string `json:"province"`
+	City            string `json:"city"`
+	PersonalCard    int    `json:"personalCard"`
+}

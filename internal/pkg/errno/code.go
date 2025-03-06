@@ -54,6 +54,8 @@ var (
 	ContactSetOnlyChatError  = &ErrNo{Code: 10030, Message: "设置联系人为仅聊天失败"}
 	ContactSetRemarkError    = &ErrNo{Code: 10031, Message: "设置联系人备注失败"}
 	GetContactListCacheError = &ErrNo{Code: 10031, Message: "获取联系人缓存失败"}
+	ContactUploadMobileError = &ErrNo{Code: 10032, Message: "上传手机号失败"}
+	ContactGetMobileError    = &ErrNo{Code: 10032, Message: "获取手机号失败"}
 	SetContactCacheError     = &ErrNo{Code: 10032, Message: "设置联系人缓存失败"}
 	LabelAddError            = &ErrNo{Code: 10032, Message: "添加标签失败"}
 	LabelDeleteError         = &ErrNo{Code: 10033, Message: "删除标签失败"}
@@ -75,6 +77,9 @@ var (
 	ChatroomSetAnnouncementError  = &ErrNo{Code: 10043, Message: "修改群聊公告失败"}
 	ChatroomGetAnnouncementError  = &ErrNo{Code: 10044, Message: "获取群聊公告失败"}
 	ChatroomDetailError           = &ErrNo{Code: 10045, Message: "获取群聊详情失败"}
+	ChatroomDeleteMemberError     = &ErrNo{Code: 10046, Message: "删除群聊成员失败"}
+	ChatroomAdminOperateError     = &ErrNo{Code: 10047, Message: "群聊管理员操作失败"}
+	ChatroomConfirInviteError     = &ErrNo{Code: 10048, Message: "确认邀请失败"}
 	XmlDecodeError                = &ErrNo{Code: 10046, Message: "xml解码失败"}
 	ExecPathError                 = &ErrNo{Code: 10047, Message: "获取执行路径失败"}
 
@@ -82,11 +87,11 @@ var (
 	FavorDetailError = &ErrNo{Code: 10049, Message: "获取收藏详情失败"}
 	FavorDeleteError = &ErrNo{Code: 10050, Message: "删除收藏失败"}
 
-	ChatroomMemberError     = &ErrNo{Code: 10051, Message: "获取群聊成员失败"}
-	ChatroomTopPingError    = &ErrNo{Code: 10052, Message: "置顶群聊失败"}
-	ChatroomSetSilenceError = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
-	ChatroomQrcodeError     = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
-
+	ChatroomMemberError               = &ErrNo{Code: 10051, Message: "获取群聊成员失败"}
+	ChatroomTopPingError              = &ErrNo{Code: 10052, Message: "置顶群聊失败"}
+	ChatroomSetSilenceError           = &ErrNo{Code: 10053, Message: "设置群聊静音失败"}
+	ChatroomQrcodeError               = &ErrNo{Code: 10054, Message: "获取群聊二维码失败"}
+	ChatroomInviteMemberError         = &ErrNo{Code: 10055, Message: "邀请群聊成员失败"}
 	SnsDetailError                    = &ErrNo{Code: 10055, Message: "获取朋友圈详情失败"}
 	SnsMyselfPageError                = &ErrNo{Code: 10056, Message: "获取自己的朋友圈列表失败"}
 	SnsFriendPageError                = &ErrNo{Code: 10057, Message: "获取好友朋友圈列表失败"}

@@ -60,6 +60,10 @@ const (
 	chatroomContactSaveList  = "/wxsdk/group/movecontractlist"
 	chatroomSetSilence       = "/wxsdk/group/setdisturb"
 	chatroomQrcode           = "/wxsdk/group/getqrcode"
+	chatroomDeleteMember     = "/wxsdk/group/delmember"
+	chatroomInvite           = "/wxsdk/group/invite"
+	chatroomAdminOperate     = "/wxsdk/group/admin"
+	chatroomConfirmInvite    = "/wxsdk/group/approveaddchatroommember"
 
 	snsUploadImg                 = "/wxsdk/sns/uploadimage"
 	snsFriendPage                = "/wxsdk/sns/userpage"
@@ -84,8 +88,7 @@ const (
 	favorDetail = "/wxsdk/favor/getcontent"
 	favorDelete = "/wxsdk/favor/delete"
 
-	redPacket    = "/wxsdk/tenpay/openhb"
-	collectMoney = "/wxsdk/tenpay/collectmoney"
-
+	redPacket      = "/wxsdk/tenpay/openhb"
+	collectMoney   = "/wxsdk/tenpay/collectmoney"
 	batchHeartBeat = "/api/toolbox/batchheartbeat"
 )

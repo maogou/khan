@@ -108,3 +108,30 @@ type ChatroomQrcodeResponse struct {
 	QrBase64 string `json:"qrBase64"`
 	QrTips   string `json:"qrTips"`
 }
+
+type ChatroomDeleteMemberRequset struct {
+	AppId      string `json:"appId" binding:"required"`
+	Wxids      string `json:"wxids" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+}
+
+type ChatroomInviteMemberRequset struct {
+	AppId      string `json:"appId" binding:"required"`
+	Wxids      string `json:"wxids" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	Reason     string `json:"reason" binding:"required"`
+}
+
+type ChatroomAdminOperateRequest struct {
+	AppId      string   `json:"appId" binding:"required"`
+	ChatroomId string   `json:"chatroomId" binding:"required"`
+	OperType   *int     `json:"operType" binding:"required,oneof=0 1 2 3"`
+	Wxids      []string `json:"wxids" binding:"required"`
+}
+
+type ChatroomConfimInviteRequest struct {
+	AppId      string `json:"appId" binding:"required"`
+	ChatroomId string `json:"chatroomId" binding:"required"`
+	NewMsgId   int64  `json:"newMsgId" binding:"required"`
+	MsgContent string `json:"msgContent" binding:"required"`
+}
