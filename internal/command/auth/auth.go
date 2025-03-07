@@ -51,11 +51,6 @@ func Verify(conf config.Config) *cli.Command {
 				return err
 			}
 
-			if lic.Expired() {
-				log.Error().Err(err).Msg("授权许可证已过期")
-				return err
-			}
-
 			_ = printLicense(lic)
 			if err != nil {
 				return err
