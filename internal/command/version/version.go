@@ -63,11 +63,10 @@ func printVersionInfo(bv Version) error {
 			{"构建系统", bv.Os},
 			{"版本号", constant.VERSION},
 			{"协议", "iPad 8.0.48"},
-			{"Git地址", "https://github.com/maogou/vRobot.git"},
 			{"分支", "master"},
 			{"CommitId", bv.CommitId},
 			{"CommitDate", bv.CommitDate},
-			{"作者", "kinyou_xy@foxmail.com"},
+			{"作者", "khanwchat632@gmail.com"},
 		},
 	).Render()
 }
