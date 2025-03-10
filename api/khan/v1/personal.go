@@ -74,3 +74,13 @@ type PersonalLicensePermission struct {
 	Name  string `json:"name"`
 	Value int    `json:"value"`
 }
+
+type PersonalUpdateProfileRequest struct {
+	AppId     string `json:"appId" binding:"required"`
+	City      string `json:"city"`
+	Country   string `json:"country"`
+	NickName  string `json:"nickName"`
+	Province  string `json:"province"`
+	Sex       *int   `json:"sex"`
+	Signature string `json:"signature"`
+}
