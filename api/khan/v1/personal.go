@@ -50,7 +50,7 @@ type PersonalSafetResponse struct {
 type PersonalPrivacySettingRequest struct {
 	AppId  string `json:"appId" binding:"required"`
 	Open   bool   `json:"open" binding:"required"`
-	Option int    `json:"option" binding:"required"`
+	Option int    `json:"option" binding:"required,oneof=4 7 8 25 38 39 40"`
 }
 
 type PersonalUploadHeadImgRequest struct {
