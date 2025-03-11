@@ -6,11 +6,10 @@ type TransferBackupItem struct {
 }
 type TransferResponse struct {
 	Data []TransferBackupItem `json:"list"`
-	Tip  string               `json:"tip"`
 }
 
 type TransferImportRequest struct {
-	Data []TransferBackupItem `json:"list"`
+	Backup string `json:"backup"`
 }
 
 type TransferImportResponse struct {

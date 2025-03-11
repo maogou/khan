@@ -57,12 +57,12 @@ func Create(sdk *khan.Khan) *cli.Command {
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			return do(cCtx, sdk)
+			return do(cCtx)
 		},
 	}
 }
 
-func do(cCtx *cli.Context, sdk *khan.Khan) error {
+func do(cCtx *cli.Context) error {
 	appIds := cCtx.StringSlice("appid")
 	account := cCtx.String("account")
 	current := time.Now().Local()

@@ -31,6 +31,7 @@ const (
 
 	AesWXidKey  = "7d4bb489fc2026181e73483b2224a539"
 	AesRedisKey = "e23c03daed4736f9c3da32daff4cd00f"
+	AesBackup   = "c9cff2759b28cb51e73c72a48d9fa6e3"
 
 	KhanFree  = "khan_free"
 	KhanToken = "Khan-Token"

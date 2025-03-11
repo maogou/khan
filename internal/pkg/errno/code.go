@@ -120,4 +120,6 @@ var (
 	LongOpenError    = &ErrNo{Code: 10075, Message: "长连接打开失败"}
 	JsonEncodeError  = &ErrNo{Code: 10076, Message: "json编码失败"}
 	JsonDecodeError  = &ErrNo{Code: 10077, Message: "json解码失败"}
+	AesEncryptError  = &ErrNo{Code: 10078, Message: "aes加密失败"}
+	AesDecryptError  = &ErrNo{Code: 10079, Message: "aes解密失败"}
 )

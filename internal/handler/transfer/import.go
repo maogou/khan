@@ -1,8 +1,12 @@
 package transfer
 
 import (
+	"encoding/json"
+	"fmt"
 	v1 "smallBot/api/khan/v1"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 
@@ -14,6 +18,7 @@ func (t *TransferHandler) Import(ctx *gin.Context) {
 
 	var (
 		req    v1.TransferImportRequest
+		backup v1.TransferResponse
 		result v1.TransferImportResponse
 	)
 
@@ -23,9 +28,25 @@ func (t *TransferHandler) Import(ctx *gin.Context) {
 		return
 	}
 
+	decrypted, err := help.AesDecrypt(req.Backup, []byte(constant.AesBackup))
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("解密失败")
+		response.Fail(ctx, errno.AesDecryptError)
+		return
+	}
+
+	fmt.Println(decrypted)
+
+	if err = json.Unmarshal([]byte(decrypted), &backup); err != nil {
+		log.C(ctx).Error().Err(err).Msg("json解析失败")
+		response.Fail(ctx, errno.JsonDecodeError)
+		return
+	}
+
 	rdb := t.sdk.Rdb()
-	for _, v := range req.Data {
-		if err := rdb.Set(ctx, v.Key, v.Value, 0).Err(); err != nil {
+	for _, v := range backup.Data {
+		if err = rdb.Set(ctx, v.Key, v.Value, 0).Err(); err != nil {
 			result.Fail++
 			log.C(ctx).Error().Err(err).Str("key", v.Key).Str("value", v.Value).Msg("redis设置数据失败")
 			continue

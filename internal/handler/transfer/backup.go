@@ -1,8 +1,11 @@
 package transfer
 
 import (
+	"encoding/json"
 	v1 "smallBot/api/khan/v1"
+	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
 
@@ -14,7 +17,6 @@ func (t *TransferHandler) Backup(ctx *gin.Context) {
 
 	var result = v1.TransferResponse{
 		Data: make([]v1.TransferBackupItem, 0),
-		Tip:  "如果data数据不为空的话，请list对应的数据保存为backup.json,防止后面迁移时候使用，这样可以保证迁移后继续使用之前的appid",
 	}
 
 	keys, err := t.sdk.Rdb().Keys(ctx, "wx_*").Result()
@@ -48,5 +50,24 @@ func (t *TransferHandler) Backup(ctx *gin.Context) {
 		)
 	}
 
-	response.Success(ctx, result)
+	bByte, err := json.Marshal(result)
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("json序列化失败")
+		response.Fail(ctx, errno.JsonEncodeError)
+		return
+	}
+
+	encrypted, err := help.AesEncrypt(string(bByte), []byte(constant.AesBackup))
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("加密失败")
+		response.Fail(ctx, errno.AesEncryptError)
+		return
+	}
+
+	response.Success(
+		ctx, gin.H{
+			"backup": encrypted,
+		},
+	)
 }
