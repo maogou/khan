@@ -1,8 +1,13 @@
 package download
 
+import "smallBot/internal/sdk/khan"
+
 type DownloadHandler struct {
+	sdk *khan.Khan
 }
 
-func NewDownloadHandler() *DownloadHandler {
-	return &DownloadHandler{}
+func NewDownloadHandler(sdk *khan.Khan) *DownloadHandler {
+	return &DownloadHandler{
+		sdk: sdk,
+	}
 }

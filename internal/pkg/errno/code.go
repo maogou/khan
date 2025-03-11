@@ -122,4 +122,6 @@ var (
 	JsonDecodeError  = &ErrNo{Code: 10077, Message: "json解码失败"}
 	AesEncryptError  = &ErrNo{Code: 10078, Message: "aes加密失败"}
 	AesDecryptError  = &ErrNo{Code: 10079, Message: "aes解密失败"}
+
+	DownloadEmojiError = &ErrNo{Code: 10080, Message: "下载表情包失败"}
 )
