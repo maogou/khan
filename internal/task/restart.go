@@ -3,8 +3,8 @@ package task
 import (
 	"context"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/tranfer"
 	"smallBot/internal/constant"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"strconv"
 	"time"
@@ -12,25 +12,24 @@ import (
 	"github.com/rs/xid"
 )
 
-func (m *Monitor) restart(appIds []string) {
-	var tbhb tranfer.TranferBatchHeartBeatRequest
-
-	for _, appId := range appIds {
-		tbhb.List = append(
-			tbhb.List, tranfer.TranferBatchHeartBeatItem{
-				Appid: appId,
-			},
-		)
-	}
+func (m *Monitor) restart() {
 
 	ctx := context.WithValue(context.Background(), constant.QID, xid.New().String())
 	collectUrl := m.getCollectUrl(strconv.Itoa(m.sdk.Config().Port))
 
-	log.C(ctx).Info().Strs("appId", appIds).Msg("开始监控重启长连接.....")
+	log.C(ctx).Info().Msg("开始监控重启长连接.....")
 
 	m.crontab.AddFunc(
 		"@every 60s", func() {
 			ctx = context.WithValue(context.Background(), constant.QID, xid.New().String())
+			var appIds []string
+			p, err := help.License(ctx, m.sdk.Rdb())
+			if err != nil {
+				log.C(ctx).Error().Err(err).Msg("获取license失败")
+				return
+			}
+
+			appIds = p.AppId
 
 			for _, appId := range appIds {
 				if longStatus, err := m.getLongConnectTime(ctx, appId); err == nil && longStatus == constant.WXLongOK {

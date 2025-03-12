@@ -8,7 +8,6 @@ import (
 	"os/signal"
 	"smallBot/internal/config"
 	"smallBot/internal/middleware"
-	"smallBot/internal/pkg/license"
 	router "smallBot/internal/route"
 	"smallBot/internal/sdk/khan"
 	"strconv"
@@ -19,14 +18,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func run(conf config.Config, sdk *khan.Khan, l *license.License) error {
+func run(conf config.Config, sdk *khan.Khan) error {
 	gin.SetMode(conf.Mode)
 	route := gin.Default()
 	route.Use(middleware.RequestId(), middleware.VerifyLicense(sdk.Rdb(), conf))
 
 	addr := ":" + strconv.Itoa(conf.Port)
 
-	if err := router.InitRouter(route, sdk, l); err != nil {
+	if err := router.InitRouter(route, sdk); err != nil {
 		return err
 	}
 

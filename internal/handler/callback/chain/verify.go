@@ -3,13 +3,14 @@ package chain
 import (
 	"context"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/license"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
+	"smallBot/internal/sdk/khan"
 )
 
 type Verify struct {
 	BaseHandler
-	auth *license.License
+	sdk *khan.Khan
 }
 
 func (v *Verify) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
@@ -23,8 +24,11 @@ func (v *Verify) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 
 func (v *Verify) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
 	log.C(ctx).Info().Msg("调用Verify->IsCanHandler方法")
-	if v.auth.Expired() {
-		log.C(ctx).Warn().Msg("License已过期")
+
+	_, err := help.License(ctx, v.sdk.Rdb())
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("License已过期")
 		return false
 	}
 
@@ -38,8 +42,8 @@ func (v *Verify) Process(ctx context.Context, param v1.CollectRequest) error {
 
 var _ Chain = (*Verify)(nil)
 
-func NewVerify(l *license.License) *Verify {
+func NewVerify(sdk *khan.Khan) *Verify {
 	return &Verify{
-		auth: l,
+		sdk: sdk,
 	}
 }

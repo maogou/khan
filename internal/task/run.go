@@ -1,8 +1,8 @@
 package task
 
-func (m *Monitor) Run(appIds []string) {
-	m.restart(appIds)
-	m.forward(appIds)
+func (m *Monitor) Run() {
+	m.restart()
+	m.forward()
 	m.logrotate()
 
 	m.crontab.Start()

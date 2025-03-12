@@ -21,21 +21,6 @@ func (l *LoginHandler) CheckLogin(ctx *gin.Context) {
 		return
 	}
 
-	cKey := constant.WXQrCodeCache + req.AppId
-	qrcode, err := l.sdk.Rdb().Get(ctx, cKey).Result()
-
-	if err != nil {
-		log.C(ctx).Error().Err(err).Msg("获取wx的qrcode失败")
-		response.Fail(ctx, errno.GetWxLoginQrCodeCacheError)
-		return
-	}
-
-	if len(qrcode) == 0 {
-		log.C(ctx).Error().Err(err).Msg("获取wx的qrcode失败")
-		response.Fail(ctx, errno.ExpireWxLoginQrCodeCacheError)
-		return
-	}
-
 	resp, err := l.sdk.CheckLoginQrCode(
 		ctx, login.CheckLoginRequest{
 			Appid: req.AppId,
