@@ -34,3 +34,12 @@ type DownloadVideoRequest struct {
 type DownloadVideoResponse struct {
 	FileUrl string `json:"fileUrl"`
 }
+
+type DownloadFileWxRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	Xml   string `json:"xml" binding:"required"`
+}
+
+type DownloadFileWxResponse struct {
+	FileUrl string `json:"fileUrl"`
+}
