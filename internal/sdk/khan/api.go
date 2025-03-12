@@ -95,4 +95,7 @@ const (
 	batchHeartBeat = "/api/toolbox/batchheartbeat"
 
 	downloadEmoji = "/wxsdk/other/downloademoji"
+	downloadCdn   = "/wxsdk/other/resourcedownload"
+	downloadVideo = "/wxsdk/other/resourcedownload"
+	downloadFile  = "/wxsdk/other/resourcedownload"
 )

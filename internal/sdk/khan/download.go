@@ -16,3 +16,36 @@ func (k *Khan) DownloadEmoji(ctx context.Context, req download.DownloadEmojiRequ
 
 	return resp.Result().(*download.DownloadEmojiResponse), nil
 }
+
+func (k *Khan) DownloadCdn(ctx context.Context, req download.DownloadCdnRequest) (*download.DownloadCdnResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadCdnResponse{}).Post(downloadCdn)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadCdn方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadCdnResponse), nil
+}
+
+func (k *Khan) DownloadVideo(ctx context.Context, req download.DownloadVideoRequest) (*download.DownloadVideoResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadVideoResponse{}).Post(downloadVideo)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadVideo方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadVideoResponse), nil
+}
+
+func (k *Khan) DownloadFile(ctx context.Context, req download.DownloadFileRequest) (*download.DownloadFileResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadFileResponse{}).Post(downloadFile)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadFile方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadFileResponse), nil
+}
