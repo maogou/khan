@@ -25,3 +25,12 @@ type DownloadCdnRequest struct {
 type DownloadCdnResponse struct {
 	FileUrl string `json:"fileUrl"`
 }
+
+type DownloadVideoRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	Xml   string `json:"xml" binding:"required"`
+}
+
+type DownloadVideoResponse struct {
+	FileUrl string `json:"fileUrl"`
+}

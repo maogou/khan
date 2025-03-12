@@ -27,3 +27,14 @@ func (k *Khan) DownloadCdn(ctx context.Context, req download.DownloadCdnRequest)
 
 	return resp.Result().(*download.DownloadCdnResponse), nil
 }
+
+func (k *Khan) DownloadVideo(ctx context.Context, req download.DownloadVideoRequest) (*download.DownloadVideoResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadVideoResponse{}).Post(downloadVideo)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadVideo方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadVideoResponse), nil
+}

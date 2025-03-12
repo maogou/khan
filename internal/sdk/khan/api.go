@@ -96,4 +96,5 @@ const (
 
 	downloadEmoji = "/wxsdk/other/downloademoji"
 	downloadCdn   = "/wxsdk/other/resourcedownload"
+	downloadVideo = "/wxsdk/other/resourcedownload"
 )

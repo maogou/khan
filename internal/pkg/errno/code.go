@@ -125,4 +125,5 @@ var (
 
 	DownloadEmojiError = &ErrNo{Code: 10080, Message: "下载表情包失败"}
 	DownloadCdnError   = &ErrNo{Code: 10081, Message: "下载cdn失败"}
+	DownloadVideoError = &ErrNo{Code: 10082, Message: "下载视频失败"}
 )
