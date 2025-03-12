@@ -1,21 +1,25 @@
 package errno
 
 var (
-	Ok                  = &ErrNo{Code: 0, Message: "OK"}
-	PageNotFoundError   = &ErrNo{Code: 404, Message: "访问的页面不存在"}
-	MethodNotAllowError = &ErrNo{Code: 405, Message: "访问的路由请求方式错误"}
-	RedisGetDataError   = &ErrNo{Code: 406, Message: "redis获取数据失败"}
-	RedisNoDataError    = &ErrNo{Code: 407, Message: "redis获取数据为空"}
-	TemplateParseError  = &ErrNo{Code: 408, Message: "模板解析错误"}
-	ConvertError        = &ErrNo{Code: 409, Message: "类型转换错误"}
-	DecryptTokenFail    = &ErrNo{Code: 410, Message: "token解析失败"}
-	CreateAppErr        = &ErrNo{Code: 411, Message: "创建应用失败"}
-	CallbackMsgTypeErr  = &ErrNo{Code: 412, Message: "回调消息类型解析错误"}
-	GetFileBase64Error  = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
-	InternalServerError = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
-	ValidateError       = &ErrNo{Code: 10002, Message: "参数验证错误"}
-	ForwardMiniAppError = &ErrNo{Code: 10002, Message: "转发小程序失败"}
-	SendAppMsgError     = &ErrNo{Code: 10003, Message: "发送appMsg失败"}
+	Ok                      = &ErrNo{Code: 0, Message: "OK"}
+	PageNotFoundError       = &ErrNo{Code: 404, Message: "访问的页面不存在"}
+	MethodNotAllowError     = &ErrNo{Code: 405, Message: "访问的路由请求方式错误"}
+	RedisGetDataError       = &ErrNo{Code: 406, Message: "redis获取数据失败"}
+	RedisNoDataError        = &ErrNo{Code: 407, Message: "redis获取数据为空"}
+	TemplateParseError      = &ErrNo{Code: 408, Message: "模板解析错误"}
+	ConvertError            = &ErrNo{Code: 409, Message: "类型转换错误"}
+	DecryptTokenFail        = &ErrNo{Code: 410, Message: "token解析失败"}
+	CreateAppErr            = &ErrNo{Code: 411, Message: "创建应用失败"}
+	CallbackMsgTypeErr      = &ErrNo{Code: 412, Message: "回调消息类型解析错误"}
+	GetFileBase64Error      = &ErrNo{Code: 10000, Message: "获取文件base64失败"}
+	InternalServerError     = &ErrNo{Code: 10001, Message: "服务器内部,请稍后再试"}
+	ValidateError           = &ErrNo{Code: 10002, Message: "参数验证错误"}
+	UploadFileError         = &ErrNo{Code: 10002, Message: "上传文件失败"}
+	UploadFileEmptyError    = &ErrNo{Code: 10002, Message: "上传文件为空"}
+	SetLicenseCacheError    = &ErrNo{Code: 10002, Message: "设置license缓存失败"}
+	SetLicenseKeyCacheError = &ErrNo{Code: 10002, Message: "设置license key缓存失败"}
+	ForwardMiniAppError     = &ErrNo{Code: 10002, Message: "转发小程序失败"}
+	SendAppMsgError         = &ErrNo{Code: 10003, Message: "发送appMsg失败"}
 
 	SendMsgError                = &ErrNo{Code: 10003, Message: "发送消息失败"}
 	DownloadImgError            = &ErrNo{Code: 10004, Message: "下载图片失败"}

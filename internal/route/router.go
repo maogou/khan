@@ -19,6 +19,7 @@ func InitRouter(engine *gin.Engine, sdk *khan.Khan) error {
 	initSnsRoute(engine, sdk)
 	initFavorRoute(engine, sdk)
 	initTransferRoute(engine, sdk)
+	initSettingRoute(engine, sdk)
 	initPprofRoute(engine)
 
 	return nil
