@@ -12,4 +12,5 @@ func initDownloadRouter(route *gin.Engine, sdk *khan.Khan) {
 
 	route.GET("/v1/api/download", downloadHandler.StaticFile)
 	route.POST("/v1/api/download/emoji", downloadHandler.DownloadEmoji)
+	route.POST("/v1/api/download/cdn", downloadHandler.DownloadCdn)
 }

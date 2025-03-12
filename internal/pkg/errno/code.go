@@ -124,4 +124,5 @@ var (
 	AesDecryptError  = &ErrNo{Code: 10079, Message: "aes解密失败"}
 
 	DownloadEmojiError = &ErrNo{Code: 10080, Message: "下载表情包失败"}
+	DownloadCdnError   = &ErrNo{Code: 10081, Message: "下载cdn失败"}
 )

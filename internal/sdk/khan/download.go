@@ -16,3 +16,14 @@ func (k *Khan) DownloadEmoji(ctx context.Context, req download.DownloadEmojiRequ
 
 	return resp.Result().(*download.DownloadEmojiResponse), nil
 }
+
+func (k *Khan) DownloadCdn(ctx context.Context, req download.DownloadCdnRequest) (*download.DownloadCdnResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadCdnResponse{}).Post(downloadCdn)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadCdn方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadCdnResponse), nil
+}
