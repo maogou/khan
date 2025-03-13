@@ -15,9 +15,9 @@ type GetLoginQrCodeResponse struct {
 }
 
 type CheckLoginRequest struct {
-	AppId string `json:"appId" binding:"required"`
-	Uuid  string `json:"uuid" binding:"required"`
-	Nkey  string `json:"nkey" binding:"required"`
+	AppId  string `json:"appId" binding:"required"`
+	Uuid   string `json:"uuid" binding:"required"`
+	Newkey string `json:"newKey" binding:"required"`
 }
 
 type CheckLoginLoginInfo struct {
