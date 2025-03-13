@@ -24,7 +24,7 @@ func (l *LoginHandler) CheckLogin(ctx *gin.Context) {
 	resp, err := l.sdk.CheckLoginQrCode(
 		ctx, login.CheckLoginRequest{
 			Appid: req.AppId,
-			Nkey:  req.Nkey,
+			Nkey:  req.Newkey,
 			Uuid:  req.Uuid,
 		},
 	)
