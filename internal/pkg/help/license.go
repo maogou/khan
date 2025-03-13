@@ -8,6 +8,7 @@ import (
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
+	"smallBot/internal/pkg/log"
 	"strings"
 )
 
@@ -16,18 +17,19 @@ func License(ctx context.Context, rdb *redis.Client) (*v1.Permission, error) {
 		p    v1.Permission
 		pKey string
 	)
-	keys := []string{constant.License, constant.LicenseKey}
 
-	vals, err := rdb.MGet(ctx, keys...).Result()
+	pKey, err := rdb.Get(ctx, constant.LicenseKey).Result()
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("Redis 获取授权许可证key为空")
 
-	lb, ok := vals[0].(string)
-	if !ok || len(lb) == 0 {
-		return nil, errors.New("Redis 获取授权许可证解密key为空")
+		return nil, err
 	}
 
-	pKey, ok = vals[1].(string)
-	if !ok || len(pKey) == 0 {
-		return nil, errors.New("Redis 获取授权许可证解密key为空")
+	lb, err := rdb.Get(ctx, constant.License).Result()
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("Redis 获取授权许可证为空")
+		return nil, err
 	}
 
 	pKey = strings.NewReplacer(
