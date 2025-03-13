@@ -89,6 +89,7 @@ var (
 	ChatroomAddMemberAsFriendError = &ErrNo{Code: 10050, Message: "添加群聊成员为好友失败"}
 	XmlDecodeError                 = &ErrNo{Code: 10046, Message: "xml解码失败"}
 	ExecPathError                  = &ErrNo{Code: 10047, Message: "获取执行路径失败"}
+	DownloadVoiceError             = &ErrNo{Code: 10048, Message: "下载语音失败"}
 
 	FavorSyncError   = &ErrNo{Code: 10048, Message: "同步收藏失败"}
 	FavorDetailError = &ErrNo{Code: 10049, Message: "获取收藏详情失败"}

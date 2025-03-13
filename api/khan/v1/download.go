@@ -43,3 +43,13 @@ type DownloadFileWxRequest struct {
 type DownloadFileWxResponse struct {
 	FileUrl string `json:"fileUrl"`
 }
+
+type DownloadVoiceRequest struct {
+	AppId string `json:"appId" binding:"required"`
+	MsgId int    `json:"msgId" binding:"required"`
+	Xml   string `json:"xml" binding:"required"`
+}
+
+type DownloadVoiceResponse struct {
+	FileUrl string `json:"fileUrl"`
+}

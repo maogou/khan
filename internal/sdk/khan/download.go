@@ -49,3 +49,14 @@ func (k *Khan) DownloadFile(ctx context.Context, req download.DownloadFileReques
 
 	return resp.Result().(*download.DownloadFileResponse), nil
 }
+
+func (k *Khan) DownloadVoice(ctx context.Context, req download.DownloadVoiceRequest) (*download.DownloadVoiceResponse, error) {
+	resp, err := k.client.R().SetBody(req).SetResult(&download.DownloadVoiceResponse{}).Post(downloadVoice)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用downloadVoice方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*download.DownloadVoiceResponse), nil
+}

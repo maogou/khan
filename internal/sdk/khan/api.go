@@ -98,4 +98,5 @@ const (
 	downloadCdn   = "/wxsdk/other/resourcedownload"
 	downloadVideo = "/wxsdk/other/resourcedownload"
 	downloadFile  = "/wxsdk/other/resourcedownload"
+	downloadVoice = "/wxsdk/other/downloadvoice"
 )
