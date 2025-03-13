@@ -44,25 +44,19 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			return
 		}
 
-		keys := []string{constant.License, constant.LicenseKey}
-		vals, err := rdb.MGet(ctx, keys...).Result()
-
-		lb, ok := vals[0].(string)
-		if !ok || len(lb) == 0 {
-			log.C(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
-				"client_ip", ctx.ClientIP(),
-			).Msg("Redis 获取授权许可证为空")
-			response.SuccessMsg(ctx, "Redis 获取授权许可证为空")
+		pKey, err := rdb.Get(ctx, constant.LicenseKey).Result()
+		if err != nil {
+			log.C(ctx).Error().Err(err).Msg("Redis 获取授权许可证key为空")
+			response.SuccessMsg(ctx, "Redis 获取授权许可证key为空")
 			ctx.Abort()
 			return
 		}
 
-		pKey, ok = vals[1].(string)
-		if !ok || len(pKey) == 0 {
-			log.C(ctx).Error().Str("url", ctx.Request.URL.Path).Str(
-				"client_ip", ctx.ClientIP(),
-			).Msg("Redis 获取授权许可证key为空")
-			response.SuccessMsg(ctx, "Redis 获取授权许可证key为空")
+		lb, err := rdb.Get(ctx, constant.License).Result()
+
+		if err != nil {
+			log.C(ctx).Error().Err(err).Msg("Redis 获取授权许可证为空")
+			response.SuccessMsg(ctx, "Redis 获取授权许可证为空")
 			ctx.Abort()
 			return
 		}

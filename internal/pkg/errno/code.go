@@ -20,6 +20,7 @@ var (
 	SetLicenseKeyCacheError = &ErrNo{Code: 10002, Message: "设置license key缓存失败"}
 	ForwardMiniAppError     = &ErrNo{Code: 10002, Message: "转发小程序失败"}
 	SendAppMsgError         = &ErrNo{Code: 10003, Message: "发送appMsg失败"}
+	GetLicenseError         = &ErrNo{Code: 10002, Message: "获取license失败"}
 
 	SendMsgError                = &ErrNo{Code: 10003, Message: "发送消息失败"}
 	DownloadImgError            = &ErrNo{Code: 10004, Message: "下载图片失败"}
