@@ -13,6 +13,7 @@ import (
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -117,9 +118,12 @@ func (d *DownloadHandler) DownloadVideo(ctx *gin.Context) {
 		return
 	}
 
+	parts := strings.Split(path, "public/download")
+	fileUrl := "http://localhost:" + strconv.Itoa(d.sdk.Config().Port) + parts[1]
+
 	response.Success(
 		ctx, v1.DownloadVideoResponse{
-			FileUrl: path,
+			FileUrl: fileUrl,
 		},
 	)
 }

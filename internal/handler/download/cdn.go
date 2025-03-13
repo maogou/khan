@@ -11,6 +11,8 @@ import (
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -65,9 +67,12 @@ func (d *DownloadHandler) DownloadCdn(ctx *gin.Context) {
 		return
 	}
 
+	parts := strings.Split(path, "public/download")
+	fileUrl := "http://localhost:" + strconv.Itoa(d.sdk.Config().Port) + parts[1]
+
 	response.Success(
 		ctx, v1.DownloadCdnResponse{
-			FileUrl: path,
+			FileUrl: fileUrl,
 		},
 	)
 }

@@ -117,9 +117,12 @@ func (d *DownloadHandler) DownloadVoice(ctx *gin.Context) {
 		return
 	}
 
+	parts := strings.Split(path, "public/download")
+	fileUrl := "http://localhost:" + strconv.Itoa(d.sdk.Config().Port) + parts[1]
+
 	response.Success(
 		ctx, v1.DownloadVoiceResponse{
-			FileUrl: path,
+			FileUrl: fileUrl,
 		},
 	)
 }
