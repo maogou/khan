@@ -24,6 +24,7 @@ var excludePaths = []string{
 	"/v1/api/personal/license",
 	"/v1/api/login/createApp",
 	"/v1/api/setting/license",
+	"/v1/api/monitor",
 }
 
 func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {

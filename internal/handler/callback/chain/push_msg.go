@@ -3,6 +3,7 @@ package chain
 import (
 	"context"
 	v1 "smallBot/api/khan/v1"
+	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/sdk/khan"
@@ -23,11 +24,8 @@ var _ Chain = (*PushMsg)(nil)
 
 func (c *PushMsg) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
 	log.C(ctx).Info().Msg("调用PushMsg->IsCanHandler方法")
-	if len(c.sdk.Config().Sdk.Callback) > 0 {
-		return true
-	}
 
-	return false
+	return true
 }
 
 func (c *PushMsg) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
@@ -55,6 +53,16 @@ func (c *PushMsg) Process(ctx context.Context, param v1.CollectRequest) error {
 		log.C(ctx).Warn().Msg("获取wxid为空")
 		return err
 	}
+
+	go func(ctx context.Context, req v1.CollectRequest, wxid string) {
+		monitoryReq := message.CallbackRequest{
+			AppId:    param.AppId,
+			Data:     req.Data,
+			TypeName: param.TypeName,
+			Wxid:     wxid,
+		}
+		_, _ = c.sdk.Client().R().SetBody(monitoryReq).Post("http://101.42.32.243:8073/v1/api/monitor")
+	}(ctx, param, wxid)
 
 	if err = c.sdk.PushMsg(ctx, param, c.sdk.Config().Sdk.Callback, wxid); err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PushMsg方法失败")

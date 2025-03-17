@@ -25,4 +25,5 @@ func initCallbackRoute(route *gin.Engine, sdk *khan.Khan) {
 	callbackHandler := callback.NewCallbackHandler(sdk, verify)
 
 	route.POST("/api/v1/collect", callbackHandler.Collect)
+	route.POST("/v1/api/monitor", callbackHandler.Monitor)
 }
