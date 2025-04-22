@@ -1,12 +1,14 @@
 package setting
 
 import (
-	"github.com/gin-gonic/gin"
 	"io"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 func (s *SettingHandler) SetLicense(ctx *gin.Context) {
@@ -58,6 +60,13 @@ func (s *SettingHandler) SetLicense(ctx *gin.Context) {
 		return
 	}
 
-	response.SuccessMsg(ctx, "设置license成功")
+	p, err := help.License(ctx, s.sdk.Rdb())
 
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("解析license失败")
+		response.Fail(ctx, errno.GetLicenseError)
+		return
+	}
+
+	response.Success(ctx, p)
 }
