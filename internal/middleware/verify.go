@@ -89,7 +89,7 @@ func VerifyLicense(rdb *redis.Client, conf config.Config) gin.HandlerFunc {
 			if value, pOk := p.Permission[paths[3]]; pOk && value != 1 {
 				log.C(ctx).Info().Str("paths[3]", paths[3]).Any("permission", p).Msg("无此接口的访问权限")
 				ctx.Abort()
-				response.SuccessMsg(ctx, "无此接口的访问权限,请联系软件作者!")
+				response.SuccessMsg(ctx, "无此接口的访问权限,请通过邮件联系软件作者! Email: khanwchat632@gmail.com")
 				return
 			}
 		}
