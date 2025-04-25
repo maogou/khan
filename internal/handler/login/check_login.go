@@ -1,12 +1,15 @@
 package login
 
 import (
+	"context"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/api/khan/v1/transform/login"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+	"smallBot/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )
@@ -42,6 +45,23 @@ func (l *LoginHandler) CheckLogin(ctx *gin.Context) {
 	}
 
 	wxid := resp.Data.LoginInfo.AcctSectResp.UserName
+
+	lic, err := help.License(ctx, l.sdk.Rdb())
+	cCtx := ctx.Copy()
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("获取license失败")
+		go verifyFailLogout(cCtx, l.sdk, req.AppId)
+		response.Fail(ctx, errno.GetLicenseError)
+		return
+	}
+
+	if lic.Cus != wxid {
+		log.C(ctx).Error().Err(err).Msg("登录的微信号的和授权的微信号不相符")
+		go verifyFailLogout(cCtx, l.sdk, req.AppId)
+		response.Fail(ctx, errno.AuthWixLicenseError)
+		return
+	}
+
 	lcKey := constant.WXLoginCache + req.AppId
 	if err = l.sdk.Rdb().Set(ctx, lcKey, wxid, 0).Err(); err != nil {
 		log.C(ctx).Error().Err(err).Msg("设置wx登录缓存失败")
@@ -65,4 +85,23 @@ func (l *LoginHandler) CheckLogin(ctx *gin.Context) {
 			},
 		},
 	)
+}
+
+func verifyFailLogout(ctx context.Context, sdk *khan.Khan, appId string) {
+	log.C(ctx).Error().Msg("verifyFailLogout==>授权微信号和登录微信号不相符")
+	resp, err := sdk.Logout(
+		ctx, login.LogoutRequest{
+			Appid: appId,
+		},
+	)
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("verifyFailLogout=>调用Logout方法失败")
+		return
+	}
+
+	if resp.Ret != 0 {
+		log.C(ctx).Error().Err(err).Msg("verifyFailLogout=>ret !=0 ->调用Logout方法失败")
+		return
+	}
 }
