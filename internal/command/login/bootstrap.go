@@ -1,8 +1,8 @@
 package login
 
 type BootStrap interface {
-	GetAppId()
-	GetLoginQrCode(appId string)
+	SetAppId(appId string)
+	GetLoginQrCode()
 	PrintQrCode()
 	Confirm()
 	CheckLogin()

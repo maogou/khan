@@ -13,7 +13,6 @@ import (
 type Khan struct {
 	client   *resty.Client
 	config   *config.Config
-	token    string
 	appId    string
 	uuid     string
 	nKey     string
@@ -28,21 +27,9 @@ func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.V
 	return &Khan{
 		client:   client,
 		config:   conf,
-		token:    conf.Sdk.Token,
-		appId:    conf.Sdk.AppId,
-		uuid:     conf.Sdk.UuId,
 		validate: validate,
 		rdb:      rdb,
 	}
-}
-
-func (k *Khan) SetToken(token string) *Khan {
-	k.token = token
-	return k
-}
-
-func (k *Khan) GetToken() string {
-	return k.token
 }
 
 func (k *Khan) SetAppId(appId string) *Khan {

@@ -25,10 +25,6 @@ type Sdk struct {
 	TimeOut   time.Duration `yaml:"timeout" validate:"required,min=5"`
 	Gog7a6v8g string        `yaml:"gog7a6v8g" validate:"required"`
 	Gog7a6v90 string        `yaml:"gog7a6v90" validate:"required"`
-	Token     string        `yaml:"token"`
-	AppId     string        `yaml:"appid"`
-	UuId      string        `yaml:"uuid"`
-	License   string        `yaml:"license" validate:"required"`
 }
 
 type RdbConfig struct {

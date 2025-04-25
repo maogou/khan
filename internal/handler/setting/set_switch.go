@@ -1,7 +1,6 @@
 package setting
 
 import (
-	"github.com/gin-gonic/gin"
 	"slices"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
@@ -9,6 +8,8 @@ import (
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/log"
 	"smallBot/internal/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 var swithcs = map[int]string{
@@ -33,7 +34,7 @@ func (s *SettingHandler) SetSwitch(ctx *gin.Context) {
 		return
 	}
 
-	lc, err := help.License(ctx, s.sdk.Rdb())
+	lc, err := help.Permission(ctx, s.sdk.Rdb())
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("获取License失败")
 		response.Fail(ctx, errno.GetLicenseError)

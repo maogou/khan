@@ -23,7 +23,7 @@ func (m *Monitor) restart() {
 		"@every 60s", func() {
 			ctx = context.WithValue(context.Background(), constant.QID, xid.New().String())
 			var appIds []string
-			p, err := help.License(ctx, m.sdk.Rdb())
+			p, err := help.Permission(ctx, m.sdk.Rdb())
 			if err != nil {
 				log.C(ctx).Error().Err(err).Msg("获取license失败")
 				return

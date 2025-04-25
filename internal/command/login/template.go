@@ -7,11 +7,11 @@ type template struct {
 func (t *template) Start(appId string) {
 
 	if len(appId) == 0 {
-		t.b.GetAppId()
+		t.b.SetAppId(appId)
 	}
 
 	if t.b.CanNext() {
-		t.b.GetLoginQrCode(appId)
+		t.b.GetLoginQrCode()
 	}
 
 	if t.b.CanNext() {

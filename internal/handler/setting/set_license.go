@@ -60,7 +60,7 @@ func (s *SettingHandler) SetLicense(ctx *gin.Context) {
 		return
 	}
 
-	p, err := help.License(ctx, s.sdk.Rdb())
+	p, err := help.Permission(ctx, s.sdk.Rdb())
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("解析license失败")

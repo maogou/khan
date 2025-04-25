@@ -8,11 +8,13 @@ import (
 	"smallBot/api/khan/v1/transform/message"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/errno"
+	"smallBot/internal/pkg/help"
 	"smallBot/internal/sdk/khan"
 	"strconv"
 	"time"
 
 	"github.com/rs/zerolog"
+	"golang.org/x/exp/slices"
 
 	"github.com/rs/xid"
 
@@ -26,16 +28,17 @@ import (
 
 type QuickLogin struct {
 	template
-	tableData pterm.TableData
-	url       string
-	sdk       *khan.Khan
-	wxid      string
-	p         *tea.Program
-	selected  int
-	appId     string
-	zLog      zerolog.Logger
-	ctx       context.Context
-	err       error
+	tableData  pterm.TableData
+	url        string
+	sdk        *khan.Khan
+	wxid       string
+	p          *tea.Program
+	selected   int
+	appId      string
+	zLog       zerolog.Logger
+	ctx        context.Context
+	permission *v1.Permission
+	err        error
 }
 
 var _ BootStrap = (*QuickLogin)(nil)
@@ -53,34 +56,20 @@ func NewQuickLogin(sdk *khan.Khan, p *tea.Program) *QuickLogin {
 	return ql
 }
 
-func (q *QuickLogin) GetAppId() {
-	ctx := context.WithValue(context.Background(), "qid", xid.New().String())
-	sdkResp, err := q.sdk.CreateApp(
-		ctx, v1.CreateAppRequest{
-			Country:    constant.Country,
-			DeviceName: constant.DeviceName,
-			Model:      constant.Model,
-			SdkVer:     constant.ProtoVersion,
-		},
-	)
+func (q *QuickLogin) SetAppId(appId string) {
+	p, err := help.Permission(q.ctx, q.sdk.Rdb())
 	if err != nil {
 		q.err = err
-		q.zLog.Error().Err(err).Msg("创建appId,请求CreateApp失败")
-	} else if sdkResp.Ret != 0 {
-		q.zLog.Warn().Str("err_msg", sdkResp.MsgErr).Msg("调用创建appId失败")
-		q.err = errors.New(sdkResp.MsgErr)
+	} else if !slices.Contains(p.AppId, q.appId) {
+		q.err = errors.New("appId未授权")
 	} else {
-		q.sdk.SetAppId(sdkResp.Data.AppId)
-		q.appId = sdkResp.Data.AppId
+		q.sdk.SetAppId(appId)
+		q.appId = appId
+		q.permission = p
 	}
 }
 
-func (q *QuickLogin) GetLoginQrCode(appId string) {
-	if len(appId) > 0 {
-		q.appId = appId
-		q.sdk.SetAppId(appId)
-	}
-
+func (q *QuickLogin) GetLoginQrCode() {
 	lqcResp, err := q.sdk.LoginQrCode(q.ctx, login.GetLoginQrCodeRequest{AppId: q.appId})
 	if err != nil {
 		q.err = err

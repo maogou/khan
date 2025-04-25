@@ -23,7 +23,7 @@ func (m *Monitor) forward() {
 
 			log.C(ctx).Info().Msg("开始监控转发消息.....")
 
-			p, err := help.License(ctx, m.sdk.Rdb())
+			p, err := help.Permission(ctx, m.sdk.Rdb())
 
 			if err != nil {
 				log.C(ctx).Error().Err(err).Msg("获取license失败")

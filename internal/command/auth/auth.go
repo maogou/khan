@@ -1,16 +1,13 @@
 package auth
 
 import (
+	"context"
 	"encoding/json"
-	"os"
-	"path/filepath"
 	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/config"
-	"smallBot/internal/constant"
 	"smallBot/internal/pkg/help"
 	"smallBot/internal/pkg/license"
+	"smallBot/internal/sdk/khan"
 	"strconv"
-	"strings"
 
 	"github.com/rs/zerolog/log"
 
@@ -19,43 +16,20 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func Verify(conf config.Config) *cli.Command {
+func Verify(sdk *khan.Khan) *cli.Command {
 	return &cli.Command{
 		Name:  "verify",
 		Usage: "授权许可证验证",
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:  "path",
-				Value: conf.Sdk.License,
-				Usage: "颁发的软件许可证绝对路径",
-			},
-		},
 		Action: func(cCtx *cli.Context) error {
-			path := cCtx.String("path")
-			if _, err := os.Stat(path); len(path) > 0 && err != nil {
-				return err
-			}
-
-			pKey := filepath.Base(path)
-
-			pKey = strings.NewReplacer(
-				constant.License37, "+",
-				constant.License73, "/",
-				constant.License919, "=",
-			).Replace(pKey)
-
-			lic, err := license.Parse(pKey, path)
-
+			lic, err := help.License(context.Background(), sdk.Rdb())
 			if err != nil {
 				log.Error().Err(err).Msg("授权许可证验证失败")
 				return err
 			}
 
-			_ = printLicense(lic)
-			if err != nil {
+			if err = printLicense(lic); err != nil {
 				return err
 			}
-
 			return nil
 		},
 	}

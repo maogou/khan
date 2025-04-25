@@ -4,19 +4,36 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/redis/go-redis/v9"
 	v1 "smallBot/api/khan/v1"
 	"smallBot/internal/constant"
 	"smallBot/internal/pkg/license"
 	"smallBot/internal/pkg/log"
 	"strings"
+
+	"github.com/redis/go-redis/v9"
 )
 
-func License(ctx context.Context, rdb *redis.Client) (*v1.Permission, error) {
-	var (
-		p    v1.Permission
-		pKey string
-	)
+func Permission(ctx context.Context, rdb *redis.Client) (*v1.Permission, error) {
+	var p v1.Permission
+
+	lic, err := License(ctx, rdb)
+	if err != nil {
+		return nil, err
+	}
+
+	if err = json.Unmarshal(lic.Dat, &p); err != nil {
+		return nil, err
+	}
+
+	if lic.Expired() {
+		return nil, errors.New("授权许可证已过期")
+	}
+
+	return &p, nil
+}
+
+func License(ctx context.Context, rdb *redis.Client) (*license.License, error) {
+	var pKey string
 
 	pKey, err := rdb.Get(ctx, constant.LicenseKey).Result()
 	if err != nil {
@@ -40,13 +57,5 @@ func License(ctx context.Context, rdb *redis.Client) (*v1.Permission, error) {
 
 	lic, err := license.Parse(pKey, lb)
 
-	if err = json.Unmarshal(lic.Dat, &p); err != nil {
-		return nil, err
-	}
-
-	if lic.Expired() {
-		return nil, errors.New("授权许可证已过期")
-	}
-
-	return &p, nil
+	return lic, err
 }

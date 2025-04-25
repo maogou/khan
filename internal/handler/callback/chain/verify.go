@@ -25,7 +25,7 @@ func (v *Verify) HandlerRequest(ctx context.Context, param v1.CollectRequest) {
 func (v *Verify) IsCanHandler(ctx context.Context, param v1.CollectRequest) bool {
 	log.C(ctx).Info().Msg("调用Verify->IsCanHandler方法")
 
-	_, err := help.License(ctx, v.sdk.Rdb())
+	_, err := help.Permission(ctx, v.sdk.Rdb())
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("License已过期")
