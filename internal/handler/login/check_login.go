@@ -55,7 +55,10 @@ func (l *LoginHandler) CheckLogin(ctx *gin.Context) {
 		return
 	}
 
-	if lic.Cus != wxid {
+	alias := resp.Data.LoginInfo.AcctSectResp.Alias
+	log.C(ctx).Info().Str("wxid", wxid).Str("alias", alias).Msg("获取到的微信号")
+
+	if lic.Cus != wxid && lic.Cus != resp.Data.LoginInfo.AcctSectResp.Alias {
 		log.C(ctx).Error().Err(err).Msg("登录的微信号的和授权的微信号不相符")
 		go verifyFailLogout(cCtx, l.sdk, req.AppId)
 		response.Fail(ctx, errno.AuthWixLicenseError)
