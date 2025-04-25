@@ -3,10 +3,6 @@ package config
 import (
 	"time"
 
-	"github.com/rs/zerolog/log"
-
-	"github.com/fsnotify/fsnotify"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
 )
@@ -65,32 +61,5 @@ func MustLoadConfig(cfgFile string) Config {
 		panic(err)
 	}
 
-	go func(conf *viper.Viper) {
-		watchConfig(conf, cfgFile)
-	}(conf)
-
 	return config
-}
-
-func watchConfig(conf *viper.Viper, cfgFile string) {
-	conf.WatchConfig()
-
-	conf.OnConfigChange(
-		func(e fsnotify.Event) {
-			log.Info().Str("file", cfgFile).Msg("配置文件已修改")
-			if err := conf.ReadInConfig(); err != nil {
-				log.Error().Err(err).Str("file", cfgFile).Msg("重新读取配置文件失败")
-			} else {
-				log.Info().Str("file", cfgFile).Msg("配置文件重新加载成功")
-				printAllConfig(conf)
-			}
-		},
-	)
-}
-
-func printAllConfig(conf *viper.Viper) {
-	allSettings := conf.AllSettings()
-	for key, value := range allSettings {
-		log.Info().Str("key", key).Interface("value", value).Msg("当前配置项:")
-	}
 }
