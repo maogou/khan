@@ -14,7 +14,7 @@ import (
 
 func (m *Monitor) forceLogout() {
 	m.crontab.AddFunc(
-		"@every 30m", func() {
+		"@every 5m", func() {
 			var (
 				wg     conc.WaitGroup
 				appIds []string
@@ -56,21 +56,30 @@ func (m *Monitor) forceLogout() {
 							return
 						}
 
-						log.C(ctx).Info().Str("auth_wxid", lic.Cus).Msg("许可证授权分配的wxid")
-						if resp.Data.UserInfo.UserName.String != lic.Cus || resp.Data.UserInfo.Alias != lic.Sub {
+						wxid := resp.Data.UserInfo.UserName.String
+						alias := resp.Data.UserInfo.Alias
+						log.C(ctx).Info().Str("auth_wxid", lic.Cus).Str("wxid", wxid).Str(
+							"alias", alias,
+						).Msg("许可证授权分配的wxid")
+						if wxid != lic.Cus && alias != lic.Sub {
 							if _, lErr := m.sdk.Logout(ctx, login.LogoutRequest{Appid: appId}); lErr != nil {
 								log.C(ctx).Error().Err(lErr).Str("appId", appId).Msg("强制退出登录失败")
-							} else {
-								log.C(ctx).Info().Str("appId", appId).Msg("强制退出登录成功")
+								return
 							}
+							log.C(ctx).Info().Str("appId", appId).Msg("强制退出登录成功")
+
+							return
 						}
+
+						log.C(ctx).Info().Str(
+							"appid", appId,
+						).Msg("检测当前登录的微信号是否和当时许可证分配微信号一致,不需要强制退出用户")
 
 					},
 				)
 			}
 
 			wg.Wait()
-
 		},
 	)
 }
