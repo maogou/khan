@@ -4,7 +4,7 @@ SHELL := /bin/bash
 APP_NAME ?= khan
 DOCKER_IMAGE ?= khan
 VERSION ?= $(shell git rev-parse --short HEAD)
-GO_MODULE = smallBot/cmd
+GO_MODULE = maogou/khan/cmd
 GO_PATH := $(shell go env GOPATH)
 GO_ROOT := $(shell go env GOROOT)
 DOWNLOAD_PATH := $(shell realpath ../download)
@@ -12,7 +12,7 @@ HOST_DOWNLOAD ?= $(shell [ -d $(DOWNLOAD_PATH) ] || mkdir -p $(DOWNLOAD_PATH); e
 CONTAINER_DOWNLOAD := /app/public/download
 HOST_PORT ?= 8073
 CONTAINER_PORT ?= 8073
-LOG_FILE ?= /var/log/supervisor/supervisord.log
+LOG_FILE ?= /var/log/khan.log
 
 .PHONY: all all_mac_arm build docker-build docker-build-mac-arm docker-run docker-run-mac-arm clean help env demo
 
