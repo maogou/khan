@@ -9,7 +9,8 @@ import (
 	"maogou/khan/internal/sdk/khan"
 	"net/http"
 	"os"
-	
+	"os/signal"
+
 	"strconv"
 	"time"
 

@@ -2,7 +2,7 @@ package version
 
 import (
 	"maogou/khan/internal/constant"
-	"runti
+	"runtime/debug"
 	"time"
 
 	"github.com/pterm/pterm"

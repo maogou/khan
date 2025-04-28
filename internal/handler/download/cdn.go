@@ -1,8 +1,6 @@
 package download
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/rs/xid"
 	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/api/khan/v1/transform/download"
 	"maogou/khan/internal/pkg/errno"
@@ -10,10 +8,13 @@ import (
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/pkg/response"
 	"os"
-	"path/filepath
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/rs/xid"
 )
 
 func (d *DownloadHandler) DownloadCdn(ctx *gin.Context) {

@@ -9,7 +9,7 @@ import (
 	"maogou/khan/internal/pkg/license"
 	"maogou/khan/internal/sdk/khan"
 	"os"
-	"path/filep
+	"path/filepath"
 	"strings"
 	"time"
 

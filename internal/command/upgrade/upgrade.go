@@ -1,7 +1,7 @@
 package upgrade
 
 import (
-	"maogou/k
+	"maogou/khan/internal/constant"
 	"os/exec"
 	"runtime"
 

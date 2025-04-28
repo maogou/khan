@@ -2,7 +2,7 @@ package main
 
 import (
 	"maogou/khan/internal"
-	
+	"os"
 )
 
 func main() {
