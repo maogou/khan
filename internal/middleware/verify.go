@@ -2,14 +2,14 @@ package middleware
 
 import (
 	"encoding/json"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/config"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/license"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/pkg/response"
 	"slices"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/config"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/license"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/pkg/response"
 	"strings"
 
 	"github.com/gin-gonic/gin"

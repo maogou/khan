@@ -2,10 +2,10 @@ package task
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
 	"strconv"
 	"time"
 

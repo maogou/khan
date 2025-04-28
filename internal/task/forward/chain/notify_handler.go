@@ -2,9 +2,9 @@ package chain
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/message"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/api/khan/v1/transform/message"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 	"strconv"
 )
 

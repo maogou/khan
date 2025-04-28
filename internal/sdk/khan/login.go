@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/login"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/login"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) Logout(ctx context.Context, req login.LogoutRequest) (*login.LogoutResponse, error) {

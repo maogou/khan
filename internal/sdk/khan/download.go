@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/download"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/download"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) DownloadEmoji(ctx context.Context, req download.DownloadEmojiRequest) (*download.DownloadEmojiResponse, error) {

@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/sns"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/sns"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) SnsUploadImg(ctx context.Context, req sns.SnsUploadImgRequest) (*sns.SnsUploadImgResponse, error) {

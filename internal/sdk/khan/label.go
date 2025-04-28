@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/label"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/label"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) LabelAdd(ctx context.Context, req label.LabelAddRequest) (*label.LabelAddResponse, error) {

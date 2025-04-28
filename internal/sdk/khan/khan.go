@@ -1,7 +1,7 @@
 package khan
 
 import (
-	"smallBot/internal/config"
+	"maogou/khan/internal/config"
 	"time"
 
 	"github.com/redis/go-redis/v9"

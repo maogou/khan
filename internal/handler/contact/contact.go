@@ -1,6 +1,6 @@
 package contact
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type ContactHandler struct {
 	sdk *khan.Khan

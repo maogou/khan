@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/license"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 	"slices"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/license"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
 	"strings"
 )
 

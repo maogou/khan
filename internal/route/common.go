@@ -1,9 +1,9 @@
 package router
 
 import (
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/errno"
-	"smallBot/internal/pkg/response"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/errno"
+	"maogou/khan/internal/pkg/response"
 	"time"
 
 	"github.com/gin-gonic/gin"

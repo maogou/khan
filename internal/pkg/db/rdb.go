@@ -2,7 +2,7 @@ package db
 
 import (
 	"context"
-	"smallBot/internal/config"
+	"maogou/khan/internal/config"
 
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"

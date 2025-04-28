@@ -1,7 +1,7 @@
 package login
 
 import (
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/sdk/khan"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/urfave/cli/v2"

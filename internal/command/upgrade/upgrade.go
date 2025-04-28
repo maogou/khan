@@ -1,9 +1,9 @@
 package upgrade
 
 import (
+	"maogou/k
 	"os/exec"
 	"runtime"
-	"smallBot/internal/constant"
 
 	"github.com/urfave/cli/v2"
 )

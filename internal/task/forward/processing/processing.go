@@ -2,8 +2,8 @@ package processing
 
 import (
 	"context"
-	"smallBot/internal/sdk/khan"
-	"smallBot/internal/task/forward/chain"
+	"maogou/khan/internal/sdk/khan"
+	"maogou/khan/internal/task/forward/chain"
 )
 
 type Processing struct {

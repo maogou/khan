@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/tranfer"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/tranfer"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) BatchHeartBeat(ctx context.Context, req tranfer.TranferBatchHeartBeatRequest) (*tranfer.TranferBatchHeartBeatResponse, error) {

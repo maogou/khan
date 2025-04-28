@@ -2,11 +2,11 @@ package task
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/login"
-	"smallBot/api/khan/v1/transform/personal"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/login"
+	"maogou/khan/api/khan/v1/transform/personal"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
 
 	"github.com/rs/xid"
 	"github.com/sourcegraph/conc"

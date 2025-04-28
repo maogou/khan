@@ -1,9 +1,9 @@
 package response
 
 import (
-	"net/http"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/errno"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/errno"
+
 
 	"github.com/gin-gonic/gin"
 )

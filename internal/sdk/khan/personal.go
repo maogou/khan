@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/personal"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/personal"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) PersonalProfile(ctx context.Context, req personal.PersonalProfileRequest) (*personal.PersonalProfileResponse, error) {

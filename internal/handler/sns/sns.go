@@ -1,6 +1,6 @@
 package sns
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type SnsHandler struct {
 	sdk *khan.Khan

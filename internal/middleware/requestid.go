@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"smallBot/internal/constant"
+	"maogou/khan/internal/constant"
 
 	"github.com/rs/zerolog/log"
 

@@ -1,6 +1,6 @@
 package chatroom
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type ChatRoomHandler struct {
 	sdk *khan.Khan

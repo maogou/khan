@@ -1,6 +1,6 @@
 package login
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type LoginHandler struct {
 	sdk *khan.Khan

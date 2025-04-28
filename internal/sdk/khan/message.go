@@ -2,11 +2,11 @@ package khan
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/download"
-	"smallBot/api/khan/v1/transform/message"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/log"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/api/khan/v1/transform/download"
+	"maogou/khan/api/khan/v1/transform/message"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) PostText(ctx context.Context, req message.PostTextRequest) (*message.PostTextResponse, error) {

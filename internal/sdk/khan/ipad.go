@@ -2,9 +2,9 @@ package khan
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/login"
-	"smallBot/internal/pkg/log"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/api/khan/v1/transform/login"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) LoginQrCode(ctx context.Context, req login.GetLoginQrCodeRequest) (*login.GetLoginQrCodeResponse, error) {

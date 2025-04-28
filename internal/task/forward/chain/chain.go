@@ -2,9 +2,9 @@ package chain
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/favor"
-	"smallBot/api/khan/v1/transform/sns"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/api/khan/v1/transform/favor"
+	"maogou/khan/api/khan/v1/transform/sns"
 )
 
 type Handler interface {

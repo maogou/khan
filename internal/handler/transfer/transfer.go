@@ -1,6 +1,6 @@
 package transfer
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type TransferHandler struct {
 	sdk *khan.Khan

@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"smallBot/internal/handler/setting"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/handler/setting"
+	"maogou/khan/internal/sdk/khan"
 )
 
 func initSettingRoute(route *gin.Engine, sdk *khan.Khan) {

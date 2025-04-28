@@ -2,9 +2,9 @@ package serve
 
 import (
 	"github.com/robfig/cron/v3"
-	"smallBot/internal/config"
-	"smallBot/internal/sdk/khan"
-	"smallBot/internal/task"
+	"maogou/khan/internal/config"
+	"maogou/khan/internal/sdk/khan"
+	"maogou/khan/internal/task"
 
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"

@@ -1,8 +1,8 @@
 package version
 
 import (
-	"runtime/debug"
-	"smallBot/internal/constant"
+	"maogou/khan/internal/constant"
+	"runti
 	"time"
 
 	"github.com/pterm/pterm"

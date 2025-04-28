@@ -2,11 +2,11 @@ package download
 
 import (
 	"github.com/gin-gonic/gin"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/download"
-	"smallBot/internal/pkg/errno"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/pkg/response"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/api/khan/v1/transform/download"
+	"maogou/khan/internal/pkg/errno"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/pkg/response"
 )
 
 func (d *DownloadHandler) DownloadEmoji(ctx *gin.Context) {

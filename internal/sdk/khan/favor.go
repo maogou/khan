@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/favor"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/favor"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) Sync(ctx context.Context, req favor.FavorSyncRequest) (*favor.FavorSyncResponse, error) {

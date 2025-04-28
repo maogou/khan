@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/contact"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/contact"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) ContactList(ctx context.Context, req contact.ContactListRequest) (*contact.ContactListResponse, error) {

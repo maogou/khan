@@ -2,11 +2,11 @@ package setting
 
 import (
 	"io"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/errno"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/pkg/response"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/errno"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )

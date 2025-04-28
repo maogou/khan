@@ -1,7 +1,7 @@
 package message
 
 import (
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/sdk/khan"
 )
 
 type MessageHandler struct {

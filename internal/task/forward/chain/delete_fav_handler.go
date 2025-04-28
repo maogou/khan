@@ -3,9 +3,9 @@ package chain
 import (
 	"context"
 	"errors"
-	"smallBot/api/khan/v1/transform/favor"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/api/khan/v1/transform/favor"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 )
 
 type DeleteFavHandler struct {

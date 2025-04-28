@@ -3,13 +3,13 @@ package license
 import (
 	"encoding/json"
 	"fmt"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/license"
+	"maogou/khan/internal/sdk/khan"
 	"os"
-	"path/filepath"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/license"
-	"smallBot/internal/sdk/khan"
+	"path/filep
 	"strings"
 	"time"
 

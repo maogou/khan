@@ -1,6 +1,6 @@
 package personal
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type PersonalHandler struct {
 	sdk *khan.Khan

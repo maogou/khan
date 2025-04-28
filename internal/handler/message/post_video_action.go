@@ -1,12 +1,12 @@
 package message
 
 import (
-	v1 "smallBot/api/khan/v1"
-	"smallBot/api/khan/v1/transform/message"
-	"smallBot/internal/pkg/errno"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/pkg/response"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/api/khan/v1/transform/message"
+	"maogou/khan/internal/pkg/errno"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/pkg/response"
 	"time"
 
 	"github.com/gin-gonic/gin"

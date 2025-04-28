@@ -2,9 +2,9 @@ package chain
 
 import (
 	"context"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
-	"smallBot/internal/task/forward/strategy"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
+	"maogou/khan/internal/task/forward/strategy"
 )
 
 type SendHandler struct {

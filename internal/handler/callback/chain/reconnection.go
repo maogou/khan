@@ -3,10 +3,10 @@ package chain
 import (
 	"context"
 	"errors"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 
 	"github.com/spf13/cast"
 )

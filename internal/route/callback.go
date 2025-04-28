@@ -1,9 +1,9 @@
 package router
 
 import (
-	"smallBot/internal/handler/callback"
-	"smallBot/internal/handler/callback/chain"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/handler/callback"
+	"maogou/khan/internal/handler/callback/chain"
+	"maogou/khan/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )

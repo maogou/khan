@@ -3,10 +3,10 @@ package auth
 import (
 	"context"
 	"encoding/json"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/license"
-	"smallBot/internal/sdk/khan"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/license"
+	"maogou/khan/internal/sdk/khan"
 	"strconv"
 
 	"github.com/rs/zerolog/log"

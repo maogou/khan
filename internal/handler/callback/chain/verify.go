@@ -2,10 +2,10 @@ package chain
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 )
 
 type Verify struct {

@@ -1,8 +1,8 @@
 package router
 
 import (
-	"smallBot/internal/handler/chatroom"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/handler/chatroom"
+	"maogou/khan/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )

@@ -3,9 +3,9 @@ package chain
 import (
 	"context"
 	"errors"
-	"smallBot/api/khan/v1/transform/sns"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/api/khan/v1/transform/sns"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 )
 
 type SnsDetailHandler struct {

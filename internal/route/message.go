@@ -1,8 +1,8 @@
 package router
 
 import (
-	"smallBot/internal/handler/message"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/handler/message"
+	"maogou/khan/internal/sdk/khan"
 
 	"github.com/gin-gonic/gin"
 )

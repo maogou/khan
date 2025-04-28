@@ -2,10 +2,10 @@ package contact
 
 import (
 	"encoding/json"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/errno"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/pkg/response"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/pkg/errno"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )

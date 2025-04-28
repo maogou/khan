@@ -2,10 +2,10 @@ package chain
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/favor"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/api/khan/v1/transform/favor"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 	"strconv"
 	"time"
 )

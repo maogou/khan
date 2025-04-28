@@ -2,10 +2,10 @@ package task
 
 import (
 	"context"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/help"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/task/forward/processing"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/help"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/task/forward/processing"
 
 	"github.com/rs/xid"
 	"github.com/sourcegraph/conc"

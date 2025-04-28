@@ -1,8 +1,8 @@
 package main
 
 import (
-	"os"
-	"smallBot/internal"
+	"maogou/khan/internal"
+	
 )
 
 func main() {

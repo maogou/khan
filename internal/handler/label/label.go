@@ -1,6 +1,6 @@
 package label
 
-import "smallBot/internal/sdk/khan"
+import "maogou/khan/internal/sdk/khan"
 
 type LabelHandler struct {
 	sdk *khan.Khan

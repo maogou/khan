@@ -2,9 +2,9 @@ package task
 
 import (
 	"context"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/log"
 	"os/exec"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/log"
 
 	"github.com/rs/xid"
 )

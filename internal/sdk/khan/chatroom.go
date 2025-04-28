@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/chatroom"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/chatroom"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) ChatroomCreate(ctx context.Context, req chatroom.ChatroomCreateRequest) (*chatroom.ChatroomCreateResponse, error) {

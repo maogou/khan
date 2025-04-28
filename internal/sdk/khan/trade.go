@@ -2,8 +2,8 @@ package khan
 
 import (
 	"context"
-	"smallBot/api/khan/v1/transform/trade"
-	"smallBot/internal/pkg/log"
+	"maogou/khan/api/khan/v1/transform/trade"
+	"maogou/khan/internal/pkg/log"
 )
 
 func (k *Khan) OpenRedPacket(ctx context.Context, req trade.RedPacketRequest) (*trade.RedPacketResponse, error) {

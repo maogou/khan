@@ -3,9 +3,9 @@ package chain
 import (
 	"context"
 	"errors"
-	"smallBot/internal/constant"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	"maogou/khan/internal/constant"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 	"strconv"
 )
 

@@ -2,9 +2,9 @@ package chain
 
 import (
 	"context"
-	v1 "smallBot/api/khan/v1"
-	"smallBot/internal/pkg/log"
-	"smallBot/internal/sdk/khan"
+	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/pkg/log"
+	"maogou/khan/internal/sdk/khan"
 )
 
 type Ignore struct {
