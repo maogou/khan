@@ -30,6 +30,6 @@ type LabelListResponse struct {
 
 type LabelModifyRequest struct {
 	AppId    string   `json:"appId" binding:"required"`
-	LabelIds string   `json:"labelIds" binding:"required`
-	WxIds    []string `json:"wxIds" binding:"required`
+	LabelIds string   `json:"labelIds" binding:"required"`
+	WxIds    []string `json:"wxIds" binding:"required"`
 }
