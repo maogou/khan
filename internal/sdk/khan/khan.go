@@ -2,6 +2,7 @@ package khan
 
 import (
 	"maogou/khan/internal/config"
+	"maogou/khan/internal/constant"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -22,7 +23,7 @@ type Khan struct {
 
 func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate, rdb *redis.Client) *Khan {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
-	client.BaseURL = conf.Sdk.Gog7a6v8g
+	client.BaseURL = constant.SdkBaseUrl
 
 	return &Khan{
 		client:   client,

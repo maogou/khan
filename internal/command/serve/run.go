@@ -22,8 +22,8 @@ import (
 func run(conf config.Config, sdk *khan.Khan) error {
 	gin.SetMode(conf.Mode)
 	route := gin.Default()
-	route.Use(middleware.RequestId(), middleware.VerifyLicense(sdk.Rdb(), conf))
-
+	//route.Use(middleware.RequestId(), middleware.VerifyLicense(sdk.Rdb(), conf))
+	route.Use(middleware.RequestId())
 	addr := ":" + strconv.Itoa(conf.Port)
 
 	if err := router.InitRouter(route, sdk); err != nil {

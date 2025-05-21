@@ -61,4 +61,7 @@ const (
 	CollectMoneyFun = "collectMoney"
 
 	FavIds = "fav_id_"
+
+	SdkBaseUrl = "http://218.78.116.24:10883/gewe/v2"
+	SdkToken   = "470a8bd6-42ce-4cb8-865b-0a9b41c6366b"
 )
