@@ -2,7 +2,6 @@ package khan
 
 import (
 	"maogou/khan/internal/config"
-	"maogou/khan/internal/constant"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -10,6 +9,8 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/go-resty/resty/v2"
 )
+
+const headTokenKey = "X-GEWE-TOKEN"
 
 type Khan struct {
 	client   *resty.Client
@@ -23,7 +24,7 @@ type Khan struct {
 
 func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate, rdb *redis.Client) *Khan {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
-	client.BaseURL = constant.SdkBaseUrl
+	client.BaseURL = conf.Sdk.Api
 
 	return &Khan{
 		client:   client,
@@ -75,4 +76,8 @@ func (k *Khan) Validate() *validator.Validate {
 
 func (k *Khan) Rdb() *redis.Client {
 	return k.rdb
+}
+
+func (k *Khan) tRequest() *resty.Request {
+	return k.client.R().SetHeader(headTokenKey, k.config.Sdk.Token)
 }

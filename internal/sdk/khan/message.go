@@ -10,9 +10,7 @@ import (
 )
 
 func (k *Khan) PostText(ctx context.Context, req v1.PostTextRequest) (*v1.PostTextResponse, error) {
-	resp, err := k.client.R().SetHeader(
-		"X-GEWE-TOKEN", constant.SdkToken,
-	).SetBody(req).SetResult(&v1.PostTextResponse{}).Post("/api/message/postText")
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.PostTextResponse{}).Post("/api/message/postText")
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PostText方法失败")
 		return nil, err
