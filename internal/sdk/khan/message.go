@@ -9,14 +9,14 @@ import (
 	"maogou/khan/internal/pkg/log"
 )
 
-func (k *Khan) PostText(ctx context.Context, req message.PostTextRequest) (*message.PostTextResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&message.PostTextResponse{}).Post(postText)
+func (k *Khan) PostText(ctx context.Context, req v1.PostTextRequest) (*v1.PostTextResponse, error) {
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.PostTextResponse{}).Post("/api/message/postText")
 	if err != nil {
-		log.C(ctx).Error().Msg("调用PostText方法失败")
+		log.C(ctx).Error().Err(err).Msg("调用PostText方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*message.PostTextResponse), nil
+	return resp.Result().(*v1.PostTextResponse), nil
 }
 
 func (k *Khan) PostImage(ctx context.Context, req message.PostImage) (*message.PostImageResponse, error) {

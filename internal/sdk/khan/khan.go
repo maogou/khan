@@ -10,6 +10,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+const headTokenKey = "X-GEWE-TOKEN"
+
 type Khan struct {
 	client   *resty.Client
 	config   *config.Config
@@ -22,7 +24,7 @@ type Khan struct {
 
 func NewKhanSdk(conf *config.Config, client *resty.Client, validate *validator.Validate, rdb *redis.Client) *Khan {
 	client.SetTimeout(conf.Sdk.TimeOut * time.Second)
-	client.BaseURL = conf.Sdk.Gog7a6v8g
+	client.BaseURL = conf.Sdk.Api
 
 	return &Khan{
 		client:   client,
@@ -74,4 +76,8 @@ func (k *Khan) Validate() *validator.Validate {
 
 func (k *Khan) Rdb() *redis.Client {
 	return k.rdb
+}
+
+func (k *Khan) tRequest() *resty.Request {
+	return k.client.R().SetHeader(headTokenKey, k.config.Sdk.Token)
 }

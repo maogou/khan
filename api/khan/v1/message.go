@@ -1,5 +1,10 @@
 package v1
 
+type ResponseCommon struct {
+	Ret int    `json:"ret"`
+	Msg string `json:"msg"`
+}
+
 type PostTextRequest struct {
 	AppId   string `json:"appId" binding:"required"`
 	ToWxid  string `json:"toWxid" binding:"required"`
@@ -7,12 +12,17 @@ type PostTextRequest struct {
 	Content string `json:"content" binding:"required"`
 }
 
-type PostTextResponse struct {
+type PostTextData struct {
 	ToWxid     string `json:"toWxid"`
 	CreateTime int    `json:"createTime"`
 	MsgId      int    `json:"msgId"`
 	NewMsgId   int64  `json:"newMsgId"`
 	Type       int    `json:"type"`
+}
+
+type PostTextResponse struct {
+	ResponseCommon
+	Data PostTextData `json:"data"`
 }
 
 type PostImageRequest struct {

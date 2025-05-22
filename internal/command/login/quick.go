@@ -5,7 +5,6 @@ import (
 	"errors"
 	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/api/khan/v1/transform/login"
-	"maogou/khan/api/khan/v1/transform/message"
 	"maogou/khan/internal/constant"
 	"maogou/khan/internal/pkg/errno"
 	"maogou/khan/internal/pkg/help"
@@ -253,22 +252,22 @@ func (q *QuickLogin) Open() {
 }
 
 func (q *QuickLogin) Welcome() {
-	var welcome = message.PostTextRequest{
-		AppId: q.appId,
-		ToWxidList: []message.ToWxid{
-			{
-				Content: "欢迎使用Khan服务!",
-				ToWxid:  "filehelper",
-				MsgType: 1,
-			},
-		},
-	}
+	//var welcome = message.PostTextRequest{
+	//	AppId: q.appId,
+	//	ToWxidList: []message.ToWxid{
+	//		{
+	//			Content: "欢迎使用Khan服务!",
+	//			ToWxid:  "filehelper",
+	//			MsgType: 1,
+	//		},
+	//	},
+	//}
+	//
+	//var resp *message.PostTextResponse
 
-	var resp *message.PostTextResponse
+	//resp, q.err = q.sdk.PostText(q.ctx, welcome)
 
-	resp, q.err = q.sdk.PostText(q.ctx, welcome)
-
-	q.zLog.Info().Any("welcome", resp).Msg("发送欢迎消息")
+	//q.zLog.Info().Any("welcome", resp).Msg("发送欢迎消息")
 
 }
 

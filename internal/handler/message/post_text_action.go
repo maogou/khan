@@ -2,7 +2,6 @@ package message
 
 import (
 	v1 "maogou/khan/api/khan/v1"
-	"maogou/khan/api/khan/v1/transform/message"
 	"maogou/khan/internal/pkg/errno"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/pkg/response"
@@ -21,18 +20,7 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 		return
 	}
 
-	resp, err := m.sdk.PostText(
-		ctx, message.PostTextRequest{
-			AppId: req.AppId,
-			ToWxidList: []message.ToWxid{
-				{
-					Content: req.Content,
-					ToWxid:  req.ToWxid,
-					MsgType: 1,
-				},
-			},
-		},
-	)
+	resp, err := m.sdk.PostText(ctx, req)
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用PostText方法发送消息失败")
 		response.Fail(ctx, errno.PostTextError)
@@ -41,19 +29,5 @@ func (m *MessageHandler) PostText(ctx *gin.Context) {
 
 	log.C(ctx).Info().Any("req", req).Any("resp", resp).Msg("发送消息成功")
 
-	if resp.Ret != 0 {
-		log.C(ctx).Error().Err(err).Msg("调用PostText方法发送消息失败")
-		response.Fail(ctx, errno.PostTextError)
-		return
-	}
-
-	response.Success(
-		ctx, v1.PostTextResponse{
-			ToWxid:     req.ToWxid,
-			MsgId:      resp.Data.List[0].MsgId,
-			NewMsgId:   resp.Data.List[0].NewMsgId,
-			Type:       resp.Data.List[0].Type,
-			CreateTime: resp.Data.List[0].Createtime,
-		},
-	)
+	response.Success(ctx, resp)
 }
