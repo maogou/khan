@@ -5,6 +5,13 @@ type FavorSyncRequest struct {
 	SyncKey string `json:"syncKey"`
 }
 
+type FavorSyncData struct {
+	Data struct {
+		SyncKey string          `json:"syncKey"`
+		List    []FavorSyncItem `json:"list"`
+	} `json:"data"`
+}
+
 type FavorSyncItem struct {
 	FavId      int `json:"favId"`
 	Type       int `json:"type"`
@@ -13,8 +20,8 @@ type FavorSyncItem struct {
 }
 
 type FavorSyncResponse struct {
-	SyncKey string          `json:"syncKey"`
-	List    []FavorSyncItem `json:"list"`
+	ResponseCommon
+	FavorSyncData
 }
 
 type FavorDetailRequest struct {
@@ -22,12 +29,17 @@ type FavorDetailRequest struct {
 	FavId int    `json:"favId" binding:"required"`
 }
 
-type FavorDetailResponse struct {
+type FavorDetailData struct {
 	FavId      int    `json:"favId"`
 	Status     int    `json:"status"`
 	Flag       int    `json:"flag"`
 	UpdateTime int    `json:"updateTime"`
 	Content    string `json:"content"`
+}
+
+type FavorDetailResponse struct {
+	ResponseCommon
+	Data FavorDetailData `json:"data"`
 }
 
 type FavorDeleteRequest struct {

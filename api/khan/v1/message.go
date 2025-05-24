@@ -1,10 +1,5 @@
 package v1
 
-type ResponseCommon struct {
-	Ret int    `json:"ret"`
-	Msg string `json:"msg"`
-}
-
 type PostTextRequest struct {
 	AppId   string `json:"appId" binding:"required"`
 	ToWxid  string `json:"toWxid" binding:"required"`

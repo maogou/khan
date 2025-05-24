@@ -2,7 +2,6 @@ package favor
 
 import (
 	v1 "maogou/khan/api/khan/v1"
-	"maogou/khan/api/khan/v1/transform/favor"
 	"maogou/khan/internal/pkg/errno"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/pkg/response"
@@ -14,10 +13,7 @@ func (f *FavorHandler) Sync(ctx *gin.Context) {
 	log.C(ctx).Info().Msg("调用FavorHandler->Sync方法")
 
 	var (
-		req    v1.FavorSyncRequest
-		result = v1.FavorSyncResponse{
-			List: []v1.FavorSyncItem{},
-		}
+		req v1.FavorSyncRequest
 	)
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -26,12 +22,7 @@ func (f *FavorHandler) Sync(ctx *gin.Context) {
 		return
 	}
 
-	resp, err := f.sdk.Sync(
-		ctx, favor.FavorSyncRequest{
-			AppId:   req.AppId,
-			SyncKey: req.SyncKey,
-		},
-	)
+	resp, err := f.sdk.Sync(ctx, req)
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用favorSync方法失败")
@@ -39,24 +30,11 @@ func (f *FavorHandler) Sync(ctx *gin.Context) {
 		return
 	}
 
-	if resp.Ret != 0 {
-		log.C(ctx).Error().Err(err).Msg("ret !=0 ->调用favorSync方法失败")
+	if resp.Ret != 200 {
+		log.C(ctx).Error().Str("msg", resp.Msg).Msg("ret !=0 ->调用favorSync方法失败")
 		response.Fail(ctx, errno.FavorSyncError)
 		return
 	}
 
-	result.SyncKey = resp.Data.KeyBuf.Buffer
-
-	for _, v := range resp.Data.List {
-		result.List = append(
-			result.List, v1.FavorSyncItem{
-				FavId:      v.FavId,
-				Type:       v.Type,
-				Flag:       v.Flag,
-				UpdateTime: v.UpdateTime,
-			},
-		)
-	}
-
-	response.Success(ctx, result)
+	response.Success(ctx, resp.Data)
 }
