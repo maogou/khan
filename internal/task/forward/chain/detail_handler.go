@@ -2,7 +2,7 @@ package chain
 
 import (
 	"context"
-	"maogou/khan/api/khan/v1/transform/favor"
+	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/sdk/khan"
 )
@@ -24,7 +24,7 @@ func (d *FavDetailHandler) Handle(ctx context.Context, pld *PipelineData) error 
 	log.C(ctx).Info().Str("appid", pld.AppID).Msg("开始执行获取详情.....")
 
 	detailResp, err := d.sdk.Detail(
-		ctx, favor.FavorDetailRequest{
+		ctx, v1.FavorDetailRequest{
 			AppId: pld.AppID,
 			FavId: pld.FavID,
 		},
@@ -35,12 +35,14 @@ func (d *FavDetailHandler) Handle(ctx context.Context, pld *PipelineData) error 
 		return err
 	}
 
-	if detailResp.Ret != 0 {
-		log.C(ctx).Error().Str("appid", pld.AppID).Msg("调用fav FavDetail ->detailResp.Ret != 0 方法失败")
+	if detailResp.Ret != 200 {
+		log.C(ctx).Error().Str("msg", detailResp.Msg).Str(
+			"appid", pld.AppID,
+		).Msg("调用fav FavDetail ->detailResp.Ret != 0 方法失败")
 		return err
 	}
 
-	pld.FavDetail = detailResp
+	pld.FavDetail = &detailResp.Data
 
 	return nil
 }

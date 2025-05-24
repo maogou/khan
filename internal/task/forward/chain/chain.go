@@ -3,7 +3,6 @@ package chain
 import (
 	"context"
 	v1 "maogou/khan/api/khan/v1"
-	"maogou/khan/api/khan/v1/transform/favor"
 	"maogou/khan/api/khan/v1/transform/sns"
 )
 
@@ -18,7 +17,7 @@ type PipelineData struct {
 	SnsID        string
 	ContentStyle int
 	IsForwardOk  bool
-	FavDetail    *favor.FavorDetailResponse
+	FavDetail    *v1.FavorDetailData
 	SnsDetail    *sns.SnsDetailResponse
 	Req          v1.SnsForwardRequest
 	Timeline     v1.TimelineObject

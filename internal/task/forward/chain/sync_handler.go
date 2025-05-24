@@ -2,7 +2,7 @@ package chain
 
 import (
 	"context"
-	"maogou/khan/api/khan/v1/transform/favor"
+	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/internal/constant"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/sdk/khan"
@@ -48,7 +48,7 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		}
 
 		syncResp, err := s.sdk.Sync(
-			ctx, favor.FavorSyncRequest{
+			ctx, v1.FavorSyncRequest{
 				AppId:   pld.AppID,
 				SyncKey: syncKey,
 			},
@@ -58,12 +58,14 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 			return err
 		}
 
-		if syncResp.Ret != 0 {
-			log.C(ctx).Error().Str("appid", pld.AppID).Msg("调用favorSync ->syncResp.Ret != 0 方法失败")
+		if syncResp.Ret != 200 {
+			log.C(ctx).Error().Str("msg", syncResp.Msg).Str(
+				"appid", pld.AppID,
+			).Msg("调用favorSync ->syncResp.Ret != 0 方法失败")
 			return err
 		}
 
-		syncKey = syncResp.Data.KeyBuf.Buffer
+		syncKey = syncResp.Data.SyncKey
 
 		if len(syncResp.Data.List) == 0 {
 			log.C(ctx).Info().Str("appid", pld.AppID).Msg("同步收藏夹完成")

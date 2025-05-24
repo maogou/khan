@@ -3,7 +3,7 @@ package chain
 import (
 	"context"
 	"errors"
-	"maogou/khan/api/khan/v1/transform/favor"
+	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/sdk/khan"
 )
@@ -31,7 +31,7 @@ func (df *DeleteFavHandler) Handle(ctx context.Context, pld *PipelineData) error
 	}
 
 	delResp, err := df.sdk.Delete(
-		ctx, favor.FavorDeleteRequest{
+		ctx, v1.FavorDeleteRequest{
 			AppId: pld.AppID,
 			FavId: pld.FavID,
 		},
@@ -42,8 +42,8 @@ func (df *DeleteFavHandler) Handle(ctx context.Context, pld *PipelineData) error
 		return err
 	}
 
-	if delResp.Ret != 0 {
-		log.C(ctx).Error().Err(err).Msg("调用Delete favor方法失败")
+	if delResp.Ret != 200 {
+		log.C(ctx).Error().Str("msg", delResp.Msg).Msg("调用Delete favor方法失败")
 		return errors.New("调用Delete favor方法失败")
 	}
 

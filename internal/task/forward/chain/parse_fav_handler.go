@@ -26,17 +26,12 @@ var _ Handler = (*ParseFavHandler)(nil)
 func (pf *ParseFavHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	log.C(ctx).Info().Str("appid", pld.AppID).Msg("开始执行解析收藏夹,获取朋友圈id.....")
 
-	if len(pld.FavDetail.Data.ObjectList) == 0 {
+	if len(pld.FavDetail.Content) == 0 {
 		log.C(ctx).Warn().Str("appid", pld.AppID).Msg("收藏夹中内容为空,无需转发")
 		return errors.New("收藏夹中内容为空,无需转发")
 	}
 
-	favContent := pld.FavDetail.Data.ObjectList[0].Object
-
-	if len(favContent) == 0 {
-		log.C(ctx).Warn().Str("appid", pld.AppID).Msg("收藏夹中内容为空,无需转发")
-		return errors.New("收藏夹中内容为空,无需转发")
-	}
+	favContent := pld.FavDetail.Content
 
 	var item v1.FavItem
 	if xErr := xml.Unmarshal([]byte(favContent), &item); xErr != nil {
