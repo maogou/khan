@@ -31,7 +31,7 @@ func (p *ParseSnsHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	)
 
 	if err := xml.Unmarshal(
-		[]byte(pld.SnsDetail.Data.Object.ObjectDesc.Buffer), &timeline,
+		[]byte(pld.SnsDetail.SnsXml), &timeline,
 	); err != nil {
 		log.C(ctx).Error().Err(err).Msg("SnsDetail->xml反序列化失败")
 		return errors.New("SnsDetail->xml反序列化失败")
@@ -42,9 +42,9 @@ func (p *ParseSnsHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		AppId:   pld.AppID,
 		Privacy: false,
 		DisableWxIds: []string{
-			pld.SnsDetail.Data.Object.Username,
+			pld.SnsDetail.UserName,
 		},
-		SnsXml: pld.SnsDetail.Data.Object.ObjectDesc.Buffer,
+		SnsXml: pld.SnsDetail.SnsXml,
 	}
 
 	pld.Req = req

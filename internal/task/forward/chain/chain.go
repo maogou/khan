@@ -3,7 +3,6 @@ package chain
 import (
 	"context"
 	v1 "maogou/khan/api/khan/v1"
-	"maogou/khan/api/khan/v1/transform/sns"
 )
 
 type Handler interface {
@@ -18,7 +17,7 @@ type PipelineData struct {
 	ContentStyle int
 	IsForwardOk  bool
 	FavDetail    *v1.FavorDetailData
-	SnsDetail    *sns.SnsDetailResponse
+	SnsDetail    *v1.SnsDetailData
 	Req          v1.SnsForwardRequest
 	Timeline     v1.TimelineObject
 }

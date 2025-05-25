@@ -2,6 +2,7 @@ package khan
 
 import (
 	"context"
+	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/api/khan/v1/transform/sns"
 	"maogou/khan/internal/pkg/log"
 )
@@ -39,15 +40,15 @@ func (k *Khan) SnsFriendPage(ctx context.Context, req sns.SnsFriendPageRequest) 
 	return resp.Result().(*sns.SnsFriendPageResponse), nil
 }
 
-func (k *Khan) SnsDetail(ctx context.Context, req sns.SnsDetailRequest) (*sns.SnsDetailResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsDetailResponse{}).Post(snsDetail)
+func (k *Khan) SnsDetail(ctx context.Context, req v1.SnsDetailRequest) (*v1.SnsDetailResponse, error) {
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.SnsDetailResponse{}).Post("/api/sns/snsDetails")
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用snsDetail方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*sns.SnsDetailResponse), nil
+	return resp.Result().(*v1.SnsDetailResponse), nil
 }
 
 func (k *Khan) SnsLike(ctx context.Context, req sns.SnsLikeRequest) (*sns.SnsLikeResponse, error) {

@@ -63,7 +63,7 @@ type SnsWithUserListItem struct {
 	CommentFlag     int    `json:"CommentFlag"`
 }
 
-type SnsDetailResponse struct {
+type SnsDetailData struct {
 	Id            json.Number           `json:"id"`
 	UserName      string                `json:"userName"`
 	NickName      string                `json:"nickName"`
@@ -75,6 +75,11 @@ type SnsDetailResponse struct {
 	CommentList   []SnsCommentListItem  `json:"commentList"`
 	WithUserCount int                   `json:"withUserCount"`
 	WithUserList  []SnsWithUserListItem `json:"withUserList"`
+}
+
+type SnsDetailResponse struct {
+	ResponseCommon
+	Data SnsDetailData `json:"data"`
 }
 
 type SnsForwardRequest struct {
@@ -310,7 +315,7 @@ type TimelineObject struct {
 	ActionInfo          ActionInfo    `xml:"actionInfo"`
 	Location            Location      `xml:"location"`
 	PublicUserName      string        `xml:"publicUserName"`
-	Streamvideo         Streamvideo   `xml:"streamvideo"`
+	StreamVideo         Streamvideo   `xml:"streamvideo"`
 }
 
 type AppInfo struct {

@@ -3,7 +3,7 @@ package chain
 import (
 	"context"
 	"errors"
-	"maogou/khan/api/khan/v1/transform/sns"
+	v1 "maogou/khan/api/khan/v1"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/sdk/khan"
 )
@@ -30,10 +30,9 @@ func (sd *SnsDetailHandler) Handle(ctx context.Context, pld *PipelineData) error
 	}
 
 	snsResp, err := sd.sdk.SnsDetail(
-		ctx, sns.SnsDetailRequest{
-			AppId:   pld.AppID,
-			Decrypt: true,
-			Id:      pld.SnsID,
+		ctx, v1.SnsDetailRequest{
+			AppId: pld.AppID,
+			SnsId: pld.SnsID,
 		},
 	)
 
@@ -42,12 +41,12 @@ func (sd *SnsDetailHandler) Handle(ctx context.Context, pld *PipelineData) error
 		return err
 	}
 
-	if snsResp.Ret != 0 {
+	if snsResp.Ret != 200 {
 		log.C(ctx).Error().Err(err).Msg("ret != 0 ->调用SnsDetail方法失败")
 		return errors.New("ret != 0 ->调用SnsDetail方法失败")
 	}
 
-	pld.SnsDetail = snsResp
+	pld.SnsDetail = &snsResp.Data
 
 	return nil
 }
