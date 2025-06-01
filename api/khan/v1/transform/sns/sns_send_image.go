@@ -1,27 +1,24 @@
 package sns
 
 type SnsSendImageItem struct {
-	ThumbUrl  string `json:"thumb_url"`
+	Url       string `json:"fileUrl"`
+	ThumbUrl  string `json:"thumbUrl"`
+	Md5       string `json:"fileMd5"`
+	TotalSize string `json:"length"`
 	Width     string `json:"width"`
-	TotalSize string `json:"total_size"`
-	Id        string `json:"id"`
-	Type      string `json:"type"`
-	Url       string `json:"url"`
 	Height    string `json:"height"`
-	Md5       string `json:"md5"`
 }
 
 type SnsSendImageRequest struct {
 	AppId        string             `json:"appId"`
-	AllowUser    []string           `json:"allow_user"`
-	AllowTagId   []string           `json:"allow_tag_id"`
-	AtUser       []string           `json:"at_user"`
-	DisableUser  []string           `json:"disable_user"`
-	DisableTagId []string           `json:"disable_tag_id"`
+	AllowUser    []string           `json:"allowWxIds"`
+	AllowTagId   []string           `json:"allowTagIds"`
+	AtUser       []string           `json:"atWxIds"`
+	DisableUser  []string           `json:"disableWxIds"`
+	DisableTagId []string           `json:"disableTagIds"`
 	Private      bool               `json:"private"`
-	XmlTxt       string             `json:"xml_txt"`
 	Content      string             `json:"content"`
-	Media        []SnsSendImageItem `json:"media"`
+	Media        []SnsSendImageItem `json:"imgInfos"`
 }
 
 type SnsSendImageResponse struct {

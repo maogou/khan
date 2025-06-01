@@ -27,8 +27,6 @@ func (is *ImageStrategy) Send(ctx context.Context, req v1.SnsForwardRequest, tim
 				ThumbUrl:  media.Thumb.Text,
 				Width:     strconv.Itoa(cast.ToInt(media.Size.Width)),
 				TotalSize: media.Size.TotalSize,
-				Id:        media.Id,
-				Type:      "1",
 				Url:       media.Url.Text,
 				Height:    strconv.Itoa(cast.ToInt(media.Size.Height)),
 				Md5:       media.Url.Md5,
@@ -45,7 +43,6 @@ func (is *ImageStrategy) Send(ctx context.Context, req v1.SnsForwardRequest, tim
 			DisableUser:  lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
 			DisableTagId: make([]string, 0),
 			Private:      req.Privacy,
-			XmlTxt:       req.SnsXml,
 			Content:      timeline.ContentDesc,
 			Media:        transformImage,
 		},
@@ -56,7 +53,7 @@ func (is *ImageStrategy) Send(ctx context.Context, req v1.SnsForwardRequest, tim
 		return err
 	}
 
-	if resp.Ret != 0 {
+	if resp.Ret != 200 {
 		log.C(ctx).Error().Msg("ret !=0 ->调用SnsHandler->snsSendImage方法失败")
 		return errors.New("ret !=0 ->调用SnsHandler->snsSendImage方法失败")
 	}

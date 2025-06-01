@@ -21,7 +21,7 @@ func (s *SnsHandler) Forward(ctx *gin.Context) {
 	var (
 		req      v1.SnsForwardRequest
 		timeline v1.TimelineObject
-		result   *v1.SnsForwardResponse
+		result   *v1.SnsForwardData
 		err      error
 	)
 
@@ -57,7 +57,7 @@ func (s *SnsHandler) Forward(ctx *gin.Context) {
 	response.Success(ctx, result)
 }
 
-func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, timeline v1.TimelineObject) (*v1.SnsForwardResponse, error) {
+func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, timeline v1.TimelineObject) (*v1.SnsForwardData, error) {
 	log.C(ctx).Info().Msg("调用SnsHandler->snsSendImage方法")
 
 	var transformImage []sns.SnsSendImageItem
@@ -68,8 +68,6 @@ func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, ti
 				ThumbUrl:  media.Thumb.Text,
 				Width:     strconv.Itoa(cast.ToInt(media.Size.Width)),
 				TotalSize: media.Size.TotalSize,
-				Id:        media.Id,
-				Type:      "1",
 				Url:       media.Url.Text,
 				Height:    strconv.Itoa(cast.ToInt(media.Size.Height)),
 				Md5:       media.Url.Md5,
@@ -86,7 +84,6 @@ func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, ti
 			DisableUser:  lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
 			DisableTagId: make([]string, 0),
 			Private:      req.Privacy,
-			XmlTxt:       req.SnsXml,
 			Content:      timeline.ContentDesc,
 			Media:        transformImage,
 		},
@@ -102,27 +99,21 @@ func (s *SnsHandler) snsSendImage(ctx *gin.Context, req v1.SnsForwardRequest, ti
 		return nil, errno.SnsSendImageError
 	}
 
-	return &v1.SnsForwardResponse{
-		Id:         resp.Data.SnsObject.Id,
-		UserName:   resp.Data.SnsObject.Username,
-		NickName:   resp.Data.SnsObject.Nickname,
-		CreateTime: resp.Data.SnsObject.CreateTime,
-	}, err
+	return &v1.SnsForwardData{}, err
 }
 
-func (s *SnsHandler) snsSendExcludeImage(ctx *gin.Context, req v1.SnsForwardRequest) (*v1.SnsForwardResponse, error) {
+func (s *SnsHandler) snsSendExcludeImage(ctx *gin.Context, req v1.SnsForwardRequest) (*v1.SnsForwardData, error) {
 	log.C(ctx).Info().Msg("调用SnsHandler->snsSendExcludeImage方法")
 
 	resp, err := s.sdk.SnsSendExcludeImage(
-		ctx, sns.SnsSendExcludeImageRequest{
+		ctx, v1.SnsForwardRequest{
 			AppId:        req.AppId,
-			AllowUser:    lo.Ternary(len(req.AllowWxIds) > 0, req.AllowWxIds, make([]string, 0)),
-			AllowTagId:   make([]string, 0),
-			AtUser:       lo.Ternary(len(req.AtWxIds) > 0, req.AtWxIds, make([]string, 0)),
-			DisableUser:  lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
-			DisableTagId: make([]string, 0),
-			Private:      req.Privacy,
-			XmlTxt:       req.SnsXml,
+			AllowWxIds:   lo.Ternary(len(req.AllowWxIds) > 0, req.AllowWxIds, make([]string, 0)),
+			AtWxIds:      lo.Ternary(len(req.AtWxIds) > 0, req.AtWxIds, make([]string, 0)),
+			DisableWxIds: lo.Ternary(len(req.DisableWxIds) > 0, req.DisableWxIds, make([]string, 0)),
+			DisableTags:  make([]string, 0),
+			Privacy:      req.Privacy,
+			SnsXml:       req.SnsXml,
 		},
 	)
 
@@ -131,16 +122,11 @@ func (s *SnsHandler) snsSendExcludeImage(ctx *gin.Context, req v1.SnsForwardRequ
 		return nil, errno.SnsSendExcludeImageError
 	}
 
-	if resp.Ret != 0 {
+	if resp.Ret != 200 {
 		log.C(ctx).Error().Msg("ret !=0 ->调用SnsHandler->snsSendExcludeImage方法失败")
 		return nil, errno.SnsSendExcludeImageError
 	}
 
-	return &v1.SnsForwardResponse{
-		Id:         resp.Data.SnsObject.Id,
-		UserName:   resp.Data.SnsObject.Username,
-		NickName:   resp.Data.SnsObject.Nickname,
-		CreateTime: resp.Data.SnsObject.CreateTime,
-	}, err
+	return &v1.SnsForwardData{}, err
 
 }

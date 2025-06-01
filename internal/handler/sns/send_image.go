@@ -29,8 +29,6 @@ func (s *SnsHandler) SendImage(ctx *gin.Context) {
 	for _, v := range req.ImgInfos {
 		transformImage = append(
 			transformImage, sns.SnsSendImageItem{
-				Id:        "0",
-				Type:      "1",
 				Url:       v.FileUrl,
 				ThumbUrl:  v.ThumbUrl,
 				Width:     strconv.Itoa(v.Width),
@@ -67,21 +65,16 @@ func (s *SnsHandler) SendImage(ctx *gin.Context) {
 		return
 	}
 
-	if resp.Data.BaseResponse.Ret != 0 {
+	if resp.Ret != 200 {
 		log.C(ctx).Error().Any(
-			"msg_err", resp.Data.BaseResponse.ErrMsg,
+			"msg_err", resp.Msg,
 		).Msg("BaseResponse.Ret !=0 ->调用SnsHandler->SendImage方法失败")
 		response.Fail(ctx, errno.SnsSendImageError)
 		return
 	}
 
 	response.Success(
-		ctx, v1.SnsSendImageResponse{
-			Id:         resp.Data.SnsObject.Id,
-			UserName:   resp.Data.SnsObject.Username,
-			NickName:   resp.Data.SnsObject.Nickname,
-			CreateTime: resp.Data.SnsObject.CreateTime,
-		},
+		ctx, v1.SnsSendImageResponse{},
 	)
 
 }

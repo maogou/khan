@@ -160,15 +160,15 @@ func (k *Khan) SnsSendText(ctx context.Context, req sns.SnsSendTextRequest) (*sn
 	return resp.Result().(*sns.SnsSendTextResponse), nil
 }
 
-func (k *Khan) SnsSendImage(ctx context.Context, req sns.SnsSendImageRequest) (*sns.SnsSendImageResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendImageResponse{}).Post(snsSendImage)
+func (k *Khan) SnsSendImage(ctx context.Context, req sns.SnsSendImageRequest) (*v1.SnsForwardResponse, error) {
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.SnsForwardResponse{}).Post("/api/sns/sendImgSns")
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用snsSendImage方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*sns.SnsSendImageResponse), nil
+	return resp.Result().(*v1.SnsForwardResponse), nil
 }
 
 func (k *Khan) SnsSendUrl(ctx context.Context, req sns.SnsSendUrlRequest) (*sns.SnsSendUrlResponse, error) {
@@ -193,13 +193,24 @@ func (k *Khan) SnsSendVideo(ctx context.Context, req sns.SnsSendVideoRequest) (*
 	return resp.Result().(*sns.SnsSendVideoResponse), nil
 }
 
-func (k *Khan) SnsSendExcludeImage(ctx context.Context, req sns.SnsSendExcludeImageRequest) (*sns.SnsSendExcludeImageResponse, error) {
-	resp, err := k.client.R().SetBody(req).SetResult(&sns.SnsSendExcludeImageResponse{}).Post(snsSendExcludeImage)
+func (k *Khan) SnsSendExcludeImage(ctx context.Context, req v1.SnsForwardRequest) (*v1.SnsForwardResponse, error) {
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.SnsForwardResponse{}).Post("/api/sns/forwardSns")
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用snsSendExcludeImage方法失败")
 		return nil, err
 	}
 
-	return resp.Result().(*sns.SnsSendExcludeImageResponse), nil
+	return resp.Result().(*v1.SnsForwardResponse), nil
+}
+
+func (k *Khan) SnsForward(ctx context.Context, req v1.SnsForwardRequest) (*v1.SnsForwardResponse, error) {
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.SnsForwardResponse{}).Post("/api/sns/forwardSns")
+
+	if err != nil {
+		log.C(ctx).Error().Err(err).Msg("调用forwardSns方法失败")
+		return nil, err
+	}
+
+	return resp.Result().(*v1.SnsForwardResponse), nil
 }

@@ -2,13 +2,13 @@ package sns
 
 type SnsSendExcludeImageRequest struct {
 	AppId        string   `json:"appId"`
-	AllowUser    []string `json:"allow_user"`
-	AllowTagId   []string `json:"allow_tag_id"`
-	AtUser       []string `json:"at_user"`
-	DisableUser  []string `json:"disable_user"`
-	DisableTagId []string `json:"disable_tag_id"`
+	AllowUser    []string `json:"allowWxIds"`
+	AllowTagId   []string `json:"allowTagIds"`
+	AtUser       []string `json:"atWxIds"`
+	DisableUser  []string `json:"disableWxIds"`
+	DisableTagId []string `json:"disableTagIds"`
 	Private      bool     `json:"private"`
-	XmlTxt       string   `json:"xml_txt"`
+	XmlTxt       string   `json:"snsXml"`
 }
 
 type SnsSendExcludeImageResponse struct {

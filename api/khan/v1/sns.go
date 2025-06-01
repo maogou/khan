@@ -87,15 +87,21 @@ type SnsForwardRequest struct {
 	AllowWxIds   []string `json:"allowWxIds"`
 	AtWxIds      []string `json:"atWxIds"`
 	DisableWxIds []string `json:"disableWxIds"`
+	DisableTags  []string `json:"disableTagIds"`
 	SnsXml       string   `json:"snsXml" binding:"required"`
 	Privacy      bool     `json:"privacy"`
 }
 
-type SnsForwardResponse struct {
+type SnsForwardData struct {
 	Id         float64 `json:"id"`
 	UserName   string  `json:"userName"`
 	NickName   string  `json:"nickName"`
 	CreateTime int64   `json:"createTime"`
+}
+
+type SnsForwardResponse struct {
+	ResponseCommon
+	Data SnsForwardData `json:"data"`
 }
 
 type SnsPageItem struct {

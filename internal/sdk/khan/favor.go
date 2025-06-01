@@ -29,7 +29,7 @@ func (k *Khan) Detail(ctx context.Context, req v1.FavorDetailRequest) (*v1.Favor
 }
 
 func (k *Khan) Delete(ctx context.Context, req v1.FavorDeleteRequest) (*v1.ResponseSuccessWithoutData, error) {
-	resp, err := k.tRequest().SetBody(req).SetResult(&v1.ResponseSuccessWithoutData{}).Post(favorDelete)
+	resp, err := k.tRequest().SetBody(req).SetResult(&v1.ResponseSuccessWithoutData{}).Post("/api/favor/delete")
 
 	if err != nil {
 		log.C(ctx).Error().Err(err).Msg("调用favorDelete方法失败")
