@@ -58,6 +58,8 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		},
 	)
 
+	log.C(ctx).Info().Any("detailResp", detailResp).Msg("获取收藏内容")
+
 	if err != nil {
 		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Int64("fav_id", startFavId).Msg("调用fav Detail方法失败")
 		return err
