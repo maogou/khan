@@ -34,9 +34,11 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 
 	currentFavId, err := s.sdk.Rdb().Get(ctx, constant.CurrentFavId+pld.AppID).Result()
 	if err != nil {
-		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Msg("调用rdb.Get方法失败")
+		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Msg("调用rdb.Get方法获取当前需要转发的收藏朋友圈id失败")
 		return err
 	}
+
+	log.C(ctx).Info().Any("current_fav_id", currentFavId).Msg("当前需要转发的收藏id")
 
 	if len(currentFavId) == 0 {
 		log.C(ctx).Warn().Msg("缓存中当前需要转发的收藏id为空")
@@ -61,7 +63,7 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		return err
 	}
 
-	if detailResp.Ret != 0 {
+	if detailResp.Ret != 200 {
 		log.C(ctx).Error().Str("appid", pld.AppID).Msg("调用fav FavDetail ->detailResp.Ret != 0 方法失败")
 		return err
 	}
