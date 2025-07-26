@@ -68,6 +68,11 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		return err
 	}
 
+	if detailResp.Data.FavId == 0 {
+		log.C(ctx).Warn().Msg("当前没有最新的收藏的朋友圈需要转发了,等待下一次转发")
+		return errors.New("当前没有最新的收藏的朋友圈需要转发了,等待下一次转发")
+	}
+
 	if detailResp.Data.Flag == 1 || len(detailResp.Data.Content) == 0 {
 		log.C(ctx).Warn().Int("fav_id", favId).Msg("当前收藏内容已经被删除")
 
