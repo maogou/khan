@@ -12,8 +12,6 @@ import (
 	"github.com/spf13/cast"
 )
 
-const startFavId = 47876
-
 type SyncHandler struct {
 	BaseHandler
 	sdk *khan.Khan
@@ -54,14 +52,14 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	detailResp, err := s.sdk.Detail(
 		ctx, v1.FavorDetailRequest{
 			AppId: pld.AppID,
-			FavId: startFavId,
+			FavId: favId,
 		},
 	)
 
 	log.C(ctx).Info().Any("detailResp", detailResp).Msg("获取收藏内容")
 
 	if err != nil {
-		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Int64("fav_id", startFavId).Msg("调用fav Detail方法失败")
+		log.C(ctx).Error().Err(err).Str("appid", pld.AppID).Int("fav_id", favId).Msg("调用fav Detail方法失败")
 		return err
 	}
 
@@ -71,7 +69,7 @@ func (s *SyncHandler) Handle(ctx context.Context, pld *PipelineData) error {
 	}
 
 	if detailResp.Data.Flag == 1 || len(detailResp.Data.Content) == 0 {
-		log.C(ctx).Warn().Int64("fav_id", startFavId).Msg("当前收藏内容已经被删除")
+		log.C(ctx).Warn().Int("fav_id", favId).Msg("当前收藏内容已经被删除")
 
 		if rErr := s.sdk.Rdb().Incr(ctx, constant.CurrentFavId+pld.AppID).Err(); rErr != nil {
 			log.C(ctx).Error().Err(rErr).Str(

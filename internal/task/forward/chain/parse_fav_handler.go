@@ -44,7 +44,15 @@ func (pf *ParseFavHandler) Handle(ctx context.Context, pld *PipelineData) error 
 		return errors.New("收藏夹中内容,获取不到朋友圈id,无需转发")
 	}
 
+	log.C(ctx).Info().Str("source_sns_id===>", item.Source.SourceID).Msg("需要解析的原始snsid")
+
 	sourceSlice := strings.Split(item.Source.SourceID, "#")
+
+	if len(sourceSlice) == 1 {
+		sourceSlice = strings.Split(item.Source.SourceID, "_")
+	}
+
+	log.C(ctx).Info().Any("sourceSlice", sourceSlice).Msg("使用#或者_分割后的朋友圈id")
 
 	if len(sourceSlice) > 1 {
 		pld.SnsID = sourceSlice[0]
