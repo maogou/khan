@@ -60,5 +60,6 @@ const (
 	TransferFun     = "transfer"
 	CollectMoneyFun = "collectMoney"
 
-	FavIds = "fav_id_"
+	FavIds       = "fav_id_"
+	CurrentFavId = "current_fav_id_"
 )
