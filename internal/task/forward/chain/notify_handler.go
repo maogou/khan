@@ -28,7 +28,7 @@ func (n *NotifyHandler) Handle(ctx context.Context, pld *PipelineData) error {
 		ctx, v1.PostTextRequest{
 			AppId:   pld.AppID,
 			ToWxid:  "filehelper",
-			Content: "收藏夹id(" + strconv.Itoa(pld.FavID) + ") 已经转发到你的朋友圈中发布内容，请及时查看!",
+			Content: "收藏夹id(" + strconv.Itoa(pld.FavID) + ") 已经转发到你的朋友圈中，请及时查看!",
 			Ats:     "",
 		},
 	)
