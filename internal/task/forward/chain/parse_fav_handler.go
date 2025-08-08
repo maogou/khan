@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"errors"
 	v1 "maogou/khan/api/khan/v1"
+	"maogou/khan/internal/constant"
 	"maogou/khan/internal/pkg/log"
 	"maogou/khan/internal/sdk/khan"
 	"strings"
@@ -36,6 +37,9 @@ func (pf *ParseFavHandler) Handle(ctx context.Context, pld *PipelineData) error 
 	var item v1.FavItem
 	if xErr := xml.Unmarshal([]byte(favContent), &item); xErr != nil {
 		log.C(ctx).Error().Err(xErr).Msg("收藏夹中内容,xml反序列化失败")
+		if err := pf.sdk.Rdb().Incr(ctx, constant.CurrentFavId+pld.AppID).Err(); err != nil {
+			log.C(ctx).Error().Err(err).Msg("调用rdb.Incr方法,更新下一次转发的收藏favId失败,请手动更新redis中的值")
+		}
 		return errors.New("收藏夹中内容,xml反序列化失败")
 	}
 
